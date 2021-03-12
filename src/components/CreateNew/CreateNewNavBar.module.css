@@ -1,0 +1,22 @@
+
+.naVigation {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    margin: 0.5% 20% 0% 20%;
+}
+
+
+.navlink {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-size: 120%;
+    margin: 0% 2% 0% 2%;
+    padding: 2%;
+}
+
+.isActive {
+    border-style: groove;
+    border-color: black;
+    font-weight: bold;
+}
