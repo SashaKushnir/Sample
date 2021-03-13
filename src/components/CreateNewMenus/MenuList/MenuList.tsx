@@ -10,5 +10,6 @@ export const MenuList = () => {
     const menus = useSelector(menuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent item={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
+        {menus}
     </div>
 }

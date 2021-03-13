@@ -5,11 +5,7 @@ import { MyPage } from "./components/MyPage/MyPage";
 import { Authorisation } from "./Authorisation/Authorisation";
 
 
-
-
-
-//qeqweqweqweq
-function App() {
+export const App = () => {
     return (
         <BrowserRouter>
             <div className="App">
@@ -24,5 +20,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-export default App;
