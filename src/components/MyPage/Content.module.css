@@ -2,12 +2,30 @@
 .wrap {
     min-height: 100%;
 }
+
 .footer {
     height: 80px;
     margin-top: -80px;
 }
-.content {
-    box-sizing: border-box;
-    min-height: 650px;
-    padding-bottom: 100px;
+@media screen and (min-height: 300px) {
+    .content {
+        box-sizing: border-box;
+        min-height: 300px;
+        padding-bottom: 100px;
+    }
 }
+@media screen and (min-height: 500px) {
+    .content {
+        box-sizing: border-box;
+        min-height: 500px;
+        padding-bottom: 100px;
+    }
+}
+@media screen and (min-height: 680px) {
+    .content {
+        box-sizing: border-box;
+        min-height: 680px;
+        padding-bottom: 100px;
+    }
+}
+

@@ -4,7 +4,17 @@
     text-align: center;
     color: black;
     font-size: 120%;
-    margin: 0% 2% 0% 2%;
+    margin: 0% 2% 0% 0%;
+    background-color: darkgray;
+    padding: 1%;
+}
+
+.navlinkRight{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-size: 120%;
+    margin: 0% 0% 0% 0%;
     background-color: darkgray;
     padding: 1%;
 }
@@ -12,9 +22,10 @@
 .navigation {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    margin: 0% 2% 0% 2%;
+    margin: 0% 0% 0% 0%;
 }
 
 .activeClassName {
     background-color: white
 }
+

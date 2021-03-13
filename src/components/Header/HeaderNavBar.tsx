@@ -5,8 +5,8 @@ import s from './NavBar.module.css'
 export const HeaderNavBar = () => {
     let {path, url} = useRouteMatch();
     return <nav className={s.navigation}>
-        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/menu`}>
-            <div className={s.division}>Menu</div>
+        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/history`}>
+            <div className={s.division}> History </div>
         </NavLink>
 
         <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/new`}>
@@ -17,7 +17,7 @@ export const HeaderNavBar = () => {
             <div> Editors</div>
         </NavLink>
 
-        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/reports`}>
+        <NavLink activeClassName={s.activeClassName} className={s.navlinkRight} to={`${url}/reports`}>
             <div>Reports</div>
         </NavLink>
     </nav>
