@@ -7,7 +7,7 @@ import { MenuItemComponent } from "./MenuItemComponent";
 
 
 export const MenuList = () => {
-    const menus = useSelector(menuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent item={curMenuItem}/>)
+    const menus = useSelector(menuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
         {menus}

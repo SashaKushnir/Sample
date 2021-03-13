@@ -84,9 +84,37 @@ let initialState = {
     response_status: true,
     response_error: null
 }
-export type MenuItem = typeof initialState.menus[0]
+export type Products = {
+    id: number
+    name: string
+    description: string
+    price: string
+    weight: string
+    menu_id: number
+    "category_id": number
+}
+export type MenuCategory =  {
+    id: number
+    name: string
+    description: string
+}
+export type ProductCategoriesItem = {
+    id: number
+    name: string
+    description: string
+    products: Array<Products>
+}
+export type Product_categories = Array<ProductCategoriesItem>
+export type MenuItem = {
+    id : number
+    menu_category:MenuCategory
+    product_categories:Product_categories
+}
+
+
+export type MenuArray = Array<MenuItem>
 type NewBanknote = {
-    menus: Array<typeof initialState.menus[0]>
+    menus: MenuArray
     response_status : boolean
     response_error: string | null
 }
