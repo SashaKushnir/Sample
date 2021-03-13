@@ -3,13 +3,13 @@ import styles from './MenuList.module.css'
 import { useSelector } from "react-redux";
 import { menuKitchen } from "../../../selectors/selector";
 import { MenuItem } from "../../../redux/newBanknote/newBanknoteReducer";
-import { MenuItemComponent } from "./MenuItemComponent";
+import { useHistory } from 'react-router-dom';
 
-
-export const MenuList = () => {
-    const menus = useSelector(menuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent item={curMenuItem}/>)
+export const MenuItemComponent: React.FC<{item: MenuItem}> = (props) => {
     return <div>
-        <div className={styles.name}>Menu List</div>
-        {menus}
+        {props.item.menu_category.name}
+        <div>
+
+        </div>
     </div>
 }

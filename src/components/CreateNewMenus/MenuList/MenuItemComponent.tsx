@@ -6,13 +6,11 @@ import { MenuItem } from "../../../redux/newBanknote/newBanknoteReducer";
 import { useHistory } from 'react-router-dom';
 
 export const MenuItemComponent: React.FC<{item: MenuItem}> = (props) => {
-    const history = useHistory()
-
-    history.push({
-
-    })
-
+const dish = map((curMenuItem:MenuItem)=> <MenuItemComponent item={curMenuItem}/>)
     return <div>
-        <div className={styles.name}>Menu List</div>
+        {props.item.menu_category.name}
+        <div>
+
+        </div>
     </div>
 }
