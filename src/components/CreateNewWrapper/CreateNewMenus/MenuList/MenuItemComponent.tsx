@@ -1,6 +1,6 @@
 import React from 'react'
-import { MenuItem } from "../../../redux/newBanknote/newBanknoteReducer";
 import { ProductCategoriesMyItem } from "./DishItem/ProductCategoriesMyItem";
+import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 
 export const MenuItemComponent: React.FC<{ Menuitem: MenuItem }> = ({Menuitem}) => {
     let product_categoriesItems= Menuitem.product_categories.map((obj)=> <ProductCategoriesMyItem product_categoriesItem={obj} />)

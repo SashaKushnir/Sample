@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { MyPage } from "./components/MyPage/MyPage";
+import { MyPage } from "./components/markup/MyPage/MyPage";
 import { Authorisation } from "./Authorisation/Authorisation";
 
 

@@ -2,8 +2,8 @@ import React from 'react'
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import s from './Content.module.css'
-import { CreateNew } from "../CreateNew/CreateNew";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { CreateNew } from "../../CreateNewWrapper/CreateNew/CreateNew";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()

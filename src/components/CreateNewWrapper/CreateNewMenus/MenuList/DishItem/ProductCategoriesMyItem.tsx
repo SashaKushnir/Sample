@@ -1,6 +1,6 @@
 import React from 'react'
-import { ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import { ProductItem } from "./ProductItem";
+import { ProductCategoriesItem } from "../../../../../redux/newBanknote/newBanknoteReducer";
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem

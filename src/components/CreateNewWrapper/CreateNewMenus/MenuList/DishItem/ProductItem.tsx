@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product_categories, ProductCategoriesItem, Products } from "../../../../redux/newBanknote/newBanknoteReducer";
+import { Products } from "../../../../../redux/newBanknote/newBanknoteReducer";
 
 type ProductItemProps = {
     productItem: Products

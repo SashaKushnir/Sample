@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './MenuList.module.css'
 import { useSelector } from "react-redux";
-import { menuKitchenInfo } from "../../../selectors/selectCreateNew";
-import { MenuItem } from "../../../redux/newBanknote/newBanknoteReducer";
 import { MenuItemComponent } from "./MenuItemComponent";
+import { menuKitchenInfo } from "../../../../selectors/selectCreateNew";
+import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 
 
 export const MenuList = () => {
