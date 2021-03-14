@@ -1,0 +1,34 @@
+.item {
+display: flex;
+    margin: 2px;
+}
+
+.img {
+    display: inline-block;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.info {
+    width: 90%;
+    display: inline-block;
+}
+
+.name {
+    font-weight: bold;
+    display: inline-block;
+}
+
+.price {
+    float: right;
+    text-align: right;
+    font-weight: bold;
+    display: inline-block;
+}
