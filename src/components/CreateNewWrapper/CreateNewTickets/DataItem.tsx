@@ -3,7 +3,7 @@ import { Determine } from "../../../redux/tickets/ticketsReducer";
 
 interface DataItemProps {
     keyVal: string
-    value: number | boolean | null
+    value: number | boolean | null | undefined
 }
 export const DataItem: React.FC<DataItemProps> = ({value, keyVal}) => {
     return <div>

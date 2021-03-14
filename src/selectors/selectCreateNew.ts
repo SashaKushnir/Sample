@@ -4,3 +4,4 @@ import { RootState } from "../redux/store";
 
 export const selectMenuKitchen = (state: RootState) => state.createNew.menus
 export const selectTickets = (state: RootState) => state.tickets.ticket_categories
+export const selectServices = (state:RootState) => state.services.service_categories
