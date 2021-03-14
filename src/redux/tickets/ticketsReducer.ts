@@ -1,6 +1,6 @@
 import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
-import * as ticketsInitial from '../../responses/get_tickets.json'
+import ticketsInitial from '../../responses/get_tickets.json'
 
 
 let initialState: TicketInitial = ticketsInitial

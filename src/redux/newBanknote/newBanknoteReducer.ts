@@ -1,8 +1,8 @@
 import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
-import * as initialMenu from '../../responses/get_menu2.json'
+import initialMenu from '../../responses/get_menu2.json'
 
-const initialState: NewBanknote = initialMenu
+const initialState: NewBanknote = initialMenu 
 export type Products = {
     id: number
     name: string

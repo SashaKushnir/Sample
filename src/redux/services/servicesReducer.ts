@@ -1,6 +1,6 @@
 import { ActionsTypes } from "../store";
 import { servicesActions } from "./servicesActions";
-import * as services from '../../responses/get_services_list.json'
+import services from '../../responses/get_services_list.json'
 import { PeriodItem } from "../tickets/ticketsReducer";
 
 const initialState: Services = services
