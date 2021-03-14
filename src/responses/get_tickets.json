@@ -1,0 +1,145 @@
+{
+  "ticket_categories": [
+    {
+      "id": 122,
+      "name": "Daily",
+      "description": "Tickets, which depend on the days of the week",
+      "tickets": [
+        {
+          "id": 55,
+          "name": "Workday ticket",
+          "description": "Monday-Friday",
+          "price": 8000,
+          "category_id": 122,
+
+          "period": {
+            "id": 1,
+            "beg_datetime": {
+              "id": 1,
+              "day": null,
+              "month": 1,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "end_datetime": {
+              "id": 2,
+              "day": null,
+              "month": 12,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "weekdays": [1, 2, 3, 4, 5],
+            "is_templatable": true
+          }
+        },
+        {
+          "id": 56,
+          "name": "Weekend ticket",
+          "description": "Saturday-Sunday",
+          "price": 10000,
+          "category_id": 122,
+
+          "period": {
+            "id": 2,
+            "beg_datetime": {
+              "id": 3,
+              "day": null,
+              "month": 1,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "end_datetime": {
+              "id": 4,
+              "day": null,
+              "month": 12,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "weekdays": [6, 7],
+            "is_templatable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 123,
+      "name": "Holiday",
+      "description": "Tickets, which are available on holidays",
+      "tickets": [
+        {
+          "id": 57,
+          "name": "Halloween ticket",
+          "description": "Tickets for the Halloween costume party",
+          "price": 20000,
+          "category_id": 123,
+
+          "period": {
+            "id": 3,
+            "beg_datetime": {
+              "id": 5,
+              "day": 31,
+              "month": 11,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "end_datetime": {
+              "id": 6,
+              "day": 31,
+              "month": 11,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "weekdays": [],
+            "is_templatable": true
+          }
+        },
+        {
+          "id": 58,
+          "name": "New Year's Eve ticket",
+          "description": "Tickets for the New Year's Eve party",
+          "price": 40000,
+          "category_id": 123,
+
+          "period": {
+            "id": 4,
+            "beg_datetime": {
+              "id": 7,
+              "day": 31,
+              "month": 12,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "end_datetime": {
+              "id": 8,
+              "day": 31,
+              "month": 12,
+              "year": null,
+              "hours": null,
+              "minutes": null,
+              "is_templatable": true
+            },
+            "weekdays": [],
+            "is_templatable": true
+          }
+        }
+      ]
+    }
+  ],
+
+  "response_status": true,
+  "response_error": null
+}

@@ -1,9 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux"
 import thunkMW from 'redux-thunk'
 import { newBanknoteReducer } from "./newBanknote/newBanknoteReducer";
+import { ticketsReducer } from "./tickets/ticketsReducer";
 
 let reducersList = combineReducers({
-    createNew : newBanknoteReducer
+    createNew : newBanknoteReducer,
+    tickets: ticketsReducer
 })
 export type RootState = ReturnType<typeof reducersList>
 
