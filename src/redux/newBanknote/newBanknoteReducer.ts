@@ -2,15 +2,33 @@ import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import initialMenu from '../../responses/get_menu2.json'
 import { Dispatch } from "redux";
+import { TicketCategoriesItem } from "../tickets/ticketsReducer";
+import { ServiceCategoriesItem } from "../services/servicesReducer";
 
-const initialState: NewBanknote  = initialMenu
+
+const initialState: MenusInitial = initialMenu
 
 
-
-export const newBanknoteReducer = (newBanknote: NewBanknote = initialState, action: ActionsTypes<typeof newBanknoteActions>): NewBanknote => {
+export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
 
     switch (action.type) {
+        case "SET_MENU_INFO":
+            return {
+                ...newBanknote,
+                menus: [...action.menus]
+            }
+        case "ADD_MENU_ITEM":
 
+            return {
+                ...newBanknote,
+                selectedOrders: {...newBanknote.selectedOrders,
+
+                    selectedMenu: newBanknote.selectedOrders?.selectedMenu ?
+                        [...newBanknote.selectedOrders?.selectedMenu,
+                        action.product
+                    ]:undefined
+                }
+            }
         default:
             return newBanknote
     }
@@ -19,19 +37,25 @@ export const newBanknoteReducer = (newBanknote: NewBanknote = initialState, acti
 // Thunk
 export const setMenuT = () => async (dispatch: Dispatch<ActionsTypes<typeof newBanknoteActions>>) => {
     // To Fetch firstly
-
-    // Get request: API await with try
-    const response = initialMenu
-    // Set response to Bll
-    dispatch(newBanknoteActions.addItem())
-    // Stop Fetching
+    try {
+        // Get request: API await with try
+        const response = initialMenu
+        // Set response to Bll
+        if (response.response_status) {
+            dispatch(newBanknoteActions.setMenuInfo(response.menus))
+            // Stop Fetching
+        }else {
+            console.warn(response.response_error)
+        }
+    } catch (error) {
+        alert("Something went wrong")
+        console.warn(error)
+    }
     // Catch don't forget
 }
 
 
-
-
-export type Products = {
+export type Product = {
     id: number
     name: string
     description: string
@@ -39,7 +63,7 @@ export type Products = {
     weight: number
     menu_id: number
     category_id: number
-    amount?:number
+    amount?: number
 }
 export type MenuCategory = {
     id: number
@@ -50,7 +74,7 @@ export type ProductCategoriesItem = {
     id: number
     name: string
     description: string
-    products: Array<Products>
+    products: Array<Product>
 }
 export type Product_categories = Array<ProductCategoriesItem>
 export type MenuItem = {
@@ -59,9 +83,15 @@ export type MenuItem = {
     product_categories: Product_categories
 }
 export type MenuArray = Array<MenuItem>
-type NewBanknote = {
+type SelectedOrders = {
+    selectedMenu?: Array<Product>
+    selectedTickets?: Array<TicketCategoriesItem>
+    selectedServices?: Array<ServiceCategoriesItem>
+}
+type MenusInitial = {
     menus: MenuArray
     response_status: boolean
+    selectedOrders?: SelectedOrders
     response_error: string | null
 }
 

@@ -1,16 +1,16 @@
 import React from 'react'
-import {Products} from "../../../../../redux/newBanknote/newBanknoteReducer";
+import {Product} from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductItem.module.css'
 import { DishImg } from "../../../../../common/compon/Dish/DishImg";
 
 type ProductItemProps = {
-    productItem: Products
+    productItem: Product
 }
 
 export const ProductItem: React.FC<ProductItemProps> = (props) => {
     return (
         <div className={styles.item}>
-                <DishImg/>
+                <DishImg productItem={props.productItem}/>
             <div className={styles.info}>
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.productItem.name}</div>
