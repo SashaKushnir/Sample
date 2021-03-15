@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './CreateNewMenus.module.css'
 import { MenuList } from "./MenuList/MenuList";
 import { AddedProducts } from "./AddedProducts/AddedProducts";
-import { useRouteMatch } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export const CreateNewMenus = () => {
-    let {url} = useRouteMatch()
+    const d = useDispatch()
+    useEffect(()=>{
+    },[])
     return <div className={styles.wrap}>
         <AddedProducts/>
         <MenuList/>

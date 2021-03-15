@@ -1,6 +1,7 @@
 import React from 'react'
 import {Products} from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductItem.module.css'
+import { DishImg } from "../../../../../common/compon/Dish/DishImg";
 
 type ProductItemProps = {
     productItem: Products
@@ -9,8 +10,7 @@ type ProductItemProps = {
 export const ProductItem: React.FC<ProductItemProps> = (props) => {
     return (
         <div className={styles.item}>
-            <div className={styles.img}><img
-                src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-15-512.png"/></div>
+                <DishImg/>
             <div className={styles.info}>
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.productItem.name}</div>
