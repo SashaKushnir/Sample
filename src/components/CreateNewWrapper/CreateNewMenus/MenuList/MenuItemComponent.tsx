@@ -4,7 +4,7 @@ import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './MenuItemComponent.module.css'
 export const MenuItemComponent: React.FC<{ Menuitem: MenuItem }> = ({Menuitem}) => {
     let product_categoriesItems= Menuitem.product_categories.map((obj)=> <ProductCategoriesMyItem product_categoriesItem={obj} />)
-    return <div>
+    return <div className={styles.item}>
         <div className={styles.name}>
             {Menuitem.menu_category.name}
         </div>

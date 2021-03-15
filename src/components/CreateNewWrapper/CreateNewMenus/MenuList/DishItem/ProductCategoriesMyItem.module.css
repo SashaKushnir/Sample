@@ -1,7 +1,11 @@
 .name{
     display: inline;
     font-weight: bold;
+
 }
 .btn_hide{
     float: right;
+}
+.item{
+
 }

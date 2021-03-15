@@ -1,6 +1,6 @@
 .item {
-    display: flex;
-    margin: 2px;
+    margin: 7px;
+display: flex;
 }
 
 img {
@@ -9,7 +9,7 @@ img {
 }
 
 .info {
-    width: 90%;
+    width: 85%;
     display: inline-block;
 }
 

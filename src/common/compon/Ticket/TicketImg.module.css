@@ -1,15 +1,17 @@
-dishimg{
+.ticketimg{
     width: 100%;
     vertical-align: middle;
     border-radius: 50%;
+    margin: auto;
 }
 
-.img {
+.item {
+    display: flex;
+
     display: inline-block;
-    width: 15%;
+    width: 10%;
     height: 100%;
     text-align: center;
-    margin: 0 10px;
     border: 3px solid darkgray;
     border-radius: 20%;
     background-color: darkgray;

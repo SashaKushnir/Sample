@@ -39,6 +39,44 @@
       ]
     },
     {
+      "id": 10,
+      "menu_category": {
+        "id": 22,
+        "name": "Bar",
+        "description": "some text or null"
+      },
+
+      "product_categories": [
+        {
+          "id": 122,
+          "name": "Cold drinks",
+          "description": "some text or null",
+          "products": [
+            {
+              "id": 55,
+              "name": "Lemonade",
+              "description": "Cool and bitter lemonade.",
+              "price": 10000,
+              "weight": 500,
+
+              "menu_id": 10,
+              "category_id": 122
+            },
+            {
+              "id": 56,
+              "name": "Mojito",
+              "description": "Lemon and lime paradise.",
+              "price": 12500,
+              "weight": 200,
+
+              "menu_id": 10,
+              "category_id": 122
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 11,
       "menu_category": {
         "id": 23,
