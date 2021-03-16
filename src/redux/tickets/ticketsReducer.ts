@@ -1,6 +1,7 @@
 import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
 import ticketsInitial from '../../responses/get_tickets.json'
+import { MenuCategory } from "../newBanknote/newBanknoteReducer";
 
 
 let initialState: TicketInitial = ticketsInitial
@@ -18,8 +19,10 @@ export interface Determine {
 export interface PeriodItem {
     id: number
     beg_datetime: Determine
+    beg_datetime_id: number
     end_datetime: Determine
-    weekdays: number[]
+    end_datetime_id: number
+    weekdays: string | null
     is_templatable: boolean
 }
 
@@ -32,18 +35,26 @@ export interface PeriodArray {
     period: PeriodItem
 }
 
-export interface TicketCategoriesItem {
+export interface Ticket {
     id: number
+    category_id: number
+    price: number
     name: string
     description: string
-    tickets: Array<PeriodArray>
+    period_id:number | null
+    period:PeriodItem | null
+    category: MenuCategory
+    created_at: string | null
+    updated_at: string | null
 }
 
 export interface TicketInitial {
-    ticket_categories: Array<TicketCategoriesItem>
+    tickets: Array<Ticket>
     response_status: boolean
     response_error: string | null
 }
+
+
 
 export const ticketsReducer = (tickets = initialState, action: ActionsTypes<typeof ticketsActions>): TicketInitial => {
 

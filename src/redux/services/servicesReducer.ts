@@ -3,7 +3,7 @@ import { servicesActions } from "./servicesActions";
 import services from '../../responses/get_services_list.json'
 import { PeriodItem } from "../tickets/ticketsReducer";
 
-const initialState: Services = services
+const initialState: any = services
 
 export interface ServiceItem {
     id: number

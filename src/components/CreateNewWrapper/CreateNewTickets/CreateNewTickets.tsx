@@ -6,9 +6,9 @@ import styles from './CreateNewTickets.module.css'
 import { MenuList } from "../CreateNewMenus/MenuList/MenuList";
 
 export const CreateNewTickets = () => {
-    const tickets = useSelector(selectTickets).map((obj)=> <TicketItem ticketItem={obj}/>)
+//    const tickets = useSelector(selectTickets).map((obj)=> <TicketItem ticketItem={obj}/>)
     return <div className={styles.tickets}>
-        {tickets}
+        {/*{tickets}*/}
     </div>
 }
 
