@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setMenuT } from "../../../redux/newBanknote/newBanknoteReducer";
 
 export const CreateNewMenus = () => {
+
     const d = useDispatch()
     useEffect(()=>{
         d(setMenuT())
