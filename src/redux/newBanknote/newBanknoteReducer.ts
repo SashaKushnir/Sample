@@ -5,8 +5,13 @@ import { Dispatch } from "redux";
 import { TicketCategoriesItem } from "../tickets/ticketsReducer";
 import { ServiceCategoriesItem } from "../services/servicesReducer";
 
+const selectedOrders: SelectedOrders = {
+    selectedMenu: [],
+    selectedTickets: [],
+    selectedServices: []
 
-const initialState: MenusInitial = initialMenu
+}
+const initialState: MenusInitial = Object.assign({}, initialMenu, {selectedOrders: selectedOrders})
 
 
 export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
@@ -18,16 +23,43 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                 menus: [...action.menus]
             }
         case "ADD_MENU_ITEM":
-
+            const flag = newBanknote.menus.map((obj) => obj.product_categories.map((inobj) => {
+                inobj.products.some((doubleinObj) => doubleinObj.id === action.product.id)
+            }))
+            const prepareMenu = [...newBanknote.menus.map((obj) => {
+                const categor = obj.product_categories.map((inobj) => {
+                    const inl = inobj.products.map((doubleinObj) => {
+                        if (doubleinObj.id === action.product.id) {
+                            if (flag)
+                                doubleinObj.amount = (doubleinObj.amount ? doubleinObj.amount : 0) + 1
+                            else {
+                                doubleinObj.amount = 1
+                            }
+                            return doubleinObj
+                        } else {
+                            return doubleinObj
+                        }
+                    })
+                    inobj.products= inl
+                    return inobj
+                })
+                obj.product_categories = categor
+                return obj
+            })]
             return {
                 ...newBanknote,
-                selectedOrders: {...newBanknote.selectedOrders,
-
-                    selectedMenu: newBanknote.selectedOrders?.selectedMenu ?
-                        [...newBanknote.selectedOrders?.selectedMenu,
-                        action.product
-                    ]:undefined
-                }
+                menus: prepareMenu
+                // {
+                //     ...newBanknote.selectedOrders,
+                //     selectedMenu: flag ? [...newBanknote.selectedOrders.selectedMenu.map((obj) => {
+                //             if (obj.id === action.product.id)
+                //                 return action.product
+                //             return obj
+                //         })]
+                //         : [...newBanknote.selectedOrders.selectedMenu,
+                //             action.product
+                //         ]
+                // }
             }
         default:
             return newBanknote
@@ -44,7 +76,7 @@ export const setMenuT = () => async (dispatch: Dispatch<ActionsTypes<typeof newB
         if (response.response_status) {
             dispatch(newBanknoteActions.setMenuInfo(response.menus))
             // Stop Fetching
-        }else {
+        } else {
             console.warn(response.response_error)
         }
     } catch (error) {
@@ -84,14 +116,14 @@ export type MenuItem = {
 }
 export type MenuArray = Array<MenuItem>
 type SelectedOrders = {
-    selectedMenu?: Array<Product>
-    selectedTickets?: Array<TicketCategoriesItem>
-    selectedServices?: Array<ServiceCategoriesItem>
+    selectedMenu: Array<Product>
+    selectedTickets: Array<TicketCategoriesItem>
+    selectedServices: Array<ServiceCategoriesItem>
 }
 type MenusInitial = {
     menus: MenuArray
     response_status: boolean
-    selectedOrders?: SelectedOrders
+    //selectedOrders: SelectedOrders
     response_error: string | null
 }
 

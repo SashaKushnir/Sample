@@ -6,8 +6,8 @@ import { selectMenuKitchen } from "../../../../selectors/selectCreateNew";
 import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 
 
-export const MenuList = () => {
-    const menus = useSelector(selectMenuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent Menuitem={curMenuItem}/>)
+export const MenuList:React.FC<{showAmount?: boolean}> = (props) => {
+    const menus = useSelector(selectMenuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
         <div className={styles.tickets}>

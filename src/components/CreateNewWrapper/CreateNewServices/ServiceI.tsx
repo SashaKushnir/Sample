@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ServiceCategoriesItem, ServiceItem } from "../../../redux/services/servicesReducer";
+import { ServiceItem } from "../../../redux/services/servicesReducer";
 import { DataItem } from "../CreateNewTickets/DataItem";
 import { Determine } from "../../../redux/tickets/ticketsReducer";
 

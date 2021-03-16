@@ -5,10 +5,13 @@ import styles from './ProductCategoriesMyItem.module.css'
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
+    showAmount?: boolean
 }
 
 export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
-    const products = props.product_categoriesItem.products.map((obj) => <ProductItem productItem={obj}/> )
+    const products = props.product_categoriesItem.products.map((obj) => <ProductItem
+        showAmount={props.showAmount}
+     productItem={obj}/> )
     return <div className={styles.item}>
         <div className={styles.name}>{props.product_categoriesItem.name}</div>
         <button className={styles.btn_hide}>hide</button>

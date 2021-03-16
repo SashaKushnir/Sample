@@ -15,7 +15,7 @@
           "description": "some text or null",
           "products": [
             {
-              "id": 55,
+              "id": 54,
               "name": "Lemonade",
               "description": "Cool and bitter lemonade.",
               "price": 10000,
@@ -53,7 +53,7 @@
           "description": "some text or null",
           "products": [
             {
-              "id": 55,
+              "id": 54,
               "name": "Lemonade",
               "description": "Cool and bitter lemonade.",
               "price": 10000,
@@ -63,7 +63,7 @@
               "category_id": 122
             },
             {
-              "id": 56,
+              "id": 59,
               "name": "Mojito",
               "description": "Lemon and lime paradise.",
               "price": 12500,
@@ -91,7 +91,7 @@
           "description": "some text or null",
           "products": [
             {
-              "id": 55,
+              "id": 560,
               "name": "Waffles",
               "description": "Waffles with honey and blueberries",
               "price": 21000,
@@ -101,7 +101,7 @@
               "category_id": 126
             },
             {
-              "id": 56,
+              "id": 561,
               "name": "Mojito",
               "description": "Lemon and lime paradise.",
               "price": 12500,

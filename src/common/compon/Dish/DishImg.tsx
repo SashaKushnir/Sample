@@ -10,7 +10,7 @@ interface DishImgProps {
 }
 
 export const DishImg: React.FC<DishImgProps> = ({productItem}) => {
-    let [amount, setAmount] = useState(0)
+    let [amount, setAmount]= useState(productItem.amount?productItem.amount:1)
     const d = useDispatch()
     const productI = {...productItem}
     const addProduct = () => {
@@ -18,7 +18,7 @@ export const DishImg: React.FC<DishImgProps> = ({productItem}) => {
         productI.amount = amount
         d(newBanknoteActions.addMenuItem(productI))
     }
-    return <div onDoubleClick={addProduct} className={s.img}>
+    return <div onClick={addProduct} className={s.img}>
         <img className={dishimg} src={dishimg} alt="Dish img"/>
     </div>
 }
