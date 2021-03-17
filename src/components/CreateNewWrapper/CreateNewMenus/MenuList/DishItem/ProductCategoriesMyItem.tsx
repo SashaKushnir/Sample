@@ -32,7 +32,6 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.product_categoriesItem.name}</div>
                     <div className={styles.price}>{props.product_categoriesItem.price}</div>
-                    <div className={styles.price}>{props.product_categoriesItem.amount}</div>
                 </div>
                 <div className={styles.name_price}>
                     <div className={styles.desc}>{props.product_categoriesItem.description}</div>

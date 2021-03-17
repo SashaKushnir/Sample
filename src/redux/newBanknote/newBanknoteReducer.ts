@@ -22,8 +22,6 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                     const curM = menuI.products.map((productI) => {
                         if (productI.id === action.productI.id) {
                             productI.amount = (productI.amount ? productI.amount : 0) + 1
-                        } else {
-                            productI.amount = 1
                         }
                     return productI
                 })
@@ -33,44 +31,6 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
         )
 ]
 }
-// const flag = newBanknote.menus.map((obj) => obj.product_categories.map((inobj) => {
-//     inobj.products.some((doubleinObj) => doubleinObj.id === action.product.id)
-// }))
-// const prepareMenu = [...newBanknote.menus.map((obj) => {
-//     const categor = obj.product_categories.map((inobj) => {
-//         const inl = inobj.products.map((doubleinObj) => {
-//             if (doubleinObj.id === action.product.id) {
-//                 if (flag)
-//                     doubleinObj.amount = (doubleinObj.amount ? doubleinObj.amount : 0) + 1
-//                 else {
-//                     doubleinObj.amount = 1
-//                 }
-//                 return doubleinObj
-//             } else {
-//                 return doubleinObj
-//             }
-//         })
-//         inobj.products = inl
-//         return inobj
-//     })
-//     obj.product_categories = categor
-//     return obj
-// })]
-// return {
-//     ...newBanknote,
-//     menus: prepareMenu
-//     // {
-//     ...newBanknote.selectedOrders,
-//     selectedMenu: flag ? [...newBanknote.selectedOrders.selectedMenu.map((obj) => {
-//             if (obj.id === action.product.id)
-//                 return action.product
-//             return obj
-//         })]
-//         : [...newBanknote.selectedOrders.selectedMenu,
-//             action.product
-//         ]
-// }
-// }
 default:
 return newBanknote
 }
