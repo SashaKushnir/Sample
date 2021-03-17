@@ -1,6 +1,6 @@
-import { MenuArray } from "./newBanknoteReducer";
+import { MenuArray, ProductCategoriesItem } from "./newBanknoteReducer";
 
 export const newBanknoteActions = {
-    addMenuItem: () => ({type: "ADD_MENU_ITEM"}) as const,
+    addMenuItem: (productI: ProductCategoriesItem) => ({type: "ADD_MENU_ITEM", productI}) as const,
     setMenuInfo: (menus: MenuArray) => ({type: "SET_MENU_INFO", menus}) as const
 }
