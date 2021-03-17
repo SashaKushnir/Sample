@@ -16,7 +16,7 @@ export const DishImg: React.FC<DishImgProps> = ({productItem}) => {
     const addProduct = () => {
         setAmount(amount + 1)
         productI.amount = amount
-      d(newBanknoteActions.addMenuItem(productI))
+      d(newBanknoteActions.addMenuItem(productI, null))
     }
     return <div onClick={addProduct} className={s.img}>
         <img className={dishimg} src={dishimg} alt="Dish img"/>

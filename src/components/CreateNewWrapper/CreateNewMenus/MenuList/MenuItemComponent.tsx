@@ -11,6 +11,7 @@ interface MenuItemComponentProps {
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
     let product_categoriesItems= Menuitem.products.map((obj)=>
         <ProductCategoriesMyItem showAmount={showAmount} product_categoriesItem={obj} />)
+    console.log("ProductCategoriesMyItem", product_categoriesItems)
     return <div className={styles.item}>
         <div className={styles.name}>
             {Menuitem.name}
