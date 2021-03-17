@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { ProductCategoriesItem } from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductCategoriesMyItem.module.css'
 import { DishImg } from "../../../../../common/compon/Dish/DishImg";
@@ -17,10 +17,14 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
     const d = useDispatch()
     const deleteItem = () => {
         d(newBanknoteActions.deleteFullItem(props.product_categoriesItem))
+        setCurrentA(0)
     }
+    useEffect(() => {
+        setCurrentA(props.product_categoriesItem.amount)
+    }, [props.product_categoriesItem.amount])
     const changeCurA = (value: number) => {
         setCurrentA(value)
-        d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
+        //d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
     }
     return <div>
         {props.showAmount && <div>{props.product_categoriesItem.amount && props.product_categoriesItem.amount !== 0
@@ -32,8 +36,7 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                     <div className={styles.price}>{props.product_categoriesItem.price}</div>
                     <div className={styles.price}>Amount <NumericInput defaultValue={1}
                                                                        style={{width: 120}}
-                                                                       placeholder={currentA}
-                                                                       value={currentA}
+                                                                       value={String(currentA)}
                                                                        onChange={changeCurA}/>
                     </div>
 
