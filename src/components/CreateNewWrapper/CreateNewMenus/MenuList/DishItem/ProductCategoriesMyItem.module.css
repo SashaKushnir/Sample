@@ -1,11 +1,47 @@
 .name{
-    display: inline;
+    display: inline-block;
     font-weight: bold;
-
 }
 .btn_hide{
     float: right;
 }
 .item{
+ display: flex;
+}
 
+.info{
+ display: inline-block;
+    width: 90%;
+}
+.name_price{
+
+}
+.price{
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+}
+.desc{
+    margin-top: 5px;
+}
+.weight{
+
+}
+.image{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    margin:auto 5px;
+    text-align: center;
+}
+.dish{
+    margin: 10px 5px;
+}
+.amount{
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+}
+.amount_text{
+    display: inline-block;
 }
