@@ -48,18 +48,26 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
         </div>}
         </div>}
         {!props.showAmount && <div className={styles.item}>
-            <DishImg productItem={props.product_categoriesItem}/>
+            <div className={styles.image}>
+                <DishImg productItem={props.product_categoriesItem}/>
+            </div>
             <div className={styles.info}>
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.product_categoriesItem.name}</div>
-                    <div className={styles.price}>{props.product_categoriesItem.price}</div>
+                    <div className={styles.price}>{props.product_categoriesItem.price}$</div>
                 </div>
                 <div className={styles.name_price}>
                     <div className={styles.desc}>{props.product_categoriesItem.description}</div>
-                    <div className={styles.weight}>{props.product_categoriesItem.weight}</div>
+                    {/*<div className={styles.weight}>{props.product_categoriesItem.weight}</div>*/}
                 </div>
             </div>
         </div>
         }
     </div>
 }
+
+// <div className={1} style={"display:inline-block"}>
+//     <div className={2}>
+//         <img className={3}/>
+//     </div>
+// </div>

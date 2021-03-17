@@ -15,8 +15,12 @@ export const MenuList:React.FC<MenuListProps> = (props) => {
         <MenuItemComponent showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
-        <div className={styles.tickets}>
-        {menus}
-        </div>
+        {props.showAmount && <div>
+            {menus}
+        </div>}
+        {!props.showAmount && <div className={styles.menus}>
+            {menus}
+        </div>}
+
     </div>
 }

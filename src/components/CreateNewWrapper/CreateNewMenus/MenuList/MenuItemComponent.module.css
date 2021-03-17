@@ -1,9 +1,21 @@
 .name{
-    text-align: center;
+    text-align: left;
     font-weight: bold;
-}
-.item{
-    width: 48%;
+    font-size: 19px;
+    padding-left: 10px;
     display: inline-block;
-    margin: 5px;
+}
+/*.item_show{*/
+/*    margin: 0 auto;*/
+
+/*}*/
+/*.item_not_show{*/
+
+/*}*/
+.hide{
+    display: inline-block;
+    float: right;
+}
+.all_menu{
+
 }
