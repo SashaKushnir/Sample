@@ -1,6 +1,6 @@
 import React from 'react'
 import {Determine, PeriodArray, PeriodItem, Ticket} from "../../../redux/tickets/ticketsReducer";
-import {DataItem} from "./DataItem";
+
 import styles from './TicketItemMap.module.css'
 import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
 

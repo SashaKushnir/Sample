@@ -15,5 +15,11 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
         <div>
             {serviceItem.description}
         </div>
+        <div>
+            {serviceItem.once_paid_price}
+        </div>
+        <div>
+            {serviceItem.hourly_paid_price}
+        </div>
     </div>
 }

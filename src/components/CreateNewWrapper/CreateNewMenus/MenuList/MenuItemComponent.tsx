@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { ProductCategoriesMyItem } from "./DishItem/ProductCategoriesMyItem";
-import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
+import React, {useState} from 'react'
+import {ProductCategoriesMyItem} from "./DishItem/ProductCategoriesMyItem";
+import {MenuItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './MenuItemComponent.module.css'
-import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons";
+import {FullscreenExitOutlined, FullscreenOutlined} from "@ant-design/icons";
 
 interface MenuItemComponentProps {
     Menuitem: MenuItem
@@ -16,29 +16,34 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                                  showAmount={showAmount} product_categoriesItem={obj}/>)
 
     const showMenuItem = Menuitem.products.some((obj) => obj.amount ? obj.amount : 0 > 0)
-    return <div >
+    return <div>
         {!showAmount && <div className={styles.item}>
-            <div className={styles.name}>
-                {Menuitem.name}
-            </div>
-            <div className={styles.hide}>
-                <label>{!hide ? <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
-                :<FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
+            <div className={styles.title}>
+                <div className={styles.name}>
+                    {Menuitem.name}
+                </div>
+                <div className={styles.hide}>
+                    <label>{!hide ?
+                        <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
+                        :
+                        <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
+                </div>
             </div>
             {/*<div>*/}
             {/*    {Menuitem.menu_category.description}*/}
             {/*</div>*/}
-            {!hide && <div>
+            {!hide && <div className={styles.all_menu}>
                 {product_categoriesItems}
             </div>}
         </div>}
         {showAmount && showMenuItem && <div>
-            <div className={styles.name}>
+            <div className={styles.name_basket}>
                 {Menuitem.name}
             </div>
             <div className={styles.hide}>
-                <label>{!hide ? <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
-                    :<FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
+                <label>{!hide ?
+                    <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
+                    : <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
             </div>
             {/*<div>*/}
             {/*    {Menuitem.menu_category.description}*/}

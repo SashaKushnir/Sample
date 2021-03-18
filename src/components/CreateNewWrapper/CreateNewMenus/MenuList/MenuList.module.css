@@ -1,18 +1,8 @@
 .name{
     text-align: center;
     font-weight: bold;
+    font-size: 19px;
 }
 .menus{
 
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
-}
-@media only screen and (max-width: 768px) {
-    .menus{
-        display: block;
-        -webkit-column-count: 1; /* Chrome, Safari, Opera */
-        -moz-column-count: 1; /* Firefox */
-        column-count: 1;
-    }
 }
