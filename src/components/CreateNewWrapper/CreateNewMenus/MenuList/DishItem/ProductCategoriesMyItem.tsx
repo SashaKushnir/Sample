@@ -29,14 +29,16 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
         d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
     }
     const [id] = useState(_uniqueId('prefix-'))
-    return <div>
+    return <div className={styles.dish}>
         {props.showAmount && <div>{props.product_categoriesItem.amount && props.product_categoriesItem.amount !== 0
         && <div className={styles.item}>
-            <DishImg productItem={props.product_categoriesItem}/>
+            <div className={styles.image}>
+                <DishImg productItem={props.product_categoriesItem}/>
+            </div>
             <div className={styles.info}>
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.product_categoriesItem.name}</div>
-                    <div className={styles.price}>{props.product_categoriesItem.price}</div>
+                    <div className={styles.price}>{props.product_categoriesItem.price}$</div>
                     <div className={styles.price}><label htmlFor={id}>Amount</label> <NumericInput
                                                                                     id={id}
                                                                                     defaultValue={1}
@@ -48,10 +50,10 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                 </div>
                 <div className={styles.name_price}>
                     {
-                        <div className={styles.weight}>{props.product_categoriesItem.weight}</div>
+                        <div className={styles.weight_basket}>{props.product_categoriesItem.weight}</div>
                     }
                 </div>
-                <button onClick={deleteItem}>Delete</button>
+                <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>
         </div>}
         </div>}
@@ -66,7 +68,7 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                 </div>
                 <div className={styles.name_price}>
                     <div className={styles.desc}>{props.product_categoriesItem.description}</div>
-                    {/*<div className={styles.weight}>{props.product_categoriesItem.weight}</div>*/}
+                    <div className={styles.weight}>{props.product_categoriesItem.weight}кг.</div>
                 </div>
             </div>
         </div>

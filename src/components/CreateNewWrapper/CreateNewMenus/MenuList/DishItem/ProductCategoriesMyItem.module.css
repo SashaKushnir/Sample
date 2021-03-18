@@ -23,9 +23,11 @@
 }
 .desc{
     margin-top: 5px;
+    display: inline-block;
 }
 .weight{
-
+    display: inline-block;
+    float: right;
 }
 .image{
     width: 10%;
@@ -44,4 +46,10 @@
 }
 .amount_text{
     display: inline-block;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
 }
