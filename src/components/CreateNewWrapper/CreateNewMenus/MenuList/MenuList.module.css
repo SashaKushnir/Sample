@@ -3,11 +3,10 @@
     font-weight: bold;
 }
 .menus{
-    display: block;
+
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
     column-count: 2;
-    
 }
 @media only screen and (max-width: 768px) {
     .menus{

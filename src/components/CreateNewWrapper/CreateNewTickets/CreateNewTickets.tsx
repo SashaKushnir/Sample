@@ -4,11 +4,12 @@ import { selectTickets } from "../../../selectors/selectCreateNew";
 import { TicketItem } from "./TicketItem";
 import styles from './CreateNewTickets.module.css'
 import { MenuList } from "../CreateNewMenus/MenuList/MenuList";
+import {TicketItemMap} from "./TicketItemMap";
 
 export const CreateNewTickets = () => {
-    //const tickets = useSelector(selectTickets).map((obj)=> <TicketItem ticketItem={obj}/>)
+    const tickets = useSelector(selectTickets).map((obj)=> <TicketItemMap ticketItem={obj}/>)
     return <div className={styles.tickets}>
-        {/*{tickets}*/}
+        {tickets}
     </div>
 }
 

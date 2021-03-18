@@ -1,5 +1,6 @@
 import { Input, Tooltip } from 'antd';
 import React, { ChangeEvent } from "react";
+import styles from "./InputNumber.module.css"
 
 function formatNumber(value: string) {
     value += '';
@@ -59,6 +60,7 @@ export class NumericInput extends React.Component<any> {
                     onBlur={this.onBlur}
                     placeholder="Input a number"
                     maxLength={25}
+                    className={styles.input}
                 />
             </Tooltip>
         );
@@ -79,7 +81,7 @@ class NumericInputDemo extends React.Component<NumberProps, { value: string }> {
 
     render() {
         return (
-            <NumericInput style={{ width: 120 }} value={this.state.value} onChange={this.onChange} />
+            <NumericInput  value={this.state.value} onChange={this.onChange} />
         );
     }
 }
