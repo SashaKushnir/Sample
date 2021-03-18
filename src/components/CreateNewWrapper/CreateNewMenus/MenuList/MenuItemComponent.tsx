@@ -9,8 +9,9 @@ interface MenuItemComponentProps {
 }
 
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
-    let product_categoriesItems = Menuitem.products.map((obj) =>
-        <ProductCategoriesMyItem showAmount={showAmount} product_categoriesItem={obj}/>)
+    let product_categoriesItems = Menuitem.products.map((obj, index) =>
+        <ProductCategoriesMyItem key={index} keyVal={index}
+                                 showAmount={showAmount} product_categoriesItem={obj}/>)
 
     const showMenuItem = Menuitem.products.some((obj)=> obj.amount?obj.amount:0 > 0)
     return <div className={styles.item_show}>

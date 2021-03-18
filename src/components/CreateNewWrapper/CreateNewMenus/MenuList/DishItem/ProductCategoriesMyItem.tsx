@@ -1,14 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, createRef, useEffect, useRef, useState } from 'react'
 import { ProductCategoriesItem } from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductCategoriesMyItem.module.css'
 import { DishImg } from "../../../../../common/compon/Dish/DishImg";
 import { useDispatch } from "react-redux";
 import { newBanknoteActions } from "../../../../../redux/newBanknote/newBanknoteActions";
 import { NumericInput } from "../../../../../common/compon/InputNumber/InputNumber";
+import _uniqueId from 'lodash/uniqueId';
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
     showAmount?: boolean
+    keyVal: number
 }
 
 export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
@@ -24,8 +26,9 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
     }, [props.product_categoriesItem.amount])
     const changeCurA = (value: number) => {
         setCurrentA(value)
-        //d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
+        d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
     }
+    const [id] = useState(_uniqueId('prefix-'))
     return <div>
         {props.showAmount && <div>{props.product_categoriesItem.amount && props.product_categoriesItem.amount !== 0
         && <div className={styles.item}>
@@ -34,10 +37,12 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                 <div className={styles.name_price}>
                     <div className={styles.name}>{props.product_categoriesItem.name}</div>
                     <div className={styles.price}>{props.product_categoriesItem.price}</div>
-                    <div className={styles.price}>Amount <NumericInput defaultValue={1}
-                                                                       style={{width: 120}}
-                                                                       value={String(currentA)}
-                                                                       onChange={changeCurA}/>
+                    <div className={styles.price}><label htmlFor={id}>Amount</label> <NumericInput
+                                                                                    id={id}
+                                                                                    defaultValue={1}
+                                                                                    style={{width: 120}}
+                                                                                    value={String(currentA)}
+                                                                                    onChange={changeCurA}/>
                     </div>
 
                 </div>
