@@ -1,14 +1,20 @@
 import React from 'react'
-import { useSelector } from "react-redux";
-import { selectTickets } from "../../../selectors/selectCreateNew";
+import {useSelector} from "react-redux";
+import {selectTickets} from "../../../selectors/selectCreateNew";
 import styles from './CreateNewTickets.module.css'
-import { MenuList } from "../CreateNewMenus/MenuList/MenuList";
+import {MenuList} from "../CreateNewMenus/MenuList/MenuList";
 import {TicketItemMap} from "./TicketItemMap";
 
 export const CreateNewTickets = () => {
-    const tickets = useSelector(selectTickets).map((obj)=> <TicketItemMap ticketItem={obj}/>)
-    return <div className={styles.tickets}>
-        {tickets}
+    const tickets = useSelector(selectTickets).map((obj) => <TicketItemMap ticketItem={obj}/>)
+    return <div className={styles.main}>
+        <div className={styles.basket}>
+            Корзина
+        </div>
+        <div className={styles.tickets}>
+            {tickets}
+        </div>
+
     </div>
 }
 

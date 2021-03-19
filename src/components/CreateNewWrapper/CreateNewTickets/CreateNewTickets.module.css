@@ -1,3 +1,12 @@
+.main{
+    margin: 0 15px;
+    display: flex;
+}
+.basket{
+    width: 30%;
+
+}
 .tickets{
-    margin: 0 30%;
+    width: 70%;
+    margin: 0 auto;
 }

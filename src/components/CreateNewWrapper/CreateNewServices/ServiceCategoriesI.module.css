@@ -1,0 +1,22 @@
+.item{
+    margin: 0 5px;
+    display: inline-block;
+    width: 90%;
+}
+.intertaiment{
+    display: flex;
+    margin: 5px 0;
+}
+.img{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    margin:auto 5px;
+    text-align: center;
+}
+.name{
+    margin: auto;
+    display: inline-block;
+    width: 50%;
+    font-weight: bold;
+}

@@ -16,8 +16,9 @@
     margin: auto;
     display: inline-block;
     width: 50%;
-    text-align: center;
+    text-align: right;
     font-weight: bold;
+
 }
 .item{
     margin: 0 5px;
@@ -33,5 +34,6 @@
 }
 .ticket{
     display: flex;
-    margin: 5px 0;
+    margin: 5px auto;
+    width: 70%;
 }
