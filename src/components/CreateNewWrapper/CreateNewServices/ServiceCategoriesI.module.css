@@ -5,7 +5,8 @@
 }
 .intertaiment{
     display: flex;
-    margin: 5px 0;
+    margin: 5px auto;
+    width: 70%;
 }
 .img{
     width: 10%;
@@ -19,4 +20,12 @@
     display: inline-block;
     width: 50%;
     font-weight: bold;
+}
+.price{
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+}
+.text{
+    display: inline-block;
 }

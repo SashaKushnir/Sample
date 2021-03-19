@@ -22,10 +22,12 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
                 {serviceItem.description}
             </div>
             <div className={styles.price1}>
-               Одноразова оплата {serviceItem.once_paid_price}$
+                <div className={styles.text}>Одноразова оплата </div>
+                <div className={styles.price}>{serviceItem.once_paid_price}$</div>
             </div>
             <div className={styles.price2}>
-               Оплата за годину {serviceItem.hourly_paid_price}$
+                <div className={styles.text}>Оплата за годину</div>
+                <div className={styles.price}>{serviceItem.hourly_paid_price}$</div>
             </div>
         </div>
     </div>
