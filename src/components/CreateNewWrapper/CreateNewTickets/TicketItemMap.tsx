@@ -1,11 +1,11 @@
 import React from 'react'
-import {Determine, PeriodArray, PeriodItem, Ticket} from "../../../redux/tickets/ticketsReducer";
 
 import styles from './TicketItemMap.module.css'
-import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
+import { TicketImg } from "../../../common/compon/Ticket/TicketImg";
+import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
 
 interface TicketItemProps {
-    ticketItem: Ticket
+    ticketItem: ProductCategoriesItem
 }
 
 export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem}) => {

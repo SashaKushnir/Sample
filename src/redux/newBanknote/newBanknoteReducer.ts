@@ -2,6 +2,7 @@ import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import initialMenu from '../../responses/get_menu2.json'
 import { Dispatch } from "redux";
+import { PeriodItem } from "../tickets/ticketsReducer";
 
 
 const initialState: MenusInitial = initialMenu
@@ -81,13 +82,15 @@ export type ProductCategoriesItem = {
     name: string
     description: string | null
     price: number
-    weight: number
-    updated_at: string
-    menu_id: number
+    weight?: number
+    menu_id?: number
     category_id: number
     amount?: number
+    period_id?: number | null
+    period?: PeriodItem | null
     category: MenuCategory
     created_at: string
+    updated_at: string
 }
 export type Product_categories = Array<ProductCategoriesItem>
 export type MenuItem = {
@@ -97,7 +100,7 @@ export type MenuItem = {
     description: string | null
     category_id: number | null
     category: MenuCategory
-    created_at: string,
+    created_at: string
     updated_at: string
     period_id: string | null
 }

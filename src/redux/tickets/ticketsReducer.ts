@@ -1,7 +1,7 @@
 import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
 import ticketsInitial from '../../responses/get_tickets.json'
-import { MenuCategory } from "../newBanknote/newBanknoteReducer";
+import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
 
 
 let initialState: TicketInitial = ticketsInitial
@@ -26,30 +26,30 @@ export interface PeriodItem {
     is_templatable: boolean
 }
 
-export interface PeriodArray {
-    id: number
-    name: string
-    description: string
-    price: number
-    category_id: number
-    period: PeriodItem
-}
-
-export interface Ticket {
-    id: number
-    category_id: number
-    price: number
-    name: string
-    description: string
-    period_id:number | null
-    period:PeriodItem | null
-    category: MenuCategory
-    created_at: string | null
-    updated_at: string | null
-}
+// export interface PeriodArray {
+//     id: number
+//     name: string
+//     description: string
+//     price: number
+//     category_id: number
+//     period: PeriodItem
+// }
+//
+// export interface Ticket {
+//     id: number
+//     category_id: number
+//     price: number
+//     name: string
+//     description: string
+//     period_id:number | null
+//     period:PeriodItem | null
+//     category: MenuCategory
+//     created_at: string | null
+//     updated_at: string | null
+// }
 
 export interface TicketInitial {
-    tickets: Array<Ticket>
+    tickets: Array<ProductCategoriesItem>
     response_status: boolean
     response_error: string | null
 }
