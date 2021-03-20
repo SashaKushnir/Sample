@@ -2,6 +2,7 @@ import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import initialMenu from '../../responses/get_menu2.json'
 import { Dispatch } from "redux";
+import { PeriodItem } from "../tickets/ticketsReducer";
 
 
 const initialState: MenusInitial = initialMenu
@@ -16,44 +17,35 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                 menus: [...action.menus]
             }
         case "ADD_MENU_ITEM":
-            // const flag = newBanknote.menus.map((obj) => obj.product_categories.map((inobj) => {
-            //     inobj.products.some((doubleinObj) => doubleinObj.id === action.product.id)
-            // }))
-            // const prepareMenu = [...newBanknote.menus.map((obj) => {
-            //     const categor = obj.product_categories.map((inobj) => {
-            //         const inl = inobj.products.map((doubleinObj) => {
-            //             if (doubleinObj.id === action.product.id) {
-            //                 if (flag)
-            //                     doubleinObj.amount = (doubleinObj.amount ? doubleinObj.amount : 0) + 1
-            //                 else {
-            //                     doubleinObj.amount = 1
-            //                 }
-            //                 return doubleinObj
-            //             } else {
-            //                 return doubleinObj
-            //             }
-            //         })
-            //         inobj.products = inl
-            //         return inobj
-            //     })
-            //     obj.product_categories = categor
-            //     return obj
-            // })]
-            // return {
-            //     ...newBanknote,
-            //     menus: prepareMenu
-            //     // {
-                //     ...newBanknote.selectedOrders,
-                //     selectedMenu: flag ? [...newBanknote.selectedOrders.selectedMenu.map((obj) => {
-                //             if (obj.id === action.product.id)
-                //                 return action.product
-                //             return obj
-                //         })]
-                //         : [...newBanknote.selectedOrders.selectedMenu,
-                //             action.product
-                //         ]
-                // }
-           // }
+            return {
+                ...newBanknote,
+                menus: [...newBanknote.menus.map((menuI) => {
+                    const curM = menuI.products.map((productI) => {
+                        if (productI.id === action.productI.id) {
+                            productI.showAmount=true
+                            productI.amount = action.value === null ? 0
+                                : action.value
+                        }
+                        return productI
+                    })
+                    menuI.products = curM
+                    return menuI
+                })]
+            }
+        case "TOTALLY_DELETE_MENU_ITEM":
+            return {
+                ...newBanknote,
+                menus: [...newBanknote.menus.map((menuI) => {
+                    menuI.products.map((productI) => {
+                        if (productI.id === action.productI.id) {
+                            productI.showAmount=false
+                            delete productI.amount
+                        }
+                        return productI
+                    })
+                    return menuI
+                })]
+            }
         default:
             return newBanknote
     }
@@ -79,17 +71,6 @@ export const setMenuT = () => async (dispatch: Dispatch<ActionsTypes<typeof newB
     // Catch don't forget
 }
 
-
-// export type Product = {
-//     id: number
-//     name: string
-//     description: string | null
-//     price: number
-//     weight: number
-//     menu_id: number
-//     category_id: number
-//     amount?: number
-// }
 export type MenuCategory = {
     id: number
     name: string
@@ -100,13 +81,16 @@ export type ProductCategoriesItem = {
     name: string
     description: string | null
     price: number
-    weight: number
-    updated_at: string
-    menu_id: number
+    weight?: number
+    menu_id?: number
     category_id: number
-    amount?: number
+    amount?: number | string
+    showAmount?: boolean
+    period_id?: number | null
+    period?: PeriodItem | null
     category: MenuCategory
     created_at: string
+    updated_at: string
 }
 export type Product_categories = Array<ProductCategoriesItem>
 export type MenuItem = {
@@ -116,7 +100,7 @@ export type MenuItem = {
     description: string | null
     category_id: number | null
     category: MenuCategory
-    created_at: string,
+    created_at: string
     updated_at: string
     period_id: string | null
 }

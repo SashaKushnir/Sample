@@ -3,7 +3,6 @@ import styles from './CreateNewMenus.module.css'
 import { MenuList } from "./MenuList/MenuList";
 import { useDispatch } from "react-redux";
 import { MenuArray, setMenuT } from "../../../redux/newBanknote/newBanknoteReducer";
-import { Ticket } from "../../../redux/tickets/ticketsReducer";
 
 interface CreateNewMenusProps {
     menus: MenuArray

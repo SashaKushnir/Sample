@@ -1,32 +1,70 @@
-import React from 'react'
-import {Determine, PeriodArray, PeriodItem, Ticket} from "../../../redux/tickets/ticketsReducer";
-import {DataItem} from "./DataItem";
+import React, { useState } from 'react'
+
 import styles from './TicketItemMap.module.css'
-import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
+import { TicketImg } from "../../../common/compon/Ticket/TicketImg";
+import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
+import { useDispatch } from "react-redux";
+import _uniqueId from "lodash/uniqueId";
+import { NumericInput } from "../../../common/compon/InputNumber/InputNumber";
+import { ticketsActions } from "../../../redux/tickets/ticketsActions";
 
 interface TicketItemProps {
-    periodArray: PeriodArray
+    ticketItem: ProductCategoriesItem
+    showAmount?: boolean
 }
 
-export const TicketItemMap: React.FC<TicketItemProps> = ({periodArray}) => {
-    const periodItem = Object.keys(periodArray.period.beg_datetime).map((val) =>
-        <DataItem key={val} keyVal={val} value={periodArray.period.beg_datetime[val as keyof Determine]}/>)
-    return <div>
-        <TicketImg/>
-        <div className={styles.item}>
-            <div className={styles.title}>
-                <div className={styles.name}>
-                    {periodArray.name}
-                </div>
-                <div className={styles.price}>
-                    {periodArray.price} грн.
-                </div>
+export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
 
+    const d = useDispatch()
+    const deleteItem = () => {
+        d(ticketsActions.deleteFullTicketItem(ticketItem))
+    }
+    const changeCurT = (value: number) => {
+        d(ticketsActions.addTicketItem(ticketItem, value))
+    }
+    const [id] = useState(_uniqueId('prefix-'))
+
+    return <div>
+        {showAmount && ticketItem.showAmount && <div className={styles.ticket}>
+            <div className={styles.img}>
+                <TicketImg ticketI={ticketItem}/>
             </div>
-            <div className={styles.desc}>
-                {periodArray.description}
+            <div className={styles.item}>
+                <div className={styles.title}>
+                    <div className={styles.name}>
+                        {ticketItem.name}
+                    </div>
+                    <div className={styles.price}>
+                        {ticketItem.price}$
+                    </div>
+                    <button onClick={deleteItem}>Delete</button>
+                    <div>
+                        <NumericInput value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurT}/>
+                    </div>
+                </div>
+                <div className={styles.desc}>
+                    {ticketItem.description}
+                </div>
+            </div>
+        </div>}
+        {!showAmount &&  <div className={styles.ticket}>
+            <div className={styles.img}>
+                <TicketImg ticketI={ticketItem}/>
+            </div>
+            <div className={styles.item}>
+                <div className={styles.title}>
+                    <div className={styles.name}>
+                        {ticketItem.name}
+                    </div>
+                    <div className={styles.price}>
+                        {ticketItem.price}$
+                    </div>
+                </div>
+                <div className={styles.desc}>
+                    {ticketItem.description}
+                </div>
             </div>
         </div>
-        {/*{periodItem}*/}
+        }
     </div>
 }

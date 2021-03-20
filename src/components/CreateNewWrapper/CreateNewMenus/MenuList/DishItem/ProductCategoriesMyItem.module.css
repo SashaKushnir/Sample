@@ -1,11 +1,65 @@
 .name{
-    display: inline;
+    display: inline-block;
     font-weight: bold;
-
 }
 .btn_hide{
     float: right;
 }
 .item{
+ display: flex;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
 
+    page-break-inside: avoid; /* Firefox */
+
+    break-inside: avoid; /* IE 10+ */
+}
+
+.info{
+ display: inline-block;
+    width: 90%;
+}
+.name_price{
+
+}
+.price{
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+}
+.desc{
+    margin-top: 5px;
+    display: inline-block;
+    width: 80%;
+}
+.weight{
+    display: inline-block;
+    float: right;
+    text-align: right;
+    width: 20%;
+}
+.image{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    margin:auto 5px;
+    text-align: center;
+}
+.dish{
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.amount{
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+}
+.amount_text{
+    display: inline-block;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
 }
