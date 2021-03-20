@@ -35,7 +35,7 @@ export interface ServiceCategoriesItem {
     id: number
     name: string
     description: string | null
-    amount?: number
+    amount?: number | string
     showAmount?: boolean
     once_paid_price: number | null
     hourly_paid_price: number | null
@@ -61,10 +61,13 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                 ...services,
                 services: [...services.services.map((serviceI) => {
                     if(serviceI.id === action.entertainmentI.id){
-                        if(action.value)
+                        serviceI.showAmount=true
+                        if(action.value){
                             serviceI.amount = action.value
-                        else
-                            serviceI.amount =/* (productI.amount ? productI.amount : 0) + */1
+
+                        } else {
+                            serviceI.amount=""
+                        }
                     }
                     return serviceI
                 })]
@@ -78,8 +81,10 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
             return {
                 ...services,
                 services: [...services.services.map((serviceI)=>{
-                    if(serviceI.id === action.entertainmentI.id)
+                    if(serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
+                        serviceI.showAmount=false
+                    }
                     return serviceI
                 })]
             }

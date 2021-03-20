@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { ServiceCategoriesItem } from "../../../redux/services/servicesReducer";
 import styles from "./ServiceCategoriesI.module.css";
 import { IntertaimentImg } from "../../../common/compon/Intartaiment/EntertainmentImg";
-import { InputNumber } from "antd";
 import { useDispatch } from "react-redux";
 import { servicesActions } from "../../../redux/services/servicesActions";
 import { NumericInput } from "../../../common/compon/InputNumber/InputNumber";
@@ -14,17 +13,12 @@ interface ServiceCategoriesItemProps {
 }
 
 export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({serviceItem, showAmount}) => {
-    let [currentS, setCurrentS] = useState(serviceItem.amount)
     const d = useDispatch()
     const deleteItem = () => {
         d(servicesActions.deleteFullEntertainmentItem(serviceItem))
-        setCurrentS(0)
+
     }
-    useEffect(() => {
-        setCurrentS(serviceItem.amount)
-    }, [serviceItem.amount])
     const changeCurS = (value: number) => {
-        setCurrentS(value)
         d(servicesActions.addEntertainmentItem(serviceItem, value))
     }
 
@@ -50,7 +44,7 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
                 </div>
             </div>
         </div>}
-        {showAmount && serviceItem.amount &&  <div className={styles.intertaiment}>
+        {showAmount && serviceItem.showAmount &&  <div className={styles.intertaiment}>
             <div className={styles.img}>
                 <div><IntertaimentImg entertainmentI={serviceItem}/></div>
             </div>
@@ -62,7 +56,7 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
                     {serviceItem.description}
                     <label htmlFor={"def"}>Amount</label>
                     <button onClick={deleteItem}>Delete</button>
-                    <NumericInput value={String(serviceItem.amount)?String(serviceItem.amount):1} onChange={changeCurS}  />
+                    <NumericInput value={serviceItem.amount?String(serviceItem.amount):""} onChange={changeCurS}  />
                 </div>
                 <div className={styles.price1}>
                     <div className={styles.text}>Одноразова оплата</div>

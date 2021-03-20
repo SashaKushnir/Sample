@@ -17,8 +17,8 @@ export const IntertaimentImg: React.FC<EntertainmentImgProps> = ({entertainmentI
         message.info('You have already selected this item',1);
     };
     const addService = () => {
-        if(!entertainmentI.amount  ) {
-            setAmount(amount + 1)
+        if(!entertainmentI.showAmount  ) {
+            setAmount(amount as number + 1)
             productI.amount = amount
             d(servicesActions.addEntertainmentItem(entertainmentI,null))
         } else {
