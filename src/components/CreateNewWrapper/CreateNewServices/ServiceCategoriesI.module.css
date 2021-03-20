@@ -5,8 +5,8 @@
 }
 .intertaiment{
     display: flex;
-    margin: 5px auto;
-    width: 70%;
+
+    
 }
 .img{
     width: 10%;
@@ -16,10 +16,10 @@
     text-align: center;
 }
 .name{
-    margin: auto;
+    margin: 0 auto;
     display: inline-block;
-    width: 50%;
     font-weight: bold;
+    width: 50%;
 }
 .price{
     font-weight: bold;
@@ -28,4 +28,26 @@
 }
 .text{
     display: inline-block;
+}
+.desc{
+    margin: 0 auto;
+
+
+}
+.desc_basket{
+    text-align: right;
+    width: 50%;
+    margin: 0 auto;
+    display: inline-block;
+    font-weight: bold;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
+}
+.amount{
+    font-weight: bold;
+    margin-right: 5px;
 }

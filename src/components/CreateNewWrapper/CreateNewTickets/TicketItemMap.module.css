@@ -1,5 +1,4 @@
 .title{
-
     display: flex;
 }
 .name{
@@ -18,7 +17,6 @@
     width: 50%;
     text-align: right;
     font-weight: bold;
-
 }
 .item{
     margin: 0 5px;
@@ -34,6 +32,20 @@
 }
 .ticket{
     display: flex;
-    margin: 5px auto;
-    width: 70%;
+    margin: 5px 0;
+    width: 100%;
+}
+.text{
+    font-weight: bold;
+    margin-right: 5px;
+}
+.input{
+    display: inline-block;
+    float: right;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
 }

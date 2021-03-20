@@ -34,7 +34,6 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categori
                     <div className={styles.name}>{product_categoriesItem.name}</div>
                     <div className={styles.price}>{product_categoriesItem.price}$</div>
 
-
                 </div>
                 <div className={styles.name_price}>
                     <div className={styles.price}><label htmlFor={id}>Amount</label> <NumericInput

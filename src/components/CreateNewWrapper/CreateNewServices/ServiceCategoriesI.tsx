@@ -25,7 +25,7 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
     return <div>
         {!showAmount && <div className={styles.intertaiment}>
             <div className={styles.img}>
-                <div><IntertaimentImg entertainmentI={serviceItem}/></div>
+             <IntertaimentImg entertainmentI={serviceItem}/>
             </div>
             <div className={styles.item}>
                 <div className={styles.name}>
@@ -46,18 +46,18 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
         </div>}
         {showAmount && serviceItem.showAmount &&  <div className={styles.intertaiment}>
             <div className={styles.img}>
-                <div><IntertaimentImg entertainmentI={serviceItem}/></div>
+                <IntertaimentImg entertainmentI={serviceItem}/>
             </div>
             <div className={styles.item}>
                 <div className={styles.name}>
                     {serviceItem.name}
                 </div>
-                <div className={styles.desc}>
-                    {serviceItem.description}
-                    <label htmlFor={"def"}>Amount</label>
-                    <button onClick={deleteItem}>Delete</button>
+                <div className={styles.desc_basket}>
+                    {/*{serviceItem.description}*/}
+                    <label htmlFor={"def"} className={styles.amount}>Amount</label>
                     <NumericInput value={serviceItem.amount?String(serviceItem.amount):""} onChange={changeCurS}  />
                 </div>
+
                 <div className={styles.price1}>
                     <div className={styles.text}>Одноразова оплата</div>
                     <div className={styles.price}>{serviceItem.once_paid_price}$</div>
@@ -66,6 +66,7 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
                     <div className={styles.text}>Оплата за годину</div>
                     <div className={styles.price}>{serviceItem.hourly_paid_price}$</div>
                 </div>
+                <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>
         </div>}
     </div>

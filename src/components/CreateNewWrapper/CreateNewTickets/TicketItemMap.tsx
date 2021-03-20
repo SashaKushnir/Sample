@@ -37,13 +37,14 @@ export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}
                     <div className={styles.price}>
                         {ticketItem.price}$
                     </div>
-                    <button onClick={deleteItem}>Delete</button>
-                    <div>
-                        <NumericInput value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurT}/>
-                    </div>
+                </div>
+                <button onClick={deleteItem} className={styles.btn}>Delete</button>
+                <div className={styles.input}>
+                    <label htmlFor={"def"} className={styles.text}>Amount</label>
+                    <NumericInput value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurT}/>
                 </div>
                 <div className={styles.desc}>
-                    {ticketItem.description}
+                    {/*{ticketItem.description}*/}
                 </div>
             </div>
         </div>}
