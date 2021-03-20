@@ -15,7 +15,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
         <ProductCategoriesMyItem key={index} keyVal={index}
                                  showAmount={showAmount} product_categoriesItem={obj}/>)
 
-    const showMenuItem = Menuitem.products.some((obj) => obj.amount ? obj.amount : 0 > 0)
+    const showMenuItem = Menuitem.products.some((obj) => obj.showAmount)
     return <div>
         {!showAmount && <div className={styles.item}>
             <div className={styles.title}>

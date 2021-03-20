@@ -22,11 +22,9 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                 menus: [...newBanknote.menus.map((menuI) => {
                     const curM = menuI.products.map((productI) => {
                         if (productI.id === action.productI.id) {
-                            if(action.value){
-                                productI.amount = action.value
-                            }else {
-                                productI.amount =/* (productI.amount ? productI.amount : 0) + */1
-                            }
+                            productI.showAmount=true
+                            productI.amount = action.value === null ? 0
+                                : action.value
                         }
                         return productI
                     })
@@ -37,9 +35,10 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
         case "TOTALLY_DELETE_MENU_ITEM":
             return {
                 ...newBanknote,
-                menus: [...newBanknote.menus.map((menuI)=>{
-                    menuI.products.map((productI)=> {
-                        if(productI.id === action.productI.id){
+                menus: [...newBanknote.menus.map((menuI) => {
+                    menuI.products.map((productI) => {
+                        if (productI.id === action.productI.id) {
+                            productI.showAmount=false
                             delete productI.amount
                         }
                         return productI
@@ -85,7 +84,8 @@ export type ProductCategoriesItem = {
     weight?: number
     menu_id?: number
     category_id: number
-    amount?: number
+    amount?: number | string
+    showAmount?: boolean
     period_id?: number | null
     period?: PeriodItem | null
     category: MenuCategory

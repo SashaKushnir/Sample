@@ -21,7 +21,7 @@ function formatNumber(value: string) {
 export class NumericInput extends React.Component<any> {
     onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        const reg = /^-?\d*(\.\d*)?$/;
+        const reg = /^\d*$/;
         if ((!isNaN(parseInt(value)) && reg.test(value)) || value === '' || value === '-') {
             this.props.onChange(value);
         }
@@ -31,8 +31,8 @@ export class NumericInput extends React.Component<any> {
     onBlur = () => {
         const { value, onBlur, onChange } = this.props;
         let valueTemp = value;
-        if (value.charAt(value.length - 1) === '.' || value === '-') {
-            valueTemp = value.slice(0, -1);
+        if (String(value).charAt(value.length - 1) === '.' || value === '-') {
+            valueTemp = String(value).slice(0, -1);
         }
         onChange(valueTemp.replace(/0*(\d+)/, '$1'));
         if (onBlur) {
@@ -63,25 +63,6 @@ export class NumericInput extends React.Component<any> {
                     className={styles.input}
                 />
             </Tooltip>
-        );
-    }
-}
-interface NumberProps {
-
-}
-class NumericInputDemo extends React.Component<NumberProps, { value: string }> {
-    constructor(props: NumberProps) {
-        super(props);
-        this.state = { value: '' };
-    }
-
-    onChange = (value: string) => {
-        this.setState({ value });
-    };
-
-    render() {
-        return (
-            <NumericInput  value={this.state.value} onChange={this.onChange} />
         );
     }
 }

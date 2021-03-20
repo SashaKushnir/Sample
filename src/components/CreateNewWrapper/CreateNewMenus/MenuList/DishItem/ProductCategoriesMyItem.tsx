@@ -13,32 +13,26 @@ type DishesProps = {
     keyVal: number
 }
 
-export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
-
-    let [currentA, setCurrentA] = useState(props.product_categoriesItem.amount)
+export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categoriesItem, showAmount,keyVal}) => {
     const d = useDispatch()
     const deleteItem = () => {
-        d(newBanknoteActions.deleteFullItem(props.product_categoriesItem))
-        setCurrentA(0)
+        d(newBanknoteActions.deleteFullItem(product_categoriesItem))
     }
-    useEffect(() => {
-        setCurrentA(props.product_categoriesItem.amount)
-    }, [props.product_categoriesItem.amount])
     const changeCurA = (value: number) => {
-        setCurrentA(value)
-        d(newBanknoteActions.addMenuItem(props.product_categoriesItem, value))
+            d(newBanknoteActions.addMenuItem(product_categoriesItem, value))
     }
     const [id] = useState(_uniqueId('prefix-'))
+
     return <div className={styles.dish}>
-        {props.showAmount && <div>{props.product_categoriesItem.amount && props.product_categoriesItem.amount !== 0
+        {showAmount && product_categoriesItem.showAmount
         && <div className={styles.item}>
             <div className={styles.image}>
-                <DishImg productItem={props.product_categoriesItem}/>
+                <DishImg productItem={product_categoriesItem}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.name_price}>
-                    <div className={styles.name}>{props.product_categoriesItem.name}</div>
-                    <div className={styles.price}>{props.product_categoriesItem.price}$</div>
+                    <div className={styles.name}>{product_categoriesItem.name}</div>
+                    <div className={styles.price}>{product_categoriesItem.price}$</div>
 
 
                 </div>
@@ -47,38 +41,34 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = (props) => {
                         id={id}
                         defaultValue={1}
                         style={{width: 120}}
-                        value={String(currentA)}
+                        value={!product_categoriesItem.amount?"":String(product_categoriesItem.amount) ?
+                            String(product_categoriesItem.amount) :""}
                         onChange={changeCurA}/>
                     </div>
                     {
-                        <div className={styles.weight_basket}>{props.product_categoriesItem.weight}</div>
+                        <div className={styles.weight_basket}>{product_categoriesItem.weight}</div>
                     }
                 </div>
                 <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>
         </div>}
-        </div>}
-        {!props.showAmount && <div className={styles.item}>
+
+        {!showAmount && <div className={styles.item}>
             <div className={styles.image}>
-                <DishImg productItem={props.product_categoriesItem}/>
+                <DishImg productItem={product_categoriesItem}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.name_price}>
-                    <div className={styles.name}>{props.product_categoriesItem.name}</div>
-                    <div className={styles.price}>{props.product_categoriesItem.price}$</div>
+                    <div className={styles.name}>{product_categoriesItem.name}</div>
+                    <div className={styles.price}>{product_categoriesItem.price}$</div>
                 </div>
                 <div className={styles.name_price}>
-                    <div className={styles.desc}>{props.product_categoriesItem.description}</div>
-                    <div className={styles.weight}>{props.product_categoriesItem.weight}кг.</div>
+                    <div className={styles.desc}>{product_categoriesItem.description}</div>
+                    <div className={styles.weight}>{product_categoriesItem.weight}кг.</div>
                 </div>
             </div>
         </div>
         }
+
     </div>
 }
-
-// <div className={1} style={"display:inline-block"}>
-//     <div className={2}>
-//         <img className={3}/>
-//     </div>
-// </div>

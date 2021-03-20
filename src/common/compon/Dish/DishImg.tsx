@@ -18,8 +18,8 @@ export const DishImg: React.FC<DishImgProps> = ({productItem}) => {
         message.info('You have already selected this item',1);
     };
     const addProduct = () => {
-        if(!productItem.amount  ) {
-            setAmount(amount + 1)
+        if(!productItem.showAmount  ) {
+            setAmount(amount as number + 1)
             productI.amount = amount
             d(newBanknoteActions.addMenuItem(productI, null))
         } else {
