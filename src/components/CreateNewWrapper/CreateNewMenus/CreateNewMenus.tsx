@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react'
 import styles from './CreateNewMenus.module.css'
 import { MenuList } from "./MenuList/MenuList";
-import { useDispatch } from "react-redux";
-import { MenuArray, setMenuT } from "../../../redux/newBanknote/newBanknoteReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { setMenuT } from "../../../redux/newBanknote/newBanknoteReducer";
+import { selectMenuKitchen } from "../../../selectors/selectCreateNew";
+import { newBanknoteActions } from "../../../redux/newBanknote/newBanknoteActions";
 
-interface CreateNewMenusProps {
-    menus: MenuArray
-}
 
-export const CreateNewMenus: React.FC<CreateNewMenusProps> = ({menus}) => {
+export const CreateNewMenus: React.FC = () => {
     const d = useDispatch()
-    useEffect(()=>{
-        d(setMenuT())
-    },[])
+    const menuData = useSelector(selectMenuKitchen)
+    useEffect(() => {
+        let localServices = JSON.parse(sessionStorage.getItem("menus") || "[]");
+        if (localServices.length > 0) {
+            d(newBanknoteActions.setMenuInfo(localServices));
+            sessionStorage.removeItem("menus");
+        } else
+            d(setMenuT())
+    }, [])
+    useEffect(() => {
+        sessionStorage.setItem("menus", JSON.stringify(menuData))
+    })
+    const menus = useSelector(selectMenuKitchen)
     return <div className={styles.wrap}>
-        <MenuList menus={menus} showAmount={true} />
+        <MenuList menus={menus} showAmount={true}/>
         <MenuList menus={menus}/>
     </div>
 }

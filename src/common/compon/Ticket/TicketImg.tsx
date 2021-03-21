@@ -26,7 +26,7 @@ export const TicketImg:React.FC<TicketImgProps> = ({ticketI}) => {
             info()
         }
     }
-    return <div className={s.item}>
-        <img onClick={addTicket} className={s.ticketimg} src={ticketimg} alt="Ticket img"/>
+    return <div onClick={addTicket} className={s.item}>
+        <img className={s.ticketimg} src={ticketimg} alt="Ticket img"/>
     </div>
 }
