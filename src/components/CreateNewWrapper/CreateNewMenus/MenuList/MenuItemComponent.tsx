@@ -3,6 +3,7 @@ import {ProductCategoriesMyItem} from "./DishItem/ProductCategoriesMyItem";
 import {MenuItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './MenuItemComponent.module.css'
 import {FullscreenExitOutlined, FullscreenOutlined} from "@ant-design/icons";
+import {ProductCategoriesMyItemBasket} from "./DishItem/ProductCategoriesMyItemBasket";
 
 interface MenuItemComponentProps {
     Menuitem: MenuItem
@@ -14,7 +15,9 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
     let product_categoriesItems = Menuitem.products.map((obj, index) =>
         <ProductCategoriesMyItem key={index} keyVal={index}
                                  showAmount={showAmount} product_categoriesItem={obj}/>)
-
+    let product_categoriesItemsBasket = Menuitem.products.map((obj, index) =>
+        <ProductCategoriesMyItemBasket key={index} keyVal={index}
+                                 showAmount={showAmount} product_categoriesItem={obj}/>)
     const showMenuItem = Menuitem.products.some((obj) => obj.showAmount)
     return <div>
         {!showAmount && <div className={styles.item}>
@@ -49,7 +52,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
             {/*    {Menuitem.menu_category.description}*/}
             {/*</div>*/}
             {!hide && <div>
-                {product_categoriesItems}
+                {product_categoriesItemsBasket}
             </div>}
         </div>
         }

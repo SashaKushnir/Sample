@@ -1,4 +1,4 @@
-import React from "react";
+import yReact from "react";
 
 import { ServiceCategoriesItem } from "../../../redux/services/servicesReducer";
 import styles from "./ServiceCategoriesI.module.css";
