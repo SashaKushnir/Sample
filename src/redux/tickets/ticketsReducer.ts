@@ -2,6 +2,9 @@ import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
 import ticketsInitial from '../../responses/get_tickets.json'
 import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
+import { Dispatch } from "redux";
+import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
+import initialMenu from "../../responses/get_menu2.json";
 
 
 let initialState: TicketInitial = ticketsInitial
@@ -76,3 +79,20 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
 }
 
 // Thunk
+export const setTicketsT = () => (dispatch: Dispatch<ActionsTypes<typeof ticketsActions>>) => {
+    // To Fetch firstly
+    try {
+        // Get request: API await with try
+        const response = ticketsInitial
+        // Set response to Bll
+        if (response.response_status) {
+            dispatch(ticketsActions.setTicketInfo(response.tickets))
+            // Stop Fetching
+        } else {
+            console.warn(response.response_error)
+        }
+    } catch (error) {
+        alert("Something went wrong")
+        console.warn(error)
+    }
+}
