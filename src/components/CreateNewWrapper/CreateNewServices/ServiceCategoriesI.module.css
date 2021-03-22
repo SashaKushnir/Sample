@@ -19,7 +19,7 @@
     margin: 0 auto;
     display: inline-block;
     font-weight: bold;
-    width: 50%;
+    width: 70%;
 }
 .price{
     font-weight: bold;
@@ -31,12 +31,10 @@
 }
 .desc{
     margin: 0 auto;
-
-
 }
 .desc_basket{
     text-align: right;
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
     display: inline-block;
     font-weight: bold;

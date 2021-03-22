@@ -8,6 +8,7 @@ import { setServicesT } from "../../../redux/services/servicesReducer";
 import { createPost } from "../../../redux/formPostObject/createObjReducer";
 import { newBanknoteActions } from "../../../redux/newBanknote/newBanknoteActions";
 import { servicesActions } from "../../../redux/services/servicesActions";
+import {ServiceCategoriesIShowAmount} from "./ServiceCategoriesIShowAmount";
 
 
 export const CreateNewServices = () => {
@@ -31,13 +32,13 @@ export const CreateNewServices = () => {
 
     const selectedServices = useSelector(selectServices).filter((obj)=>
         obj.showAmount).map((obj,index)=>
-        <ServiceCategoriesI key={index} serviceItem={obj} showAmount={true}/>)
+        <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>)
 
     const createMyPost = () => {
         d(createPost())
     }
     const services = useSelector(selectServices).map((obj, index) =>
-        <ServiceCategoriesI key={index} serviceItem={obj}/>)
+        <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>)
 
 
     return <div className={styles.main}>

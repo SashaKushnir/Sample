@@ -13,19 +13,19 @@ interface TicketItemProps {
     showAmount?: boolean
 }
 
-export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
+export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
 
-    // const d = useDispatch()
-    // const deleteItem = () => {
-    //     d(ticketsActions.deleteFullTicketItem(ticketItem))
-    // }
-    // const changeCurT = (value: number) => {
-    //     d(ticketsActions.addTicketItem(ticketItem, value))
-    // }
-    // const [id] = useState(_uniqueId('prefix-'))
+    const d = useDispatch()
+    const deleteItem = () => {
+        d(ticketsActions.deleteFullTicketItem(ticketItem))
+    }
+    const changeCurT = (value: number) => {
+        d(ticketsActions.addTicketItem(ticketItem, value))
+    }
+    const [id] = useState(_uniqueId('prefix-'))
 
     return <div>
-        <div className={styles.ticket}>
+         <div className={styles.ticket}>
             <div className={styles.img}>
                 <TicketImg ticketI={ticketItem}/>
             </div>
@@ -38,8 +38,13 @@ export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}
                         {ticketItem.price}$
                     </div>
                 </div>
+                <button onClick={deleteItem} className={styles.btn}>Delete</button>
+                <div className={styles.input}>
+                    <label htmlFor={"def"} className={styles.text}>Amount</label>
+                    <NumericInput value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurT}/>
+                </div>
                 <div className={styles.desc}>
-                    {ticketItem.description}
+                    {/*{ticketItem.description}*/}
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import styles from './CreateNewTickets.module.css'
 import { TicketItemMap } from "./TicketItemMap";
 import { ticketsActions } from "../../../redux/tickets/ticketsActions";
 import { setTicketsT } from "../../../redux/tickets/ticketsReducer";
+import {TicketItemMapShowAmount} from "./TicketItemMapShowAmount";
 
 export const CreateNewTickets = () => {
     const ticketData  = useSelector(selectTickets)
@@ -26,7 +27,7 @@ export const CreateNewTickets = () => {
         <TicketItemMap key={index}  showAmount={false} ticketItem={obj}/>)
 
     const selectedTickets = useSelector(selectTickets).map((obj, index)=>
-        <TicketItemMap key={index} showAmount={true} ticketItem={obj}/>)
+        <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>)
 
     return <div className={styles.main}>
         <div className={styles.basket}>
