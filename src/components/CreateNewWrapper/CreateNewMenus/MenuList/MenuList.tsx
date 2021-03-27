@@ -11,8 +11,8 @@ interface MenuListProps {
 }
 
 export const MenuList:React.FC<MenuListProps> = (props) => {
-    const menus = props.menus.map((curMenuItem:MenuItem)=>
-        <MenuItemComponent showAmount={props.showAmount} Menuitem={curMenuItem}/>)
+    const menus = props.menus.map((curMenuItem:MenuItem, index)=>
+        <MenuItemComponent key={index} showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
         {props.showAmount && <div>

@@ -1,0 +1,12 @@
+.dashed {
+    border-top: 3px dashed #bbb;
+}
+.item {
+    margin: 10px;
+}
+hr.solid {
+    border-top: 3px solid black;
+}
+.banquetWithName{
+    font-size: 150%;
+}

@@ -25,11 +25,9 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem,s
     const deleteItem = () => {
         d(ticketsActions.deleteFullTicketItem(ticketItem))
     }
-    const changeCurT = (value: number) => {
-        d(ticketsActions.addTicketItem(ticketItem, value))
-    }
     const changeCurr = (e: ChangeEvent<HTMLInputElement>) => {
-        d(ticketsActions.addTicketItem(ticketItem, e.target.value as any))
+        if(e.target.value.match(/^(\d)*$/))
+            d(ticketsActions.addTicketItem(ticketItem, e.target.value as any))
     }
 
 
@@ -49,7 +47,8 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem,s
             <button onClick={deleteItem} className={styles.btn}>Delete</button>
             <div className={styles.input}>
                 <label htmlFor={"def"} className={styles.text}>Amount</label>
-                <input ref={textInput} value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurr}/>
+                <input ref={textInput} placeholder={"Amount"}
+                       value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurr}/>
             </div>
             <div className={styles.desc}>
                 {/*{ticketItem.description}*/}

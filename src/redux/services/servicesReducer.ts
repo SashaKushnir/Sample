@@ -93,21 +93,3 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
     }
 }
 // Thunk
-export const setServicesT = () => async (dispatch: Dispatch<ActionsTypes<typeof servicesActions>>) => {
-    // To Fetch firstly
-    try {
-        // Get request: API await with try
-        const response = services
-        // Set response to Bll
-        if (response.response_status) {
-            dispatch(servicesActions.setEntertainmentInfo(response.services))
-            // Stop Fetching
-        } else {
-            console.warn(response.response_error)
-        }
-    } catch (error) {
-        alert("Something went wrong")
-        console.warn(error)
-    }
-    // Catch don't forget
-}

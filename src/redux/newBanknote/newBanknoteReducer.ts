@@ -1,7 +1,6 @@
 import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import initialMenu from '../../responses/get_menu2.json'
-import { Dispatch } from "redux";
 import { PeriodItem } from "../tickets/ticketsReducer";
 
 
@@ -52,25 +51,6 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
 }
 
 // Thunk
-export const setMenuT = () => async (dispatch: Dispatch<ActionsTypes<typeof newBanknoteActions>>) => {
-    // To Fetch firstly
-    try {
-        // Get request: API await with try
-        const response = initialMenu
-        // Set response to Bll
-        if (response.response_status) {
-            dispatch(newBanknoteActions.setMenuInfo(response.menus))
-            // Stop Fetching
-        } else {
-            console.warn(response.response_error)
-        }
-    } catch (error) {
-        alert("Something went wrong")
-        console.warn(error)
-    }
-    // Catch don't forget
-}
-
 export type MenuCategory = {
     id: number
     name: string

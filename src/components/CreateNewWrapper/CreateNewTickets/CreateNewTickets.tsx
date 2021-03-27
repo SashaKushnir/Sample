@@ -4,8 +4,8 @@ import { selectTickets } from "../../../selectors/selectCreateNew";
 import styles from './CreateNewTickets.module.css'
 import { TicketItemMap } from "./TicketItemMap";
 import { ticketsActions } from "../../../redux/tickets/ticketsActions";
-import { setTicketsT } from "../../../redux/tickets/ticketsReducer";
 import {TicketItemMapShowAmount} from "./TicketItemMapShowAmount";
+import { setTicketsT } from "../../../redux/tickets/ticketsThunks";
 
 export const CreateNewTickets = () => {
     const ticketData  = useSelector(selectTickets)

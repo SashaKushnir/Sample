@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectServices } from "../../../selectors/selectCreateNew";
 import { ServiceCategoriesI } from "./ServiceCategoriesI";
 import styles from "./CreateNewServices.module.css";
-import { useEffect, useState } from "react";
-import { setServicesT } from "../../../redux/services/servicesReducer";
-import { createPost } from "../../../redux/formPostObject/createObjReducer";
-import { newBanknoteActions } from "../../../redux/newBanknote/newBanknoteActions";
+import { useEffect } from "react";
 import { servicesActions } from "../../../redux/services/servicesActions";
-import {ServiceCategoriesIShowAmount} from "./ServiceCategoriesIShowAmount";
+import { ServiceCategoriesIShowAmount } from "./ServiceCategoriesIShowAmount";
+import { createPost } from "../../../redux/formPostObject/createObjThunks";
+import { setServicesT } from "../../../redux/services/servicesThunks";
 
 
 export const CreateNewServices = () => {
@@ -34,9 +33,7 @@ export const CreateNewServices = () => {
         obj.showAmount).map((obj,index)=>
         <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>)
 
-    const createMyPost = () => {
-        d(createPost())
-    }
+
     const services = useSelector(selectServices).map((obj, index) =>
         <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>)
 
@@ -48,7 +45,5 @@ export const CreateNewServices = () => {
         <div className={styles.intertaiment}>
             {services}
         </div>
-        <button onClick={createMyPost}>Save</button>
-
     </div>
 }

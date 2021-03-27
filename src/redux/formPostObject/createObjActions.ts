@@ -1,3 +1,3 @@
 export const createObjActions = {
-    createObj: () => ({type:"CREATE_POST_OBJECT"}) as const
+    fetchingToggle: (status: boolean) => ({type:"FETCHING_TOGGLE", status}) as const
 }

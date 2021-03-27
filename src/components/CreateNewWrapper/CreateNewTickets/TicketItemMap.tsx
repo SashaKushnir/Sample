@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import styles from './TicketItemMap.module.css'
 import { TicketImg } from "../../../common/compon/Ticket/TicketImg";
 import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
-import { useDispatch } from "react-redux";
-import _uniqueId from "lodash/uniqueId";
-import { NumericInput } from "../../../common/compon/InputNumber/InputNumber";
-import { ticketsActions } from "../../../redux/tickets/ticketsActions";
 
 interface TicketItemProps {
     ticketItem: ProductCategoriesItem
@@ -14,16 +10,6 @@ interface TicketItemProps {
 }
 
 export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
-
-    // const d = useDispatch()
-    // const deleteItem = () => {
-    //     d(ticketsActions.deleteFullTicketItem(ticketItem))
-    // }
-    // const changeCurT = (value: number) => {
-    //     d(ticketsActions.addTicketItem(ticketItem, value))
-    // }
-    // const [id] = useState(_uniqueId('prefix-'))
-
     return <div>
         <div className={styles.ticket}>
             <div className={styles.img}>
