@@ -1,24 +1,23 @@
 import { Dispatch } from "redux";
 import { ActionsTypes } from "../store";
 import { servicesActions } from "./servicesActions";
-import services from "../../responses/get_services_list.json";
-import { createObjActions } from "../formPostObject/createObjActions";
+import { commonActions } from "../forCommon/forCommonActions";
+import { services } from "../../api/CreateNew/services";
 
-export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof servicesActions | typeof createObjActions>>) => {
+export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof servicesActions | typeof commonActions>>) => {
     try {
-        d(createObjActions.fetchingToggle(true))
-        const response = services
+        d(commonActions.fetchingToggle(true))
+        const response = await services.getAllServices()
         // Set response to Bll
-        if (response.response_status) {
-            d(servicesActions.setEntertainmentInfo(response.services))
-            d(createObjActions.fetchingToggle(false))
+        if (response.data.response_status && !response.data.response_error) {
+            d(servicesActions.setEntertainmentInfo(response.data.services))
+            d(commonActions.fetchingToggle(false))
         } else {
-            console.warn(response.response_error)
+            console.warn(response.data.response_error)
         }
     } catch (error) {
         alert("Something went wrong")
         console.warn(error)
-        d(createObjActions.fetchingToggle(false))
+        d(commonActions.fetchingToggle(false))
     }
-    // Catch don't forget
 }

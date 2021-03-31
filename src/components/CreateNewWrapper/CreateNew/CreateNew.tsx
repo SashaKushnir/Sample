@@ -7,7 +7,9 @@ import { CreateNewTickets } from "../CreateNewTickets/CreateNewTickets";
 import { BlankHeader } from "../BlankHeader/BlankHeader";
 import s from './CreateNewNavBar.module.css'
 import { createPost } from "../../../redux/formPostObject/createObjThunks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchingComponent } from "../../../common/compon/FetchingComponent/FetchingComponent";
+import { RootState } from "../../../redux/store";
 
 export const CreateNew = () => {
     let {url} = useRouteMatch()
@@ -22,6 +24,9 @@ export const CreateNew = () => {
     const submitB = () => {
         d(createPost())
     }
+    if (useSelector((state:RootState) => state.common.isFetching))
+        return <FetchingComponent/>
+
     return <>
         {editMode && <div>
             <BlankHeader/>

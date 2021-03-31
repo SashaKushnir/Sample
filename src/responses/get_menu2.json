@@ -12,38 +12,6 @@
       },
       "products": [
         {
-          "id": 1,
-          "name": "Mojito",
-          "description": "Iced Sprite with mint, lime and lemon.",
-          "price": 12000,
-          "weight": 25000,
-          "menu_id": 1,
-          "category_id": 2,
-          "category": {
-            "id": 2,
-            "name": "Cold drinks",
-            "description": null
-          },
-          "created_at": "2021-03-16 10:55:37",
-          "updated_at": "2021-03-16 10:55:37"
-        },
-        {
-          "id": 2,
-          "name": "Simpleton Cocktail",
-          "description": "A sparkling combination of juice and vodka.",
-          "price": 10000,
-          "weight": 20000,
-          "menu_id": 1,
-          "category_id": 2,
-          "category": {
-            "id": 2,
-            "name": "Cold drinks",
-            "description": null
-          },
-          "created_at": "2021-03-16 10:55:37",
-          "updated_at": "2021-03-16 10:55:37"
-        },
-        {
           "id": 3,
           "name": "Martini",
           "description": null,

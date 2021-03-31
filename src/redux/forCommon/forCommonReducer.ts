@@ -1,26 +1,29 @@
 import { ActionsTypes } from "../store";
-import { createObjActions } from "./createObjActions";
 import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
 import { ServiceCategoriesItem } from "../services/servicesReducer";
+import { commonActions } from "./forCommonActions";
 
 export interface PostObject {
     menus: Array<ProductCategoriesItem> | null,
     tickets: Array<ProductCategoriesItem> | null,
     services: Array<ServiceCategoriesItem> | null,
+    isFetching: boolean
 }
 
-const initialState: PostObject = {
-    menus: null,
-    services: null,
-    tickets: null
+const initialState = {
+    isFetching: false
 }
 
 
-export const createObjReducer = (postObj = initialState, action: ActionsTypes<typeof createObjActions>) => {
+export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>) => {
 
     switch (action.type) {
-
+        case "FETCHING_TOGGLE":
+            return {
+                ...common,
+                isFetching: action.status
+            }
         default:
-            return postObj
+            return common
     }
 }

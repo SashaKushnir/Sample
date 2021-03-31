@@ -2,11 +2,10 @@ import { Dispatch } from "redux";
 import { ActionsTypes, RootState } from "../store";
 import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
 import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
-import { PostObject } from "./createObjReducer";
 const _ = require("lodash");
 
 export const createPost = () => (dispatch: Dispatch<ActionsTypes<typeof newBanknoteActions>>, getState: ()=>RootState) => {
-    let mainPost: PostObject = {
+    let mainPost: any = {
         menus: getState().createNew.menus.reduce((acum:Array<ProductCategoriesItem>,menuI,index)=>
             acum.concat(menuI.products.filter((productI)=> productI.showAmount).map((obj)=> {
                 const subset = _.omit(obj, [ 'showAmount', 'description', "category", "name", "period", "weight", "price"])

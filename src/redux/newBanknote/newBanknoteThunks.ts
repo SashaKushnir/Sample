@@ -1,24 +1,27 @@
 import { Dispatch } from "redux";
 import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
-import initialMenu from "../../responses/get_menu2.json";
-import { createObjActions } from "../formPostObject/createObjActions";
+import { menus } from "../../api/CreateNew/menus";
+import { commonActions } from "../forCommon/forCommonActions";
 
-export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknoteActions | typeof createObjActions>>) => {
+export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknoteActions | typeof commonActions>>) => {
     try {
-        d(createObjActions.fetchingToggle(true))
-        const response = initialMenu
+        d(commonActions.fetchingToggle(true))
+        const response = await menus.getAllMenus()
+        console.log("res", response)
         // Set response to Bll
-        if (response.response_status) {
-            d(newBanknoteActions.setMenuInfo(response.menus))
-            d(createObjActions.fetchingToggle(false))
-        } else {
-            console.warn(response.response_error)
+
+
+         if (response.data.response_status && !response.data.response_error) {
+            d(newBanknoteActions.setMenuInfo(response.data.menus))
+            d(commonActions.fetchingToggle(false))
+         } else {
+            console.warn(response.statusText)
         }
     } catch (error) {
         alert("Something went wrong")
         console.warn(error)
-        d(createObjActions.fetchingToggle(false))
+        d(commonActions.fetchingToggle(false))
     }
     // Catch don't forget
 }

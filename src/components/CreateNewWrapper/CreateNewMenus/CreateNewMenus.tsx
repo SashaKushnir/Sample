@@ -11,11 +11,11 @@ export const CreateNewMenus: React.FC = () => {
     const d = useDispatch()
     const menuData = useSelector(selectMenuKitchen)
     useEffect(() => {
-        // let localServices = JSON.parse(sessionStorage.getItem("menus") || "[]");
-        // if (localServices.length > 0) {
-        //     d(newBanknoteActions.setMenuInfo(localServices));
-        //     sessionStorage.removeItem("menus");
-        // } else
+        let localServices = JSON.parse(sessionStorage.getItem("menus") || "[]");
+        if (localServices.length > 0) {
+            d(newBanknoteActions.setMenuInfo(localServices));
+            sessionStorage.removeItem("menus");
+        } else
             d(setMenuT())
     }, [])
     useEffect(() => {

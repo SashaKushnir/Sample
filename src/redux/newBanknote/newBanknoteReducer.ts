@@ -4,7 +4,7 @@ import initialMenu from '../../responses/get_menu2.json'
 import { PeriodItem } from "../tickets/ticketsReducer";
 
 
-const initialState: MenusInitial = initialMenu
+const initialState:  MenusInitial = initialMenu
 
 
 export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
