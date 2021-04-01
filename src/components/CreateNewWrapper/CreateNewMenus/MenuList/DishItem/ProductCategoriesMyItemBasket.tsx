@@ -42,14 +42,16 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                     <div className={styles.name}>{product_categoriesItem.name}</div>
                     <div className={styles.price}>{product_categoriesItem.price}$</div>
                 </div>
-                <div className={styles.input}>
-                    <label htmlFor={"def"} className={styles.text}>Amount</label>
-                    <input onChange={changeCurA}
+                <div className={styles.input_block}>
+                    <label htmlFor={"def"} className={styles.input_label}>Amount</label>
+                    <input className={styles.input}
+                        onChange={changeCurA}
                            value={!product_categoriesItem.amount ? "" : String(product_categoriesItem.amount) ?
                                String(product_categoriesItem.amount) : ""}
                            placeholder={"Amount"}
                            ref={textInput}/>
                 </div>
+
                 {/*{*/}
                 {/*    <div className={styles.weight_basket}>{product_categoriesItem.weight}</div>*/}
                 {/*}*/}
