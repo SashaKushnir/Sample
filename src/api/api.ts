@@ -28,16 +28,16 @@ export type ApiMenusResultType<D> = {
     response_status_code: number,
 }
 export type ApiServicesResultType<D> = {
-    response_error: string | null,
-    services: D,
+    response_error: string | null
+    services: D
     response_status: boolean
-    response_status_code: number,
+    response_status_code: number
 }
 export type ApiTicketsResultType<D> = {
-    response_error: string | null,
-    tickets: D,
+    response_error: string | null
+    tickets: D
     response_status: boolean
-    response_status_code: number,
+    response_status_code: number
 }
 // Accept-Encoding: gzip, deflate
 // Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6

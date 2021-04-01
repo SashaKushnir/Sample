@@ -1,17 +1,10 @@
 import { ActionsTypes } from "../store";
-import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
-import { ServiceCategoriesItem } from "../services/servicesReducer";
 import { commonActions } from "./forCommonActions";
 
-export interface PostObject {
-    menus: Array<ProductCategoriesItem> | null,
-    tickets: Array<ProductCategoriesItem> | null,
-    services: Array<ServiceCategoriesItem> | null,
-    isFetching: boolean
-}
 
 const initialState = {
-    isFetching: false
+    isFetching: false,
+    isAuthorised: false
 }
 
 
@@ -22,6 +15,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isFetching: action.status
+            }
+        case "AUTH_TOGGLE":
+            return {
+                ...common,
+                isAuthorised: action.status
             }
         default:
             return common
