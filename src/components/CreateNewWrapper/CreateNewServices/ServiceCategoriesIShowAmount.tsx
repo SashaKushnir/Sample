@@ -1,11 +1,12 @@
-import yReact from "react";
+import yReact, {ChangeEvent, useEffect} from "react";
 
-import { ServiceCategoriesItem } from "../../../redux/services/servicesReducer";
+import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 import styles from "./ServiceCategoriesI.module.css";
-import { IntertaimentImg } from "../../../common/compon/Intartaiment/EntertainmentImg";
-import { useDispatch } from "react-redux";
-import { servicesActions } from "../../../redux/services/servicesActions";
-import { NumericInput } from "../../../common/compon/InputNumber/InputNumber";
+import {IntertaimentImg} from "../../../common/compon/Intartaiment/EntertainmentImg";
+import {useDispatch} from "react-redux";
+import {servicesActions} from "../../../redux/services/servicesActions";
+import {NumericInput} from "../../../common/compon/InputNumber/InputNumber";
+import React from "react";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem
@@ -14,12 +15,21 @@ interface ServiceCategoriesItemProps {
 
 export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> = ({serviceItem, showAmount}) => {
     const d = useDispatch()
+
+    const textInput = React.createRef<HTMLInputElement>()
+    useEffect(() => {
+        if (serviceItem.showAmount) {
+            textInput.current?.focus()
+        }
+    }, [serviceItem.showAmount])
+
     const deleteItem = () => {
         d(servicesActions.deleteFullEntertainmentItem(serviceItem))
 
     }
-    const changeCurS = (value: number) => {
-        d(servicesActions.addEntertainmentItem(serviceItem, value))
+    const changeCurS = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.match(/^(\d)*$/))
+            d(servicesActions.addEntertainmentItem(serviceItem, e.target.value as any))
     }
 
     return <div>
@@ -32,9 +42,7 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                     {serviceItem.name}
                 </div>
                 <div className={styles.desc_basket}>
-                    {/*{serviceItem.description}*/}
-                    <label htmlFor={"def"} className={styles.amount}>Amount</label>
-                    <NumericInput value={serviceItem.amount?String(serviceItem.amount):""} onChange={changeCurS}  />
+
                 </div>
 
                 <div className={styles.price1}>
@@ -44,6 +52,15 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                 <div className={styles.price2}>
                     <div className={styles.text}>Оплата за годину</div>
                     <div className={styles.price}>{serviceItem.hourly_paid_price}$</div>
+                </div>
+
+                <div className={styles.input}>
+                    <label htmlFor={"def"} className={styles.text}>Amount</label>
+                    <input
+                        onChange={changeCurS}
+                        value={serviceItem.amount ? String(serviceItem.amount) : ""}
+                        placeholder={"Amount"}
+                        ref={textInput}/>
                 </div>
                 <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>

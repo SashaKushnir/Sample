@@ -6,7 +6,7 @@
 .intertaiment{
     display: flex;
 
-    
+
 }
 .img{
     width: 10%;
@@ -48,4 +48,12 @@
 .amount{
     font-weight: bold;
     margin-right: 5px;
+}
+.input{
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+}
+input{
+    margin: 0 2px;
 }

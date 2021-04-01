@@ -1,12 +1,13 @@
 .main{
-    margin: 0 15px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 33% 66%;
 }
 .basket{
-    width: 30%;
+    /*width: 33%;*/
 
 }
 .tickets{
-    width: 70%;
-    margin: 0 auto;
+    /*width: 66%;*/
+    /*margin: 0 auto;*/
 }
+

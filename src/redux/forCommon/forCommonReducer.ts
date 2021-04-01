@@ -4,7 +4,7 @@ import { commonActions } from "./forCommonActions";
 
 const initialState = {
     isFetching: false,
-    isAuthorised: false
+    isAuthorised: true
 }
 
 

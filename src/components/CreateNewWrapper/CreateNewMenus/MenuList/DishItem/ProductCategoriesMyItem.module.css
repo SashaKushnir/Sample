@@ -63,3 +63,8 @@
     cursor: pointer;
     padding: 1px;
 }
+.input{
+    display: inline-block;
+    font-weight: bold;
+    float: right;
+}

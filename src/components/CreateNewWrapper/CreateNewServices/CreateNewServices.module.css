@@ -1,12 +1,12 @@
 .main{
-    margin: 0 15px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 33% 66%;
 }
 .basket{
-    width: 30%;
+    /*width: 30%;*/
 
 }
 .intertaiment{
-    width: 70%;
-    margin: 0 auto;
+    /*width: 70%;*/
+    /*margin: 0 auto;*/
 }
