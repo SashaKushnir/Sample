@@ -4,6 +4,7 @@ import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
+import {Register} from "../../Registration/Register";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
@@ -16,7 +17,7 @@ export const MyPage = () => {
                 <Route path={`${url}/history`} render={() => <div>history</div>}/>
                 <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
                 <Route path={`${url}/reports`} render={() => <div>reports</div>}/>
-                <Route path={`${url}/support`} render={() => <div>support</div>}/>
+                <Route path={`${url}/support`} render={() => <div><Register/></div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>
                 <Route path={`${url}/authors`} render={() => <div>authors</div>}/>
