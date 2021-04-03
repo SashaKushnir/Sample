@@ -7,7 +7,7 @@ import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
 export const Header = () => {
     const d = useDispatch();
-    const log_out = () =>  d(commonActions.authToggle(false))
+    const log_out = () =>  d(commonActions.logOut())
     return <>
         <header>
             <div className={s.headerText}>

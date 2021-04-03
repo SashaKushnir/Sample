@@ -39,6 +39,12 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
                 ...common,
                 userInfo: {...action.payload} as any
             }
+        case "LOG_OUT":
+            return {
+                ...common,
+                userInfo: null,
+                isAuthorised: false
+            }
         default:
             return common
     }
