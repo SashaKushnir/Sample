@@ -1,10 +1,10 @@
-import { Field, Form, Formik } from "formik";
+import {Field, Form, Formik} from "formik";
 import React from "react";
 import * as Yup from 'yup';
 import s from './LoginForm.module.css'
-import { useDispatch, useSelector } from "react-redux";
-import { tryLoginT } from "../../redux/forCommon/forCommonThunks";
-import { RootState } from "../../redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {tryLoginT} from "../../redux/forCommon/forCommonThunks";
+import {RootState} from "../../redux/store";
 
 export interface LoginFormType {
     name: string
@@ -33,7 +33,6 @@ export const LoginForm = () => {
                        password: ''
                    }}>
         {({errors, touched}) => (
-
             <Form>
                 <div className={s.myFrom}>
                     <div>
@@ -48,13 +47,10 @@ export const LoginForm = () => {
                             <div className={s.error}>{errors.password}</div>
                         ) : null}
                     </div>
-
                 </div>
                 <div className={s.errorMessage}>{unSuccessMessage}</div>
                 <button className={s.button} type="submit">Submit</button>
-
             </Form>
-
         )}
     </Formik>
 }

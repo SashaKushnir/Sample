@@ -24,5 +24,4 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
-
 }

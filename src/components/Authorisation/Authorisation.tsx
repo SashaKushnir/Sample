@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginForm } from "./LoginForm";
+import {LoginForm} from "./LoginForm";
 import s from './Authorisation.module.css'
 
 export const Authorisation = () => {

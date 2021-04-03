@@ -5,3 +5,15 @@
     padding: 1%;
     margin: 0% 0% 0.6% 0%;
 }
+.log_out{
+    float: right;
+    display: inline-block;
+    background-color: #ff573f;
+    border-radius: 5px;
+    padding: 3px;
+}
+.log_out:hover{
+    border: 2px solid black;
+    padding: 1px;
+    cursor: pointer;
+}
