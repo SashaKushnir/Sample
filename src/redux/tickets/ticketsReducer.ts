@@ -2,6 +2,7 @@ import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
 import ticketsInitial from '../../responses/get_tickets.json'
 import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
+import {ServiceCategoriesItem} from "../services/servicesReducer";
 
 
 let initialState: TicketInitial = ticketsInitial
@@ -25,9 +26,10 @@ export interface PeriodItem {
     weekdays: string | null
     is_templatable: boolean
 }
+export type TicketArray = Array<ProductCategoriesItem>
 
 export interface TicketInitial {
-    tickets: Array<ProductCategoriesItem>
+    tickets: TicketArray
     response_status: boolean
     response_error: string | null
 }

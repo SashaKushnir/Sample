@@ -1,7 +1,7 @@
 import { ActionsTypes } from "../store";
 import { servicesActions } from "./servicesActions";
 import services from '../../responses/get_services_list.json'
-import { MenuCategory } from "../newBanknote/newBanknoteReducer";
+import {MenuCategory, MenuItem} from "../newBanknote/newBanknoteReducer";
 import { Dispatch } from "redux";
 import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
 import initialMenu from "../../responses/get_menu2.json";
@@ -47,8 +47,10 @@ export interface ServiceCategoriesItem {
     updated_at: string
 }
 
+export type ServicesArray = Array<ServiceCategoriesItem>
+
 interface Services {
-    services: Array<ServiceCategoriesItem>
+    services: ServicesArray
     response_status: boolean
     response_error: string | null
 }

@@ -9,6 +9,7 @@ let reducersList = combineReducers({
     createNew : newBanknoteReducer,
     tickets: ticketsReducer,
     services: servicesReducer,
+    // history: historyReducer,
     common: commonReducer
 })
 export type RootState = ReturnType<typeof reducersList>
