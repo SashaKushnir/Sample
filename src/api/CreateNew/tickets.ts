@@ -4,6 +4,6 @@ import { ProductCategoriesItem } from "../../redux/newBanknote/newBanknoteReduce
 
 export const tickets = {
     getAllTickets: () => {
-        return myGetInstance.get<ApiTicketsResultType<Array<ProductCategoriesItem>>>('/tickets')
+        return myGetInstance.get<ApiTicketsResultType>('/tickets')
     }
 }

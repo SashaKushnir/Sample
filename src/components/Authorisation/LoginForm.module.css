@@ -1,0 +1,32 @@
+.myFrom div span {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    padding: 1%;
+    text-align: right;
+}
+
+.myFrom div {
+    padding: 1%;
+    margin: 1%;
+    display: grid;
+    grid-template-columns: 45% 20% 35%;
+}
+.error {
+    text-align: left;
+    color: #f44336;
+}
+.errorMessage {
+    text-align: center;
+    color: #f44336;
+    padding: 0 0 1.5% 0;
+}
+.button {
+    background-color: darkgray;
+    border: none;
+    border-radius: 5%;
+    color: white;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+}

@@ -1,14 +1,22 @@
 import { ActionsTypes } from "../store";
 import { commonActions } from "./forCommonActions";
+import { UserType } from "../../api/login/login";
 
 
-const initialState = {
+interface InitialCommonType {
+    isFetching: boolean
+    isAuthorised: boolean
+    userInfo?: UserType
+    message?: string
+}
+
+const initialState: InitialCommonType = {
     isFetching: false,
-    isAuthorised: true
+    isAuthorised: false,
 }
 
 
-export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>) => {
+export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {
 
     switch (action.type) {
         case "FETCHING_TOGGLE":
@@ -20,6 +28,16 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isAuthorised: action.status
+            }
+        case "SET_UNAUTHORISED_DATA":
+            return {
+                ...common,
+                message: action.payload
+            }
+        case "SET_AUTHORISED_DATA":
+            return {
+                ...common,
+                userInfo: {...action.payload} as any
             }
         default:
             return common

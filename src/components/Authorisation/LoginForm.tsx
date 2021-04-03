@@ -1,40 +1,60 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from 'yup';
+import s from './LoginForm.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import { tryLoginT } from "../../redux/forCommon/forCommonThunks";
+import { RootState } from "../../redux/store";
 
-interface InitialValuesType  {
-    email: string
+export interface LoginFormType {
+    name: string
     password: string
 }
 
 export const LoginForm = () => {
+
+    const d = useDispatch()
+    const unSuccessMessage = useSelector((state: RootState) => state.common.message)
+
     const SignupSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required('Required'),
+        name: Yup.string().required('Required'),
         password: Yup.string().required('Required')
-            .min(2, 'Too Short!')
+            .min(8, 'Too Short!')
             .max(50, 'Too Long!'),
     });
 
-    return <Formik onSubmit={(values:InitialValuesType) => {
+    return <Formik onSubmit={(values: LoginFormType) => {
+        console.log(values)
+        d(tryLoginT(values))
     }}
                    validationSchema={SignupSchema}
                    initialValues={{
-                       email: '',
+                       name: '',
                        password: ''
                    }}>
         {({errors, touched}) => (
+
             <Form>
-                <Field name="email" type="email"/>
-                {errors.email && touched.email ? <div>{errors.email}</div> : null}
-                <Field name="lastName"/>
-                {errors.password && touched.password ? (
-                    <div>{errors.password}</div>
-                ) : null}
+                <div className={s.myFrom}>
+                    <div>
+                        <span>Login: </span>
+                        <Field name="name" type="text" placeholder={"Name"}/>
+                        {errors.name && touched.name ? <div className={s.error}>{errors.name}</div> : null}
+                    </div>
+                    <div>
+                        <span>Password : </span>
+                        <Field name="password" placeholder={"Password"}/>
+                        {errors.password && touched.password ? (
+                            <div className={s.error}>{errors.password}</div>
+                        ) : null}
+                    </div>
 
-                <button type="submit">Submit</button>
+                </div>
+                <div className={s.errorMessage}>{unSuccessMessage}</div>
+                <button className={s.button} type="submit">Submit</button>
+
             </Form>
-        )
 
-        }
+        )}
     </Formik>
 }

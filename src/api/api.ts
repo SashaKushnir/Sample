@@ -1,12 +1,8 @@
 import axios from "axios";
+import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBanknoteReducer";
+import { UserType } from "./login/login";
+import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 
-// Accept  text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-// Accept-Encoding  gzip, deflate
-// Accept-Language  en-US,en;q=0.5
-// Connection  keep-alive
-// Host  194.213.104.146:222
-// Upgrade-Insecure-Requests  1
-// User-Agent  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0
 
 export const BaseURL = "http://194.213.104.146:222"
 //http://imperia-api.com
@@ -16,39 +12,27 @@ export const myGetInstance = axios.create({
 })
 export const myPostInstance = axios.create({
     baseURL: BaseURL,
-    headers: {
 
-    }
 })
-
-export type ApiMenusResultType<D> = {
-    response_error: string | null,
-    menus: D,
-    response_status: boolean
-    response_status_code: number,
-}
-export type ApiServicesResultType<D> = {
+export type ApiResultType = {
     response_error: string | null
-    services: D
     response_status: boolean
-    response_status_code: number
+    response_status_code: number | null
+    message?: string
 }
-export type ApiTicketsResultType<D> = {
-    response_error: string | null
-    tickets: D
-    response_status: boolean
-    response_status_code: number
-}
-// Accept-Encoding: gzip, deflate
-// Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6
-// Cache-Control: max-age=0
-// Connection: keep-alive
-// Host: imperia-api.com:222
-// Upgrade-Insecure-Requests: 1
 
-// }
-// 'Access-Control-Allow-Origin': '*',
-//     'User-Agent' : "PostmanRuntime/7.26.10",
-//     'Accept': '*/*',
-//     'Accept-Encoding': 'gzip, deflate, br',
-//     'Connection': ' keep-alive'
+export interface ApiMenusResultType extends ApiResultType {
+    menus: MenuArray
+}
+
+export interface ApiLoginResultType extends ApiResultType {
+    user: UserType
+}
+
+export interface ApiServicesResultType extends ApiResultType {
+    services: Array<ServiceCategoriesItem>
+}
+
+export interface ApiTicketsResultType extends ApiResultType {
+    tickets: Array<ProductCategoriesItem>
+}
