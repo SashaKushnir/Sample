@@ -6,12 +6,12 @@ import { selectMenuKitchen } from "../../../../selectors/selectCreateNew";
 import { MenuArray, MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 
 interface MenuListProps {
-    menus: MenuArray
+    menus?: MenuArray
     showAmount?: boolean
 }
 
 export const MenuList:React.FC<MenuListProps> = (props) => {
-    const menus = props.menus.map((curMenuItem:MenuItem, index)=>
+    const menus = props.menus?.map((curMenuItem:MenuItem, index)=>
         <MenuItemComponent key={index} showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>

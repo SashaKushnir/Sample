@@ -20,20 +20,22 @@ export const CreateNewServices = () => {
              d(servicesActions.setEntertainmentInfo(localServices));
          }else {
             d(setServicesT())
+            localStorage.setItem("services", JSON.stringify(ser))
         }
 
     }, [])
     useEffect(()=> {
-     //   localStorage.setItem("services", JSON.stringify(ser))
+        if(ser)
+        localStorage.setItem("services", JSON.stringify(ser))
     })
 
 
-    const selectedServices = useSelector(selectServices).filter((obj)=>
+    const selectedServices = useSelector(selectServices)?.filter((obj)=>
         obj.showAmount).map((obj,index)=>
         <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>)
 
 
-    const services = useSelector(selectServices).map((obj, index) =>
+    const services = useSelector(selectServices)?.map((obj, index) =>
         <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>)
 
 

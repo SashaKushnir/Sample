@@ -46,7 +46,6 @@ export const App = () => {
 
     return (
         <div className="App">
-            {cookies.authInfo}
             <Switch>
                 <Redirect exact from="/" to="/content"/>
                 <Route path='/login' render={() => <Authorisation/>}/>

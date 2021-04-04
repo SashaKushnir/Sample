@@ -4,7 +4,7 @@ import initialMenu from '../../responses/get_menu2.json'
 import { PeriodItem } from "../tickets/ticketsReducer";
 
 
-const initialState:  MenusInitial = initialMenu
+const initialState:  MenusInitial = {}
 
 
 export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
@@ -18,7 +18,8 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
         case "ADD_MENU_ITEM":
             return {
                 ...newBanknote,
-                menus: [...newBanknote.menus.map((menuI) => {
+                menus: newBanknote.menus?
+                    [...newBanknote.menus.map((menuI) => {
                     const curM = menuI.products.map((productI) => {
                         if (productI.id === action.productI.id) {
                             productI.showAmount=true
@@ -29,12 +30,13 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                     })
                     menuI.products = curM
                     return menuI
-                })]
+                })]: undefined
             }
         case "TOTALLY_DELETE_MENU_ITEM":
             return {
                 ...newBanknote,
-                menus: [...newBanknote.menus.map((menuI) => {
+                menus: newBanknote.menus?
+                    [...newBanknote.menus.map((menuI) => {
                     menuI.products.map((productI) => {
                         if (productI.id === action.productI.id) {
                             productI.showAmount=false
@@ -43,7 +45,7 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                         return productI
                     })
                     return menuI
-                })]
+                })]:undefined
             }
         default:
             return newBanknote
@@ -87,9 +89,7 @@ export type MenuItem = {
 export type MenuArray = Array<MenuItem>
 
 type MenusInitial = {
-    menus: MenuArray
-    response_status: boolean
-    response_error: string | null
+    menus?: MenuArray
 }
 
 

@@ -20,14 +20,17 @@ export const CreateNewTickets = () => {
 
     }, [])
     useEffect(()=> {
+        if(ticketData)
         localStorage.setItem("tickets", JSON.stringify(ticketData))
     })
-    const tickets = useSelector(selectTickets).map((obj, index)=>
-        <TicketItemMap key={index}  showAmount={false} ticketItem={obj}/>)
-
-    const selectedTickets = useSelector(selectTickets).map((obj, index)=>
-        <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>)
-
+    const ticketsData = useSelector(selectTickets)
+    let tickets, selectedTickets
+    if(ticketsData) {
+        tickets = ticketsData.map((obj, index) =>
+        <TicketItemMap key={index} showAmount={false} ticketItem={obj}/>)
+        selectedTickets = ticketsData.map((obj, index) =>
+            <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>)
+    }
     return <div className={styles.main}>
         <div className={styles.basket}>
             {selectedTickets}
@@ -35,7 +38,6 @@ export const CreateNewTickets = () => {
         <div className={styles.tickets}>
             {tickets}
         </div>
-
     </div>
 }
 

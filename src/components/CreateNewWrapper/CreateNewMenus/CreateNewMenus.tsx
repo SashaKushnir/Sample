@@ -9,20 +9,21 @@ import { setMenuT } from "../../../redux/newBanknote/newBanknoteThunks";
 
 export const CreateNewMenus: React.FC = () => {
     const d = useDispatch()
-    const menuData = useSelector(selectMenuKitchen)
+
     useEffect(() => {
-        let localServices = JSON.parse(localStorage.getItem("menus") || "[]");
-        if (localServices.length > 0) {
-            d(newBanknoteActions.setMenuInfo(localServices));
+        let localMenus = JSON.parse(localStorage.getItem("menus") || "[]");
+        if (localMenus.length > 0) {
+            d(newBanknoteActions.setMenuInfo(localMenus));
         } else
             d(setMenuT())
     }, [])
     useEffect(() => {
+        if(menuData)
         localStorage.setItem("menus", JSON.stringify(menuData))
     })
-    const menus = useSelector(selectMenuKitchen)
+    const menuData = useSelector(selectMenuKitchen)
     return <div className={styles.wrap}>
-        <MenuList menus={menus} showAmount={true}/>
-        <MenuList menus={menus}/>
+        <MenuList menus={menuData} showAmount={true}/>
+        <MenuList menus={menuData}/>
     </div>
 }

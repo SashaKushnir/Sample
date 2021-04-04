@@ -1,12 +1,8 @@
 import { ActionsTypes } from "../store";
 import { servicesActions } from "./servicesActions";
-import services from '../../responses/get_services_list.json'
-import {MenuCategory, MenuItem} from "../newBanknote/newBanknoteReducer";
-import { Dispatch } from "redux";
-import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
-import initialMenu from "../../responses/get_menu2.json";
+import { MenuCategory } from "../newBanknote/newBanknoteReducer";
 
-const initialState: Services = services
+const initialState: Services = {}
 
 
 export interface Period{
@@ -50,9 +46,7 @@ export interface ServiceCategoriesItem {
 export type ServicesArray = Array<ServiceCategoriesItem>
 
 interface Services {
-    services: ServicesArray
-    response_status: boolean
-    response_error: string | null
+    services?: ServicesArray
 }
 
 export const servicesReducer = (services = initialState, action: ActionsTypes<typeof servicesActions>):Services => {
@@ -61,7 +55,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
         case "ADD_ENTERTAINMENT":
             return {
                 ...services,
-                services: [...services.services.map((serviceI) => {
+                services: services.services? [...services.services.map((serviceI) => {
                     if(serviceI.id === action.entertainmentI.id){
                         serviceI.showAmount=true
                         if(action.value){
@@ -72,7 +66,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         }
                     }
                     return serviceI
-                })]
+                })]: undefined
             }
         case "SET_ENTERTAINMENT_INFO":
             return {
@@ -82,13 +76,13 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
         case "TOTALLY_DELETE_ENTERTAINMENT_ITEM":
             return {
                 ...services,
-                services: [...services.services.map((serviceI)=>{
+                services: services.services ? [...services.services.map((serviceI)=>{
                     if(serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
                         serviceI.showAmount=false
                     }
                     return serviceI
-                })]
+                })]: undefined
             }
         default:
             return services
