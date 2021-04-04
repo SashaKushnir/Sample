@@ -1,10 +1,10 @@
-import {Field, Form, Formik} from "formik";
-import React from "react";
+import { Field, Form, Formik } from "formik";
+import React, { useEffect } from "react";
 import * as Yup from 'yup';
 import s from './LoginForm.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {tryLoginT} from "../../redux/forCommon/forCommonThunks";
-import {RootState} from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { tryLoginT } from "../../redux/forCommon/forCommonThunks";
+import { RootState } from "../../redux/store";
 
 export interface LoginFormType {
     name: string
@@ -12,9 +12,11 @@ export interface LoginFormType {
 }
 
 export const LoginForm = () => {
-
     const d = useDispatch()
     const unSuccessMessage = useSelector((state: RootState) => state.common.message)
+    useEffect(() => {
+
+    },[])
 
     const SignupSchema = Yup.object().shape({
         name: Yup.string().required('Required'),

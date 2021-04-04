@@ -1,4 +1,4 @@
-//import React from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { selectServices } from "../../../selectors/selectCreateNew";
 import { ServiceCategoriesI } from "./ServiceCategoriesI";
@@ -6,7 +6,6 @@ import styles from "./CreateNewServices.module.css";
 import { useEffect } from "react";
 import { servicesActions } from "../../../redux/services/servicesActions";
 import { ServiceCategoriesIShowAmount } from "./ServiceCategoriesIShowAmount";
-import { createPost } from "../../../redux/formPostObject/createObjThunks";
 import { setServicesT } from "../../../redux/services/servicesThunks";
 
 
@@ -16,18 +15,18 @@ export const CreateNewServices = () => {
 
 
     useEffect(() => {
-        let localServices = JSON.parse(sessionStorage.getItem("services") || "[]");
+        let localServices = JSON.parse(localStorage.getItem("services") || "[]");
         if(localServices.length > 0) {
              d(servicesActions.setEntertainmentInfo(localServices));
-             sessionStorage.removeItem("services");
          }else {
             d(setServicesT())
         }
 
     }, [])
     useEffect(()=> {
-        sessionStorage.setItem("services", JSON.stringify(ser))
+     //   localStorage.setItem("services", JSON.stringify(ser))
     })
+
 
     const selectedServices = useSelector(selectServices).filter((obj)=>
         obj.showAmount).map((obj,index)=>

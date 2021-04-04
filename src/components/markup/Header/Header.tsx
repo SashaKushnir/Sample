@@ -1,13 +1,18 @@
 import React from 'react'
-import {HeaderNavBar} from "./HeaderNavBar";
+import { HeaderNavBar } from "./HeaderNavBar";
 import s from './Header.module.css'
-import {RootState} from "../../../redux/store";
-import {useDispatch} from "react-redux";
-import {commonActions} from "../../../redux/forCommon/forCommonActions";
+import { useDispatch } from "react-redux";
+import { commonActions } from "../../../redux/forCommon/forCommonActions";
+import { useHistory } from "react-router-dom";
 
-export const Header = () => {
+export const Header: React.FC<any> = ({removeCookie}) => {
+
+    const history = useHistory()
     const d = useDispatch();
-    const log_out = () =>  d(commonActions.logOut())
+    const log_out = ( ) => {
+        d(commonActions.logOut())
+        removeCookie("authInfo")
+    }
     return <>
         <header>
             <div className={s.headerText}>

@@ -6,11 +6,11 @@ import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
 import {Register} from "../../Registration/Register";
 
-export const MyPage = () => {
+export const MyPage: React.FC<any> = ({removeCookie}) => {
     let {url} = useRouteMatch()
     return <div className={s.wrap}>
         <div className={s.content}>
-            <Header/>
+            <Header removeCookie={removeCookie}/>
             <Switch>
                 <Redirect exact from={`${url}`} to={`${url}/history`}/>
                 <Route path={`${url}/new`} render={() => <CreateNew/>}/>

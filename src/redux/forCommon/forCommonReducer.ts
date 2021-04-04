@@ -37,7 +37,8 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
         case "SET_AUTHORISED_DATA":
             return {
                 ...common,
-                userInfo: {...action.payload} as any
+                userInfo: {...action.payload} as any,
+                message: ""
             }
         case "LOG_OUT":
             return {
