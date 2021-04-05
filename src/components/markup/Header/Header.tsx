@@ -9,9 +9,10 @@ export const Header: React.FC<any> = ({removeCookie}) => {
 
     const history = useHistory()
     const d = useDispatch();
-    const log_out = ( ) => {
+    const log_out =  ( ) => {
         d(commonActions.logOut())
-        removeCookie("authInfo")
+         removeCookie("authInfo")
+        localStorage.clear()
     }
     return <>
         <header>

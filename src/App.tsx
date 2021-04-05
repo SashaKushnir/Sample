@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Redirect, Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import { MyPage } from "./components/markup/MyPage/MyPage";
 import { Authorisation } from "./components/Authorisation/Authorisation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
-import { useCookies } from "react-cookie";
 import { commonActions } from "./redux/forCommon/forCommonActions";
+import { useCookies } from "react-cookie";
 
 export const App = () => {
     const {url} = useRouteMatch()
@@ -46,6 +46,7 @@ export const App = () => {
 
     return (
         <div className="App">
+
             <Switch>
                 <Redirect exact from="/" to="/content"/>
                 <Route path='/login' render={() => <Authorisation/>}/>
