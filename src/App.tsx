@@ -10,12 +10,13 @@ import { useCookies } from "react-cookie";
 
 export const App = () => {
     const api_token = localStorage.getItem("api_token")
-    const {url} = useRouteMatch()
+    const use = useRouteMatch()
     const needRedirect = useSelector((state: RootState) => state.common.needRedirect)
     const d = useDispatch()
     const history = useHistory()
     const isAuth = useSelector((state: RootState) => state.common.isAuthorised)
     const userInfo = (useSelector((state: RootState) => state.common.userInfo))
+
     const initAuth = () => {
         if (localStorage.getItem("api_token")) {
             if(!isAuth){
@@ -45,10 +46,11 @@ export const App = () => {
             history.push('/login')
             d(commonActions.needRedirectToggle(true))
         } else {
+            console.log(use)
             if(isAuth ===true)
+
                 if((needRedirect === true) || (needRedirect === null)) {
                     history.push('/content')
-
                 }
             if (userInfo?.api_token)
               localStorage.setItem("api_token", userInfo.api_token)

@@ -15,9 +15,8 @@ export const CreateNewServices = () => {
 
 
     useEffect(() => {
-        let localServices = JSON.parse(localStorage.getItem("services") || "[]");
-        if(localServices.length > 0) {
-             d(servicesActions.setEntertainmentInfo(localServices));
+        if(JSON.parse(localStorage.getItem("services") || "[]").length > 0) {
+             d(servicesActions.setEntertainmentInfo(JSON.parse(localStorage.getItem("services") || "[]")));
          }else {
             d(setServicesT())
             localStorage.setItem("services", JSON.stringify(ser))
