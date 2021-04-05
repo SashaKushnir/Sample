@@ -2,17 +2,18 @@ import React from 'react'
 import { HeaderNavBar } from "./HeaderNavBar";
 import s from './Header.module.css'
 import { useDispatch } from "react-redux";
-import { commonActions } from "../../../redux/forCommon/forCommonActions";
 import { useHistory } from "react-router-dom";
+import { logOutT } from "../../../redux/forCommon/forCommonThunks";
+import { commonActions } from "../../../redux/forCommon/forCommonActions";
 
-export const Header: React.FC<any> = ({removeCookie}) => {
+export const Header = () => {
 
     const history = useHistory()
     const d = useDispatch();
     const log_out =  ( ) => {
-        d(commonActions.logOut())
-         removeCookie("authInfo")
+        d(logOutT())
         localStorage.clear()
+        d(commonActions.needRedirectToggle(true))
     }
     return <>
         <header>

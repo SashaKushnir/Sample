@@ -84,6 +84,15 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                     return serviceI
                 })]: undefined
             }
+        case "TOTALLY_DELETE_ALL_ENTERTAINMENT_ITEMS":
+            return {
+                ...services,
+                services: services.services ? [...services.services.map((serviceI)=>{
+                        delete serviceI.amount
+                        serviceI.showAmount=false
+                    return serviceI
+                })]: undefined
+            }
         default:
             return services
     }

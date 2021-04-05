@@ -9,48 +9,60 @@ import { commonActions } from "./redux/forCommon/forCommonActions";
 import { useCookies } from "react-cookie";
 
 export const App = () => {
+    const api_token = localStorage.getItem("api_token")
     const {url} = useRouteMatch()
-    const [cookies, setCookie, removeCookie] = useCookies(["authInfo"]);
+    const needRedirect = useSelector((state: RootState) => state.common.needRedirect)
     const d = useDispatch()
     const history = useHistory()
     const isAuth = useSelector((state: RootState) => state.common.isAuthorised)
     const userInfo = (useSelector((state: RootState) => state.common.userInfo))
     const initAuth = () => {
-        if (cookies.authInfo)
+        if (localStorage.getItem("api_token")) {
+            if(!isAuth){
+                d(commonActions.needRedirectToggle(true))
+            }
             d(commonActions.authToggle(true))
-        else
+        }
+        else {
             d(commonActions.authToggle(false))
+        }
     }
-    console.log(cookies)
     useEffect(() => {
         initAuth()
     }, [])
     useEffect(() => {
-        if (!isAuth) {
-            history.push('/login')
-        } else {
-
-            if(url.includes("/login") || url.includes("/")) {
-                history.push('/content')
-            }
-            if (userInfo?.api_token)
-                setCookie('authInfo', userInfo.api_token, {
-                    maxAge: 360000 * 24 * 30,
-                    path:'/'
-                })
+        if (api_token) {
+            d(commonActions.authToggle(true))
+            d(commonActions.needRedirectToggle(true))
         }
-    }, [isAuth])
+        else {
+            d(commonActions.authToggle(false))
+        }
+    },[api_token])
+
     useEffect(() => {
-        initAuth()
-    },[cookies])
+        if (isAuth === false) {
+            history.push('/login')
+            d(commonActions.needRedirectToggle(true))
+        } else {
+            if(isAuth ===true)
+                if((needRedirect === true) || (needRedirect === null)) {
+                    history.push('/content')
+
+                }
+            if (userInfo?.api_token)
+              localStorage.setItem("api_token", userInfo.api_token)
+            d(commonActions.needRedirectToggle(false))
+        }
+    }, [isAuth, needRedirect])
+
 
     return (
         <div className="App">
-
             <Switch>
                 <Redirect exact from="/" to="/content"/>
                 <Route path='/login' render={() => <Authorisation/>}/>
-                <Route path='/content' render={() => <MyPage removeCookie={removeCookie}/>}/>
+                <Route path='/content' render={() => <MyPage/>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>
         </div>

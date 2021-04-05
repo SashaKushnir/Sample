@@ -34,18 +34,21 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
             }
         case "TOTALLY_DELETE_MENU_ITEM":
             return {
+
+            }
+        case "TOTALLY_DELETE_ALL_MENU_ITEMS":
+            return {
                 ...newBanknote,
                 menus: newBanknote.menus?
                     [...newBanknote.menus.map((menuI) => {
-                    menuI.products.map((productI) => {
-                        if (productI.id === action.productI.id) {
-                            productI.showAmount=false
-                            delete productI.amount
-                        }
-                        return productI
-                    })
-                    return menuI
-                })]:undefined
+                        menuI.products.map((productI) => {
+                                productI.showAmount=false
+                                delete productI.amount
+                            return productI
+                        })
+                        return menuI
+                    })]:undefined
+
             }
         default:
             return newBanknote
@@ -91,18 +94,3 @@ export type MenuArray = Array<MenuItem>
 type MenusInitial = {
     menus?: MenuArray
 }
-
-
-//
-// type InitialMenu = NewBanknote & {
-//     cart: [
-//         tickets:
-//         services:
-//         menus: Product_categories
-//     ]
-// }
-// type SelectedOrders = {
-//     selectedMenu: Array<Product>
-//     selectedTickets: Array<TicketCategoriesItem>
-//     selectedServices: Array<ServiceCategoriesItem>
-// }

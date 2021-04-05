@@ -7,6 +7,9 @@ export const ticketsActions = {
         type: "TOTALLY_DELETE_TICKET_ITEM",
         ticketI
     }) as const,
+    deleteAllAmounts: () => ({
+        type: "TOTALLY_DELETE_ALL_TICKET_ITEMS"
+    }) as const,
     setTicketInfo: (ticketI: Array<ProductCategoriesItem>) => ({
         type: "SET_TICKET_INFO",
         ticketI

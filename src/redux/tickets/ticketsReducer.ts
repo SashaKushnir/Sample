@@ -60,14 +60,22 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
         case "TOTALLY_DELETE_TICKET_ITEM":
             return {
                 ...tickets,
-                // @ts-ignore
-                tickets: [...tickets.tickets.map((ticketI)=>{
+                tickets: tickets.tickets?[...tickets.tickets.map((ticketI)=>{
                     if(ticketI.id === action.ticketI.id) {
                         delete ticketI.amount
                         ticketI.showAmount=false
                     }
                     return ticketI
-                })]
+                })]:undefined
+            }
+        case "TOTALLY_DELETE_ALL_TICKET_ITEMS":
+            return {
+                ...tickets,
+                tickets: tickets.tickets?[...tickets.tickets.map((ticketI)=>{
+                        delete ticketI.amount
+                        ticketI.showAmount=false
+                    return ticketI
+                })]:undefined
             }
         default:
             return tickets

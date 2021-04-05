@@ -5,14 +5,16 @@ import { UserType } from "../../api/login/login";
 
 interface InitialCommonType {
     isFetching: boolean
-    isAuthorised: boolean
+    isAuthorised: boolean | null
     userInfo?: UserType
     message?: string
+    needRedirect: boolean | null
 }
 
 const initialState: InitialCommonType = {
     isFetching: false,
-    isAuthorised: false,
+    needRedirect: false,
+    isAuthorised: null
 }
 
 
@@ -28,6 +30,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isAuthorised: action.status
+            }
+        case "SET_NEED_REDIRECT":
+            return {
+                ...common,
+                needRedirect: action.statusR
             }
         case "SET_UNAUTHORISED_DATA":
             return {

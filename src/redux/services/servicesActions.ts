@@ -7,6 +7,9 @@ export const servicesActions = {
         type: "TOTALLY_DELETE_ENTERTAINMENT_ITEM",
         entertainmentI
     }) as const,
+    deleteAllAmount: () => ({
+        type: "TOTALLY_DELETE_ALL_ENTERTAINMENT_ITEMS"
+    }) as const,
     setEntertainmentInfo: (entertainmentI: Array<ServiceCategoriesItem>) => ({
         type: "SET_ENTERTAINMENT_INFO",
         entertainmentI
