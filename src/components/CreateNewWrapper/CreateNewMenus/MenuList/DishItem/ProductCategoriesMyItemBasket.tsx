@@ -32,7 +32,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
     }
     const [id] = useState(_uniqueId('prefix-'))
 
-    return <div> {product_categoriesItem.showAmount && <div className={styles.dish}>
+    return <div> {product_categoriesItem.showAmount && <div className={styles.dish_basket}>
         <div className={styles.item}>
             <div className={styles.image}>
                 <DishImg productItem={product_categoriesItem}/>

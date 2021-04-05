@@ -1,21 +1,16 @@
 .title{
-    display: flex;
+
 }
 .name{
-    margin: auto;
     display: inline-block;
-    width: 50%;
     font-weight: bold;
 }
 .desc{
 
 }
 .price{
-
-    margin: auto;
     display: inline-block;
-    width: 50%;
-    text-align: right;
+    float: right;
     font-weight: bold;
 }
 .item{
@@ -27,7 +22,7 @@
     width: 10%;
     display: inline-block;
     height: 100%;
-
+    margin: auto auto;
     text-align: center;
 }
 .ticket{
@@ -39,13 +34,41 @@
     font-weight: bold;
     margin-right: 5px;
 }
-.input{
-    display: inline-block;
-    float: right;
-}
 .btn{
     background-color: #f44336;
     color: white;
     cursor: pointer;
     padding: 1px;
+}
+.input_block{
+    display: flex;
+    font-weight: bold;
+    float: right;
+
+}
+.input{
+    border-radius: 5px;
+    border: 2px solid darkgray;
+    float: right;
+    width: 100%;
+}
+input:focus {
+    outline: none;
+}
+.input_label{
+    margin-right: 5px;
+}
+@media only screen and (max-width: 768px) {
+    .img{
+        width: 15%;
+    }
+    .item{
+        margin: 0 5px;
+        display: inline-block;
+        width: 85%;
+    }
+    .title{
+
+        overflow: auto;
+    }
 }

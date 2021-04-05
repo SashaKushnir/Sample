@@ -43,7 +43,7 @@ export const CreateNewServices = () => {
         <div className={styles.basket}>
             {selectedServices}
         </div>
-        <div className={styles.intertaiment}>
+        <div className={styles.services}>
             {services}
         </div>
     </div>

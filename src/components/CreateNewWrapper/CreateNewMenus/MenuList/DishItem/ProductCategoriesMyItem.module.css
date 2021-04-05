@@ -17,6 +17,7 @@
 .info{
  display: inline-block;
     width: 90%;
+    margin: 0 5px;
 }
 .name_price{
 
@@ -29,13 +30,14 @@
 .desc{
     margin-top: 5px;
     display: inline-block;
-    width: 80%;
+    float: left;
 }
 .weight{
     display: inline-block;
-    float: right;
+
     text-align: right;
     width: 20%;
+    float: right;
 }
 .image{
     width: 10%;
@@ -43,9 +45,12 @@
     height: 100%;
     margin:auto 0px;
     text-align: center;
-    margin-right: 10px;
 }
 .dish{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.dish_basket{
     margin-bottom: 10px;
 
 }
@@ -64,18 +69,30 @@
     padding: 1px;
 }
 .input_block{
-    display: inline-block;
+    display: flex;
     font-weight: bold;
     float: right;
-
 }
 .input{
     border-radius: 5px;
     border: 2px solid darkgray;
     float: right;
+    width: 100%;
 }
 input:focus {
     outline: none;
 }
 .input_label{
+    margin-right: 5px;
+}
+@media only screen and (max-width: 768px) {
+    .info{
+        width: 85%;
+    }
+    .image{
+        width: 15%;
+    }
+    .dish{
+        margin-left: 0px;
+    }
 }

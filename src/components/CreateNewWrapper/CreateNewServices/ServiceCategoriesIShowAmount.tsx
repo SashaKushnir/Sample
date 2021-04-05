@@ -41,10 +41,6 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                 <div className={styles.name}>
                     {serviceItem.name}
                 </div>
-                <div className={styles.desc_basket}>
-
-                </div>
-
                 <div className={styles.price1}>
                     <div className={styles.text}>Одноразова оплата</div>
                     <div className={styles.price}>{serviceItem.once_paid_price}$</div>
@@ -54,9 +50,9 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                     <div className={styles.price}>{serviceItem.hourly_paid_price}$</div>
                 </div>
 
-                <div className={styles.input}>
-                    <label htmlFor={"def"} className={styles.text}>Amount</label>
-                    <input
+                <div className={styles.input_block}>
+                    <label htmlFor={"def"} className={styles.input_label}>Amount</label>
+                    <input className={styles.input}
                         onChange={changeCurS}
                         value={serviceItem.amount ? String(serviceItem.amount) : ""}
                         placeholder={"Amount"}

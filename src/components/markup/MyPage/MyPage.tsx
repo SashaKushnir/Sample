@@ -4,7 +4,7 @@ import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
-import {Register} from "../../Registration/Register";
+import {Register} from "../../Support/Registration/Register";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
