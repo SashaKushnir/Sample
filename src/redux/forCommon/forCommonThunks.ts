@@ -35,4 +35,24 @@ export const logOutT = () => (d: Dispatch<ActionsTypes<typeof commonActions | ty
     d(ticketsActions.deleteAllAmounts())
     d(servicesActions.deleteAllAmount())
     d(commonActions.logOut())
+    d(commonActions.successTokenToggle(false))
+}
+
+export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes<typeof commonActions>>) => {
+    try {
+        d(commonActions.fetchingToggle(true))
+        const res = await login.loginByToken(token)
+        console.log(res)
+        if(res.data.user){
+            d(commonActions.successTokenToggle(true))
+        } else {
+            alert("Something wrong with your token, please login with name and password")
+            d(commonActions.successTokenToggle(false))
+            d(commonActions.fetchingToggle(false))
+        }
+    } catch (error) {
+        console.warn(error)
+        alert("Error")
+        d(commonActions.fetchingToggle(false))
+    }
 }

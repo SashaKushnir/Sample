@@ -2,9 +2,9 @@ import { RootState } from "../redux/store";
 
 // Get menu data
 
-export const selectMenuKitchen = (state: RootState) => state.createNew?.menus
-export const selectTickets = (state: RootState) => state.tickets.tickets
-export const selectServices = (state:RootState) => state.services.services
+export const selectMenuKitchen = (state: RootState) => state.createObj.createNew?.menus
+export const selectTickets = (state: RootState) => state.createObj.tickets.tickets
+export const selectServices = (state:RootState) => state.createObj.services.services
 //export const selectHistory = (state:RootState) => state.history.history
 
 // export const selectSelectedOrders = (state:RootState) => state.createNew.selectedOrders

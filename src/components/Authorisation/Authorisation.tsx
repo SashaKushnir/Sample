@@ -8,7 +8,8 @@ import { useHistory } from "react-router-dom";
 
 export const Authorisation = () => {
     const history = useHistory()
-    if(localStorage.getItem("api_token")){
+    const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
+    if(tokenSuccess){
        history.push('/content')
     }
 

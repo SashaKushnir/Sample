@@ -7,4 +7,5 @@ export const commonActions = {
     setUnauthorisedMessage: (payload: string) => ({type: "SET_UNAUTHORISED_DATA", payload}) as const,
     logOut: () => ({type: "LOG_OUT"}) as const,
     needRedirectToggle: (statusR: boolean | null ) => ({type: "SET_NEED_REDIRECT", statusR}) as const,
+    successTokenToggle: (statusAuthWithToke: boolean) => ({type: "AUTH_BY_TOKEN", statusAuthWithToke}) as const,
 }

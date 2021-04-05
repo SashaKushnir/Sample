@@ -5,6 +5,9 @@ import { LoginFormType } from "../../components/Authorisation/LoginForm";
 export const login = {
     tryLogin: (loginObject: LoginFormType) => {
         return myPostInstance.post<ApiLoginResultType>('/users/login', loginObject)
+    },
+    loginByToken: (token: string) => {
+        return myPostInstance.post<ApiLoginResultType>('/users/login', token)
     }
 }
 export type UserType = {
