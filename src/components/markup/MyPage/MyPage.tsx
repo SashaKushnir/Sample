@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
@@ -6,9 +6,23 @@ import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
 import {Register} from "../../Support/Registration/Register";
 import {Banquets} from "../../History/BanquetsHistory/Banquets";
+import { logInWithToken } from "../../../redux/forCommon/forCommonThunks";
+import { commonActions } from "../../../redux/forCommon/forCommonActions";
+import { useDispatch } from "react-redux";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
+    const api_token = localStorage.getItem("api_token")
+    const d = useDispatch()
+    useEffect(() => {
+        if (api_token) {
+            d(logInWithToken(api_token))
+           // d(commonActions.needRedirectToggle(true))
+        }
+        else {
+            d(commonActions.authToggle(false))
+        }
+    },[api_token])
     return <div className={s.wrap}>
         <div className={s.content}>
             <Header/>
