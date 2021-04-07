@@ -34,7 +34,18 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
             }
         case "TOTALLY_DELETE_MENU_ITEM":
             return {
-
+                ...newBanknote,
+                menus: newBanknote.menus?
+                    [...newBanknote.menus.map((menuI) => {
+                        menuI.products.map((productI) => {
+                            if (productI.id === action.productI.id) {
+                                productI.showAmount=false
+                                delete productI.amount
+                            }
+                            return productI
+                        })
+                        return menuI
+                    })]:undefined
             }
         case "TOTALLY_DELETE_ALL_MENU_ITEMS":
             return {
@@ -76,8 +87,14 @@ export type ProductCategoriesItem = {
     category: MenuCategory
     created_at: string
     updated_at: string
+
+    child_tickets_amount?: number
+    adult_tickets_amount?: number
+    birthday_tickets_amount?: number
 }
+
 export type Product_categories = Array<ProductCategoriesItem>
+
 export type MenuItem = {
     id: number
     products: Product_categories

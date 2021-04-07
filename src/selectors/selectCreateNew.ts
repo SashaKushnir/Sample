@@ -5,7 +5,7 @@ import { RootState } from "../redux/store";
 export const selectMenuKitchen = (state: RootState) => state.createNew?.menus
 export const selectTickets = (state: RootState) => state.tickets.tickets
 export const selectServices = (state:RootState) => state.services.services
-//export const selectHistory = (state:RootState) => state.history.history
+export const selectHistory = (state:RootState) => state.history.banquets
 
 // export const selectSelectedOrders = (state:RootState) => state.createNew.selectedOrders
 // export const selectSelectedMenu = (state: RootState) => state.createNew.selectedOrders.selectedMenu
