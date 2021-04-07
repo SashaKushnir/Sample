@@ -7,7 +7,7 @@ export const login = {
         return myPostInstance.post<ApiLoginResultType>('/users/login', loginObject)
     },
     loginByToken: (token: string) => {
-        return myPostInstance.post<ApiLoginResultType>('/users/login', token)
+        return myPostInstance.post<ApiLoginResultType>('/users/login', {api_token: token})
     }
 }
 export type UserType = {

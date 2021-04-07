@@ -10,9 +10,8 @@ export const Authorisation = () => {
     const history = useHistory()
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
     if(tokenSuccess){
-       history.push('/content')
+       history.push('/')
     }
-
     if (useSelector((state: RootState)=> state.common.isFetching))
         return <FetchingComponent/>
         return <div className={s.wrap}>

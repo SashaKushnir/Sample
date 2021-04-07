@@ -6,31 +6,31 @@ import { Authorisation } from "./components/Authorisation/Authorisation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { commonActions } from "./redux/forCommon/forCommonActions";
+import { logInWithToken } from "./redux/forCommon/forCommonThunks";
 
 export const App = () => {
     const api_token = localStorage.getItem("api_token")
+    const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
     const needRedirect = useSelector((state: RootState) => state.common.needRedirect)
     const d = useDispatch()
     const history = useHistory()
     const isAuth = useSelector((state: RootState) => state.common.isAuthorised)
     const userInfo = (useSelector((state: RootState) => state.common.userInfo))
-    const initAuth = () => {
-        if (localStorage.getItem("api_token")) {
-            if(!isAuth){
+    useEffect(() => {
+        if(api_token)
+            d(logInWithToken(api_token))
+    }, [])
+    useEffect(() => {
+        if (tokenSuccess) {
+            if(isAuth === false){
                 d(commonActions.needRedirectToggle(true))
             }
             d(commonActions.authToggle(true))
         }
-        else {
-            d(commonActions.authToggle(false))
-        }
-    }
-    useEffect(() => {
-        initAuth()
-    }, [])
+    }, [tokenSuccess])
     useEffect(() => {
         if (api_token) {
-            d(commonActions.authToggle(true))
+            d(logInWithToken(api_token))
             d(commonActions.needRedirectToggle(true))
         }
         else {

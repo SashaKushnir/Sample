@@ -45,9 +45,14 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
         console.log(res)
         if(res.data.user){
             d(commonActions.successTokenToggle(true))
+            d(commonActions.setAuthorisedData(res.data.user))
+            d(commonActions.authToggle(true))
+            d(commonActions.fetchingToggle(false))
         } else {
             alert("Something wrong with your token, please login with name and password")
             d(commonActions.successTokenToggle(false))
+            d(commonActions.authToggle(false))
+            d(commonActions.setAuthorisedData(undefined))
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {
