@@ -28,15 +28,15 @@ export const App = () => {
             d(commonActions.authToggle(true))
         }
     }, [tokenSuccess])
-    useEffect(() => {
-        if (api_token) {
-            d(logInWithToken(api_token))
-            d(commonActions.needRedirectToggle(true))
-        }
-        else {
-            d(commonActions.authToggle(false))
-        }
-    },[api_token])
+    // useEffect(() => {
+    //     if (api_token) {
+    //         d(logInWithToken(api_token))
+    //         d(commonActions.needRedirectToggle(true))
+    //     }
+    //     else {
+    //         d(commonActions.authToggle(false))
+    //     }
+    // },[api_token])
 
     useEffect(() => {
         if (isAuth === false) {
