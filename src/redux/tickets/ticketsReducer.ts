@@ -48,6 +48,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                         } else {
                             ticketI.amount=""
                         }
+                        ticketI.amount > 0 ?  ticketI.ready = true :  ticketI.ready = false
                     }
                     return ticketI
                 })] : undefined

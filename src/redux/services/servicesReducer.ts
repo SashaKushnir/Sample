@@ -42,6 +42,7 @@ export interface ServiceCategoriesItem {
     created_at: string
     updated_at: string
     duration?: number
+    ready?: boolean
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>
@@ -65,6 +66,8 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         } else {
                             serviceI.amount=""
                         }
+                        serviceI.ready = serviceI.amount > 0
+
                     }
                     return serviceI
                 })]: undefined

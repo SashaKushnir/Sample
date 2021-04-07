@@ -25,6 +25,7 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                             productI.showAmount=true
                             productI.amount = action.value === null ? 0
                                 : action.value
+                            productI.amount > 0 ? productI.ready = true : productI.ready = false
                         }
                         return productI
                     })
@@ -87,7 +88,7 @@ export type ProductCategoriesItem = {
     category: MenuCategory
     created_at: string
     updated_at: string
-
+    ready?: boolean
     child_tickets_amount?: number
     adult_tickets_amount?: number
     birthday_tickets_amount?: number
