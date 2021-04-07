@@ -7,11 +7,11 @@ import { commonReducer } from "./forCommon/forCommonReducer";
 import { historyReducer } from "./history/newHistoryReducer";
 
 let reducersList = combineReducers({
-    createObj: combineReducers({
+
         createNew : newBanknoteReducer,
         tickets: ticketsReducer,
-        services: servicesReducer
-    }),
+        services: servicesReducer,
+
     history: historyReducer,
     common: commonReducer
 })

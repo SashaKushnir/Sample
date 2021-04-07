@@ -41,6 +41,7 @@ export interface ServiceCategoriesItem {
     category: MenuCategory
     created_at: string
     updated_at: string
+    duration?: number
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>

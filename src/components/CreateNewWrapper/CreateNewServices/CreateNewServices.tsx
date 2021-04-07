@@ -19,7 +19,8 @@ export const CreateNewServices = () => {
              d(servicesActions.setEntertainmentInfo(JSON.parse(localStorage.getItem("services") || "[]")));
          }else {
             d(setServicesT())
-            localStorage.setItem("services", JSON.stringify(ser))
+            if(ser)
+                localStorage.setItem("services", JSON.stringify(ser))
         }
 
     }, [])

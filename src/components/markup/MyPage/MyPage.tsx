@@ -5,6 +5,7 @@ import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
 import {Register} from "../../Support/Registration/Register";
+import {Banquets} from "../../History/BanquetsHistory/Banquets";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
@@ -14,7 +15,7 @@ export const MyPage = () => {
             <Switch>
                 <Redirect exact from={`${url}`} to={`${url}/history`}/>
                 <Route path={`${url}/new`} render={() => <CreateNew/>}/>
-                <Route path={`${url}/history`} render={() => <div>history</div>}/>
+                <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>
                 <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
                 <Route path={`${url}/reports`} render={() => <div>reports</div>}/>
                 <Route path={`${url}/support`} render={() => <div><Register/></div>}/>

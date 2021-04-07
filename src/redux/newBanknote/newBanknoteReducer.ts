@@ -87,8 +87,14 @@ export type ProductCategoriesItem = {
     category: MenuCategory
     created_at: string
     updated_at: string
+
+    child_tickets_amount?: number
+    adult_tickets_amount?: number
+    birthday_tickets_amount?: number
 }
+
 export type Product_categories = Array<ProductCategoriesItem>
+
 export type MenuItem = {
     id: number
     products: Product_categories
