@@ -41,7 +41,7 @@ export interface ServiceCategoriesItem {
     category: MenuCategory
     created_at: string
     updated_at: string
-    duration?: number
+    duration?: number | string
     ready?: boolean
 }
 
@@ -96,6 +96,16 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         serviceI.showAmount=false
                     return serviceI
                 })]: undefined
+            }
+        case "SET_DURATION":
+            return{
+                ...services,
+                services: services.services ? services.services.map((obj)=>{
+                    if(obj.id === action.id){
+                        obj.duration = action.duration
+                    }
+                    return obj
+                }) : undefined
             }
         default:
             return services

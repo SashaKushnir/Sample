@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import styles from './Banquets.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {selectHistory} from "../../../selectors/selectCreateNew";
@@ -11,10 +11,10 @@ export const Banquets: React.FC = () => {
     const d = useDispatch()
     const historyData = useSelector(selectHistory)
 
-    const history = historyData?.map( (obj:History) => <OneBanquet data={obj}/>)
-    useEffect( () => {
+    const history = historyData?.map((obj: History) => <OneBanquet data={obj}/>).reverse()
+    useEffect(() => {
         d(setHistoryT())
-    },[])
+    }, [])
     return <>
         {history}
     </>

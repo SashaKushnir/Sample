@@ -32,6 +32,11 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
             d(servicesActions.addEntertainmentItem(serviceItem, e.target.value as any))
     }
 
+    const changeCurD = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.match(/^(\d)*$/))
+            d(servicesActions.setDuration(e.target.value,serviceItem.id))
+    }
+
     return <div>
         <div className={styles.intertaiment}>
             <div className={styles.img}>
@@ -58,6 +63,16 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                         placeholder={"Amount"}
                         ref={textInput}/>
                 </div>
+
+                <div className={styles.input_block}>
+                    <label htmlFor={"def"} className={styles.input_label}>Duration</label>
+                    <input className={styles.input}
+                           onChange={changeCurD}
+                           value={serviceItem.duration ? String(serviceItem.duration) : ""}
+                           placeholder={"Duration"}
+                           ref={textInput}/>
+                </div>
+
                 <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>
         </div>

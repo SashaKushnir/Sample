@@ -13,5 +13,10 @@ export const servicesActions = {
     setEntertainmentInfo: (entertainmentI: Array<ServiceCategoriesItem>) => ({
         type: "SET_ENTERTAINMENT_INFO",
         entertainmentI
+    }) as const,
+    setDuration: (duration: number | string, id:number) => ({
+        type: "SET_DURATION",
+        duration,
+        id
     }) as const
 }
