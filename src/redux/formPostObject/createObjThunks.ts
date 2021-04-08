@@ -37,6 +37,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (services_ready && tickets_ready && menu_ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
+
             name: "Some name",
             description: null,
             customer_id: 6,
@@ -61,8 +62,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             },
             service_order: {
                 items: getState().services.services?.filter((serviceI) => serviceI.showAmount).map((obj) => {
-                    const subset = _.omit(obj, ['showAmount', 'description', "category", "name", "period", "weight", "price",
-                        'hourly_paid_price', "once_paid_price"])
+                    const subset = _.pick(obj, ["id", 'amount', "duration"])
+                    subset.duration = 1
                     return subset
                 })
             }
@@ -96,11 +97,6 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
         d(commonActions.fetchingToggle(false))
     }
 }
-
-
-
-
-
 
 
 

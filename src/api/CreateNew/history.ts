@@ -7,7 +7,7 @@ export const history = {
         return myGetInstance.get<ApiHistoryResultType>('/banquets')
     },
     postHistory: (obj: BanquetType, api_token: string) => {
-        return myPostInstance.post('/banquets/create', obj, {
+        return myPostInstance.post('/banquets/create', {banquet: obj}, {
             headers :{
                 "api_token": api_token
             }
