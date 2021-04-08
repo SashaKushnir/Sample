@@ -10,13 +10,16 @@ interface InitialCommonType {
     message?: string
     needRedirect: boolean | null
     authByToken: boolean
+    fullEmptyAmount: boolean | null
+
 }
 
 const initialState: InitialCommonType = {
     isFetching: false,
     needRedirect: false,
     isAuthorised: null,
-    authByToken: false
+    authByToken: false,
+    fullEmptyAmount: null
 }
 
 
@@ -27,6 +30,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isFetching: action.status
+            }
+        case "NEED_AMOUNT_TOGGLE":
+            return {
+                ...common,
+                fullEmptyAmount: action.amountStatus
             }
         case "AUTH_BY_TOKEN":
             return {

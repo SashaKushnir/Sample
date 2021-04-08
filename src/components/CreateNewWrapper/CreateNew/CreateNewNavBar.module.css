@@ -46,3 +46,6 @@
 .toRightSide button{
     margin: 0.5%;
 }
+.amountMessage {
+    color:red;
+}

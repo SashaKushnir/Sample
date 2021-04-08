@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CreateNewNavBar } from "./CreateNewNavBar";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import { CreateNewMenus } from "../CreateNewMenus/CreateNewMenus";
@@ -12,17 +12,22 @@ import { FetchingComponent } from "../../../common/compon/FetchingComponent/Fetc
 import { RootState } from "../../../redux/store";
 
 export const CreateNew = () => {
+    const fullEmptyAmount = useSelector((state:RootState) => state.common.fullEmptyAmount)
     let {url} = useRouteMatch()
     const d = useDispatch()
     const [editMode, setEditMode] = useState(true)
+    useEffect(() => {
+        if(fullEmptyAmount === false)
+            setEditMode(false)
+    }, [fullEmptyAmount])
     const saveB = () => {
-        setEditMode(false)
+        d(createPost())
     }
     const editB = () => {
         setEditMode(true)
     }
     const submitB = () => {
-        d(createPost())
+
     }
     if (useSelector((state:RootState) => state.common.isFetching))
         return <FetchingComponent/>
@@ -38,6 +43,9 @@ export const CreateNew = () => {
                 <Route path={`${url}/entertainments`} render={() => <CreateNewServices/>}/>
             </Switch>
             <div className={s.toRightSide}>
+                {fullEmptyAmount && <div className={s.amountMessage}>
+                    Some fields are empty!
+                </div>}
                 <button className={s.buttonGreen} onClick={saveB}>Save</button>
             </div>
         </div>}

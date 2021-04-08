@@ -28,15 +28,7 @@ export const App = () => {
             d(commonActions.authToggle(true))
         }
     }, [tokenSuccess])
-    // useEffect(() => {
-    //     if (api_token) {
-    //         d(logInWithToken(api_token))
-    //         d(commonActions.needRedirectToggle(true))
-    //     }
-    //     else {
-    //         d(commonActions.authToggle(false))
-    //     }
-    // },[api_token])
+
 
     useEffect(() => {
         if (isAuth === false) {
@@ -46,7 +38,7 @@ export const App = () => {
             if(isAuth ===true)
                 if((needRedirect === true) || (needRedirect === null)) {
                     history.push('/content')
-
+                    d(commonActions.needRedirectToggle(false))
                 }
             if (userInfo?.api_token)
               localStorage.setItem("api_token", userInfo.api_token)
