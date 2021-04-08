@@ -1,13 +1,13 @@
-import { ApiLoginResultType, myPostInstance } from "../api";
+import { ApiLoginResultType, myGetInstance } from "../api";
 import { LoginFormType } from "../../components/Authorisation/LoginForm";
 
 
 export const login = {
     tryLogin: (loginObject: LoginFormType) => {
-        return myPostInstance.post<ApiLoginResultType>('/users/login', loginObject)
+        return myGetInstance.post<ApiLoginResultType>('/users/login', loginObject)
     },
     loginByToken: (token: string) => {
-        return myPostInstance.post<ApiLoginResultType>('/users/login', {api_token: token})
+        return myGetInstance.post<ApiLoginResultType>('/users/login', {api_token: token})
     }
 }
 export type UserType = {

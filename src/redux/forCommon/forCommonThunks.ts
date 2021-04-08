@@ -35,7 +35,7 @@ export const logOutT = () => (d: Dispatch<ActionsTypes<typeof commonActions | ty
     d(ticketsActions.deleteAllAmounts())
     d(servicesActions.deleteAllAmount())
     d(commonActions.logOut())
-    d(commonActions.successTokenToggle(false))
+    d(commonActions.successTokenToggle(null))
 }
 
 export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes<typeof commonActions>>) => {

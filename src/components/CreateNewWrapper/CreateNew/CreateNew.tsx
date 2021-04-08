@@ -6,28 +6,35 @@ import { CreateNewServices } from "../CreateNewServices/CreateNewServices";
 import { CreateNewTickets } from "../CreateNewTickets/CreateNewTickets";
 import { BlankHeader } from "../BlankHeader/BlankHeader";
 import s from './CreateNewNavBar.module.css'
-import { createPost } from "../../../redux/formPostObject/createObjThunks";
+import { createPost, postNewBanknote } from "../../../redux/formPostObject/createObjThunks";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchingComponent } from "../../../common/compon/FetchingComponent/FetchingComponent";
 import { RootState } from "../../../redux/store";
 
 export const CreateNew = () => {
+    const token = localStorage.getItem("api_token")
+    const postBObj = useSelector((state:RootState) => state.postBanquet.postBanquetObj)
     const fullEmptyAmount = useSelector((state:RootState) => state.common.fullEmptyAmount)
     let {url} = useRouteMatch()
     const d = useDispatch()
     const [editMode, setEditMode] = useState(true)
-    useEffect(() => {
-        if(fullEmptyAmount === false)
-            setEditMode(false)
-    }, [fullEmptyAmount])
-    const saveB = () => {
+        useEffect(() => {
+            if(fullEmptyAmount === false)
+                setEditMode(false)
+
+        },[fullEmptyAmount])
+        useEffect(() => {
+
+        },[])
+        const saveB = () => {
         d(createPost())
     }
     const editB = () => {
         setEditMode(true)
     }
     const submitB = () => {
-
+        if(postBObj && token)
+            d(postNewBanknote(postBObj,token))
     }
     if (useSelector((state:RootState) => state.common.isFetching))
         return <FetchingComponent/>

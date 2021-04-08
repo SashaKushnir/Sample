@@ -5,13 +5,13 @@ import { ticketsReducer } from "./tickets/ticketsReducer";
 import { servicesReducer } from "./services/servicesReducer";
 import { commonReducer } from "./forCommon/forCommonReducer";
 import { historyReducer } from "./history/newHistoryReducer";
+import { createObjReducer } from "./formPostObject/createObjReducer";
 
 let reducersList = combineReducers({
-
-        createNew : newBanknoteReducer,
-        tickets: ticketsReducer,
-        services: servicesReducer,
-
+    createNew : newBanknoteReducer,
+    tickets: ticketsReducer,
+    services: servicesReducer,
+    postBanquet: createObjReducer,
     history: historyReducer,
     common: commonReducer
 })

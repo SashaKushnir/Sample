@@ -11,8 +11,7 @@ export const myGetInstance = axios.create({
     baseURL: BaseURL
 })
 export const myPostInstance = axios.create({
-    baseURL: BaseURL,
-
+    baseURL: BaseURL
 })
 export type ApiResultType = {
     response_error: string | null

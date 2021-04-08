@@ -1,3 +1,5 @@
+import { BanquetType } from "./createObjReducer";
+
 export const createObjActions = {
-    checkForSetAmount: () => ({type: "CHECK_FOR_INPUT_AMOUNT"}) as const
+    setPostBanquetObj: (payload: BanquetType) => ({type : "SET_POST_BANQUET_OBJ", payload})
 }

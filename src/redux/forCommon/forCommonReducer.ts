@@ -9,7 +9,7 @@ interface InitialCommonType {
     userInfo?: UserType
     message?: string
     needRedirect: boolean | null
-    authByToken: boolean
+    authByToken: boolean | null
     fullEmptyAmount: boolean | null
 
 }

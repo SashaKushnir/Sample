@@ -7,6 +7,7 @@ import { FetchingComponent } from "../../common/compon/FetchingComponent/Fetchin
 import { useHistory } from "react-router-dom";
 
 export const Authorisation = () => {
+    const token = localStorage.getItem("api_token")
     const history = useHistory()
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
     if(tokenSuccess){
