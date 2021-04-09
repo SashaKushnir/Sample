@@ -23,8 +23,7 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                     const curM = menuI.products.map((productI) => {
                         if (productI.id === action.productI.id) {
                             productI.showAmount=true
-                            productI.amount = action.value === null ? 0
-                                : action.value
+                            productI.amount = action.value === null ? 0 : action.value
                             productI.amount > 0 ? productI.ready = true : productI.ready = false
                         }
                         return productI

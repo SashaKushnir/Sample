@@ -10,13 +10,20 @@ import {ServiceCategoriesI} from "./../../../CreateNewWrapper/CreateNewServices/
 import {ProductsOrder} from "../../../OrderInfo/Products/ProductsOrder";
 import {TicketsOrder} from "../../../OrderInfo/Tickets/TicketsOrder";
 import {ServicesOrder} from "../../../OrderInfo/Services/ServicesOrder";
+import {deleteHistoryT} from "../../../../redux/history/newHistoryThunk";
+import {useDispatch} from "react-redux";
+import {selectHistory} from "../../../../selectors/selectCreateNew";
+import {historyActions} from "../../../../redux/history/newHistoryAction";
 
 interface BanquetProps {
     data: History
 }
 
-export const OneBanquet: React.FC<BanquetProps> = (props) => {
 
+
+
+export const OneBanquet: React.FC<BanquetProps> = (props) => {
+    const d = useDispatch()
     const data = props.data
     let products = null
     if(props.data.product_order !== null)
@@ -33,8 +40,17 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         services = props.data.service_order.items.map((obj:ServiceCategoriesItem) =>
             <ServicesOrder item={obj}/>)
 
+    const Delete = () => {
+        if (window.confirm("Delete this banquet? It can not be restored!!!")) {
+            d(deleteHistoryT(data.id,localStorage.getItem("api_token") as string))
+            d(historyActions.deleteOneHistoty(data.id))
+        }
+    }
+
     return <div className={s.main}>
+
         <div className={s.first}>
+            <button onClick={Delete}>Delete</button>
             <div className={s.line1}>
                 <div className={s.name}>
                     {data.name}
@@ -84,5 +100,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 </div>
             </div>
         </div>
+
     </div>
 }

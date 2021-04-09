@@ -17,6 +17,11 @@ export const historyReducer = (history = initialState, action: ActionsTypes<type
                 ...history,
                 banquets: [...action.history]
             }
+        case "DELETE_ONE_HISTORY":
+            return{
+                ...history,
+                banquets: history.banquets?.filter((obj:History) => obj.id !== action.id)
+            }
         default:
             return history
     }

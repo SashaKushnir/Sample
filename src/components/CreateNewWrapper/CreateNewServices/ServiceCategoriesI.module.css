@@ -53,7 +53,7 @@
     display: flex;
     font-weight: bold;
     float: right;
-
+    margin-bottom: 3px;
 }
 .input{
     border-radius: 5px;
@@ -63,6 +63,16 @@
     float: right;
 }
 input:focus {
+    outline: none;
+}
+.input_wrong{
+    border-radius: 5px;
+    border: 3px solid red;
+    float: right;
+    width: 100%;
+    float: right;
+}
+input_wrong:focus {
     outline: none;
 }
 .input_label{

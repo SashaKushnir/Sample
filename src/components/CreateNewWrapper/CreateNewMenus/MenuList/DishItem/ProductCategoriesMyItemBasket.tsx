@@ -44,7 +44,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                 </div>
                 <div className={styles.input_block}>
                     <label htmlFor={"def"} className={styles.input_label}>Amount</label>
-                    <input className={styles.input}
+                    <input className={product_categoriesItem.ready ? styles.input : styles.input_wrong}
                         onChange={changeCurA}
                            value={!product_categoriesItem.amount ? "" : String(product_categoriesItem.amount) ?
                                String(product_categoriesItem.amount) : ""}

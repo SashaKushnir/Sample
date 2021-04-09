@@ -1,12 +1,12 @@
-import { ActionsTypes } from "../store";
-import { servicesActions } from "./servicesActions";
-import { MenuCategory } from "../newBanknote/newBanknoteReducer";
+import {ActionsTypes} from "../store";
+import {servicesActions} from "./servicesActions";
+import {MenuCategory} from "../newBanknote/newBanknoteReducer";
 
 const initialState: Services = {}
 
 
-export interface Period{
-    id:number
+export interface Period {
+    id: number
     beg_datetime: datetime
     end_datetime: datetime
     beg_datetime_id: number
@@ -15,7 +15,7 @@ export interface Period{
     weekdays: string
 }
 
-export interface datetime{
+export interface datetime {
     id: number
     day: string | null
     month: number | null
@@ -24,7 +24,6 @@ export interface datetime{
     minutes: number | null
     is_templatable: boolean
 }
-
 
 
 export interface ServiceCategoriesItem {
@@ -51,26 +50,26 @@ interface Services {
     services?: ServicesArray
 }
 
-export const servicesReducer = (services = initialState, action: ActionsTypes<typeof servicesActions>):Services => {
+export const servicesReducer = (services = initialState, action: ActionsTypes<typeof servicesActions>): Services => {
 
     switch (action.type) {
         case "ADD_ENTERTAINMENT":
             return {
                 ...services,
-                services: services.services? [...services.services.map((serviceI) => {
-                    if(serviceI.id === action.entertainmentI.id){
-                        serviceI.showAmount=true
-                        if(action.value){
+                services: services.services ? [...services.services.map((serviceI) => {
+                    if (serviceI.id === action.entertainmentI.id) {
+                        serviceI.showAmount = true
+                        if (action.value) {
                             serviceI.amount = action.value
 
                         } else {
-                            serviceI.amount=""
+                            serviceI.amount = ""
                         }
                         serviceI.ready = serviceI.amount > 0
 
                     }
                     return serviceI
-                })]: undefined
+                })] : undefined
             }
         case "SET_ENTERTAINMENT_INFO":
             return {
@@ -80,28 +79,31 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
         case "TOTALLY_DELETE_ENTERTAINMENT_ITEM":
             return {
                 ...services,
-                services: services.services ? [...services.services.map((serviceI)=>{
-                    if(serviceI.id === action.entertainmentI.id) {
+                services: services.services ? [...services.services.map((serviceI) => {
+                    if (serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
-                        serviceI.showAmount=false
+
+                        serviceI.showAmount = false
+
                     }
                     return serviceI
-                })]: undefined
+                })] : undefined
             }
         case "TOTALLY_DELETE_ALL_ENTERTAINMENT_ITEMS":
             return {
                 ...services,
-                services: services.services ? [...services.services.map((serviceI)=>{
-                        delete serviceI.amount
-                        serviceI.showAmount=false
+                services: services.services ? [...services.services.map((serviceI) => {
+                    delete serviceI.amount
+                    delete serviceI.duration
+                    serviceI.showAmount = false
                     return serviceI
-                })]: undefined
+                })] : undefined
             }
         case "SET_DURATION":
-            return{
+            return {
                 ...services,
-                services: services.services ? services.services.map((obj)=>{
-                    if(obj.id === action.id){
+                services: services.services ? services.services.map((obj) => {
+                    if (obj.id === action.id) {
                         obj.duration = action.duration
                     }
                     return obj
