@@ -15,7 +15,7 @@ export interface Role {
     updated_at: string
 }
 
-export interface Customer {
+export interface CustomerType {
     name:string
     id: number
     password: string
@@ -26,7 +26,7 @@ export interface Customer {
     updated_at: string
 }
 
-export type CustomersArray = Array<Customer>
+export type CustomersArray = Array<CustomerType>
 
 export type UsersInitial = {
     users?: CustomersArray
@@ -43,7 +43,7 @@ export const customersReducer = (users = initialState, action: ActionsTypes<type
         case "DELETE_ONE_USER":
             return{
                 ...users,
-                users: users.users?.filter((obj:Customer) => obj.id !== action.user.id)
+                users: users.users?.filter((obj:CustomerType) => obj.id !== action.user.id)
             }
         default:
             return users

@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-export const Users = () => {
+export const Customer = () => {
     const users = {}
 
     return(
