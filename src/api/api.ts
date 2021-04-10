@@ -3,6 +3,7 @@ import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBankno
 import { UserType } from "./login/login";
 import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
+import {UserArray} from "../redux/users/usersReducer";
 
 export const BaseURL = "http://194.213.104.146:222"
 //http://imperia-api.com
@@ -26,6 +27,10 @@ export interface ApiMenusResultType extends ApiResultType {
 
 export interface ApiLoginResultType extends ApiResultType {
     user: UserType
+}
+
+export interface ApiUsersResultType extends ApiResultType {
+    user: UserArray
 }
 
 export interface ApiServicesResultType extends ApiResultType {

@@ -63,11 +63,15 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             service_order: {
                 items: getState().services.services?.filter((serviceI) => serviceI.showAmount).map((obj) => {
                     const subset = _.pick(obj, ["id", 'amount', "duration"])
+                    if(subset.duration === null){
+                        subset.duration = 1
+                    }
                     return subset
                 })
             }
         }
         d(createObjActions.setPostBanquetObj(mainPost))
+        console.log("Post obj ")
         console.log(mainPost)
 
     } else {

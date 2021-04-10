@@ -82,7 +82,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                 services: services.services ? [...services.services.map((serviceI) => {
                     if (serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
-
+                        delete serviceI.duration
                         serviceI.showAmount = false
 
                     }
