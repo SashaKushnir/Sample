@@ -4,13 +4,13 @@ import { commonActions } from "../forCommon/forCommonActions";
 import {customersActions} from "./customersActions";
 import {customers} from "../../api/CreateNew/customers";
 
-export const setUsers = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
+export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
     try {
         d(commonActions.fetchingToggle(true))
         const response = await customers.getAllUsers()
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
-            d(customersActions.addUsersInfo(response.data.customers))
+            d(customersActions.setCustomersInfo(response.data.customers))
             d(commonActions.fetchingToggle(false))
         } else {
             console.warn(response.data.response_error)

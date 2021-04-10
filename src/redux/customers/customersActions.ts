@@ -1,6 +1,6 @@
 import {CustomerType, CustomersArray} from ".//customersReducer";
 
 export const customersActions = {
-    addUsersInfo: (user: CustomersArray) => ({type: "ADD_USER_INFO", user}) as const,
-    deleteOneUser: (user: CustomerType) => ({type: "DELETE_ONE_USER", user}) as const
+    setCustomersInfo: (customers: CustomersArray) => ({type: "ADD_USER_INFO", customers}) as const,
+    deleteOneCustomer: (customer: CustomerType) => ({type: "DELETE_ONE_USER", customer}) as const
 }
