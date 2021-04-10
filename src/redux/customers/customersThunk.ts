@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
 import { ActionsTypes } from "../store";
 import { commonActions } from "../forCommon/forCommonActions";
-import {usersActions} from "./usersActions";
-import {users} from "../../api/CreateNew/users";
+import {customersActions} from "./customersActions";
+import {customers} from "../../api/CreateNew/customers";
 
-export const setUsers = () => async (d: Dispatch<ActionsTypes<typeof usersActions | typeof commonActions>>) => {
+export const setUsers = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await users.getAllUsers()
+        const response = await customers.getAllUsers()
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
-            d(usersActions.addUsersInfo(response.data.user))
+            d(customersActions.addUsersInfo(response.data.customers))
             d(commonActions.fetchingToggle(false))
         } else {
             console.warn(response.data.response_error)

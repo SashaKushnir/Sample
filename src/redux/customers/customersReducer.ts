@@ -1,5 +1,5 @@
 import {ActionsTypes} from "../store";
-import {usersActions} from "./usersActions";
+import {customersActions} from "./customersActions";
 
 let initialState: UsersInitial = {}
 
@@ -15,7 +15,7 @@ export interface Role {
     updated_at: string
 }
 
-export interface User {
+export interface Customer {
     name:string
     id: number
     password: string
@@ -26,13 +26,13 @@ export interface User {
     updated_at: string
 }
 
-export type UserArray = Array<User>
+export type CustomersArray = Array<Customer>
 
 export type UsersInitial = {
-    users?: UserArray
+    users?: CustomersArray
 }
 
-export const usersReducer = (users = initialState, action: ActionsTypes<typeof usersActions>): UsersInitial => {
+export const customersReducer = (users = initialState, action: ActionsTypes<typeof customersActions>): UsersInitial => {
 
     switch (action.type) {
         case "ADD_USER_INFO":
@@ -43,7 +43,7 @@ export const usersReducer = (users = initialState, action: ActionsTypes<typeof u
         case "DELETE_ONE_USER":
             return{
                 ...users,
-                users: users.users?.filter((obj:User) => obj.id !== action.user.id)
+                users: users.users?.filter((obj:Customer) => obj.id !== action.user.id)
             }
         default:
             return users

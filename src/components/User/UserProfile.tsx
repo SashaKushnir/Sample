@@ -1,8 +1,9 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {selectUsers} from "../../selectors/selectCreateNew";
-import {User} from "../../redux/users/usersReducer";
+import {Customer} from "../../redux/customers/customersReducer";
 import {Users} from "./Users";
+
 
 
 
@@ -10,7 +11,7 @@ const UserProfile: React.FC = () => {
 
     const users = useSelector(selectUsers)
 
-    const userProfiles = users?.map((obj:User) => <Users/>)
+    const userProfiles = users?.map((obj:Customer) => <Users/>)
 
     return(
         <div>
