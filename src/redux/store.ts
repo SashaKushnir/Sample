@@ -15,7 +15,7 @@ let reducersList = combineReducers({
     postBanquet: createObjReducer,
     history: historyReducer,
     common: commonReducer,
-    users: customersReducer
+    customers: customersReducer
 })
 export type RootState = ReturnType<typeof reducersList>
 

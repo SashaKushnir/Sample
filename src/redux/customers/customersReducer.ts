@@ -4,7 +4,7 @@ import {customersActions} from "./customersActions";
 let initialState: UsersInitial = {}
 
 export interface CustomerType {
-    name:string
+    name: string
     id: number
     surname: string | null
     phone: string
@@ -12,27 +12,54 @@ export interface CustomerType {
     birthdate: string | null
     created_at: string | null
     updated_at: string | null
+    isCustomerSelected: boolean
 }
 
 export type CustomersArray = Array<CustomerType>
 
 export type UsersInitial = {
     customers?: CustomersArray
+    selectedCustomer?: CustomerType | null
 }
 
 export const customersReducer = (customers = initialState, action: ActionsTypes<typeof customersActions>): UsersInitial => {
 
     switch (action.type) {
-        case "ADD_USER_INFO":
-                return{
-                    ...customers,
-                    customers: [...action.customers]
-                }
-        case "DELETE_ONE_USER":
+        case "ADD_CUSTOMER_INFO":
+            return {
+                ...customers,
+                customers: [...action.customers]
+            }
+        case "DELETE_ONE_CUSTOMER":
+            return {
+                ...customers,
+                customers: customers.customers?.filter((obj: CustomerType) => obj.id !== action.customer.id)
+            }
+        case "SELECTED_CUSTOMER":
             return{
                 ...customers,
-                customers: customers.customers?.filter((obj:CustomerType) => obj.id !== action.customer.id)
+                selectedCustomer: action.customer
             }
+
+        // case "SELECT_CUSTOMER":
+        //     return {
+        //         ...customers,
+        //         customers: customers.customers?.map((obj: CustomerType) => {
+        //             obj.isCustomerSelected = false
+        //             if (obj.id === action.customer.id) {
+        //                 action.customer.isCustomerSelected = true
+        //             }
+        //             return obj
+        //         })
+        //     }
+        // case "UN_SELECT_ALL_CUSTOMER":
+        //     return {
+        //         ...customers,
+        //         customers: customers.customers?.map((obj: CustomerType) => {
+        //             obj.isCustomerSelected = false
+        //             return obj
+        //         })
+        //     }
         default:
             return customers
     }

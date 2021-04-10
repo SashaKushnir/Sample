@@ -63,7 +63,6 @@ export const CreateNew = () => {
         </div>}
         {!editMode && <div>
             <BlankHeader/>
-
             <OrderItems/>
             <div className={s.toRightSide}>
                 <button className={s.buttonBlack} onClick={editB}>Edit</button>

@@ -6,18 +6,21 @@ import {CustomerProfile} from "./CustomerProfile";
 import {setHistoryT} from "../../redux/history/newHistoryThunk";
 import {setCustomersT} from "../../redux/customers/customersThunk";
 
+type ProptsType = {
+    openMenu: any
+}
 
 
-export const Customers: React.FC = (props) => {
+export const Customers: React.FC<ProptsType> = (props) => {
 
     const d = useDispatch()
-    const users = useSelector(selectUsers)
+    const customers = useSelector(selectUsers)
 
     useEffect(() => {
         d(setCustomersT())
     }, [])
 
-    const customerProfiles = users?.map((obj:CustomerType) => <CustomerProfile customer={obj}/>)
+    const customerProfiles = customers.customers?.map((obj:CustomerType) => <CustomerProfile customer={obj} openMenu={props.openMenu}/>)
 
     return(
         <div>
