@@ -1,17 +1,26 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './BlankHeader.module.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectUsers} from "../../../selectors/selectCreateNew";
+import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 
 export const BlankHeader = () => {
+
+    const d = useDispatch()
+
+    const setName = (e: ChangeEvent<HTMLInputElement>) => {
+        d(banquetActions.setName(e.target.value as any))
+    }
+
+
 
     const customers = useSelector(selectUsers)
     console.log(customers)
     const customerInfo = customers.selectedCustomer
     return <div>
         <div className={s.item}>
-            <div className={s.banquetWithName}><b>Banquet Name:</b></div>
-            <div>Optional description</div>
+            <div className={s.banquetWithName}><input className={s.input} placeholder={"Banquet name"} /></div>
+            <div><textarea className={s.input} placeholder={"Description"}></textarea></div>
             <hr className={s.solid}/>
         </div>
         <div className={s.item}>
