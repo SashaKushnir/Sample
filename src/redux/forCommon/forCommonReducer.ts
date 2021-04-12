@@ -2,7 +2,6 @@ import { ActionsTypes } from "../store";
 import { commonActions } from "./forCommonActions";
 import { UserType } from "../../api/login/login";
 
-
 interface InitialCommonType {
     isFetching: boolean
     isAuthorised: boolean | null
@@ -11,7 +10,7 @@ interface InitialCommonType {
     needRedirect: boolean | null
     authByToken: boolean | null
     fullEmptyAmount: boolean | null
-
+    isSaved: boolean
 }
 
 const initialState: InitialCommonType = {
@@ -19,9 +18,9 @@ const initialState: InitialCommonType = {
     needRedirect: false,
     isAuthorised: null,
     authByToken: false,
-    fullEmptyAmount: null
+    fullEmptyAmount: null,
+    isSaved: false
 }
-
 
 export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {
 
@@ -67,6 +66,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
                 ...common,
                 userInfo: null,
                 isAuthorised: false
+            }
+        case "SET_SAVED":
+            return {
+                ...common,
+                isSaved: action.status
             }
         default:
             return common

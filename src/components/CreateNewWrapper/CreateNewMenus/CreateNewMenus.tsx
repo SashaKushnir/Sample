@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectMenuKitchen } from "../../../selectors/selectCreateNew";
 import { newBanknoteActions } from "../../../redux/newBanknote/newBanknoteActions";
 import { setMenuT } from "../../../redux/newBanknote/newBanknoteThunks";
+import {RootState} from "../../../redux/store";
 
 
 export const CreateNewMenus: React.FC = () => {
@@ -22,6 +23,7 @@ export const CreateNewMenus: React.FC = () => {
         localStorage.setItem("menus", JSON.stringify(menuData))
     })
     const menuData = useSelector(selectMenuKitchen)
+
     return <div className={styles.wrap}>
         <MenuList menus={menuData} showAmount={true}/>
         <MenuList menus={menuData}/>

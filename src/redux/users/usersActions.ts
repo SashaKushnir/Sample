@@ -1,5 +1,6 @@
-import { User } from "../users/usersReducer";
+import {User, UserArray} from "../users/usersReducer";
 
-export const ticketsActions = {
-    addUser: (user: User) => ({type: "ADD_USER", user}) as const
+export const usersActions = {
+    addUsersInfo: (user: UserArray) => ({type: "ADD_USER_INFO", user}) as const,
+    deleteOneUser: (user: User) => ({type: "DELETE_ONE_USER", user}) as const
 }

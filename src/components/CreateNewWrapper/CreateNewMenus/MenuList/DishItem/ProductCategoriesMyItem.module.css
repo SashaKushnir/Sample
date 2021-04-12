@@ -52,7 +52,6 @@
 }
 .dish_basket{
     margin-bottom: 10px;
-
 }
 .amount{
     display: inline-block;
@@ -78,6 +77,15 @@
     border: 2px solid darkgray;
     float: right;
     width: 100%;
+}
+.input_wrong{
+    border-radius: 5px;
+    border: 3px solid red;
+    float: right;
+    width: 100%;
+}
+.input_wrong:focus{
+    outline: none;
 }
 input:focus {
     outline: none;

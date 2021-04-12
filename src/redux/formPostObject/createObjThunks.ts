@@ -7,6 +7,7 @@ import { ServiceCategoriesItem } from "../services/servicesReducer";
 import { commonActions } from "../forCommon/forCommonActions";
 import { history } from "../../api/CreateNew/history";
 import { BanquetType, Product } from "./createObjReducer";
+import {number} from "yup";
 
 const _ = require("lodash");
 
@@ -37,7 +38,6 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (services_ready && tickets_ready && menu_ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
-
             name: "Some name",
             description: null,
             customer_id: 6,
@@ -63,12 +63,15 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             service_order: {
                 items: getState().services.services?.filter((serviceI) => serviceI.showAmount).map((obj) => {
                     const subset = _.pick(obj, ["id", 'amount', "duration"])
-                    subset.duration = 1
+                    if(subset.duration === null){
+                        subset.duration = 1
+                    }
                     return subset
                 })
             }
         }
         d(createObjActions.setPostBanquetObj(mainPost))
+        console.log("Post obj ")
         console.log(mainPost)
 
     } else {
@@ -97,10 +100,3 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
         d(commonActions.fetchingToggle(false))
     }
 }
-
-
-
-
-
-
-

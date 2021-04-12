@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-const Users = () => {
+export const Users = () => {
     const users = {}
 
     return(
