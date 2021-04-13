@@ -45,7 +45,7 @@ export const CreateNew = () => {
 
     return <>
         {editMode && <div>
-            <BlankHeader/>
+            <BlankHeader isEdit={editMode}/>
             <CreateNewNavBar/>
             <Switch>
                 <Redirect exact from={url} to={`${url}/menus`}/>
@@ -62,7 +62,7 @@ export const CreateNew = () => {
             </div>
         </div>}
         {!editMode && <div>
-            <BlankHeader/>
+            <BlankHeader isEdit={editMode}/>
             <OrderItems/>
             <div className={s.toRightSide}>
                 <button className={s.buttonBlack} onClick={editB}>Edit</button>

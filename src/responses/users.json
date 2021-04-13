@@ -1,0 +1,68 @@
+{
+  "response_status": true,
+  "response_status_code": 200,
+  "response_error": null,
+  "users": [
+    {
+      "type": "users",
+      "id": 1,
+      "name": "Owner",
+      "password": "OWNER_USER",
+      "api_token": "eb05722d5d6fe8e4ebb0e43fba89b9a160d534541d6fc122bf194b0dcc17fb27",
+      "role_id": 1,
+      "role": {
+        "id": 1,
+        "name": "owner",
+        "description": null,
+        "can_read": true,
+        "can_insert": true,
+        "can_modify": true,
+        "is_owner": true,
+        "created_at": "2021-04-10 22:39:40",
+        "updated_at": "2021-04-10 22:39:40"
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
+    },
+    {
+      "id": 2,
+      "name": "Admin",
+      "password": "ADMIN_USER",
+      "api_token": "b9461ee404534f09dfe0f1697cfa796fb2df67e9dc1e7457d177451d1abb9262",
+      "role_id": 2,
+      "role": {
+        "id": 2,
+        "name": "admin",
+        "description": null,
+        "can_read": true,
+        "can_insert": true,
+        "can_modify": true,
+        "is_owner": false,
+        "created_at": "2021-04-10 22:39:40",
+        "updated_at": "2021-04-10 22:39:40"
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
+    },
+    {
+      "id": 3,
+      "name": "Manager",
+      "password": "MANAGER_USER",
+      "api_token": "7f8053ef001d3d626e92da75f8e1f47544f526ebd450cc06416f2c1980e3969f",
+      "role_id": 3,
+      "role": {
+        "id": 3,
+        "name": "manager",
+        "description": null,
+        "can_read": true,
+        "can_insert": true,
+        "can_modify": false,
+        "is_owner": false,
+        "created_at": "2021-04-10 22:39:40",
+        "updated_at": "2021-04-10 22:39:40"
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ export const history = {
         return myGetInstance.get<ApiHistoryResultType>('/banquets')
     },
     postHistory: (obj: BanquetType, api_token: string) => {
-        return myPostInstance.post('/banquets/create', {banquet: obj}, {
+        return myPostInstance.post('/banquets', {banquet: obj}, {
             headers: {
                 "api_token": api_token
             }
@@ -19,9 +19,19 @@ export const history = {
                 "id": id
             }
         }
-        return myPostInstance.post<ApiResultType>('/banquets/delete', obj, {
+        // return myPostInstance.post<ApiResultType>('/banquets', obj, {
+        //     headers: {
+        //         "api_token": api_token
+        //     }
+        // })
+        return myPostInstance.delete<ApiResultType>('/banquets', {
             headers: {
                 "api_token": api_token
+            },
+            data: {
+                "banquet": {
+                    "id": id
+                }
             }
         })
     },
