@@ -11,7 +11,9 @@ export const selectMenuKitchen = (state: RootState) => state.createNew?.menus
 export const selectTickets = (state: RootState) => state.tickets?.tickets
 export const selectServices = (state:RootState) => state.services.services
 export const selectHistory = (state:RootState) => state.history.banquets
-export const selectUsers = (state:RootState) => state.users.users
+export const selectUsers = (state:RootState) => state.customers
+export const selectBanquet = (state:RootState) => state.banquet
+
 // export const selectSelectedOrders = (state:RootState) => state.createNew.selectedOrders
 // export const selectSelectedMenu = (state: RootState) => state.createNew.selectedOrders.selectedMenu
 // export const selectSelectedTickets = (state: RootState) => state.createNew.selectedOrders.selectedTickets

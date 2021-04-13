@@ -48,7 +48,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     }
 
     return <div className={s.main}>
-
         <div className={s.first}>
             <button onClick={Delete}>Delete</button>
             <div className={s.line1}>
@@ -70,7 +69,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
             <div className={s.desc}>
                 {data.description}
             </div>
-
         </div>
         <div className={s.second}>
             <div className={s.products}>

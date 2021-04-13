@@ -2,524 +2,108 @@
   "response_status": true,
   "response_status_code": 200,
   "response_error": null,
-  "banquets": [
+  "discounts": [
     {
       "id": 1,
-      "name": "New Year Eve Party",
+      "name": "10% discount",
       "description": null,
-      "advance_amount": 470000,
-      "child_guests_amount": 42,
-      "adult_guests_amount": 5,
-      "beg_datetime": "2021-12-31 22:00:00",
-      "end_datetime": "2022-01-01 01:00:00",
-      "state_id": 1,
-      "customer_id": 2,
-      "created_at": "2021-04-05 18:19:31",
-      "updated_at": "2021-04-05 18:19:31",
-      "paid_at": null,
-      "total": 0,
-      "ticket_order": null,
-      "product_order": null,
-      "service_order": null,
-      "state": [
-        {
-          "id": 1,
-          "name": "planning",
-          "description": null
-        }
-      ],
-      "customer": {
-        "id": 2,
-        "name": "LeBron",
-        "surname": "James",
-        "phone": "+38 050 000 2222",
-        "email": "lebron.james@gmail.com",
-        "birthdate": "1984-12-30",
-        "created_at": "2021-04-05 18:19:24",
-        "updated_at": "2021-04-05 18:19:24"
-      }
+      "amount": null,
+      "percent": 1000,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 1,
+        "name": "Percentage",
+        "description": null
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
     },
     {
       "id": 2,
-      "name": "Halloween Party",
+      "name": "20% discount",
       "description": null,
-      "advance_amount": 230000,
-      "child_guests_amount": 20,
-      "adult_guests_amount": 3,
-      "beg_datetime": "2021-10-31 18:00:00",
-      "end_datetime": "2022-10-31 23:00:00",
-      "state_id": 2,
-      "customer_id": 6,
-      "created_at": "2021-04-05 18:19:31",
-      "updated_at": "2021-04-05 18:19:31",
-      "paid_at": null,
-      "total": 0,
-      "ticket_order": {
+      "amount": null,
+      "percent": 2000,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
         "id": 1,
-        "banquet_id": 2,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:32",
-        "updated_at": "2021-04-05 18:19:32",
-        "discount": null,
-        "items": [
-          {
-            "id": 4,
-            "name": "Weekday ticket",
-            "description": "Monday-Friday",
-            "price": 8000,
-            "category_id": 2,
-            "period_id": 1,
-            "period": {
-              "id": 1,
-              "beg_datetime": {
-                "id": 1,
-                "day": null,
-                "month": 1,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "end_datetime": {
-                "id": 2,
-                "day": null,
-                "month": 12,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "beg_datetime_id": 1,
-              "end_datetime_id": 2,
-              "is_templatable": true,
-              "weekdays": "1,2,3,4,5"
-            },
-            "category": {
-              "id": 2,
-              "name": "Daily",
-              "description": "Tickets, which depend on the days of the week"
-            },
-            "created_at": "2021-04-05 18:19:26",
-            "updated_at": "2021-04-05 18:19:26",
-            "child_tickets_amount": 10,
-            "adult_tickets_amount": 2,
-            "birthday_tickets_amount": 1
-          }
-        ]
+        "name": "Percentage",
+        "description": null
       },
-      "product_order": {
-        "id": 1,
-        "banquet_id": 2,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:31",
-        "updated_at": "2021-04-05 18:19:31",
-        "discount": null,
-        "items": [
-          {
-            "id": 1,
-            "name": "Mojito",
-            "description": "Iced Sprite with mint, lime and lemon.",
-            "price": 12000,
-            "weight": 25000,
-            "menu_id": 1,
-            "category_id": 2,
-            "category": {
-              "id": 2,
-              "name": "Cold drinks",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:29",
-            "updated_at": "2021-04-05 18:19:29",
-            "amount": 2
-          },
-          {
-            "id": 11,
-            "name": "Margarita",
-            "description": "The simplest pizza ever. Cheese, basil and few slices of tomato.",
-            "price": 9000,
-            "weight": 40000,
-            "menu_id": 3,
-            "category_id": 4,
-            "category": {
-              "id": 4,
-              "name": "Pizza",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:30",
-            "updated_at": "2021-04-05 18:19:30",
-            "amount": 10
-          },
-          {
-            "id": 12,
-            "name": "Romana",
-            "description": "Cheese, beacon, arugula and parmesan.",
-            "price": 1300,
-            "weight": 45000,
-            "menu_id": 3,
-            "category_id": 4,
-            "category": {
-              "id": 4,
-              "name": "Pizza",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:31",
-            "updated_at": "2021-04-05 18:19:31",
-            "amount": 5
-          },
-          {
-            "id": 13,
-            "name": "Ortolana",
-            "description": "Mushrooms, zucchini, eggplant, parmesan and sliced parsley.",
-            "price": 13000,
-            "weight": 40000,
-            "menu_id": 3,
-            "category_id": 4,
-            "category": {
-              "id": 4,
-              "name": "Pizza",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:31",
-            "updated_at": "2021-04-05 18:19:31",
-            "amount": 3
-          }
-        ]
-      },
-      "service_order": {
-        "id": 1,
-        "banquet_id": 2,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:32",
-        "updated_at": "2021-04-05 18:19:32",
-        "discount": null,
-        "items": [
-          {
-            "id": 3,
-            "name": "Carved fruits arrangement",
-            "description": "Carved apples, bananas, mangoes and melons",
-            "once_paid_price": 50000,
-            "hourly_paid_price": 40000,
-            "category_id": 2,
-            "period_id": null,
-            "period": null,
-            "category": {
-              "id": 2,
-              "name": "Catering",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:28",
-            "updated_at": "2021-04-05 18:19:28",
-            "amount": 2,
-            "duration": 0
-          }
-        ]
-      },
-      "state": [
-        {
-          "id": 2,
-          "name": "booked",
-          "description": null
-        }
-      ],
-      "customer": {
-        "id": 6,
-        "name": "Dwight",
-        "surname": "Howard",
-        "phone": "+38 050 000 6666",
-        "email": null,
-        "birthdate": null,
-        "created_at": "2021-04-05 18:19:24",
-        "updated_at": "2021-04-05 18:19:24"
-      }
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
     },
     {
       "id": 3,
-      "name": "Johny's Birthday Party",
+      "name": "33% discount",
       "description": null,
-      "advance_amount": 90000,
-      "child_guests_amount": 8,
-      "adult_guests_amount": 1,
-      "beg_datetime": "2021-04-16 17:00:00",
-      "end_datetime": "2022-04-16 21:00:00",
-      "state_id": 2,
-      "customer_id": 9,
-      "created_at": "2021-04-05 18:19:31",
-      "updated_at": "2021-04-05 18:19:31",
-      "paid_at": null,
-      "total": 0,
-      "ticket_order": {
-        "id": 2,
-        "banquet_id": 3,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:32",
-        "updated_at": "2021-04-05 18:19:32",
-        "discount": null,
-        "items": [
-          {
-            "id": 5,
-            "name": "Weekend ticket",
-            "description": "Saturday-Sunday",
-            "price": 10000,
-            "category_id": 2,
-            "period_id": 2,
-            "period": {
-              "id": 2,
-              "beg_datetime": {
-                "id": 3,
-                "day": null,
-                "month": 1,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "end_datetime": {
-                "id": 4,
-                "day": null,
-                "month": 12,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "beg_datetime_id": 3,
-              "end_datetime_id": 4,
-              "is_templatable": true,
-              "weekdays": "6,7"
-            },
-            "category": {
-              "id": 2,
-              "name": "Daily",
-              "description": "Tickets, which depend on the days of the week"
-            },
-            "created_at": "2021-04-05 18:19:26",
-            "updated_at": "2021-04-05 18:19:26",
-            "child_tickets_amount": 15,
-            "adult_tickets_amount": 3,
-            "birthday_tickets_amount": 2
-          }
-        ]
+      "amount": null,
+      "percent": 3300,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 1,
+        "name": "Percentage",
+        "description": null
       },
-      "product_order": {
-        "id": 2,
-        "banquet_id": 3,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:31",
-        "updated_at": "2021-04-05 18:19:31",
-        "discount": null,
-        "items": [
-          {
-            "id": 8,
-            "name": "Creamy Caramel Latté",
-            "description": "Late with a touch of caramel.",
-            "price": 8500,
-            "weight": 18000,
-            "menu_id": 1,
-            "category_id": 1,
-            "category": {
-              "id": 1,
-              "name": "Hot drinks",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:30",
-            "updated_at": "2021-04-05 18:19:30",
-            "amount": 2
-          },
-          {
-            "id": 10,
-            "name": "Warm Hazelnut Toddy",
-            "description": null,
-            "price": 11200,
-            "weight": 25000,
-            "menu_id": 1,
-            "category_id": 1,
-            "category": {
-              "id": 1,
-              "name": "Hot drinks",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:30",
-            "updated_at": "2021-04-05 18:19:30",
-            "amount": 5
-          },
-          {
-            "id": 12,
-            "name": "Romana",
-            "description": "Cheese, beacon, arugula and parmesan.",
-            "price": 1300,
-            "weight": 45000,
-            "menu_id": 3,
-            "category_id": 4,
-            "category": {
-              "id": 4,
-              "name": "Pizza",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:31",
-            "updated_at": "2021-04-05 18:19:31",
-            "amount": 3
-          },
-          {
-            "id": 17,
-            "name": "Parsnip soup with toasted hazelnuts",
-            "description": null,
-            "price": 12000,
-            "weight": 30000,
-            "menu_id": 3,
-            "category_id": 3,
-            "category": {
-              "id": 3,
-              "name": "Soups",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:31",
-            "updated_at": "2021-04-05 18:19:31",
-            "amount": 2
-          }
-        ]
-      },
-      "service_order": {
-        "id": 2,
-        "banquet_id": 3,
-        "discount_id": null,
-        "created_at": "2021-04-05 18:19:32",
-        "updated_at": "2021-04-05 18:19:32",
-        "discount": null,
-        "items": [
-          {
-            "id": 1,
-            "name": "Clown show",
-            "description": "A fun clown that will bring a lot of joy to your children",
-            "once_paid_price": 20000,
-            "hourly_paid_price": 20000,
-            "category_id": 1,
-            "period_id": 5,
-            "period": {
-              "id": 5,
-              "beg_datetime": {
-                "id": 9,
-                "day": null,
-                "month": 1,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "end_datetime": {
-                "id": 10,
-                "day": null,
-                "month": 12,
-                "year": null,
-                "hours": null,
-                "minutes": null,
-                "is_templatable": true
-              },
-              "beg_datetime_id": 9,
-              "end_datetime_id": 10,
-              "is_templatable": true,
-              "weekdays": "1,2,3,4,5,6"
-            },
-            "category": {
-              "id": 1,
-              "name": "Entertainment",
-              "description": null
-            },
-            "created_at": "2021-04-05 18:19:27",
-            "updated_at": "2021-04-05 18:19:27",
-            "amount": 1,
-            "duration": 150
-          }
-        ]
-      },
-      "state": [
-        {
-          "id": 2,
-          "name": "booked",
-          "description": null
-        }
-      ],
-      "customer": {
-        "id": 9,
-        "name": "Tim",
-        "surname": "Duncan",
-        "phone": "+38 050 000 9999",
-        "email": "tim.duncan@gmail.com",
-        "birthdate": null,
-        "created_at": "2021-04-05 18:19:24",
-        "updated_at": "2021-04-05 18:19:24"
-      }
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
     },
     {
       "id": 4,
-      "name": "Ann's Birthday Party",
+      "name": "100 uah discount",
       "description": null,
-      "advance_amount": 200000,
-      "child_guests_amount": 16,
-      "adult_guests_amount": 4,
-      "beg_datetime": "2021-03-28 13:00:00",
-      "end_datetime": "2022-03-28 18:00:00",
-      "state_id": 5,
-      "customer_id": 9,
-      "created_at": "2021-04-05 18:19:31",
-      "updated_at": "2021-04-05 18:19:31",
-      "paid_at": null,
-      "total": 0,
-      "ticket_order": null,
-      "product_order": null,
-      "service_order": null,
-      "state": [
-        {
-          "id": 5,
-          "name": "finished",
-          "description": null
-        }
-      ],
-      "customer": {
-        "id": 9,
-        "name": "Tim",
-        "surname": "Duncan",
-        "phone": "+38 050 000 9999",
-        "email": "tim.duncan@gmail.com",
-        "birthdate": null,
-        "created_at": "2021-04-05 18:19:24",
-        "updated_at": "2021-04-05 18:19:24"
-      }
+      "amount": 10000,
+      "percent": null,
+      "category_id": 2,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 2,
+        "name": "Amount",
+        "description": null
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
     },
     {
       "id": 5,
-      "name": "Some name",
+      "name": "200 uah discount",
       "description": null,
-      "advance_amount": 30000,
-      "child_guests_amount": 10,
-      "adult_guests_amount": 2,
-      "beg_datetime": "2021-05-25 17:00:00",
-      "end_datetime": "2021-05-25 21:00:13",
-      "state_id": 1,
-      "customer_id": 6,
-      "created_at": "2021-04-05 18:20:21",
-      "updated_at": "2021-04-05 18:20:21",
-      "paid_at": null,
-      "total": 0,
-      "ticket_order": null,
-      "product_order": null,
-      "service_order": null,
-      "state": [
-        {
-          "id": 1,
-          "name": "planning",
-          "description": null
-        }
-      ],
-      "customer": {
-        "id": 6,
-        "name": "Dwight",
-        "surname": "Howard",
-        "phone": "+38 050 000 6666",
-        "email": null,
-        "birthdate": null,
-        "created_at": "2021-04-05 18:19:24",
-        "updated_at": "2021-04-05 18:19:24"
-      }
+      "amount": 20000,
+      "percent": null,
+      "category_id": 2,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 2,
+        "name": "Amount",
+        "description": null
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
+    },
+    {
+      "id": 6,
+      "name": "300 uah discount",
+      "description": null,
+      "amount": 30000,
+      "percent": null,
+      "category_id": 2,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 2,
+        "name": "Amount",
+        "description": null
+      },
+      "created_at": "2021-04-10 22:39:40",
+      "updated_at": "2021-04-10 22:39:40"
     }
   ]
 }

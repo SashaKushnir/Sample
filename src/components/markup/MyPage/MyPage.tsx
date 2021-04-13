@@ -9,6 +9,8 @@ import {Banquets} from "../../History/BanquetsHistory/Banquets";
 import { logInWithToken } from "../../../redux/forCommon/forCommonThunks";
 import { commonActions } from "../../../redux/forCommon/forCommonActions";
 import { useDispatch } from "react-redux";
+import {Customers} from "../../Customer/Customers";
+import {CreateNewWrapper} from "../../CreateNewWrapper/CreateNewWrapper/CreateNewWrapper";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
@@ -28,7 +30,7 @@ export const MyPage = () => {
             <Header/>
             <Switch>
                 <Redirect exact from={`${url}`} to={`${url}/history`}/>
-                <Route path={`${url}/new`} render={() => <CreateNew/>}/>
+                <Route path={`${url}/new`} render={() => <CreateNewWrapper/>}/>
                 <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>
                 <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
                 <Route path={`${url}/reports`} render={() => <div>reports</div>}/>

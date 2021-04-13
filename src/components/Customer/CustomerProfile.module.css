@@ -1,0 +1,17 @@
+.profile{
+    border: 2px solid grey;
+    margin: 15px;
+}
+.name{
+    border-bottom: 2px solid grey;
+    margin: 5px;
+}
+.email{
+    margin: 5px;
+}
+.birthdate{
+    margin: 5px;
+}
+.phone{
+    margin: 5px;
+}

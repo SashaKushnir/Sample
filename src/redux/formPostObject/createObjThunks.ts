@@ -38,8 +38,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (services_ready && tickets_ready && menu_ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
-            name: "Some name",
-            description: null,
+            name: getState().banquet.name,
+            description: getState().banquet.decription,
             customer_id: 6,
             state_id: 1,
             advance_amount: 30000,

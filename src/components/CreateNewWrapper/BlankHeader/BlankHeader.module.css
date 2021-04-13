@@ -10,3 +10,14 @@ hr.solid {
 .banquetWithName{
     font-size: 150%;
 }
+.input{
+    outline: none;
+    border: 0px;
+    width: 100%;
+}
+.input:focus{
+    outline: none;
+}
+.input:focus{
+    outline: none;
+}
