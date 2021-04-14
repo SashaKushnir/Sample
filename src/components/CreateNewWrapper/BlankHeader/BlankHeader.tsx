@@ -6,9 +6,10 @@ import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 
 type PropsType = {
     isEdit: boolean
+    CusMenuSwitch?: any
 }
 
-export const BlankHeader: React.FC<PropsType> = ({isEdit}) => {
+export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
 
@@ -24,6 +25,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit}) => {
     const customers = useSelector(selectUsers)
     console.log(customers)
     const customerInfo = customers.selectedCustomer
+
+    const ChooseCustomer = () => {
+        CusMenuSwitch(true)
+    }
+
     return <div>
         <div className={s.item}>
             {!isEdit && <div>
@@ -32,7 +38,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit}) => {
             </div>
             }
             {isEdit && <div>
-                <div className={s.banquetWithName}><input className={s.input} placeholder={"Banquet name"} onChange={setName}  /></div>
+                <div className={s.banquetWithName}><input className={s.input} placeholder={"Banquet name"} onChange={setName}/></div>
                 <div><textarea className={s.input} placeholder={"Description"} onChange={setDesc} ></textarea></div>
             </div>
             }
@@ -49,7 +55,14 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit}) => {
             </div>
         </div>
         <div className={s.item}>
-            <div>Customer: {customerInfo?.name}</div>
+            {isEdit && <div onClick={ChooseCustomer}>
+                Customer: {customerInfo ? customerInfo?.name : ""}
+            </div>
+            }
+            {!isEdit && <div>
+                Customer: {customerInfo?.name}
+            </div>
+            }
             <hr className={s.solid}/>
         </div>
 

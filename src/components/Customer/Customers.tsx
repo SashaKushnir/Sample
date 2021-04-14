@@ -7,7 +7,7 @@ import {setHistoryT} from "../../redux/history/newHistoryThunk";
 import {setCustomersT} from "../../redux/customers/customersThunk";
 
 type ProptsType = {
-    openMenu: any
+    CusMenuSwitch: any
 }
 
 
@@ -20,7 +20,7 @@ export const Customers: React.FC<ProptsType> = (props) => {
         d(setCustomersT())
     }, [])
 
-    const customerProfiles = customers.customers?.map((obj:CustomerType) => <CustomerProfile customer={obj} openMenu={props.openMenu}/>)
+    const customerProfiles = customers.customers?.map((obj:CustomerType) => <CustomerProfile customer={obj} CusMenuSwitch={props.CusMenuSwitch}/>)
 
     return(
         <div>

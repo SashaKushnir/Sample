@@ -9,7 +9,7 @@ export const CreateNewWrapper: React.FC = () => {
     const d = useDispatch()
     const [showMenu, setShowMenuToggle] = useState(false)
     return <div>
-        {showMenu && <CreateNew />}
-        {!showMenu && <Customers openMenu={setShowMenuToggle} />}
+        {showMenu && <Customers  CusMenuSwitch={setShowMenuToggle}/>}
+        {!showMenu && <CreateNew CusMenuSwitch={setShowMenuToggle}/>}
     </div>
 }

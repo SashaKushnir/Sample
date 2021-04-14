@@ -8,7 +8,7 @@ import {customersActions} from "../../redux/customers/customersActions";
 
 type PropsType = {
     customer: CustomerType
-    openMenu: any
+    CusMenuSwitch: any
 }
 
 export const CustomerProfile: React.FC<PropsType> = (props) => {
@@ -17,7 +17,7 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
     const cus = props.customer
 
     const Select = () => {
-        props.openMenu(true)
+        props.CusMenuSwitch(false)
         d(customersActions.selectedCustomer(cus))
     }
 

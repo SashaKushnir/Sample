@@ -19,20 +19,12 @@ export const history = {
                 "id": id
             }
         }
-        // return myPostInstance.post<ApiResultType>('/banquets', obj, {
-        //     headers: {
-        //         "api_token": api_token
-        //     }
-        // })
+
         return myPostInstance.delete<ApiResultType>('/banquets', {
             headers: {
                 "api_token": api_token
             },
-            data: {
-                "banquet": {
-                    "id": id
-                }
-            }
+            data: obj
         })
     },
 }

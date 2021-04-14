@@ -13,7 +13,11 @@ import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
-export const CreateNew = () => {
+type PropsType = {
+    CusMenuSwitch: any
+}
+
+export const CreateNew: React.FC<PropsType> = (props) => {
     const token = localStorage.getItem("api_token")
     const postBObj = useSelector((state: RootState) => state.postBanquet.postBanquetObj)
     const fullEmptyAmount = useSelector((state: RootState) => state.common.fullEmptyAmount)
@@ -44,7 +48,7 @@ export const CreateNew = () => {
 
     return <>
         {editMode && <div>
-            <BlankHeader isEdit={editMode}/>
+            <BlankHeader isEdit={editMode} CusMenuSwitch={props.CusMenuSwitch}/>
             <CreateNewNavBar/>
             <Switch>
                 <Redirect exact from={url} to={`${url}/menus`}/>
