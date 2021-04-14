@@ -34,7 +34,6 @@ export const CreateNew = () => {
     }
     const editB = () => {
         setEditMode(true)
-        d(commonActions.needAmountToggle(true))
     }
     const submitB = () => {
         if (postBObj && token)
