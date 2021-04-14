@@ -1,13 +1,11 @@
-import { Dispatch } from "redux";
-import { ActionsTypes, RootState } from "../store";
-import { MenuItem, ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
-import { createObjActions } from "./createObjActions";
-import { useDispatch } from "react-redux";
-import { ServiceCategoriesItem } from "../services/servicesReducer";
-import { commonActions } from "../forCommon/forCommonActions";
-import { history } from "../../api/CreateNew/history";
-import { BanquetType, Product } from "./createObjReducer";
-import {number} from "yup";
+import {Dispatch} from "redux";
+import {ActionsTypes, RootState} from "../store";
+import {MenuItem, ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
+import {createObjActions} from "./createObjActions";
+import {ServiceCategoriesItem} from "../services/servicesReducer";
+import {commonActions} from "../forCommon/forCommonActions";
+import {history} from "../../api/CreateNew/history";
+import {BanquetType, Product} from "./createObjReducer";
 
 const _ = require("lodash");
 
@@ -43,8 +41,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             customer_id: 6,
             state_id: 1,
             advance_amount: 30000,
-            child_guests_amount: 10,
-            adult_guests_amount: 2,
+            creator_id: getState().common.userInfo?.id,
             beg_datetime: "2021-05-25 17:00:00",
             end_datetime: "2021-05-25 21:00:13",
             product_order: {
@@ -56,7 +53,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             },
             ticket_order: {
                 items: getState().tickets.tickets?.filter((ticketI) => ticketI.showAmount).map((obj) => {
-                    const subset = _.pick(obj, ["id", "child_tickets_amount", "adult_tickets_amount", "birthday_tickets_amount"])
+                    const subset = _.pick(obj, ["id", "amount"])
                     return subset
                 })
             },
@@ -85,7 +82,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 }
 
 export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d: Dispatch<ActionsTypes<typeof createObjActions | typeof commonActions>>) => {
-
+    debugger
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)

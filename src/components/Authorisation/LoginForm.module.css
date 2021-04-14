@@ -30,3 +30,23 @@
     display: inline-block;
     font-size: 17px;
 }
+.buttonGreen {
+    background-color: green;
+    border: none;
+    border-radius: 5%;
+    color: white;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+}
+button:hover.buttonGreen{
+    background-color: greenyellow;
+    border: none;
+    border-radius: 5%;
+    color: white;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+}

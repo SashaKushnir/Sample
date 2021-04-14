@@ -63,8 +63,7 @@ export type BanquetType = {
     customer_id: number
     state_id: number
     advance_amount: number
-    child_guests_amount: number
-    adult_guests_amount: number
+    creator_id?: number
     beg_datetime: string | null
     end_datetime: string | null
     product_order?: Product_order

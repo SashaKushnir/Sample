@@ -9,7 +9,6 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
     try {
         d(commonActions.fetchingToggle(true))
         const response = await history.getAllHistory()
-
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
             console.log(response.data.banquets)
