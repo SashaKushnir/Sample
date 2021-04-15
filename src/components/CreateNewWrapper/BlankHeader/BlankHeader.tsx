@@ -30,6 +30,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         CusMenuSwitch(true)
     }
 
+    let date = ""
+    let time = ""
+    const SetTime = (text:string) => {
+        time = text
+    }
     return <div>
         <div className={s.item}>
             {!isEdit && <div>
@@ -44,14 +49,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             }
             <hr className={s.solid}/>
             <div>
-                <input type="time" id="start" name="trip-start"
-
-                       min="2020-01-01" max="2035-12-31"/>
+                <input type="time" id="start" name="trip-start"/>
             </div>
             <div>
-                <input type="date" id="start" name="trip-start"
-
-                       min="2020-01-01" max="2035-12-31"/>
+                <input type="date" id="start" onChange={(event) => console.log(event.target.value) } name="trip-start"/>
             </div>
         </div>
         <div className={s.item}>

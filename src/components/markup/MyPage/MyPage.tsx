@@ -4,7 +4,6 @@ import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
-import {Register} from "../../Support/Registration/Register";
 import {Banquets} from "../../History/BanquetsHistory/Banquets";
 import { logInWithToken } from "../../../redux/forCommon/forCommonThunks";
 import { commonActions } from "../../../redux/forCommon/forCommonActions";
@@ -33,9 +32,9 @@ export const MyPage = () => {
                 <Redirect exact from={`${url}`} to={`${url}/history`}/>
                 <Route path={`${url}/new`} render={() => <CreateNewWrapper/>}/>
                 <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>
-                <Route path={`${url}/editors`} render={() => <div><CreateNewEmployeePage/></div>}/>
+                <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
                 <Route path={`${url}/reports`} render={() => <div>reports</div>}/>
-                <Route path={`${url}/support`} render={() => <div><Register/></div>}/>
+                <Route path={`${url}/support`} render={() => <div><CreateNewEmployeePage/></div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>
                 <Route path={`${url}/authors`} render={() => <div>authors</div>}/>
