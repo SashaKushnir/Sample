@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBanknoteReducer";
-import { UserType } from "./login/login";
+import {UserInter, UserType} from "./login/login";
 import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
 import {CustomersArray} from "../redux/customers/customersReducer";
@@ -43,4 +43,8 @@ export interface ApiTicketsResultType extends ApiResultType {
 
 export interface ApiHistoryResultType extends ApiResultType {
     banquets: Array<History>
+}
+
+export interface ApiGetUsersResultType extends ApiResultType {
+    users: Array<UserInter>
 }

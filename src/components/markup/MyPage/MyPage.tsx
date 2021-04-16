@@ -3,12 +3,12 @@ import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
+<<<<<<< Updated upstream
 import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
 import {Banquets} from "../../History/BanquetsHistory/Banquets";
 import { logInWithToken } from "../../../redux/forCommon/forCommonThunks";
 import { commonActions } from "../../../redux/forCommon/forCommonActions";
 import { useDispatch } from "react-redux";
-import {Customers} from "../../Customer/Customers";
 import {CreateNewWrapper} from "../../CreateNewWrapper/CreateNewWrapper/CreateNewWrapper";
 import {CreateNewEmployeePage} from "../../CreateEmployeeAccount/CreateNewEmployeePage";
 
