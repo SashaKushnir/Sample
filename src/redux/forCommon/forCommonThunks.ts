@@ -20,7 +20,7 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
         } else {
             console.warn("error")
             if (res.data.message)
-                d(commonActions.setUnauthorisedMessage(res.data.message))
+                d(commonActions.setErrorMessage(res.data.message))
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {

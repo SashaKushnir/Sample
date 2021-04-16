@@ -14,6 +14,7 @@ export const myGetInstance = axios.create({
 export const myPostInstance = axios.create({
     baseURL: BaseURL
 })
+
 export type ApiResultType = {
     response_error: string | null
     response_status: boolean
@@ -47,4 +48,8 @@ export interface ApiHistoryResultType extends ApiResultType {
 
 export interface ApiGetUsersResultType extends ApiResultType {
     users: Array<UserInter>
+}
+
+export interface ApiPatchUserResponseType extends ApiResultType {
+    data: UserInter
 }

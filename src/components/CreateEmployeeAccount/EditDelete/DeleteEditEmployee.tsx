@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAllEmployees} from "../../../redux/CreateNewEmployee/CreateNewEmployeeT";
 import {RootState} from "../../../redux/store";
 import {UserItem} from "./UserItem";
+import s from './DeleteEditEmployee.module.css'
+import {EditUserForm} from "../EditUserForm/EditUserForm";
 
 export const DeleteEditEmployee = () => {
     const token = localStorage.getItem('api_token')
@@ -15,7 +17,12 @@ export const DeleteEditEmployee = () => {
             d(getAllEmployees(token))
     },[])
 
-    return <div>
-        {users}
+    return <div className={s.deleteEdit}>
+        <div>
+            <EditUserForm/>
+        </div>
+        <div className={s.uploadedUsers}>
+            {users}
+        </div>
     </div>
 }
