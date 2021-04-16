@@ -1,19 +1,35 @@
 import {ActionsTypes} from "../store";
 import {banquetActions} from "./banquetInfoActions";
+import {State} from "../history/newHistoryReducer";
 
 let initialState: BanquetInitial = {
     name: "None",
-    decription: "None",
+    description: "None",
     beginnig: "01.01.2000",
     end: "01.01.2000",
-}
+    advance_amount: 0,
+    total: 0,
+    created_at: "01.01.2000",
+    updated_at: "01.01.2000",
+    state: {
+        id: 1,
+        name: "planing",
+        description: null,
+        type: "banquet_states"
+    }
 
+}
 
 export type BanquetInitial = {
     name: string
-    decription: string | null
+    description: string | null
     beginnig: string
     end: string
+    advance_amount: number
+    total: number
+    created_at: string
+    updated_at: string
+    state: State
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -37,8 +53,21 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
         case "SET_DESCRIPTION":
             return{
                 ...banquet,
-                decription: action.description
+                description: action.description
             }
+        case "SET_ADVANCE":
+            return{
+                ...banquet,
+                advance_amount: action.num
+            }
+        // case "SET_STATE":
+        //     return{
+        //         ...banquet,
+        //         state: {
+        //
+        //             name: action.state
+        //         }
+        //     }
         default:
             return banquet
     }

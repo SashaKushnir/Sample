@@ -1,7 +1,7 @@
 .dashed {
     border-top: 3px dashed #bbb;
 }
-.item {
+.info_bock {
     margin: 10px;
 }
 hr.solid {
@@ -21,3 +21,26 @@ hr.solid {
 .input:focus{
     outline: none;
 }
+.customer{
+    display: inline-block;
+    cursor: pointer;
+}
+.customer:hover{
+    text-decoration: underline;
+}
+.advance{
+
+}
+.time{
+    display: inline-block;
+    float: right;
+}
+.date{
+    display: inline-block;
+    float: right;
+}
+.margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

@@ -50,6 +50,8 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     return <div className={s.main}>
         <div className={s.first}>
             <button onClick={Delete}>Delete</button>
+            <button >Edit</button>
+            <button >Print</button>
             <div className={s.line1}>
                 <div className={s.name}>
                     {data.name}
@@ -68,6 +70,9 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
             </div>
             <div className={s.desc}>
                 {data.description}
+            </div>
+            <div className={s.desc}>
+                {data.customer.name}
             </div>
         </div>
         <div className={s.second}>

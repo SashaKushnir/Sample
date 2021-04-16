@@ -4,6 +4,7 @@ import {ServiceCategoriesItem, ServicesArray} from "../services/servicesReducer"
 import { historyActions } from "./newHistoryAction";
 import {MenuArray, Product_categories, ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import data from "./../../responses/banquets.json"
+import {CustomerType} from "../customers/customersReducer";
 
 const initialState: HistoryInitial = {}
 
@@ -61,20 +62,11 @@ export interface State  {
     id: number
     name: string
     description: string | null
+    type: string
 }
 
 type StateArray = Array<State>
 
-export interface Customer  {
-    id: number,
-    name: string
-    surname: string
-    phone: string
-    email: string | null
-    birthdate: string | null
-    created_at: string
-    updated_at: string
-}
 
 export interface History{
     id: number
@@ -95,7 +87,7 @@ export interface History{
     product_order: Product_order | null
     service_order: Service_order | null
     state: StateArray
-    customer: Customer
+    customer: CustomerType
 }
 
 type HistoryArray = Array<History>

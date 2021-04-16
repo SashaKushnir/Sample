@@ -12,7 +12,7 @@ export interface CustomerType {
     birthdate: string | null
     created_at: string | null
     updated_at: string | null
-    isCustomerSelected: boolean
+    type: string
 }
 
 export type CustomersArray = Array<CustomerType>

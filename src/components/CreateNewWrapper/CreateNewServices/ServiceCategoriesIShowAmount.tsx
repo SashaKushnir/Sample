@@ -66,7 +66,7 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
 
                 <div className={styles.input_block}>
                     <label htmlFor={"def"} className={styles.input_label}>Duration</label>
-                    <input className= {serviceItem.ready ? styles.input : styles.input_wrong}
+                    <input className= {styles.input}
                            onChange={changeCurD}
                            value={serviceItem.duration ? String(serviceItem.duration) : ""}
                            placeholder={"Duration"}

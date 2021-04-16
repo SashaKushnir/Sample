@@ -25,8 +25,9 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const d = useDispatch()
     const [editMode, setEditMode] = useState(true)
     useEffect(() => {
-        if (fullEmptyAmount === false)
-            setEditMode(false)
+        if (fullEmptyAmount === false){
+            console.log("save faile")
+            setEditMode(false)}
         else setEditMode(true)
     }, [fullEmptyAmount])
     useEffect(() => {

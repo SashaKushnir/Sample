@@ -11,39 +11,64 @@ const _ = require("lodash");
 
 export const createPost = () => (d: any, getState: () => RootState) => {
 
-    let mainPost: BanquetType, menu_ready = true, tickets_ready = true, services_ready = true
+    let mainPost: BanquetType, ready = true
 
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
             if (item.ready === false) {
-                menu_ready = false
+                ready = false
             }
         })
     })
 
     getState().tickets.tickets?.filter((obj: ProductCategoriesItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
-            tickets_ready = false
+            ready = false
         }
     })
 
     getState().services.services?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem) => {
+        if(item.duration === undefined || item.duration === null){
+            item.duration = 0
+        }
         if (item.ready === false) {
-            services_ready = false
+            ready = false
         }
     })
 
-    if (services_ready && tickets_ready && menu_ready) {
+    if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
+            id: 18,
             name: getState().banquet.name,
-            description: getState().banquet.decription,
+            description: getState().banquet.description,
             customer_id: 6,
             state_id: 1,
-            advance_amount: 30000,
+            advance_amount: getState().banquet.advance_amount,
             creator_id: getState().common.userInfo?.id,
-            beg_datetime: "2021-05-25 17:00:00",
-            end_datetime: "2021-05-25 21:00:13",
+            beg_datetime: getState().banquet.beginnig,
+            end_datetime: getState().banquet.end,
+            created_at: "2021-05-25 17:00:00",
+            updated_at: "2021-05-25 17:00:00",
+            paid_at: "2021-05-25 17:00:00",
+            total: 228,
+            customer: {
+                id: 1,
+                name: "Anthony",
+                surname: "Davis",
+                phone: "+38 050 000 1111",
+                email: "anthony.davis@gmail.com",
+                birthdate: "1993-03-11",
+                created_at: "2021-04-13 21:17:09",
+                updated_at: "2021-04-13 21:17:09",
+                type: "customers"
+            }, //???????????????????????????
+            state: {
+                id: 1,
+                name: "string",
+                description: null,
+                type: "",
+            },
             product_order: {
                 items: getState().createNew.menus?.reduce((acum: Array<Product>, menuI, index) =>
                     acum.concat(menuI.products.filter((productI) => productI.showAmount).map((obj) => {
@@ -70,19 +95,15 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         d(createObjActions.setPostBanquetObj(mainPost))
         console.log("Post obj ")
         console.log(mainPost)
-
+            //2021-04-14T14:46
     } else {
         d(commonActions.needAmountToggle(true))
     }
-    console.log("menu " + menu_ready)
-    console.log("tickets " + tickets_ready)
-    console.log("services " + services_ready)
-
+    console.log("is ready? " + ready)
 
 }
 
 export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d: Dispatch<ActionsTypes<typeof createObjActions | typeof commonActions>>) => {
-    debugger
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)

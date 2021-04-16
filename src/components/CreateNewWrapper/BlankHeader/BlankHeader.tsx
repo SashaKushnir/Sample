@@ -19,51 +19,89 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setDesc = (e: ChangeEvent<HTMLTextAreaElement>) => {
         d(banquetActions.setDescription(e.target.value as any))
     }
-
+    const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
+        d(banquetActions.setAdvance(e.target.value as any))
+    }
     const data = useSelector(selectBanquet)
 
     const customers = useSelector(selectUsers)
-    console.log(customers)
     const customerInfo = customers.selectedCustomer
 
     const ChooseCustomer = () => {
         CusMenuSwitch(true)
     }
 
-    let date = ""
-    let time = ""
-    const SetTime = (text:string) => {
-        time = text
+    const setBegining = (e: ChangeEvent<HTMLInputElement>) => {
+        let time = e.target.value.replace("T"," ")
+        console.log(time)
+        time += ":00"
+        d(banquetActions.setBegining(time))
+    }
+    const setEnd = (e: ChangeEvent<HTMLInputElement>) => {
+        let time = e.target.value.replace("T"," ")
+        time += ":00"
+        d(banquetActions.setEnd(time))
     }
     return <div>
-        <div className={s.item}>
-            {!isEdit && <div>
-                <div className={s.banquetWithName}><input className={s.input} placeholder={"Banquet name"} onChange={setName} value={data.name}  readOnly/></div>
-                <div><textarea className={s.input} placeholder={"Description"} onChange={setDesc} value={data.decription ? data.decription : ""} readOnly></textarea></div>
+        <div className={s.info_bock}>
+            {isEdit && <div className={s.margin}>
+                <div className={s.banquetWithName}>
+                    <input className={s.input} placeholder={"Banquet name"}
+                           onChange={setName} defaultValue={data.name ? data.name : ""}/>
+                </div>
+                <div>
+                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc} defaultValue={data.description ? data.description : ""}/>
+                </div>
             </div>
             }
-            {isEdit && <div>
-                <div className={s.banquetWithName}><input className={s.input} placeholder={"Banquet name"} onChange={setName}/></div>
-                <div><textarea className={s.input} placeholder={"Description"} onChange={setDesc} ></textarea></div>
+            {!isEdit && <div className={s.margin}>
+                <div className={s.banquetWithName}>
+                    <input className={s.input} placeholder={"Banquet name"}
+                           onChange={setName} value={data.name} readOnly/>
+                </div>
+                <div>
+                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
+                              value={data.description ? data.description : ""} readOnly/>
+                </div>
             </div>
             }
+
             <hr className={s.solid}/>
-            <div>
-                <input type="time" id="start" name="trip-start"/>
-            </div>
-            <div>
-                <input type="date" id="start" onChange={(event) => console.log(event.target.value) } name="trip-start"/>
-            </div>
         </div>
-        <div className={s.item}>
-            {isEdit && <div onClick={ChooseCustomer}>
-                Customer: {customerInfo ? customerInfo?.name : ""}
+        <div className={s.info_bock}>
+
+            {isEdit && <div className={s.margin}>
+                <div onClick={ChooseCustomer} className={s.customer}>
+                    Customer: {customerInfo ? customerInfo?.name : ""}
+                </div>
+                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}/>
             </div>
             }
-            {!isEdit && <div>
-                Customer: {customerInfo?.name}
+            {!isEdit && <div className={s.margin}>
+                <div className={s.customer}>
+                    Customer: {customerInfo?.name}
+                </div>
+                <input type="datetime-local" id="meeting-time" className={s.time} value={data.beginnig} readOnly/>
             </div>
             }
+            <div className={s.margin}>
+                {isEdit && <div className={s.advance}>
+                    Advance <input type="text" onChange={setAdvance}/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}/>
+                </div>}
+                {!isEdit &&
+                <div className={s.advance}>
+                    Advance <input type="text" value={data.advance_amount} readOnly/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} value={data.end} readOnly/>
+                </div>}
+                <div className={s.advance}>
+                    State <select>
+                    <option>Planning</option>
+                    <option>Booked</option>
+                    <option>Finished</option>
+                </select>
+                </div>
+            </div>
             <hr className={s.solid}/>
         </div>
 

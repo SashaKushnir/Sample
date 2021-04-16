@@ -65,7 +65,8 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         } else {
                             serviceI.amount = ""
                         }
-                        serviceI.ready = (serviceI.amount > 0) && (serviceI.duration?serviceI.duration > 0 : false)
+                        //serviceI.ready = (serviceI.amount > 0) && (serviceI.duration?serviceI.duration > 0 : false)
+                        serviceI.ready = (serviceI.amount > 0)
                     }
                     return serviceI
                 })] : undefined
