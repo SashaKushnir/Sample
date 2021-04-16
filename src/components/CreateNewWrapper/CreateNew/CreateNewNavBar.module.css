@@ -5,6 +5,11 @@
     margin: 0.5% 20% 0% 20%;
 }
 
+.navFor50{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 0.5% 20% 0% 20%;
+}
 
 .navlink {
     text-decoration: none;

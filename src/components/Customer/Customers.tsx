@@ -7,7 +7,7 @@ import {setHistoryT} from "../../redux/history/newHistoryThunk";
 import {setCustomersT} from "../../redux/customers/customersThunk";
 
 type ProptsType = {
-    CusMenuSwitch: any
+    CusMenuSwitch:  any
 }
 
 

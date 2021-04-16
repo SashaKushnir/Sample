@@ -1,4 +1,4 @@
-import {myGetInstance} from "../api";
+import {ApiGetUsersResultType, myGetInstance} from "../api";
 import {CreateNewEmployeeType} from "../../components/CreateEmployeeAccount/CreateNewEmployeeForm";
 
 export const accounts = {
@@ -6,6 +6,13 @@ export const accounts = {
         return myGetInstance.post('/users', {user: signUpObject},{
             headers: {
                 api_token: api_token
+            }
+        })
+    },
+    getAllAccounts: (token: string) => {
+        return myGetInstance.get<ApiGetUsersResultType>('/users',{
+            headers:{
+                api_token: token
             }
         })
     }
