@@ -16,22 +16,28 @@ export const UserItem: React.FC<UserItemProps> = ({userI}) => {
     const deleteU = () => {
         d(deleteUser(userI.api_token))
     }
-    return <div onClick={editUser}>
-        <div>
-            {userI.id}
-        </div>
-        <div >
-            {userI.name}
-        </div>
-        <div>
-            {userI.type}
-        </div>
-        <div>
-            {userI.password}
-        </div><div>
-            {userI.created_at}
-        </div><div>
-            {userI.updated_at}
+    return <div>
+        <div onClick={editUser}>
+            <div>
+                <b>Name: </b>
+                {userI.name}
+            </div>
+            <div>
+                <b>Type: </b>
+                {userI.type}
+            </div>
+            <div>
+                <b>Password: </b>
+                {userI.password}
+            </div>
+            <div>
+                <b>Created at: </b>
+                {userI.created_at}
+            </div>
+            <div>
+                <b>Updated at: </b>
+                {userI.updated_at}
+            </div>
         </div>
         <button onClick={deleteU}>
             Delete

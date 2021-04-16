@@ -95,7 +95,6 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         d(createObjActions.setPostBanquetObj(mainPost))
         console.log("Post obj ")
         console.log(mainPost)
-            //2021-04-14T14:46
     } else {
         d(commonActions.needAmountToggle(true))
     }

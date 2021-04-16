@@ -31,10 +31,12 @@ export const CreateNew: React.FC<PropsType> = (props) => {
         else setEditMode(true)
     }, [fullEmptyAmount])
     useEffect(() => {
-
+        setEditMode(true)
     }, [])
     const saveB = () => {
         d(createPost())
+        if(!fullEmptyAmount)
+            setEditMode(false)
 
     }
     const editB = () => {
