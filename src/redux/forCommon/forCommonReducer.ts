@@ -9,7 +9,7 @@ interface InitialCommonType {
     message?: string
     needRedirect: boolean | null
     authByToken: boolean | null
-    fullEmptyAmount: boolean | null
+    fullEmptyAmount: boolean
     isSaved: boolean
 }
 
@@ -18,7 +18,7 @@ const initialState: InitialCommonType = {
     needRedirect: false,
     isAuthorised: null,
     authByToken: false,
-    fullEmptyAmount: null,
+    fullEmptyAmount: true,
     isSaved: false
 }
 

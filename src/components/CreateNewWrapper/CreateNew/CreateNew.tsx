@@ -13,6 +13,7 @@ import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
+
 type PropsType = {
     CusMenuSwitch: any
 }
@@ -26,9 +27,8 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const [editMode, setEditMode] = useState(true)
     useEffect(() => {
         if (fullEmptyAmount === false){
-            console.log("save faile")
             setEditMode(false)}
-        else setEditMode(true)
+        else {setEditMode(true)}
     }, [fullEmptyAmount])
     useEffect(() => {
         setEditMode(true)

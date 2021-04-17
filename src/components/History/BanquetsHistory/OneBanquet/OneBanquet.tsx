@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import s from "./OneBanquet.module.css"
 import {History} from "./../../../../redux/history/newHistoryReducer"
 import {ProductCategoriesMyItem} from "./../../../CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItem"
@@ -20,29 +20,28 @@ interface BanquetProps {
 }
 
 
-
-
 export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const d = useDispatch()
+    const [hide, setHide] = useState(false)
     const data = props.data
     let products = null
-    if(props.data.product_order !== null)
-        products = props.data.product_order.items.map((obj:ProductCategoriesItem, index:number) =>
-        <ProductsOrder item={obj}/>)
+    if (props.data.product_order !== null)
+        products = props.data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
+            <ProductsOrder item={obj}/>)
 
     let tickets = null
-    if(props.data.ticket_order !== null)
-        tickets = props.data.ticket_order.items.map((obj:ProductCategoriesItem) =>
-        <TicketsOrder item={obj}/>)
+    if (props.data.ticket_order !== null)
+        tickets = props.data.ticket_order.items.map((obj: ProductCategoriesItem) =>
+            <TicketsOrder item={obj}/>)
 
     let services = null
-    if(props.data.service_order !== null)
-        services = props.data.service_order.items.map((obj:ServiceCategoriesItem) =>
+    if (props.data.service_order !== null)
+        services = props.data.service_order.items.map((obj: ServiceCategoriesItem) =>
             <ServicesOrder item={obj}/>)
 
     const Delete = () => {
         if (window.confirm("Delete this banquet? It can not be restored!!!")) {
-            d(deleteHistoryT(data.id,localStorage.getItem("api_token") as string))
+            d(deleteHistoryT(data.id, localStorage.getItem("api_token") as string))
             d(historyActions.deleteOneHistoty(data.id))
         }
     }
@@ -50,8 +49,8 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     return <div className={s.main}>
         <div className={s.first}>
             <button onClick={Delete}>Delete</button>
-            <button >Edit</button>
-            <button >Print</button>
+            <button>Edit</button>
+            <button>Print</button>
             <div className={s.line1}>
                 <div className={s.name}>
                     {data.name}
@@ -75,6 +74,8 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 {data.customer.name}
             </div>
         </div>
+        <div onClick={() => setHide(!hide)}>Hide</div>
+        {hide &&
         <div className={s.second}>
             <div className={s.products}>
                 <div className={s.title}>
@@ -103,6 +104,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 </div>
             </div>
         </div>
-
+        }
     </div>
 }
