@@ -1,23 +1,36 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, {MouseEvent, SyntheticEvent} from 'react'
+import {useDispatch} from "react-redux";
 import {UserInter} from "../../../api/login/login";
 import {createNewEmployeeA} from "../../../redux/CreateNewEmployee/CreateNewEmployeeA";
 import {deleteUser} from "../../../redux/CreateNewEmployee/CreateNewEmployeeT";
+import s from './UserItem.module.css'
 
 interface UserItemProps {
     userI: UserInter
 }
 
+export interface EditUserType {
+    name: string
+    password: string
+    role_id: 1 | 2 | 3
+    api_token: string
+}
+
 export const UserItem: React.FC<UserItemProps> = ({userI}) => {
     const d = useDispatch()
     const editUser = () => {
-        d(createNewEmployeeA.editUser(userI.name, userI.password, userI.role_id, userI.api_token))
+        d(createNewEmployeeA.editUser({
+            name: userI.name,
+            password:userI.password,
+            role_id: userI.role_id as 1 | 2 | 3,
+            api_token: userI.api_token}))
     }
-    const deleteU = () => {
+    const deleteU = (e: SyntheticEvent) => {
         d(deleteUser(userI.api_token))
+        e.stopPropagation()
     }
-    return <div>
-        <div onClick={editUser}>
+    return <div onClick={editUser} className={s.userItemWrap}>
+        <div>
             <div>
                 <b>Name: </b>
                 {userI.name}

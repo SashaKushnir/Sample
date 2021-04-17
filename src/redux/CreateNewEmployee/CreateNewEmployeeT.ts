@@ -41,10 +41,8 @@ export const editUser = (newUser: EditUserObjectType) => async (d: Dispatch<Acti
     try {
         d(commonActions.fetchingToggle(true))
         const res = await accounts.editAccountByToken(newUser, getState().common.userInfo?.api_token as string)
-        console.log("Ediiit", res)
         if (res.data.response_status) {
             d(createNewEmployeeA.editSuccess(res.data.data))
-            console.log("Present Users")
         } else {
             if (res.data.message)
                 d(commonActions.setErrorMessage(res.data.message))
@@ -61,12 +59,11 @@ export const deleteUser = (token: string) => async (d: Dispatch<ActionsTypes<typ
     typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        console.log("KEY", getState().common.userInfo?.api_token, "KEY", token)
         const res = await accounts.deleteAccountByToken(token, getState().common.userInfo?.api_token as string)
-        console.log("Ediiit", res)
-        if (res.data) {
-            d(createNewEmployeeA.setAllUsers(res.data.users))
-            console.log("Present Users")
+        if (res.data.response_status) {
+            d(createNewEmployeeA.deleteSuccess(token))
+            if(getState().accounts.editUserInfo?.api_token === token)
+                d(createNewEmployeeA.editUser(undefined))
         } else {
             console.log("Failed")
         }
@@ -74,7 +71,6 @@ export const deleteUser = (token: string) => async (d: Dispatch<ActionsTypes<typ
     } catch (e) {
         console.warn("Something went wrong")
         d(commonActions.fetchingToggle(false))
-
     }
 }
 

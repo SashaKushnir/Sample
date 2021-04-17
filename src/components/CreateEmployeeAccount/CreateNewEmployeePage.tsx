@@ -3,6 +3,7 @@ import {Redirect, Route, Switch, useRouteMatch} from 'react-router-dom';
 import {CreateNewEmployeeForm} from "./CreateNewEmployeeForm";
 import {DeleteEditEmployee} from "./EditDelete/DeleteEditEmployee";
 import {AccountNavbar} from "./AccountNavbar/AccountNavbar";
+import s from './CreateNewEmployeePage.module.css'
 
 export const CreateNewEmployeePage = () => {
     const {url} = useRouteMatch()
@@ -10,7 +11,7 @@ export const CreateNewEmployeePage = () => {
         <div>
             <AccountNavbar/>
         </div>
-        <div>
+        <div className={s.padding}>
             <Switch>
                 <Redirect exact from={url} to={`${url}/signup`}/>
                 <Route path={`${url}/signup`} render={() =><CreateNewEmployeeForm/>}/>

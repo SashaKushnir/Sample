@@ -19,10 +19,17 @@ export const DeleteEditEmployee = () => {
 
     return <div className={s.deleteEdit}>
         <div>
-            <EditUserForm/>
+            <div className={s.center}>Edit Form</div>
+            <div className={s.deleteEditFormWrapper}>
+                <EditUserForm/>
+            </div>
         </div>
-        <div className={s.uploadedUsers}>
-            {users}
+        <div className={s.rightSide}>
+            <div className={s.center}>Users</div>
+            <div className={s.uploadedUsers}>
+                {users}
+            </div>
         </div>
+
     </div>
 }

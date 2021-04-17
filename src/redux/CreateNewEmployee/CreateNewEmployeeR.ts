@@ -30,20 +30,22 @@ export const CreateNewEmployeeR = (createEA: InitialEmployee = initialEmployee,
             return {
                 ...createEA,
                 users: createEA.users?[...createEA.users.map((userI) => {
-                    if(action.refreshedUser.api_token === userI.api_token)
+                    if(action.refreshedUser?.api_token === userI.api_token)
                         userI = {...action.refreshedUser}
                         return userI
                 })]: [action.refreshedUser]
             }
+        case "SET_REFRESHED_USERS_AFTER_DELETE":
+            return {
+                ...createEA,
+                users: createEA.users?[...createEA.users.filter((userI) =>
+                    userI.api_token !== action.api_token
+                )]:undefined
+            }
         case "EDIT_USER":
             return {
                 ...createEA,
-                editUserInfo: {
-                    name: action.name,
-                    password: action.password,
-                    role_id: action.role_id,
-                    api_token: action.api_token
-                }
+                editUserInfo: action.payload?{...action.payload}: undefined
             }
         default:
             return {

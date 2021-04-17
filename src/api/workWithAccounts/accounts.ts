@@ -1,4 +1,4 @@
-import {ApiGetUsersResultType, ApiPatchUserResponseType, myGetInstance} from "../api";
+import {ApiGetUsersResultType, ApiPatchUserResponseType, ApiResultType, myGetInstance} from "../api";
 import {CreateNewEmployeeType} from "../../components/CreateEmployeeAccount/CreateNewEmployeeForm";
 import {EditUserObjectType} from "../../components/CreateEmployeeAccount/EditUserForm/EditUserForm";
 
@@ -25,7 +25,7 @@ export const accounts = {
         })
     },
     deleteAccountByToken: (tokenForDelete: string, headerToken: string) => {
-        return myGetInstance.delete('/users',  {
+        return myGetInstance.delete<ApiResultType>('/users',  {
             headers: {
                 api_token: headerToken
             },
