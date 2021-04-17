@@ -24,8 +24,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
     const data = useSelector(selectBanquet)
 
-    const customers = useSelector(selectUsers)
-    const customerInfo = customers.selectedCustomer
+    const customers = useSelector(selectBanquet)
+    const customerInfo = customers.customer
 
     const ChooseCustomer = () => {
         CusMenuSwitch(true)
@@ -49,6 +49,9 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             return time
         }
     }
+
+
+
     return <div>
         <div className={s.info_bock}>
             {isEdit && <div className={s.margin}>

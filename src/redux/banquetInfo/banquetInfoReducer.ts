@@ -1,6 +1,7 @@
 import {ActionsTypes} from "../store";
 import {banquetActions} from "./banquetInfoActions";
 import {State} from "../history/newHistoryReducer";
+import {CustomerType} from "../customers/customersReducer";
 
 let initialState: BanquetInitial = {
     name: "None",
@@ -16,8 +17,8 @@ let initialState: BanquetInitial = {
         name: "planing",
         description: null,
         type: "banquet_states"
-    }
-
+    },
+    customer: null
 }
 
 export type BanquetInitial = {
@@ -30,6 +31,7 @@ export type BanquetInitial = {
     created_at: string
     updated_at: string
     state: State
+    customer: CustomerType | null
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -68,6 +70,16 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
         //             name: action.state
         //         }
         //     }
+        case "SET_TOTAL_PRICE":
+            return{
+                ...banquet,
+                total: action.price
+            }
+        case "SET_CUSTOMER":
+            return{
+                ...banquet,
+                customer: action.cus
+            }
         default:
             return banquet
     }

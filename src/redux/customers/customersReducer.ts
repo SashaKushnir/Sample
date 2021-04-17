@@ -19,7 +19,6 @@ export type CustomersArray = Array<CustomerType>
 
 export type UsersInitial = {
     customers?: CustomersArray
-    selectedCustomer?: CustomerType | null
 }
 
 export const customersReducer = (customers = initialState, action: ActionsTypes<typeof customersActions>): UsersInitial => {
@@ -35,11 +34,7 @@ export const customersReducer = (customers = initialState, action: ActionsTypes<
                 ...customers,
                 customers: customers.customers?.filter((obj: CustomerType) => obj.id !== action.customer.id)
             }
-        case "SELECTED_CUSTOMER":
-            return{
-                ...customers,
-                selectedCustomer: action.customer
-            }
+
 
         // case "SELECT_CUSTOMER":
         //     return {

@@ -8,9 +8,11 @@ import {ProductsOrder} from "./Products/ProductsOrder";
 import {TicketsOrder} from "./Tickets/TicketsOrder";
 import {ServicesOrder} from "./Services/ServicesOrder";
 import {selectMenuKitchen, selectServices, selectTickets} from "../../selectors/selectCreateNew";
+import {banquetActions} from "../../redux/banquetInfo/banquetInfoActions";
 
 
 export const OrderItems: React.FC = (props) => {
+    const d = useDispatch()
     const menuData = JSON.parse(localStorage.getItem("menus") || "[]");
     const ticketsData = JSON.parse(localStorage.getItem("tickets") || "[]");
     const servicesData = JSON.parse(localStorage.getItem("services") || "[]");
@@ -45,6 +47,9 @@ export const OrderItems: React.FC = (props) => {
                 services_price = services_price + (item.amount as number * item.once_paid_price as number)
         }
     )
+
+    d(banquetActions.setTotalPrice(menu_price + tickets_price + services_price))
+    console.log(menu_price + tickets_price + services_price)
     return <div className={s.order}>
         <div>
             {menus}

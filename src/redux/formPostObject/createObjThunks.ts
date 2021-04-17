@@ -39,36 +39,14 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
-            id: 18,
             name: getState().banquet.name,
             description: getState().banquet.description,
             customer_id: 6,
+            creator_id: getState().common.userInfo?.id,
             state_id: 1,
             advance_amount: getState().banquet.advance_amount,
-            creator_id: getState().common.userInfo?.id,
             beg_datetime: getState().banquet.beginning,
             end_datetime: getState().banquet.end,
-            created_at: "2021-05-25 17:00:00",
-            updated_at: "2021-05-25 17:00:00",
-            paid_at: "2021-05-25 17:00:00",
-            total: 228,
-            customer: {
-                id: 1,
-                name: "Anthony",
-                surname: "Davis",
-                phone: "+38 050 000 1111",
-                email: "anthony.davis@gmail.com",
-                birthdate: "1993-03-11",
-                created_at: "2021-04-13 21:17:09",
-                updated_at: "2021-04-13 21:17:09",
-                type: "customers"
-            }, //???????????????????????????
-            state: {
-                id: 1,
-                name: "string",
-                description: null,
-                type: "",
-            },
             product_order: {
                 items: getState().createNew.menus?.reduce((acum: Array<Product>, menuI, index) =>
                     acum.concat(menuI.products.filter((productI) => productI.showAmount).map((obj) => {

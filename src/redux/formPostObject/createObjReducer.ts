@@ -60,7 +60,7 @@ type Service = {
 }
 
 export type BanquetType = {
-    id: number
+
     name: string
     description: string | null
     customer_id: number
@@ -69,12 +69,6 @@ export type BanquetType = {
     creator_id?: number
     beg_datetime: string | null
     end_datetime: string | null
-    created_at: string
-    updated_at: string
-    paid_at: string | null
-    total: number
-    state: State
-    customer: CustomerType | null
     product_order?: Product_order
     ticket_order?: Ticket_order
     service_order?: Service_order

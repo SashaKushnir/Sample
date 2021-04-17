@@ -5,6 +5,7 @@ import {CustomerType} from "../../redux/customers/customersReducer";
 import {Customers} from "./Customers";
 import s from "./CustomerProfile.module.css"
 import {customersActions} from "../../redux/customers/customersActions";
+import {banquetActions} from "../../redux/banquetInfo/banquetInfoActions";
 
 type PropsType = {
     customer: CustomerType
@@ -17,8 +18,8 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
     const cus = props.customer
 
     const Select = () => {
+        d(banquetActions.setCustomer(cus))
         props.CusMenuSwitch(false)
-        d(customersActions.selectedCustomer(cus))
     }
 
     return(<div className={s.profile}>
