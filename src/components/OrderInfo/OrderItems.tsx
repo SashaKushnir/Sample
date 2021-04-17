@@ -31,14 +31,12 @@ export const OrderItems: React.FC = (props) => {
     let services_price = 0
     menuData.map((obj: MenuItem) =>
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) => {
-                if (item.amount)
-                    menu_price = menu_price + (item.amount as number * item.price)
-            else console.log("amount null")
+            menu_price = menu_price + (item.amount as number * item.price)
             }
         )
     )
-    ticketsData?.filter((obj: ProductCategoriesItem) => obj.showAmount).map((item: ProductCategoriesItem) => {
-            tickets_price += item.price
+    ticketsData?.filter((obj: ProductCategoriesItem) => obj.amount && obj.showAmount).map((item: ProductCategoriesItem) => {
+            tickets_price = tickets_price + (item.amount as number * item.price)
         }
     )
 
@@ -48,10 +46,17 @@ export const OrderItems: React.FC = (props) => {
         }
     )
     return <div className={s.order}>
-        <div>{menus}</div>
-        {menu_price}123
-        <div>{tickets}</div>{tickets_price}
-        <div>{services}</div>
-        {services_price}
+        <div>
+            {menus}
+            <div>Ціна меню: {menu_price}$</div>
+        </div>
+        <div>
+            {tickets}
+            <div>Ціна квитків:{tickets_price}$</div>
+        </div>
+        <div>
+            {services}
+            <div>Ціна сервісів: {services_price}$</div>
+        </div>
     </div>
 }

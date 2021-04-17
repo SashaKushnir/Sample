@@ -25,9 +25,7 @@ export const TicketsOrder: React.FC<Items> = ({item}) => {
                     </div>
                 </div>
                 <div className={styles.desc}>
-                    {item.adult_tickets_amount}
-                    {item.child_tickets_amount}
-                    {item.birthday_tickets_amount}
+                    Amount {item.amount}
                 </div>
             </div>
         </div>
