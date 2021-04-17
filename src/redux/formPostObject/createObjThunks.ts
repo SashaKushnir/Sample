@@ -46,7 +46,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             state_id: 1,
             advance_amount: getState().banquet.advance_amount,
             creator_id: getState().common.userInfo?.id,
-            beg_datetime: getState().banquet.beginnig,
+            beg_datetime: getState().banquet.beginning,
             end_datetime: getState().banquet.end,
             created_at: "2021-05-25 17:00:00",
             updated_at: "2021-05-25 17:00:00",

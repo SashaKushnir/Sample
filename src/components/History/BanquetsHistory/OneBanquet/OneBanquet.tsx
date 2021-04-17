@@ -22,7 +22,8 @@ interface BanquetProps {
 
 export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const d = useDispatch()
-    const [hide, setHide] = useState(false)
+    const [hideProducts, setHideProducts] = useState(false)
+    //const [hideAll, setHideAll] = useState(false)
     const data = props.data
     let products = null
     if (props.data.product_order !== null)
@@ -51,6 +52,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
             <button onClick={Delete}>Delete</button>
             <button>Edit</button>
             <button>Print</button>
+            {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
             <div className={s.line1}>
                 <div className={s.name}>
                     {data.name}
@@ -74,8 +76,8 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 {data.customer.name}
             </div>
         </div>
-        <div onClick={() => setHide(!hide)}>Hide</div>
-        {hide &&
+        <div onClick={() => setHideProducts(!hideProducts)}>Hide</div>
+        {hideProducts &&
         <div className={s.second}>
             <div className={s.products}>
                 <div className={s.title}>

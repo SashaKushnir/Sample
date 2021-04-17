@@ -5,7 +5,7 @@ import {State} from "../history/newHistoryReducer";
 let initialState: BanquetInitial = {
     name: "None",
     description: "None",
-    beginnig: "01.01.2000",
+    beginning: "01.01.2000",
     end: "01.01.2000",
     advance_amount: 0,
     total: 0,
@@ -23,7 +23,7 @@ let initialState: BanquetInitial = {
 export type BanquetInitial = {
     name: string
     description: string | null
-    beginnig: string
+    beginning: string
     end: string
     advance_amount: number
     total: number
@@ -43,7 +43,7 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
         case "SET_BEGINING":
             return{
                 ...banquet,
-                beginnig: action.time
+                beginning: action.time
             }
         case "SET_END":
             return{

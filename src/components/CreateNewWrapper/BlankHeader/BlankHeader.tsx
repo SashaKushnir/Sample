@@ -42,6 +42,13 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         time += ":00"
         d(banquetActions.setEnd(time))
     }
+    const setDefaultTime = (my_time:string) => {
+        if(my_time){
+            let time = my_time.replace(" ", "T")
+            time = time.slice(0, -3)
+            return time
+        }
+    }
     return <div>
         <div className={s.info_bock}>
             {isEdit && <div className={s.margin}>
@@ -74,25 +81,25 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 <div onClick={ChooseCustomer} className={s.customer}>
                     Customer: {customerInfo ? customerInfo?.name : ""}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}/>
+                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining} defaultValue={setDefaultTime(data.end)}/>
             </div>
             }
             {!isEdit && <div className={s.margin}>
                 <div className={s.customer}>
                     Customer: {customerInfo?.name}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} value={data.beginnig} readOnly/>
+                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)} readOnly/>
             </div>
             }
             <div className={s.margin}>
                 {isEdit && <div className={s.advance}>
-                    Advance <input type="text" onChange={setAdvance}/>
-                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}/>
+                    Advance <input type="text" onChange={setAdvance} defaultValue={data.advance_amount}/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd} defaultValue={setDefaultTime(data.end)}/>
                 </div>}
                 {!isEdit &&
                 <div className={s.advance}>
                     Advance <input type="text" value={data.advance_amount} readOnly/>
-                    <input type="datetime-local" id="meeting-time" className={s.time} value={data.end} readOnly/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)} readOnly/>
                 </div>}
                 <div className={s.advance}>
                     State <select>
