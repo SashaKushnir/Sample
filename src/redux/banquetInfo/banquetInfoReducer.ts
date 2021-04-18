@@ -6,18 +6,10 @@ import {CustomerType} from "../customers/customersReducer";
 let initialState: BanquetInitial = {
     name: "None",
     description: "None",
-    beginning: "01.01.2000",
-    end: "01.01.2000",
+    beginning: "",
+    end: "",
     advance_amount: 0,
     total: 0,
-    created_at: "01.01.2000",
-    updated_at: "01.01.2000",
-    state: {
-        id: 1,
-        name: "planing",
-        description: null,
-        type: "banquet_states"
-    },
     customer: null
 }
 
@@ -28,9 +20,6 @@ export type BanquetInitial = {
     end: string
     advance_amount: number
     total: number
-    created_at: string
-    updated_at: string
-    state: State
     customer: CustomerType | null
 }
 

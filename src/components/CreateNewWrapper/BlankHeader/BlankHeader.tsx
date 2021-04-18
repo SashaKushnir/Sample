@@ -22,6 +22,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setAdvance(e.target.value as any))
     }
+    const setState = (e: ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+        d(banquetActions.setState(e.target.value as any))
+    }
     const data = useSelector(selectBanquet)
 
     const customers = useSelector(selectBanquet)
@@ -105,7 +109,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)} readOnly/>
                 </div>}
                 <div className={s.advance}>
-                    State <select>
+                    State <select onChange={setState}>
                     <option>Planning</option>
                     <option>Booked</option>
                     <option>Finished</option>

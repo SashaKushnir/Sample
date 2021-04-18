@@ -36,6 +36,23 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         }
     })
 
+    if(getState().banquet.customer === null){
+        console.log("select customer")
+        ready = false
+    }
+    //
+    if(getState().banquet.beginning === ""){
+        console.log("select start time")
+        ready = false
+    }
+
+    if(getState().banquet.end === ""){
+        console.log("select end time")
+        ready = false
+    }
+    if(getState().banquet.advance_amount === null){
+        ready = false
+    }
     if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {

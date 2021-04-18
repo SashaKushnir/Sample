@@ -33,7 +33,7 @@ export const OrderItems: React.FC = (props) => {
     let services_price = 0
     menuData.map((obj: MenuItem) =>
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) => {
-            menu_price = menu_price + (item.amount as number * item.price)
+                menu_price = menu_price + (item.amount as number * item.price)
             }
         )
     )
@@ -47,21 +47,27 @@ export const OrderItems: React.FC = (props) => {
                 services_price = services_price + (item.amount as number * item.once_paid_price as number)
         }
     )
-
-    d(banquetActions.setTotalPrice(menu_price + tickets_price + services_price))
+    const total = menu_price + tickets_price + services_price
+    d(banquetActions.setTotalPrice(total))
     console.log(menu_price + tickets_price + services_price)
-    return <div className={s.order}>
-        <div>
-            {menus}
-            <div>Ціна меню: {menu_price}$</div>
+    return <div>
+        <div className={s.order}>
+            <div>
+                <div>{menus}</div>
+                <div className={s.total}>Ціна меню: {menu_price}$</div>
+            </div>
+            <div>
+                <div>{tickets}</div>
+                <div className={s.total}>Ціна квитків:{tickets_price}$</div>
+            </div>
+            <div>
+
+                <div>{services}</div>
+                <div className={s.total}>Ціна сервісів: {services_price}$</div>
+            </div>
         </div>
-        <div>
-            {tickets}
-            <div>Ціна квитків:{tickets_price}$</div>
-        </div>
-        <div>
-            {services}
-            <div>Ціна сервісів: {services_price}$</div>
+        <div className={s.total}>
+            Total price: {total}
         </div>
     </div>
 }
