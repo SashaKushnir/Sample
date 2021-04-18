@@ -3,9 +3,10 @@ import React from 'react'
 import styles from './TicketItemMap.module.css'
 import { TicketImg } from "../../../common/compon/Ticket/TicketImg";
 import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 interface TicketItemProps {
-    ticketItem: ProductCategoriesItem
+    ticketItem: TicketItem
     showAmount?: boolean
 }
 

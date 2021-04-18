@@ -3,7 +3,7 @@ import s from "./OneBanquet.module.css"
 import {History} from "./../../../../redux/history/newHistoryReducer"
 import {ProductCategoriesMyItem} from "./../../../CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItem"
 import {ProductCategoriesMyItemBasket} from "../../../CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
-import {ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
+import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import {TicketItemMap} from "./../../../CreateNewWrapper/CreateNewTickets/TicketItemMap"
 import {ServiceCategoriesItem} from "../../../../redux/services/servicesReducer";
 import {ServiceCategoriesI} from "./../../../CreateNewWrapper/CreateNewServices/ServiceCategoriesI"
@@ -11,9 +11,14 @@ import {ProductsOrder} from "../../../OrderInfo/Products/ProductsOrder";
 import {TicketsOrder} from "../../../OrderInfo/Tickets/TicketsOrder";
 import {ServicesOrder} from "../../../OrderInfo/Services/ServicesOrder";
 import {deleteHistoryT} from "../../../../redux/history/newHistoryThunk";
-import {useDispatch} from "react-redux";
-import {selectHistory} from "../../../../selectors/selectCreateNew";
+import {useDispatch, useSelector} from "react-redux";
+import {selectHistory, selectMenuKitchen} from "../../../../selectors/selectCreateNew";
 import {historyActions} from "../../../../redux/history/newHistoryAction";
+import {TicketItem} from "../../../../redux/tickets/ticketsReducer";
+import {NavLink} from 'react-router-dom';
+import {newBanknoteActions} from "../../../../redux/newBanknote/newBanknoteActions";
+import {ticketsActions} from "../../../../redux/tickets/ticketsActions";
+import {servicesActions} from "../../../../redux/services/servicesActions";
 
 interface BanquetProps {
     data: History
@@ -32,7 +37,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
 
     let tickets = null
     if (props.data.ticket_order !== null)
-        tickets = props.data.ticket_order.items.map((obj: ProductCategoriesItem) =>
+        tickets = props.data.ticket_order.items.map((obj: TicketItem) =>
             <TicketsOrder item={obj}/>)
 
     let services = null
@@ -46,11 +51,49 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
             d(historyActions.deleteOneHistoty(data.id))
         }
     }
+    const menus = useSelector(selectMenuKitchen)
+    const ClearAllShowAmount = () => {
+
+        menus?.map((obj: MenuItem, index: number) => {
+            obj.products.map((item: ProductCategoriesItem, index: number) => {
+                d(newBanknoteActions.deleteFullItem(item))
+                if (props.data.product_order !== null)
+                props.data.product_order.items.map((history_item: ProductCategoriesItem, index: number) =>{
+                    if(history_item.id === item.id){
+                        d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
+                    }
+                })
+            })
+
+
+
+        })
+        // tickets = tickets.map((obj: TicketItem) =>{
+        //     d(ticketsActions.deleteFullTicketItem(obj))
+        //     return obj
+        // })
+        //
+        // services = services.map((obj: ServiceCategoriesItem) =>{
+        //     d(servicesActions.deleteFullEntertainmentItem(obj))
+        //     return obj
+        // })
+        //
+        localStorage.removeItem("menus")
+        localStorage.removeItem("tickets")
+        localStorage.removeItem("services")
+    }
+
+
+    const editBanquet = () => {
+        ClearAllShowAmount()
+    }
 
     return <div className={s.main}>
         <div className={s.first}>
             <button onClick={Delete}>Delete</button>
-            <button>Edit</button>
+            <NavLink to="/content/new/menus">
+                <button onClick={editBanquet}>Edit</button>
+            </NavLink>
             <button>Print</button>
             {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
             <div className={s.line1}>

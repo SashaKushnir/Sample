@@ -9,6 +9,7 @@ import {TicketsOrder} from "./Tickets/TicketsOrder";
 import {ServicesOrder} from "./Services/ServicesOrder";
 import {selectMenuKitchen, selectServices, selectTickets} from "../../selectors/selectCreateNew";
 import {banquetActions} from "../../redux/banquetInfo/banquetInfoActions";
+import {TicketItem} from "../../redux/tickets/ticketsReducer";
 
 
 export const OrderItems: React.FC = (props) => {
@@ -21,7 +22,7 @@ export const OrderItems: React.FC = (props) => {
             <ProductsOrder item={item} key={index}/>
         )
     )
-    const tickets = ticketsData?.filter((obj: ProductCategoriesItem) => obj.showAmount).map((item: ProductCategoriesItem) =>
+    const tickets = ticketsData?.filter((obj: TicketItem) => obj.showAmount).map((item: TicketItem) =>
         <TicketsOrder item={item}/>
     )
 
@@ -37,7 +38,7 @@ export const OrderItems: React.FC = (props) => {
             }
         )
     )
-    ticketsData?.filter((obj: ProductCategoriesItem) => obj.amount && obj.showAmount).map((item: ProductCategoriesItem) => {
+    ticketsData?.filter((obj: TicketItem) => obj.amount && obj.showAmount).map((item: TicketItem) => {
             tickets_price = tickets_price + (item.amount as number * item.price)
         }
     )

@@ -13,6 +13,7 @@ export interface Determine {
     hours: number | null
     minutes: number | null
     is_templatable: boolean
+    type: string
 }
 
 export interface PeriodItem {
@@ -23,8 +24,35 @@ export interface PeriodItem {
     end_datetime_id: number
     weekdays: string | null
     is_templatable: boolean
+    type: string
 }
-export type TicketArray = Array<ProductCategoriesItem>
+
+export type Category = {
+    id: number
+    name: string
+    description: string
+    type: string
+}
+
+
+export type TicketItem = {
+    id: number
+    name: string
+    description: string
+    price: number
+    category_id: number
+    period_id: number
+    period: PeriodItem
+    category: Category
+    created_at: string
+    updated_at: string
+    type: string
+    amount?: number | string
+    showAmount?: boolean
+    ready?: boolean
+}
+
+export type TicketArray = Array<TicketItem>
 
 export type TicketInitial = {
     tickets?: TicketArray

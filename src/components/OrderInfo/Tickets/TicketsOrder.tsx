@@ -3,9 +3,10 @@ import {useDispatch} from "react-redux";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
 import styles from "../../CreateNewWrapper/CreateNewTickets/TicketItemMap.module.css";
 import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 type Items = {
-    item: ProductCategoriesItem
+    item: TicketItem
 }
 
 export const TicketsOrder: React.FC<Items> = ({item}) => {

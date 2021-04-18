@@ -77,20 +77,17 @@ export type ProductCategoriesItem = {
     name: string
     description: string | null
     price: number
-    weight?: number
-    menu_id?: number
+    weight: number
+    menu_id: number
     category_id: number
     amount?: number | string
     showAmount?: boolean
-    period_id?: number | null
-    period?: PeriodItem | null
+    //period_id: number | null
+    //period: PeriodItem | null
     category: MenuCategory
     created_at: string
     updated_at: string
     ready?: boolean
-    child_tickets_amount?: number
-    adult_tickets_amount?: number
-    birthday_tickets_amount?: number
 }
 
 export type Product_categories = Array<ProductCategoriesItem>
@@ -105,6 +102,7 @@ export type MenuItem = {
     created_at: string
     updated_at: string
     period_id: string | null
+    type: string
 }
 export type MenuArray = Array<MenuItem>
 

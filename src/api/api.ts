@@ -4,6 +4,7 @@ import {UserInter, UserType} from "./login/login";
 import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
 import {CustomersArray} from "../redux/customers/customersReducer";
+import {TicketItem} from "../redux/tickets/ticketsReducer";
 
 export const BaseURL = "http://194.213.104.146:222"
 //http://imperia-api.com
@@ -39,7 +40,7 @@ export interface ApiServicesResultType extends ApiResultType {
 }
 
 export interface ApiTicketsResultType extends ApiResultType {
-    tickets: Array<ProductCategoriesItem>
+    tickets: Array<TicketItem>
 }
 
 export interface ApiHistoryResultType extends ApiResultType {

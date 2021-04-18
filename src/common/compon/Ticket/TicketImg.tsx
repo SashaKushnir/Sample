@@ -6,9 +6,10 @@ import { message } from "antd";
 import { servicesActions } from "../../../redux/services/servicesActions";
 import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
 import { ticketsActions } from "../../../redux/tickets/ticketsActions";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 interface TicketImgProps {
-    ticketI: ProductCategoriesItem
+    ticketI: TicketItem
 }
 export const TicketImg:React.FC<TicketImgProps> = ({ticketI}) => {
     let [amount, setAmount]= useState(ticketI.amount?ticketI.amount:1)

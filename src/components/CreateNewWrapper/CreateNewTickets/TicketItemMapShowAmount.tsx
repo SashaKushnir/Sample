@@ -7,9 +7,10 @@ import {useDispatch} from "react-redux";
 import _uniqueId from "lodash/uniqueId";
 import {NumericInput} from "../../../common/compon/InputNumber/InputNumber";
 import {ticketsActions} from "../../../redux/tickets/ticketsActions";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 interface TicketItemProps {
-    ticketItem: ProductCategoriesItem
+    ticketItem: TicketItem
     showAmount?: boolean
 }
 

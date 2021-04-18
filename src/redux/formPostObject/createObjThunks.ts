@@ -6,6 +6,7 @@ import {ServiceCategoriesItem} from "../services/servicesReducer";
 import {commonActions} from "../forCommon/forCommonActions";
 import {history} from "../../api/CreateNew/history";
 import {BanquetType, Product} from "./createObjReducer";
+import {TicketItem} from "../tickets/ticketsReducer";
 
 const _ = require("lodash");
 
@@ -22,7 +23,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         })
     })
 
-    getState().tickets.tickets?.filter((obj: ProductCategoriesItem) => obj.showAmount).map(item => {
+    getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
             console.log("select tickets")
             ready = false
