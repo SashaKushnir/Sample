@@ -88,14 +88,14 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 <div onClick={ChooseCustomer} className={s.customer}>
                     Customer: {customerInfo ? customerInfo?.name : ""}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining} defaultValue={setDefaultTime(data.end)}/>
+                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining} defaultValue={setDefaultTime(data.beginning)}/>
             </div>
             }
             {!isEdit && <div className={s.margin}>
                 <div className={s.customer}>
                     Customer: {customerInfo?.name}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)} readOnly/>
+                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)} readOnly/>
             </div>
             }
             <div className={s.margin}>

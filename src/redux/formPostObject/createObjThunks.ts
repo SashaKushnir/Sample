@@ -16,6 +16,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
             if (item.ready === false) {
+                console.log("select menus")
                 ready = false
             }
         })
@@ -23,6 +24,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
     getState().tickets.tickets?.filter((obj: ProductCategoriesItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
+            console.log("select tickets")
             ready = false
         }
     })
@@ -32,15 +34,16 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             item.duration = 0
         }
         if (item.ready === false) {
+            console.log("select services")
             ready = false
         }
     })
 
-    if(getState().banquet.customer === null){
+    if(getState().banquet.customer === undefined){
         console.log("select customer")
         ready = false
     }
-    //
+
     if(getState().banquet.beginning === ""){
         console.log("select start time")
         ready = false
@@ -50,7 +53,9 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         console.log("select end time")
         ready = false
     }
+
     if(getState().banquet.advance_amount === null){
+        console.log("select advance_amount")
         ready = false
     }
     if (ready) {
@@ -58,7 +63,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         mainPost = {
             name: getState().banquet.name,
             description: getState().banquet.description,
-            customer_id: 6,
+            customer_id: 1,
             creator_id: getState().common.userInfo?.id,
             state_id: 1,
             advance_amount: getState().banquet.advance_amount,
