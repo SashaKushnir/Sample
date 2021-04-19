@@ -1,24 +1,21 @@
 import React, {useState} from 'react'
 import s from "./OneBanquet.module.css"
 import {History} from "./../../../../redux/history/newHistoryReducer"
-import {ProductCategoriesMyItem} from "./../../../CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItem"
-import {ProductCategoriesMyItemBasket} from "../../../CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
 import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
-import {TicketItemMap} from "./../../../CreateNewWrapper/CreateNewTickets/TicketItemMap"
 import {ServiceCategoriesItem} from "../../../../redux/services/servicesReducer";
-import {ServiceCategoriesI} from "./../../../CreateNewWrapper/CreateNewServices/ServiceCategoriesI"
 import {ProductsOrder} from "../../../OrderInfo/Products/ProductsOrder";
 import {TicketsOrder} from "../../../OrderInfo/Tickets/TicketsOrder";
 import {ServicesOrder} from "../../../OrderInfo/Services/ServicesOrder";
 import {deleteHistoryT} from "../../../../redux/history/newHistoryThunk";
 import {useDispatch, useSelector} from "react-redux";
-import {selectHistory, selectMenuKitchen} from "../../../../selectors/selectCreateNew";
+import {selectHistory, selectMenuKitchen, selectServices, selectTickets} from "../../../../selectors/selectCreateNew";
 import {historyActions} from "../../../../redux/history/newHistoryAction";
 import {TicketItem} from "../../../../redux/tickets/ticketsReducer";
 import {NavLink} from 'react-router-dom';
 import {newBanknoteActions} from "../../../../redux/newBanknote/newBanknoteActions";
 import {ticketsActions} from "../../../../redux/tickets/ticketsActions";
 import {servicesActions} from "../../../../redux/services/servicesActions";
+import {banquetActions} from "../../../../redux/banquetInfo/banquetInfoActions";
 
 interface BanquetProps {
     data: History
@@ -52,32 +49,55 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         }
     }
     const menus = useSelector(selectMenuKitchen)
+    const tickets1 = useSelector(selectTickets)
+    const services1 = useSelector(selectServices)
     const ClearAllShowAmount = () => {
 
         menus?.map((obj: MenuItem, index: number) => {
             obj.products.map((item: ProductCategoriesItem, index: number) => {
                 d(newBanknoteActions.deleteFullItem(item))
                 if (props.data.product_order !== null)
-                props.data.product_order.items.map((history_item: ProductCategoriesItem, index: number) =>{
-                    if(history_item.id === item.id){
-                        d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
-                    }
-                })
+                    props.data.product_order.items.map((history_item: ProductCategoriesItem, index: number) => {
+                        if (history_item.id === item.id) {
+                            d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
+                        }
+                    })
             })
 
 
-
         })
-        // tickets = tickets.map((obj: TicketItem) =>{
-        //     d(ticketsActions.deleteFullTicketItem(obj))
-        //     return obj
-        // })
-        //
-        // services = services.map((obj: ServiceCategoriesItem) =>{
-        //     d(servicesActions.deleteFullEntertainmentItem(obj))
-        //     return obj
-        // })
-        //
+
+        tickets1?.map((obj: TicketItem) => {
+            d(ticketsActions.deleteFullTicketItem(obj))
+            if (props.data.ticket_order !== null)
+                props.data.ticket_order.items.map((item: TicketItem) => {
+                    if (obj.id === item.id) {
+                        d(ticketsActions.addTicketItem(item, item.amount ? item.amount as number : 0))
+                    }
+                })
+            return obj
+        })
+
+        services1?.map((obj: ServiceCategoriesItem) => {
+            d(servicesActions.deleteFullEntertainmentItem(obj))
+            if (props.data.service_order !== null)
+                services = props.data.service_order.items.map((item: ServiceCategoriesItem) => {
+                    if (obj.id === item.id) {
+                        d(servicesActions.addEntertainmentItem(item, item.amount ? item.amount as number : 0))
+                        d(servicesActions.setDuration(item.duration as number, item.id))
+                    }
+                })
+            return obj
+        })
+
+        d(banquetActions.setCustomer(data.customer))
+        d(banquetActions.setName(data.name))
+        d(banquetActions.setDescription(data.description ? data.description : ""))
+        d(banquetActions.setBegining(data.beg_datetime))
+        d(banquetActions.setEnd(data.end_datetime))
+        d(banquetActions.setAdvance(data.advance_amount))
+        //d(banquetActions.setState(data.state))
+
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")

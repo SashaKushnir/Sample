@@ -9,6 +9,7 @@ type PropsType = {
     CusMenuSwitch?: any
 }
 
+
 export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
@@ -36,25 +37,24 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
 
     const setBegining = (e: ChangeEvent<HTMLInputElement>) => {
-        let time = e.target.value.replace("T"," ")
+        let time = e.target.value.replace("T", " ")
         console.log(time)
         time += ":00"
         d(banquetActions.setBegining(time))
     }
     const setEnd = (e: ChangeEvent<HTMLInputElement>) => {
-        let time = e.target.value.replace("T"," ")
+        let time = e.target.value.replace("T", " ")
         time += ":00"
         d(banquetActions.setEnd(time))
     }
-    const setDefaultTime = (my_time:string) => {
-        if(my_time){
+
+    const setDefaultTime = (my_time: string) => {
+        if (my_time) {
             let time = my_time.replace(" ", "T")
             time = time.slice(0, -3)
             return time
         }
     }
-
-
 
     return <div>
         <div className={s.info_bock}>
@@ -64,7 +64,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                            onChange={setName} defaultValue={data.name ? data.name : ""}/>
                 </div>
                 <div>
-                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc} defaultValue={data.description ? data.description : ""}/>
+                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
+                              defaultValue={data.description ? data.description : ""}/>
                 </div>
             </div>
             }
@@ -88,25 +89,29 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 <div onClick={ChooseCustomer} className={s.customer}>
                     Customer: {customerInfo ? customerInfo?.name : ""}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining} defaultValue={setDefaultTime(data.beginning)}/>
+                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}
+                       defaultValue={setDefaultTime(data.beginning)}/>
             </div>
             }
             {!isEdit && <div className={s.margin}>
                 <div className={s.customer}>
                     Customer: {customerInfo?.name}
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)} readOnly/>
+                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)}
+                       readOnly/>
             </div>
             }
             <div className={s.margin}>
                 {isEdit && <div className={s.advance}>
                     Advance <input type="text" onChange={setAdvance} defaultValue={data.advance_amount}/>
-                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd} defaultValue={setDefaultTime(data.end)}/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
+                           defaultValue={setDefaultTime(data.end)}/>
                 </div>}
                 {!isEdit &&
                 <div className={s.advance}>
                     Advance <input type="text" value={data.advance_amount} readOnly/>
-                    <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)} readOnly/>
+                    <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
+                           readOnly/>
                 </div>}
                 <div className={s.advance}>
                     State <select onChange={setState}>
