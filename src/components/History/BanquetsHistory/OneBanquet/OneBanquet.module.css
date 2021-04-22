@@ -1,9 +1,29 @@
 .main{
     margin: 10px 0px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    -moz-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+
+}
+.buttons{
+    display: inline-block;
+    background-color: rgb(232, 189, 246);
+    border-radius: 15px 0px 0px 15px;
+
+}
+.info{
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 10px;
+    width: auto;
 }
 .first{
-    border-top: 8px solid grey;
-    border-bottom: 2px solid grey;
+    display: grid;
+    grid-template-columns: 3% 97%;
+}
+.line{
+    width: 100%;
 }
 .name{
     display: inline-block;
@@ -13,6 +33,7 @@
 .total{
     display: inline-block;
     font-size: 16px;
+    float: right;
 }
 .start{
     display: inline-block;
@@ -30,6 +51,22 @@
 }
 .title{
     text-align: center;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    -moz-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    margin: 0 10px;
+}
+.btn{
+    display: flex;
+}
+.navLink{
+    background-color: transparent;
+}
+.items{
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 20px;
 }
 
 

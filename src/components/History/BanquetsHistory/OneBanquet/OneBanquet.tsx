@@ -16,6 +16,10 @@ import {newBanknoteActions} from "../../../../redux/newBanknote/newBanknoteActio
 import {ticketsActions} from "../../../../redux/tickets/ticketsActions";
 import {servicesActions} from "../../../../redux/services/servicesActions";
 import {banquetActions} from "../../../../redux/banquetInfo/banquetInfoActions";
+import {PrintIcon} from "../../../../common/compon/HistoryIcons/PrintIcon";
+import {DeleteIcon} from "../../../../common/compon/HistoryIcons/DeleteIcon";
+import {HideIcon} from "../../../../common/compon/HistoryIcons/HideIcon";
+import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
 
 interface BanquetProps {
     data: History
@@ -45,7 +49,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const Delete = () => {
         if (window.confirm("Delete this banquet? It can not be restored!!!")) {
             d(deleteHistoryT(data.id, localStorage.getItem("api_token") as string))
-            d(historyActions.deleteOneHistoty(data.id))
         }
     }
     const menus = useSelector(selectMenuKitchen)
@@ -110,36 +113,49 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
 
     return <div className={s.main}>
         <div className={s.first}>
-            <button onClick={Delete}>Delete</button>
-            <NavLink to="/content/new/menus">
-                <button onClick={editBanquet}>Edit</button>
-            </NavLink>
-            <button>Print</button>
-            {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
-            <div className={s.line1}>
-                <div className={s.name}>
-                    {data.name}
-                </div>
-                <div className={s.start}>
-                    {data.beg_datetime}
-                </div>
+            <div className={s.buttons}>
+                <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
+
+                <NavLink to="/content/new/menus" className={s.navLink}>
+                    <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
+                </NavLink>
+                <div className={s.btn}><PrintIcon/></div>
+                <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
             </div>
-            <div className={s.line2}>
-                <div className={s.total}>
-                    {data.total}$
+            <div className={s.info}>
+                {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
+                <div className={s.line}>
+                    <div className={s.name}>
+                        {data.name}
+                    </div>
+                    <div className={s.total}>
+                        {data.total}$
+
+                    </div>
                 </div>
-                <div className={s.end}>
-                    {data.end_datetime}
+                <div className={s.line}>
+                    <div className={s.name}>
+                        {data.description}
+                    </div>
+                    <div className={s.total}>
+                        {data.end_datetime}
+                    </div>
                 </div>
-            </div>
-            <div className={s.desc}>
-                {data.description}
-            </div>
-            <div className={s.desc}>
-                {data.customer.name}
+                <div className={s.line}>
+                    <div className={s.name}>
+                        {data.customer.name}
+                    </div>
+                    <div className={s.total}>
+                        {data.beg_datetime}
+                    </div>
+                </div>
+                <div>
+                    <div className={s.name}>
+                        {data.state.id}
+                    </div>
+                </div>
             </div>
         </div>
-        <div onClick={() => setHideProducts(!hideProducts)}>Hide</div>
         {hideProducts &&
         <div className={s.second}>
             <div className={s.products}>
@@ -147,7 +163,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                     Products
                 </div>
 
-                <div className={s.products_items}>
+                <div className={s.items}>
                     {products}
                 </div>
             </div>
@@ -155,7 +171,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 <div className={s.title}>
                     Tickets
                 </div>
-                <div className={s.tickets_items}>
+                <div className={s.items}>
                     {tickets}
                 </div>
             </div>
@@ -164,7 +180,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                     Enrtainments
                 </div>
 
-                <div className={s.enter_items}>
+                <div className={s.items}>
                     {services}
                 </div>
             </div>

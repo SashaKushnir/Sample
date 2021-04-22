@@ -25,7 +25,13 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value)
-        d(banquetActions.setState(e.target.value as any))
+        if(e.target.value === "Planning")
+            d(banquetActions.setState(1))
+        if(e.target.value === "Booked")
+            d(banquetActions.setState(2))
+        if(e.target.value === "Finished")
+            d(banquetActions.setState(3))
+
     }
     const data = useSelector(selectBanquet)
 

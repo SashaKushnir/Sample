@@ -10,7 +10,8 @@ let initialState: BanquetInitial = {
     end: "",
     advance_amount: 0,
     total: 0,
-    customer: null
+    customer: null,
+    state: 1
 }
 
 export type BanquetInitial = {
@@ -21,6 +22,7 @@ export type BanquetInitial = {
     advance_amount: number
     total: number
     customer: CustomerType | null
+    state: number
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -51,14 +53,11 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 advance_amount: action.num
             }
-        // case "SET_STATE":
-        //     return{
-        //         ...banquet,
-        //         state: {
-        //
-        //             name: action.state
-        //         }
-        //     }
+        case "SET_STATE":
+            return{
+                ...banquet,
+               state: action.state
+            }
         case "SET_TOTAL_PRICE":
             return{
                 ...banquet,

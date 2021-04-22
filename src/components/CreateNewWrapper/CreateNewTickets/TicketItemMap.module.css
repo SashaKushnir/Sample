@@ -27,7 +27,6 @@
 }
 .ticket{
     display: flex;
-    margin: 5px 0;
     width: 100%;
 }
 .text{

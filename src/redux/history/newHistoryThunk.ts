@@ -31,7 +31,7 @@ export const deleteHistoryT = (id:number, api_token:string) => async (d: Dispatc
 
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
-
+            d(historyActions.deleteOneHistoty(id))
             d(commonActions.fetchingToggle(false))
         } else {
             console.warn(response.data.response_error)

@@ -17,7 +17,7 @@ export const HeaderNavBar = () => {
             <div> Editors</div>
         </NavLink>
 
-        <NavLink activeClassName={s.activeClassName} className={s.navlinkRight} to={`${url}/reports`}>
+        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/reports`}>
             <div>Reports</div>
         </NavLink>
     </nav>

@@ -65,9 +65,6 @@ export interface State  {
     type: string
 }
 
-type StateArray = Array<State>
-
-
 export interface History{
     id: number
     name:string
@@ -86,7 +83,7 @@ export interface History{
     ticket_order: Ticket_order | null
     product_order: Product_order | null
     service_order: Service_order | null
-    state: StateArray
+    state: State
     customer: CustomerType
 }
 

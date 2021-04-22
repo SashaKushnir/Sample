@@ -7,6 +7,8 @@ import {commonActions} from "../forCommon/forCommonActions";
 import {history} from "../../api/CreateNew/history";
 import {BanquetType, Product} from "./createObjReducer";
 import {TicketItem} from "../tickets/ticketsReducer";
+import {selectBanquet} from "../../selectors/selectCreateNew";
+import {banquetActions} from "../banquetInfo/banquetInfoActions";
 
 const _ = require("lodash");
 
@@ -59,14 +61,17 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         console.log("select advance_amount")
         ready = false
     }
+    if(getState().banquet.description === null){
+       d(banquetActions.setDescription(""))
+    }
     if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
             name: getState().banquet.name,
             description: getState().banquet.description,
-            customer_id: 1,
+            customer_id: getState().banquet.customer?.id as number,
             creator_id: getState().common.userInfo?.id,
-            state_id: 1,
+            state_id: getState().banquet.state,
             advance_amount: getState().banquet.advance_amount,
             beg_datetime: getState().banquet.beginning,
             end_datetime: getState().banquet.end,
