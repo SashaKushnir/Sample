@@ -11,7 +11,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {FetchingComponent} from "../../../common/compon/FetchingComponent/FetchingComponent";
 import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
-import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
 
 type PropsType = {

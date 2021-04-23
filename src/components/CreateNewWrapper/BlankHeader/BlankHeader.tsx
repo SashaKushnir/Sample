@@ -3,6 +3,9 @@ import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
 import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
+import {RootState} from "../../../redux/store";
+import {commonActions} from "../../../redux/forCommon/forCommonActions";
+import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
 
 type PropsType = {
     isEdit: boolean
@@ -13,6 +16,8 @@ type PropsType = {
 export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
+
+    const isEditMode = useSelector((state:RootState) => state.common.banquetEditMode)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value as any))
@@ -62,6 +67,18 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         }
     }
 
+    const stopEditMode = () => {
+        d(commonActions.banquetModeToggle(false))
+        clearBasket()
+    }
+    const clearBasket = () => {
+        d(clearAllBasket())
+        localStorage.removeItem("menus")
+        localStorage.removeItem("tickets")
+        localStorage.removeItem("services")
+    }
+
+
     return <div>
         <div className={s.info_bock}>
             {isEdit && <div className={s.margin}>
@@ -72,6 +89,21 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 <div>
                     <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
                               defaultValue={data.description ? data.description : ""}/>
+                </div>
+                {isEditMode && <div>
+                    Edit Mode
+                    <button onClick={stopEditMode}>
+                        Stop Edit Mode
+                    </button>
+                </div>
+                }
+                {!isEditMode && <div>
+                    Creating Mode
+                </div>
+
+                }
+                <div>
+                    <button onClick={clearBasket}>Clear Basket</button>
                 </div>
             </div>
             }

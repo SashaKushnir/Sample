@@ -8,8 +8,7 @@ import {TicketsOrder} from "../../../OrderInfo/Tickets/TicketsOrder";
 import {ServicesOrder} from "../../../OrderInfo/Services/ServicesOrder";
 import {deleteHistoryT} from "../../../../redux/history/newHistoryThunk";
 import {useDispatch, useSelector} from "react-redux";
-import {selectHistory, selectMenuKitchen, selectServices, selectTickets} from "../../../../selectors/selectCreateNew";
-import {historyActions} from "../../../../redux/history/newHistoryAction";
+import {selectMenuKitchen, selectServices, selectTickets} from "../../../../selectors/selectCreateNew";
 import {TicketItem} from "../../../../redux/tickets/ticketsReducer";
 import {NavLink} from 'react-router-dom';
 import {newBanknoteActions} from "../../../../redux/newBanknote/newBanknoteActions";
@@ -20,6 +19,7 @@ import {PrintIcon} from "../../../../common/compon/HistoryIcons/PrintIcon";
 import {DeleteIcon} from "../../../../common/compon/HistoryIcons/DeleteIcon";
 import {HideIcon} from "../../../../common/compon/HistoryIcons/HideIcon";
 import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
+import {commonActions} from "../../../../redux/forCommon/forCommonActions";
 
 interface BanquetProps {
     data: History
@@ -55,19 +55,17 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const tickets1 = useSelector(selectTickets)
     const services1 = useSelector(selectServices)
     const ClearAllShowAmount = () => {
-
+        d(commonActions.banquetModeToggle(true))
         menus?.map((obj: MenuItem, index: number) => {
             obj.products.map((item: ProductCategoriesItem, index: number) => {
                 d(newBanknoteActions.deleteFullItem(item))
-                if (props.data.product_order !== null)
+                if (props.data.product_order)
                     props.data.product_order.items.map((history_item: ProductCategoriesItem, index: number) => {
                         if (history_item.id === item.id) {
                             d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
                         }
                     })
             })
-
-
         })
 
         tickets1?.map((obj: TicketItem) => {
