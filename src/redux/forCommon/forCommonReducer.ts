@@ -11,6 +11,7 @@ interface InitialCommonType {
     authByToken: boolean | null
     fullEmptyAmount: boolean
     isSaved: boolean
+    banquetEditMode: boolean
 }
 
 const initialState: InitialCommonType = {
@@ -19,7 +20,8 @@ const initialState: InitialCommonType = {
     isAuthorised: null,
     authByToken: false,
     fullEmptyAmount: true,
-    isSaved: false
+    isSaved: false,
+    banquetEditMode: false
 }
 
 export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {
@@ -29,6 +31,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isFetching: action.status
+            }
+        case "BANQUET_MODE_TOGGLE":
+            return {
+                ...common,
+                banquetEditMode: action.banquetModeStatus
             }
         case "NEED_AMOUNT_TOGGLE":
             return {

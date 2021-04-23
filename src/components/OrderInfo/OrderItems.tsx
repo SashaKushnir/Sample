@@ -14,10 +14,12 @@ import {TicketItem} from "../../redux/tickets/ticketsReducer";
 
 export const OrderItems: React.FC = (props) => {
     const d = useDispatch()
-    const menuData = JSON.parse(localStorage.getItem("menus") || "[]");
-    const ticketsData = JSON.parse(localStorage.getItem("tickets") || "[]");
-    const servicesData = JSON.parse(localStorage.getItem("services") || "[]");
-    const menus = menuData.map((obj: MenuItem) =>
+    const menuData = useSelector(selectMenuKitchen)
+    // const ticketsData = JSON.parse(localStorage.getItem("tickets") || "[]");
+    const ticketsData = useSelector(selectTickets)
+    // const servicesData = JSON.parse(localStorage.getItem("services") || "[]");
+    const servicesData = useSelector(selectServices)
+    const menus = menuData?.map((obj: MenuItem) =>
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) =>
             <ProductsOrder item={item} key={index}/>
         )
@@ -32,7 +34,7 @@ export const OrderItems: React.FC = (props) => {
     let menu_price = 0
     let tickets_price = 0
     let services_price = 0
-    menuData.map((obj: MenuItem) =>
+    menuData?.map((obj: MenuItem) =>
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) => {
                 menu_price = menu_price + (item.amount as number * item.price)
             }

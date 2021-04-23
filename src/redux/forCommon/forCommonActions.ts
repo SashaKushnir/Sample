@@ -10,4 +10,5 @@ export const commonActions = {
     successTokenToggle: (statusAuthWithToke: boolean | null) => ({type: "AUTH_BY_TOKEN", statusAuthWithToke}) as const,
     needAmountToggle: (amountStatus: boolean) => ({type: "NEED_AMOUNT_TOGGLE", amountStatus}) as const,
     setSaved: (status: boolean) => ({type: "SET_SAVED", status}) as const,
+    banquetModeToggle: (banquetModeStatus: boolean) => ({type: "BANQUET_MODE_TOGGLE", banquetModeStatus}) as const
 }

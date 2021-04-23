@@ -61,3 +61,16 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
         d(commonActions.fetchingToggle(false))
     }
 }
+
+export const clearAllBasket = () => (d: Dispatch<ActionsTypes<typeof newBanknoteActions |
+    typeof ticketsActions | typeof servicesActions>>, getState: () => RootState) => {
+    getState().tickets.tickets?.map((ticketI) => {
+        d(ticketsActions.deleteFullTicketItem(ticketI))
+    })
+    getState().services.services?.map((serviceI) => {
+        d(servicesActions.deleteFullEntertainmentItem(serviceI))
+    })
+    getState().createNew.menus?.map((categoryI) => categoryI.products?.map((productI) => {
+        d(newBanknoteActions.deleteFullItem(productI))
+    }))
+}
