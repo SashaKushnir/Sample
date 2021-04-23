@@ -11,6 +11,7 @@ import { commonActions } from "../../../redux/forCommon/forCommonActions";
 import { useDispatch } from "react-redux";
 import {CreateNewWrapper} from "../../CreateNewWrapper/CreateNewWrapper/CreateNewWrapper";
 import {CreateNewEmployeePage} from "../../CreateEmployeeAccount/CreateNewEmployeePage";
+import Chart from "../../Reports/PieChart";
 
 export const MyPage = () => {
     let {url} = useRouteMatch()
@@ -33,7 +34,7 @@ export const MyPage = () => {
                 <Route path={`${url}/new`} render={() => <CreateNewWrapper/>}/>
                 <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>
                 <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
-                <Route path={`${url}/reports`} render={() => <div>reports</div>}/>
+                <Route path={`${url}/reports`} render={() => <div><Chart/></div>}/>
                 <Route path={`${url}/support`} render={() => <div><CreateNewEmployeePage/></div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>
                 <Route path={`${url}/block`} render={() => <div>block</div>}/>

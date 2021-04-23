@@ -53,6 +53,7 @@ export const App = () => {
                 <Redirect exact from="/" to="/content"/>
                 <Route path='/login' render={() => <Authorisation/>}/>
                 <Route path='/content' render={() => <MyPage/>}/>
+                <Route path='/pdf' render={() => <div>123</div>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>
         </div>
