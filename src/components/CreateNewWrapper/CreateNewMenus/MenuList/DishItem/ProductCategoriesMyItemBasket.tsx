@@ -7,6 +7,7 @@ import {newBanknoteActions} from "../../../../../redux/newBanknote/newBanknoteAc
 import {NumericInput} from "../../../../../common/compon/InputNumber/InputNumber";
 import _uniqueId from 'lodash/uniqueId';
 import {number} from "yup";
+import {CommentI} from "../../../../../common/compon/CommentI/CommentI";
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
@@ -15,6 +16,8 @@ type DishesProps = {
 }
 
 export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_categoriesItem, showAmount, keyVal}) => {
+    const comments = product_categoriesItem.comments?.map((commentI, index) =>
+        <CommentI commentI={commentI} key={index}/>)
     const d = useDispatch()
     const textInput = React.createRef<HTMLInputElement>()
     useEffect(() => {
@@ -51,7 +54,10 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                            placeholder={"Amount"}
                            ref={textInput}/>
                 </div>
-
+                <div>
+                    Comments:
+                    {comments}
+                </div>
                 {/*{*/}
                 {/*    <div className={styles.weight_basket}>{product_categoriesItem.weight}</div>*/}
                 {/*}*/}

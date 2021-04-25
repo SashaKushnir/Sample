@@ -54,6 +54,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const menus = useSelector(selectMenuKitchen)
     const tickets1 = useSelector(selectTickets)
     const services1 = useSelector(selectServices)
+
     const ClearAllShowAmount = () => {
         d(commonActions.banquetModeToggle(true))
         menus?.map((obj: MenuItem, index: number) => {
@@ -107,6 +108,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
 
     const editBanquet = () => {
         ClearAllShowAmount()
+        d(commonActions.needAmountToggle(false))
     }
 
     return <div className={s.main}>

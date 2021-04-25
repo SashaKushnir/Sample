@@ -16,10 +16,7 @@ export const App = () => {
     const history = useHistory()
     const isAuth = useSelector((state: RootState) => state.common.isAuthorised)
     const userInfo = (useSelector((state: RootState) => state.common.userInfo))
-    // useEffect(() => {
-    //     if(api_token)
-    //         d(logInWithToken(api_token))
-    // }, [])
+
     useEffect(() => {
         if (tokenSuccess) {
             if(isAuth === false){

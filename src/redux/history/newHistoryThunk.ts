@@ -13,6 +13,7 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         if (response.data.response_status && !response.data.response_error) {
             console.log(response.data.banquets)
             d(historyActions.setHistoryInfo(response.data.banquets))
+            console.log(response.data.banquets[1].comments)
         } else {
             console.warn(response.data.response_error)
         }

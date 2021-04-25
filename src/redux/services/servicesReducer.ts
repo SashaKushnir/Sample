@@ -1,6 +1,7 @@
 import {ActionsTypes} from "../store";
 import {servicesActions} from "./servicesActions";
 import {MenuCategory} from "../newBanknote/newBanknoteReducer";
+import {CommentItem} from "../history/newHistoryReducer";
 
 const initialState: Services = {}
 
@@ -42,6 +43,7 @@ export interface ServiceCategoriesItem {
     updated_at: string
     duration?: number | string
     ready?: boolean
+    comments?: Array<CommentItem>
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>
@@ -61,12 +63,13 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         serviceI.showAmount = true
                         if (action.value) {
                             serviceI.amount = action.value
-
+                            serviceI.comments = action.entertainmentI.comments?[...action.entertainmentI.comments]: undefined
                         } else {
                             serviceI.amount = ""
                         }
                         //serviceI.ready = (serviceI.amount > 0) && (serviceI.duration?serviceI.duration > 0 : false)
                         serviceI.ready = (serviceI.amount > 0)
+
                     }
                     return serviceI
                 })] : undefined

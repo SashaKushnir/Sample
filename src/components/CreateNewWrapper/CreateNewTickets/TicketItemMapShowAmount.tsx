@@ -1,13 +1,12 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 
 import styles from './TicketItemMap.module.css'
 import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
-import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
-import {useDispatch} from "react-redux";
-import _uniqueId from "lodash/uniqueId";
-import {NumericInput} from "../../../common/compon/InputNumber/InputNumber";
 import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
+import {CommentI} from "../../../common/compon/CommentI/CommentI";
+import {useDispatch} from "react-redux";
+import {CommentItem} from "../../../redux/history/newHistoryReducer";
 
 interface TicketItemProps {
     ticketItem: TicketItem
@@ -15,6 +14,9 @@ interface TicketItemProps {
 }
 
 export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, showAmount}) => {
+
+    const comments = ticketItem.comments?.map((commentItem, index) =>
+        <CommentI commentI={commentItem} key={index}/>)
 
     const textInput = React.createRef<HTMLInputElement>()
     const d = useDispatch()
@@ -52,6 +54,10 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, 
                 <input className={styles.input} ref={textInput} placeholder={"Amount"}
                        value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurr}/>
             </div>
+            <div>
+                Comments:
+                {comments}
+            </div>
             <button onClick={deleteItem} className={styles.btn}>Delete</button>
             {/*<div className={styles.desc}>*/}
             {/*    /!*{ticketItem.description}*!/*/}
@@ -59,4 +65,4 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, 
         </div>
     </div>}
     </div>
-}
+};

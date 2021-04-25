@@ -24,6 +24,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
             <div className={styles.title}>
                 <div className={styles.name}>
                     {Menuitem.name}
+                    {Menuitem.type}
                 </div>
                 <div className={styles.hide}>
                     <label>{!hide ?
@@ -58,34 +59,3 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
         }
     </div>
 }
-
-// <div className={styles.all_menu}>
-//     {showAmount && <div className={styles.item_show}>
-//         <div className={styles.name}>
-//             {Menuitem.name}
-//         </div>
-//         <div className={styles.hide}>
-//             <label>hide</label>
-//         </div>
-//         {/*<div>*/}
-//         {/*    {Menuitem.menu_category.description}*/}
-//         {/*</div>*/}
-//         <div>
-//             {product_categoriesItems}
-//         </div>
-//     </div>}
-//     {!showAmount && <div className={styles.item_not_show}>
-//         <div className={styles.name}>
-//             {Menuitem.name}
-//         </div>
-//         <div className={styles.hide}>
-//             <label>hide</label>
-//         </div>
-//         {/*<div>*/}
-//         {/*    {Menuitem.menu_category.description}*/}
-//         {/*</div>*/}
-//         <div>
-//             {product_categoriesItems}
-//         </div>
-//     </div>}
-// </div>

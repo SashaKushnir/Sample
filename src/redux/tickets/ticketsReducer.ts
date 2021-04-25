@@ -1,6 +1,6 @@
 import { ActionsTypes } from "../store";
 import { ticketsActions } from "./ticketsActions";
-import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
+import {CommentItem} from "../history/newHistoryReducer";
 
 
 let initialState: TicketInitial = {}
@@ -46,10 +46,11 @@ export type TicketItem = {
     category: Category
     created_at: string
     updated_at: string
-    type: string
+    type?: string
     amount?: number | string
     showAmount?: boolean
     ready?: boolean
+    comments?: Array<CommentItem>
 }
 
 export type TicketArray = Array<TicketItem>
@@ -77,6 +78,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                             ticketI.amount=""
                         }
                         ticketI.amount > 0 ?  ticketI.ready = true :  ticketI.ready = false
+                        ticketI.comments = action.ticketI.comments ? [...action.ticketI.comments]: undefined
                     }
                     return ticketI
                 })] : undefined

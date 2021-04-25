@@ -1,12 +1,11 @@
-import yReact, {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 import styles from "./ServiceCategoriesI.module.css";
 import {IntertaimentImg} from "../../../common/compon/Intartaiment/EntertainmentImg";
 import {useDispatch} from "react-redux";
 import {servicesActions} from "../../../redux/services/servicesActions";
-import {NumericInput} from "../../../common/compon/InputNumber/InputNumber";
-import React from "react";
+import {CommentI} from "../../../common/compon/CommentI/CommentI";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem
@@ -15,8 +14,10 @@ interface ServiceCategoriesItemProps {
 
 export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> = ({serviceItem, showAmount}) => {
     const d = useDispatch()
-
+    const comments = serviceItem.comments?.map((commentI, index) =>
+        <CommentI commentI={commentI} key={index}/>)
     const textInput = React.createRef<HTMLInputElement>()
+
     useEffect(() => {
         if (serviceItem.showAmount) {
             textInput.current?.focus()
@@ -34,7 +35,7 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
 
     const changeCurD = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.match(/^(\d)*$/))
-            d(servicesActions.setDuration(e.target.value,serviceItem.id))
+            d(servicesActions.setDuration(e.target.value, serviceItem.id))
     }
 
     return <div>
@@ -58,15 +59,19 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                 <div className={styles.input_block}>
                     <label htmlFor={"def"} className={styles.input_label}>Amount</label>
                     <input className={serviceItem.ready ? styles.input : styles.input_wrong}
-                        onChange={changeCurS}
-                        value={serviceItem.amount ? String(serviceItem.amount) : ""}
-                        placeholder={"Amount"}
-                        ref={textInput}/>
+                           onChange={changeCurS}
+                           value={serviceItem.amount ? String(serviceItem.amount) : ""}
+                           placeholder={"Amount"}
+                           ref={textInput}/>
+                </div>
+                <div>
+                    Comments:
+                    {comments}
                 </div>
 
                 <div className={styles.input_block}>
                     <label htmlFor={"def"} className={styles.input_label}>Duration</label>
-                    <input className= {styles.input}
+                    <input className={styles.input}
                            onChange={changeCurD}
                            value={serviceItem.duration ? String(serviceItem.duration) : ""}
                            placeholder={"Duration"}

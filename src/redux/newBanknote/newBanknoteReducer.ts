@@ -2,6 +2,7 @@ import { ActionsTypes } from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import initialMenu from '../../responses/get_menu2.json'
 import { PeriodItem } from "../tickets/ticketsReducer";
+import {CommentItem} from "../history/newHistoryReducer";
 
 
 const initialState:  MenusInitial = {}
@@ -25,6 +26,7 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                             productI.showAmount=true
                             productI.amount = action.value === null ? 0 : action.value
                             productI.amount > 0 ? productI.ready = true : productI.ready = false
+                            productI.comments= action.productI.comments?[...action.productI.comments]:undefined
                         }
                         return productI
                     })
@@ -88,6 +90,8 @@ export type ProductCategoriesItem = {
     created_at: string
     updated_at: string
     ready?: boolean
+    type?: string
+    comments?: Array<CommentItem>
 }
 
 export type Product_categories = Array<ProductCategoriesItem>

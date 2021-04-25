@@ -10,6 +10,7 @@ import {RootState} from "../../../redux/store";
 
 export const CreateNewMenus: React.FC = () => {
     const d = useDispatch()
+    const menuData = useSelector(selectMenuKitchen)
 
     useEffect(() => {
         let localMenus = JSON.parse(localStorage.getItem("menus") || "[]");
@@ -18,11 +19,12 @@ export const CreateNewMenus: React.FC = () => {
         } else
             d(setMenuT())
     }, [])
+
     useEffect(() => {
         if(menuData)
         localStorage.setItem("menus", JSON.stringify(menuData))
     })
-    const menuData = useSelector(selectMenuKitchen)
+
 
     return <div className={styles.wrap}>
         <MenuList menus={menuData} showAmount={true}/>
