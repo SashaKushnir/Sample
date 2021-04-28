@@ -9,4 +9,6 @@ export const banquetActions = {
     setState: (state: number) => ({type: "SET_STATE", state}) as const,
     setTotalPrice: (price: number) => ({type: "SET_TOTAL_PRICE", price}) as const,
     setCustomer: (cus: CustomerType) => ({type: "SET_CUSTOMER", cus}) as const,
+    setBanquetId: (banquetId: number) => ({type: "SET_ID_FOR_BANQUET", banquetId}) as const,
+    removeBanquetId: () => ({type: "REMOVE_ID_FOR_BANQUET"}) as const,
 }

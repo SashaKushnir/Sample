@@ -60,7 +60,7 @@ type Service = {
 }
 
 export type BanquetType = {
-
+    id?: number
     name: string
     description: string | null
     customer_id: number

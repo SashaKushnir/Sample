@@ -7,7 +7,6 @@ import {commonActions} from "../forCommon/forCommonActions";
 import {history} from "../../api/CreateNew/history";
 import {BanquetType, Product} from "./createObjReducer";
 import {TicketItem} from "../tickets/ticketsReducer";
-import {selectBanquet} from "../../selectors/selectCreateNew";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 
 const _ = require("lodash");
@@ -67,6 +66,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
+            id: getState().banquet.id?getState().banquet.id:undefined,
             name: getState().banquet.name,
             description: getState().banquet.description,
             customer_id: getState().banquet.customer?.id as number,

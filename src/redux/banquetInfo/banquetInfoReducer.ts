@@ -15,6 +15,7 @@ let initialState: BanquetInitial = {
 }
 
 export type BanquetInitial = {
+    id?: number
     name: string
     description: string | null
     beginning: string
@@ -42,6 +43,16 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
             return{
                 ...banquet,
                 end: action.time
+            }
+        case "REMOVE_ID_FOR_BANQUET":
+            delete banquet.id
+            return {
+                ...banquet,
+            }
+        case "SET_ID_FOR_BANQUET":
+            return {
+                ...banquet,
+                id: action.banquetId
             }
         case "SET_DESCRIPTION":
             return{

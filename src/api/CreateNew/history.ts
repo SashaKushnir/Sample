@@ -13,7 +13,17 @@ export const history = {
             }
         })
     },
-    deleteHistory: (id:number,api_token: string) => {
+    patchHistory: (patchBanquet: BanquetType, token: string) => {
+        return myPostInstance.patch('/banquets', {
+                "banquet": patchBanquet
+            }, {
+                headers: {
+                    api_token: token
+                }
+            }
+        )
+    },
+    deleteHistory: (id: number, api_token: string) => {
         const obj = {
             "banquet": {
                 "id": id

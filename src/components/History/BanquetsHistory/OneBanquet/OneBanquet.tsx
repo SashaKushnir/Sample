@@ -98,6 +98,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         d(banquetActions.setBegining(data.beg_datetime))
         d(banquetActions.setEnd(data.end_datetime))
         d(banquetActions.setAdvance(data.advance_amount))
+        d(banquetActions.setBanquetId(data.id))
         //d(banquetActions.setState(data.state))
 
         localStorage.removeItem("menus")

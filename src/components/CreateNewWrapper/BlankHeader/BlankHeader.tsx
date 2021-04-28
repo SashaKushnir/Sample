@@ -70,6 +70,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const stopEditMode = () => {
         d(commonActions.banquetModeToggle(false))
         clearBasket()
+        d(banquetActions.removeBanquetId())
     }
     const clearBasket = () => {
         d(clearAllBasket())

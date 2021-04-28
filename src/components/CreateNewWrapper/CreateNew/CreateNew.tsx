@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {FetchingComponent} from "../../../common/compon/FetchingComponent/FetchingComponent";
 import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
+import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
 
 
 type PropsType = {
@@ -42,8 +43,15 @@ export const CreateNew: React.FC<PropsType> = (props) => {
         setEditMode(true)
     }
     const submitB = () => {
-        if (postBObj && token)
-            d(postNewBanknote(postBObj, token))
+        if (postBObj && token) {
+            if(postBObj.id){
+                d(updateHistoryT(postBObj, token))
+            }
+            else{
+                d(postNewBanknote(postBObj, token))
+            }
+
+        }
     }
     if (useSelector((state: RootState) => state.common.isFetching))
         return <FetchingComponent/>
