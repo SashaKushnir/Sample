@@ -1,8 +1,19 @@
 .order{
     display: grid;
     grid-template-columns: 33% 33% 33%;
+    margin: 10px;
+    border-radius: 10px;
+    column-gap: 5px;
+}
+.list{
+
+}
+.block{
+    background-color: white;
+    border-radius: 10px;
+
 }
 .total{
-    text-align: center;
     font-weight: bold;
+   text-align: center;
 }

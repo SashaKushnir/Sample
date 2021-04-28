@@ -55,17 +55,17 @@ export const OrderItems: React.FC = (props) => {
     console.log(menu_price + tickets_price + services_price)
     return <div>
         <div className={s.order}>
-            <div>
-                <div>{menus}</div>
+            <div className={s.block}>
+                <div className={s.list}>{menus}</div>
                 <div className={s.total}>Ціна меню: {menu_price}$</div>
             </div>
-            <div>
-                <div>{tickets}</div>
+            <div className={s.block}>
+                <div className={s.list}>{tickets}</div>
                 <div className={s.total}>Ціна квитків:{tickets_price}$</div>
             </div>
-            <div>
+            <div className={s.block}>
 
-                <div>{services}</div>
+                <div className={s.list}>{services}</div>
                 <div className={s.total}>Ціна сервісів: {services_price}$</div>
             </div>
         </div>

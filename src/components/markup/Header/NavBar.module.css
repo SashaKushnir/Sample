@@ -27,7 +27,14 @@
 }
 
 .activeClassName {
-    background-color: rgb(232, 189, 246);
-    border-radius: 27px;
+    background-color: white;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow:
+            0 25px 0 0px #FFFFFF;
+}
+.title{
+
+    border-radius: 10px;
 }
 

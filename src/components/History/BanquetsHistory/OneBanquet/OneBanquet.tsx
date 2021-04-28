@@ -111,6 +111,10 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         d(commonActions.needAmountToggle(false))
     }
 
+    const createpdf = () => {
+        d(commonActions.setBanquetPdf(data))
+    }
+
     return <div className={s.main}>
         <div className={s.first}>
             <div className={s.buttons}>
@@ -119,7 +123,9 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                 <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>
-                <div className={s.btn}><PrintIcon/></div>
+                <NavLink to="/pdf" className={s.navLink}>
+                    <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
+                </NavLink>
                 <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
             </div>
             <div className={s.info}>
@@ -149,20 +155,19 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
                         {data.beg_datetime}
                     </div>
                 </div>
-                <div>
-                    <div className={s.name}>
-                        {data.state.id}
-                    </div>
-                </div>
+                {/*<div>*/}
+                {/*    <div className={s.name}>*/}
+                {/*        {data.state.id}*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         </div>
         {hideProducts &&
         <div className={s.second}>
             <div className={s.products}>
                 <div className={s.title}>
-                    Products
+                   Products
                 </div>
-
                 <div className={s.items}>
                     {products}
                 </div>

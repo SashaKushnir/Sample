@@ -1,7 +1,7 @@
 import { ActionsTypes } from "../store";
 import { commonActions } from "./forCommonActions";
 import { UserType } from "../../api/login/login";
-
+import {History} from "./../history/newHistoryReducer"
 interface InitialCommonType {
     isFetching: boolean
     isAuthorised: boolean | null
@@ -12,6 +12,7 @@ interface InitialCommonType {
     fullEmptyAmount: boolean
     isSaved: boolean
     banquetEditMode: boolean
+    banquet_pdf: History | null
 }
 
 const initialState: InitialCommonType = {
@@ -21,7 +22,8 @@ const initialState: InitialCommonType = {
     authByToken: false,
     fullEmptyAmount: true,
     isSaved: false,
-    banquetEditMode: false
+    banquetEditMode: false,
+    banquet_pdf: null
 }
 
 export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {
@@ -78,6 +80,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isSaved: action.status
+            }
+        case "BANQUET_PDF":
+            return{
+                ...common,
+                banquet_pdf: action.banquet
             }
         default:
             return common
