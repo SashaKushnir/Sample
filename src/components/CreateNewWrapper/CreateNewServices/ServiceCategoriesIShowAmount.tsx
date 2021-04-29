@@ -15,7 +15,7 @@ interface ServiceCategoriesItemProps {
 export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> = ({serviceItem, showAmount}) => {
     const d = useDispatch()
     const comments = serviceItem.comments?.map((commentI, index) =>
-        <CommentI commentI={commentI} key={index}/>)
+        <CommentI commentI={commentI} key={index} parentId={serviceItem.id} index={index}/>)
     const textInput = React.createRef<HTMLInputElement>()
 
     useEffect(() => {

@@ -16,7 +16,7 @@ interface TicketItemProps {
 export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, showAmount}) => {
 
     const comments = ticketItem.comments?.map((commentItem, index) =>
-        <CommentI commentI={commentItem} key={index}/>)
+        <CommentI commentI={commentItem} key={index} parentId={ticketItem.id} index={index}/>)
 
     const textInput = React.createRef<HTMLInputElement>()
     const d = useDispatch()

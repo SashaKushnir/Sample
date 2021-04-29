@@ -30,12 +30,10 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                     <label>{!hide ?
                         <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
                         :
-                        <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
+                        <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}
+                    </label>
                 </div>
             </div>
-            {/*<div>*/}
-            {/*    {Menuitem.menu_category.description}*/}
-            {/*</div>*/}
             {!hide && <div className={styles.all_menu}>
                 {product_categoriesItems}
             </div>}

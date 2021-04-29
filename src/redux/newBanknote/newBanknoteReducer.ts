@@ -1,12 +1,17 @@
-import { ActionsTypes } from "../store";
-import { newBanknoteActions } from "./newBanknoteActions";
-import initialMenu from '../../responses/get_menu2.json'
-import { PeriodItem } from "../tickets/ticketsReducer";
+import {ActionsTypes} from "../store";
+import {newBanknoteActions} from "./newBanknoteActions";
 import {CommentItem} from "../history/newHistoryReducer";
 
 
-const initialState:  MenusInitial = {}
+const initialState: MenusInitial = {}
 
+export const setInitialComment = (productI: ProductCategoriesItem) => {
+    return {
+        text: "",
+        target_id: productI.id,
+        target_type: productI.type
+    }
+}
 
 export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
 
@@ -19,48 +24,100 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
         case "ADD_MENU_ITEM":
             return {
                 ...newBanknote,
-                menus: newBanknote.menus?
+                menus: newBanknote.menus ?
                     [...newBanknote.menus.map((menuI) => {
-                    const curM = menuI.products.map((productI) => {
-                        if (productI.id === action.productI.id) {
-                            productI.showAmount=true
-                            productI.amount = action.value === null ? 0 : action.value
-                            productI.amount > 0 ? productI.ready = true : productI.ready = false
-                            productI.comments= action.productI.comments?[...action.productI.comments]:undefined
-                        }
-                        return productI
-                    })
-                    menuI.products = curM
-                    return menuI
-                })]: undefined
+                        const curM = menuI.products.map((productI) => {
+                            if (productI.id === action.productI.id) {
+                                productI.showAmount = true
+                                productI.amount = action.value === null ? 0 : action.value
+                                productI.amount > 0 ? productI.ready = true : productI.ready = false
+                                productI.comments = action.productI.comments ? [...action.productI.comments] : []
+                            }
+                            return productI
+                        })
+                        menuI.products = curM
+                        return menuI
+                    })] : undefined
             }
         case "TOTALLY_DELETE_MENU_ITEM":
             return {
                 ...newBanknote,
-                menus: newBanknote.menus?
+                menus: newBanknote.menus ?
                     [...newBanknote.menus.map((menuI) => {
                         menuI.products.map((productI) => {
                             if (productI.id === action.productI.id) {
-                                productI.showAmount=false
+                                productI.comments = []
+                                productI.showAmount = false
                                 delete productI.amount
+
                             }
                             return productI
                         })
                         return menuI
-                    })]:undefined
+                    })] : undefined
             }
+        case "ADD_COMMENT_TO_MENUS":
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus ? [...newBanknote.menus.map((categoryI) => {
+                    categoryI.products.map((productI) => {
+                        if (productI.id === action.commentI.target_id) {
+                            productI.comments.push({...action.commentI})
+                        }
+                        return productI
+                    })
+                    return categoryI
+                })
+                ] : []
+            }
+        case "SAVE_COMMENT_TO_MENUS":
+            if (action.commentI.text)
+                return {
+                    ...newBanknote,
+                    menus: newBanknote.menus ? [...newBanknote.menus.map((categoryI) => {
+                        categoryI.products.map((productI) => {
+                            if ((productI.id === action.commentI.target_id)) {
+                                productI.comments.map((commentI, index, array) => {
+                                    if (index === action.index) {
+                                        commentI.text = action.commentI.text
+                                    }
+                                    return commentI
+
+                                })
+                            }
+                            return productI
+                        })
+                        return categoryI
+                    })
+                    ] : []
+                }
+        else{
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus?[...newBanknote.menus.map((categoryI) => {
+                    categoryI.products.map((productI) => {
+                            productI.comments = productI.comments.filter((commentI, index) =>{
+                                return index !== action.index
+                            })
+                        return productI
+                    })
+                    return categoryI
+                })
+                ]: []
+            }
+        }
         case "TOTALLY_DELETE_ALL_MENU_ITEMS":
             return {
                 ...newBanknote,
-                menus: newBanknote.menus?
+                menus: newBanknote.menus ?
                     [...newBanknote.menus.map((menuI) => {
                         menuI.products.map((productI) => {
-                                productI.showAmount=false
-                                delete productI.amount
+                            productI.showAmount = false
+                            delete productI.amount
                             return productI
                         })
                         return menuI
-                    })]:undefined
+                    })] : undefined
 
             }
         default:
@@ -84,14 +141,12 @@ export type ProductCategoriesItem = {
     category_id: number
     amount?: number | string
     showAmount?: boolean
-    //period_id: number | null
-    //period: PeriodItem | null
     category: MenuCategory
     created_at: string
     updated_at: string
     ready?: boolean
     type?: string
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export type Product_categories = Array<ProductCategoriesItem>

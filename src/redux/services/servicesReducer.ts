@@ -43,7 +43,7 @@ export interface ServiceCategoriesItem {
     updated_at: string
     duration?: number | string
     ready?: boolean
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>
@@ -63,7 +63,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         serviceI.showAmount = true
                         if (action.value) {
                             serviceI.amount = action.value
-                            serviceI.comments = action.entertainmentI.comments?[...action.entertainmentI.comments]: undefined
+                            serviceI.comments = action.entertainmentI.comments?[...action.entertainmentI.comments]:[]
                         } else {
                             serviceI.amount = ""
                         }

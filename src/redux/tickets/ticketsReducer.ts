@@ -50,7 +50,7 @@ export type TicketItem = {
     amount?: number | string
     showAmount?: boolean
     ready?: boolean
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export type TicketArray = Array<TicketItem>
@@ -78,7 +78,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                             ticketI.amount=""
                         }
                         ticketI.amount > 0 ?  ticketI.ready = true :  ticketI.ready = false
-                        ticketI.comments = action.ticketI.comments ? [...action.ticketI.comments]: undefined
+                        ticketI.comments =  action.ticketI.comments?[...action.ticketI.comments]:[]
                     }
                     return ticketI
                 })] : undefined
