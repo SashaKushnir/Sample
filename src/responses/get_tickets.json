@@ -1,145 +1,214 @@
 {
-  "ticket_categories": [
+  "tickets": [
     {
-      "id": 122,
-      "name": "Daily",
-      "description": "Tickets, which depend on the days of the week",
-      "tickets": [
-        {
-          "id": 55,
-          "name": "Workday ticket",
-          "description": "Monday-Friday",
-          "price": 8000,
-          "category_id": 122,
-
-          "period": {
-            "id": 1,
-            "beg_datetime": {
-              "id": 1,
-              "day": null,
-              "month": 1,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "end_datetime": {
-              "id": 2,
-              "day": null,
-              "month": 12,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "weekdays": [1, 2, 3, 4, 5],
-            "is_templatable": true
-          }
-        },
-        {
-          "id": 56,
-          "name": "Weekend ticket",
-          "description": "Saturday-Sunday",
-          "price": 10000,
-          "category_id": 122,
-
-          "period": {
-            "id": 2,
-            "beg_datetime": {
-              "id": 3,
-              "day": null,
-              "month": 1,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "end_datetime": {
-              "id": 4,
-              "day": null,
-              "month": 12,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "weekdays": [6, 7],
-            "is_templatable": true
-          }
-        }
-      ]
+      "id": 1,
+      "name": "Childeeennn ticket",
+      "description": "0-10 years",
+      "price": 8000,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 1,
+        "name": "Age",
+        "description": "Tickets, which are available for different age groups"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
     },
     {
-      "id": 123,
-      "name": "Holiday",
-      "description": "Tickets, which are available on holidays",
-      "tickets": [
-        {
-          "id": 57,
-          "name": "Halloween ticket",
-          "description": "Tickets for the Halloween costume party",
-          "price": 20000,
-          "category_id": 123,
-
-          "period": {
-            "id": 3,
-            "beg_datetime": {
-              "id": 5,
-              "day": 31,
-              "month": 11,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "end_datetime": {
-              "id": 6,
-              "day": 31,
-              "month": 11,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "weekdays": [],
-            "is_templatable": true
-          }
+      "id": 2,
+      "name": "Teenager ticket",
+      "description": "11-16 years",
+      "price": 8000,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 1,
+        "name": "Age",
+        "description": "Tickets, which are available for different age groups"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
+    },
+    {
+      "id": 3,
+      "name": "Adult ticket",
+      "description": "16+ years",
+      "price": 8000,
+      "category_id": 1,
+      "period_id": null,
+      "period": null,
+      "category": {
+        "id": 1,
+        "name": "Age",
+        "description": "Tickets, which are available for different age groups"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
+    },
+    {
+      "id": 4,
+      "name": "Weekday ticket",
+      "description": "Monday-Friday",
+      "price": 8000,
+      "category_id": 2,
+      "period_id": 1,
+      "period": {
+        "id": 1,
+        "beg_datetime": {
+          "id": 1,
+          "day": null,
+          "month": 1,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
         },
-        {
-          "id": 58,
-          "name": "New Year's Eve ticket",
-          "description": "Tickets for the New Year's Eve party",
-          "price": 40000,
-          "category_id": 123,
-
-          "period": {
-            "id": 4,
-            "beg_datetime": {
-              "id": 7,
-              "day": 31,
-              "month": 12,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "end_datetime": {
-              "id": 8,
-              "day": 31,
-              "month": 12,
-              "year": null,
-              "hours": null,
-              "minutes": null,
-              "is_templatable": true
-            },
-            "weekdays": [],
-            "is_templatable": true
-          }
-        }
-      ]
+        "end_datetime": {
+          "id": 2,
+          "day": null,
+          "month": 12,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "beg_datetime_id": 1,
+        "end_datetime_id": 2,
+        "is_templatable": true,
+        "weekdays": "1,2,3,4,5"
+      },
+      "category": {
+        "id": 2,
+        "name": "Daily",
+        "description": "Tickets, which depend on the days of the week"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
+    },
+    {
+      "id": 5,
+      "name": "Weekend ticket",
+      "description": "Saturday-Sunday",
+      "price": 10000,
+      "category_id": 2,
+      "period_id": 2,
+      "period": {
+        "id": 2,
+        "beg_datetime": {
+          "id": 3,
+          "day": null,
+          "month": 1,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "end_datetime": {
+          "id": 4,
+          "day": null,
+          "month": 12,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "beg_datetime_id": 3,
+        "end_datetime_id": 4,
+        "is_templatable": true,
+        "weekdays": "6,7"
+      },
+      "category": {
+        "id": 2,
+        "name": "Daily",
+        "description": "Tickets, which depend on the days of the week"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
+    },
+    {
+      "id": 6,
+      "name": "Halloween ticket",
+      "description": "Tickets for the Halloween costume party",
+      "price": 20000,
+      "category_id": 3,
+      "period_id": 3,
+      "period": {
+        "id": 3,
+        "beg_datetime": {
+          "id": 5,
+          "day": 31,
+          "month": 11,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "end_datetime": {
+          "id": 6,
+          "day": 31,
+          "month": 11,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "beg_datetime_id": 5,
+        "end_datetime_id": 6,
+        "is_templatable": true,
+        "weekdays": null
+      },
+      "category": {
+        "id": 3,
+        "name": "Holiday",
+        "description": "Tickets, which are available on holidays"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
+    },
+    {
+      "id": 7,
+      "name": "New Year's Eve ticket",
+      "description": "Tickets for the New Year's Eve party",
+      "price": 40000,
+      "category_id": 3,
+      "period_id": 4,
+      "period": {
+        "id": 4,
+        "beg_datetime": {
+          "id": 7,
+          "day": 31,
+          "month": 12,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "end_datetime": {
+          "id": 8,
+          "day": 1,
+          "month": 1,
+          "year": null,
+          "hours": null,
+          "minutes": null,
+          "is_templatable": true
+        },
+        "beg_datetime_id": 7,
+        "end_datetime_id": 8,
+        "is_templatable": true,
+        "weekdays": null
+      },
+      "category": {
+        "id": 3,
+        "name": "Holiday",
+        "description": "Tickets, which are available on holidays"
+      },
+      "created_at": "2021-03-16 10:55:37",
+      "updated_at": "2021-03-16 10:55:37"
     }
   ],
-
-  "response_status": true,
-  "response_error": null
+  "response_error": null,
+  "response_status": true
 }

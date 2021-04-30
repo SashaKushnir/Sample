@@ -3,11 +3,23 @@ import thunkMW from 'redux-thunk'
 import { newBanknoteReducer } from "./newBanknote/newBanknoteReducer";
 import { ticketsReducer } from "./tickets/ticketsReducer";
 import { servicesReducer } from "./services/servicesReducer";
+import { commonReducer } from "./forCommon/forCommonReducer";
+import { historyReducer } from "./history/newHistoryReducer";
+import { createObjReducer } from "./formPostObject/createObjReducer";
+import {customersReducer} from "./customers/customersReducer";
+import {banquetReducer} from "./banquetInfo/banquetInfoReducer";
+import {CreateNewEmployeeR} from "./CreateNewEmployee/CreateNewEmployeeR";
 
 let reducersList = combineReducers({
     createNew : newBanknoteReducer,
     tickets: ticketsReducer,
-    services: servicesReducer
+    services: servicesReducer,
+    postBanquet: createObjReducer,
+    history: historyReducer,
+    common: commonReducer,
+    customers: customersReducer,
+    banquet: banquetReducer,
+    accounts: CreateNewEmployeeR
 })
 export type RootState = ReturnType<typeof reducersList>
 

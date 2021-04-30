@@ -3,13 +3,24 @@ import styles from './MenuList.module.css'
 import { useSelector } from "react-redux";
 import { MenuItemComponent } from "./MenuItemComponent";
 import { selectMenuKitchen } from "../../../../selectors/selectCreateNew";
-import { MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
+import { MenuArray, MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
 
+interface MenuListProps {
+    menus?: MenuArray
+    showAmount?: boolean
+}
 
-export const MenuList = () => {
-    const menus = useSelector(selectMenuKitchen).map((curMenuItem:MenuItem)=> <MenuItemComponent Menuitem={curMenuItem}/>)
+export const MenuList:React.FC<MenuListProps> = (props) => {
+    const menus = props.menus?.map((curMenuItem:MenuItem, index)=>
+        <MenuItemComponent key={index} showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
         <div className={styles.name}>Menu List</div>
-        {menus}
+        {props.showAmount && <div>
+            {menus}
+        </div>}
+        {!props.showAmount && <div className={styles.menus}>
+            {menus}
+        </div>}
+
     </div>
 }

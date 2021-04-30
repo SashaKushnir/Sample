@@ -1,0 +1,73 @@
+.title{
+
+}
+.name{
+    display: inline-block;
+    font-weight: bold;
+}
+.desc{
+
+}
+.price{
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+}
+.item{
+    margin: 0 5px;
+    display: inline-block;
+    width: 90%;
+}
+.img{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    margin: auto auto;
+    text-align: center;
+}
+.ticket{
+    display: flex;
+    width: 100%;
+}
+.text{
+    font-weight: bold;
+    margin-right: 5px;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
+}
+.input_block{
+    display: flex;
+    font-weight: bold;
+    float: right;
+
+}
+.input{
+    border-radius: 5px;
+    border: 2px solid darkgray;
+    float: right;
+    width: 100%;
+}
+input:focus {
+    outline: none;
+}
+.input_label{
+    margin-right: 5px;
+}
+@media only screen and (max-width: 768px) {
+    .img{
+        width: 15%;
+    }
+    .item{
+        margin: 0 5px;
+        display: inline-block;
+        width: 85%;
+    }
+    .title{
+
+        overflow: auto;
+    }
+}

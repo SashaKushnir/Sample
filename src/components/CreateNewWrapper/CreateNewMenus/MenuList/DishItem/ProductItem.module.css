@@ -1,14 +1,6 @@
 .item {
+    margin: 7px;
 display: flex;
-    margin: 2px;
-}
-
-.img {
-    display: inline-block;
-    width: 10%;
-    height: 100%;
-    text-align: center;
-    margin: auto;
 }
 
 img {
@@ -17,7 +9,7 @@ img {
 }
 
 .info {
-    width: 90%;
+    width: 85%;
     display: inline-block;
 }
 

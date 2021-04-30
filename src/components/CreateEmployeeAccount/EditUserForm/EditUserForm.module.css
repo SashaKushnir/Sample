@@ -1,0 +1,19 @@
+.formWrap div{
+    display: grid;
+    grid-template-columns: 30% 55% 15%;
+    padding: 2%;
+    margin: 6%;
+}
+
+.formWrap div span {
+    text-align: center;
+    font-size: 150%;
+}
+
+.formWrap {
+    padding: 1%;
+}
+
+.forButton{
+    text-align: center;
+}

@@ -1,4 +1,11 @@
 .wrap{
     display: grid;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 33% 66%;
+}
+
+@media only screen and (max-width: 768px) {
+    .wrap{
+        display:flex;
+        flex-direction: column-reverse;
+    }
 }
