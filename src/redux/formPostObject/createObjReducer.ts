@@ -3,15 +3,13 @@ import {createObjActions} from "./createObjActions";
 import {ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import {ServiceCategoriesItem} from "../services/servicesReducer";
 import {CustomerType} from "../customers/customersReducer";
-import {State} from "../history/newHistoryReducer";
+import {CommentItem, State} from "../history/newHistoryReducer";
 
 export interface PostObject {
     postBanquetObj?: BanquetType
 }
 
-const initialState: PostObject = {
-
-}
+const initialState: PostObject = {}
 
 
 export const createObjReducer = (postObj = initialState, action: ActionsTypes<typeof createObjActions>) => {
@@ -72,5 +70,5 @@ export type BanquetType = {
     product_order?: Product_order
     ticket_order?: Ticket_order
     service_order?: Service_order
-    comments:Comment | [] | null
+    comments?: Array<CommentItem>
 }

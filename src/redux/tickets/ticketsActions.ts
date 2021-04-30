@@ -1,5 +1,6 @@
-import { ProductCategoriesItem } from "../newBanknote/newBanknoteReducer";
+import {ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import {TicketItem} from "./ticketsReducer";
+import {CommentMainProperties} from "../../components/CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
 
 export const ticketsActions = {
     addTicketItem: (ticketI: TicketItem, value: number | null) =>
@@ -14,5 +15,11 @@ export const ticketsActions = {
     setTicketInfo: (ticketI: Array<TicketItem>) => ({
         type: "SET_TICKET_INFO",
         ticketI
-    }) as const
+    }) as const,
+    addTicketComment: (commentI: CommentMainProperties, index: number) => ({
+        type: "SAVE_COMMENT_TO_TICKETS",
+        commentI,
+        index
+    }) as const,
+    addTicketEmptyComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_TICKETS", commentI}) as const,
 }

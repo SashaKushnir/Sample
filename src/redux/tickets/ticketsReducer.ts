@@ -1,5 +1,5 @@
-import { ActionsTypes } from "../store";
-import { ticketsActions } from "./ticketsActions";
+import {ActionsTypes} from "../store";
+import {ticketsActions} from "./ticketsActions";
 import {CommentItem} from "../history/newHistoryReducer";
 
 
@@ -50,7 +50,7 @@ export type TicketItem = {
     amount?: number | string
     showAmount?: boolean
     ready?: boolean
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export type TicketArray = Array<TicketItem>
@@ -60,25 +60,22 @@ export type TicketInitial = {
 }
 
 
-
-
-
 export const ticketsReducer = (tickets = initialState, action: ActionsTypes<typeof ticketsActions>): TicketInitial => {
 
     switch (action.type) {
         case "ADD_TICKET":
             return {
                 ...tickets,
-                tickets: tickets.tickets? [...tickets.tickets.map((ticketI) => {
-                    if(ticketI.id === action.ticketI.id){
-                        ticketI.showAmount=true
-                        if(action.value){
+                tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                    if (ticketI.id === action.ticketI.id) {
+                        ticketI.showAmount = true
+                        if (action.value) {
                             ticketI.amount = action.value
                         } else {
-                            ticketI.amount=""
+                            ticketI.amount = ""
                         }
-                        ticketI.amount > 0 ?  ticketI.ready = true :  ticketI.ready = false
-                        ticketI.comments = action.ticketI.comments ? [...action.ticketI.comments]: undefined
+                        ticketI.amount > 0 ? ticketI.ready = true : ticketI.ready = false
+                        ticketI.comments = action.ticketI.comments ? [...action.ticketI.comments] : []
                     }
                     return ticketI
                 })] : undefined
@@ -86,27 +83,71 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
         case "SET_TICKET_INFO":
             return {
                 ...tickets,
-                tickets:[...action.ticketI]
+                tickets: [...action.ticketI]
+            }
+        case "ADD_COMMENT_TO_TICKETS":
+            return {
+                ...tickets,
+                tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                    if (ticketI.id === action.commentI.target_id) {
+                        ticketI.comments.push({...action.commentI})
+                    }
+                    return ticketI
+                })
+                ] : []
+            }
+        case "SAVE_COMMENT_TO_TICKETS":
+            if (action.commentI.text)
+                return {
+                    ...tickets,
+                    tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                        if ((ticketI.id === action.commentI.target_id)) {
+                            ticketI.comments.map((commentI, index, array) => {
+                                    if (index === action.index) {
+                                        commentI.text = action.commentI.text
+                                    }
+                                    return commentI
+                                }
+                            )
+                        }
+                        return ticketI
+                    })] : []
+                }
+            else {
+                return {
+                    ...tickets,
+                    tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                        ticketI.comments = ticketI.comments?.filter((commentI, index) => {
+                            return index !== action.index
+                        })
+                        return ticketI
+                    })
+                    ] : []
+                }
             }
         case "TOTALLY_DELETE_TICKET_ITEM":
             return {
                 ...tickets,
-                tickets: tickets.tickets?[...tickets.tickets.map((ticketI)=>{
-                    if(ticketI.id === action.ticketI.id) {
+                tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                    if (ticketI.id === action.ticketI.id) {
                         delete ticketI.amount
-                        ticketI.showAmount=false
+                        ticketI.comments = []
+                        ticketI.showAmount = false
                     }
                     return ticketI
-                })]:undefined
+                })] : undefined
             }
-        case "TOTALLY_DELETE_ALL_TICKET_ITEMS":
+        case
+        "TOTALLY_DELETE_ALL_TICKET_ITEMS"
+        :
             return {
                 ...tickets,
-                tickets: tickets.tickets?[...tickets.tickets.map((ticketI)=>{
-                        delete ticketI.amount
-                        ticketI.showAmount=false
+                tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                    delete ticketI.amount
+                    ticketI.comments = []
+                    ticketI.showAmount = false
                     return ticketI
-                })]:undefined
+                })] : undefined
             }
         default:
             return tickets

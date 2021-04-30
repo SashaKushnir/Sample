@@ -43,7 +43,8 @@ export interface ServiceCategoriesItem {
     updated_at: string
     duration?: number | string
     ready?: boolean
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
+    type: string
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>
@@ -63,7 +64,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                         serviceI.showAmount = true
                         if (action.value) {
                             serviceI.amount = action.value
-                            serviceI.comments = action.entertainmentI.comments?[...action.entertainmentI.comments]: undefined
+                            serviceI.comments = action.entertainmentI.comments?[...action.entertainmentI.comments]:[]
                         } else {
                             serviceI.amount = ""
                         }
@@ -73,6 +74,47 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                     }
                     return serviceI
                 })] : undefined
+            }
+        case "SAVE_COMMENT_TO_SERVICES":
+            if (action.commentI.text)
+                return {
+                    ...services,
+                    services: services.services ? [...services.services.map((ticketI) => {
+                        if ((ticketI.id === action.commentI.target_id)) {
+                            ticketI.comments.map((commentI, index, array) => {
+                                    if (index === action.index) {
+                                        commentI.text = action.commentI.text
+                                    }
+                                    return commentI
+                                }
+                            )
+                        }
+                        return ticketI
+                    })] : []
+                }
+            else {
+                return {
+                    ...services,
+                    services: services.services ? [...services.services.map((servicesI) => {
+                        servicesI.comments = servicesI.comments?.filter((commentI, index) => {
+                            return index !== action.index
+                        })
+                        return servicesI
+                    })
+                    ] : []
+                }
+            }
+        case "ADD_COMMENT_TO_SERVICES":
+            return {
+                ...services,
+                services: services.services ? [...services.services.map((serviceI) => {
+                        if (serviceI.id === action.commentI.target_id) {
+                            serviceI.comments = serviceI.comments?[...serviceI.comments,{...action.commentI}]
+                                :[{...action.commentI}]
+                        }
+                        return serviceI
+                    })
+                ] : []
             }
         case "SET_ENTERTAINMENT_INFO":
             return {
@@ -86,6 +128,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                     if (serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
                         delete serviceI.duration
+                        serviceI.comments = []
                         serviceI.showAmount = false
                     }
                     return serviceI
@@ -96,6 +139,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                 ...services,
                 services: services.services ? [...services.services.map((serviceI) => {
                     delete serviceI.amount
+                    serviceI.comments = []
                     delete serviceI.duration
                     serviceI.showAmount = false
                     return serviceI

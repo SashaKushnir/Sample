@@ -1,4 +1,5 @@
-import { ServiceCategoriesItem } from "./servicesReducer";
+import {ServiceCategoriesItem} from "./servicesReducer";
+import {CommentMainProperties} from "../../components/CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
 
 export const servicesActions = {
     addEntertainmentItem: (entertainmentI: ServiceCategoriesItem, value: number | null) =>
@@ -14,9 +15,15 @@ export const servicesActions = {
         type: "SET_ENTERTAINMENT_INFO",
         entertainmentI
     }) as const,
-    setDuration: (duration: number | string, id:number) => ({
+    setDuration: (duration: number | string, id: number) => ({
         type: "SET_DURATION",
         duration,
         id
-    }) as const
+    }) as const,
+    addServiceComment: (commentI: CommentMainProperties, index: number) => ({
+        type: "SAVE_COMMENT_TO_SERVICES",
+        commentI,
+        index
+    }) as const,
+    addServiceEmptyComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_SERVICES", commentI}) as const,
 }

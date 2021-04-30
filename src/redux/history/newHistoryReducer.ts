@@ -36,7 +36,7 @@ export interface Ticket_order  {
     updated_at: string
     discount: number | null
     items: TicketArray
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export interface Product_order  {
@@ -47,7 +47,7 @@ export interface Product_order  {
     updated_at: string
     discount: number | null
     items: Product_categories
-    comments?: Array<CommentItem>
+    comments: Array<CommentItem>
 }
 
 export interface Service_order  {
@@ -91,15 +91,15 @@ export interface History{
 }
 
 export interface CommentItem {
-    container_id: number
-    container_type: string
-    created_at: string
-    id: number
+    container_id?: number
+    container_type?: string
+    created_at?: string
+    id?: number
     target_id: number
     target_type: string
     text: string
-    type: string
-    updated_at: string
+    type?: string
+    updated_at?: string
 }
 
 type HistoryArray = Array<History>

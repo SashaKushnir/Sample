@@ -9,6 +9,13 @@ import _uniqueId from 'lodash/uniqueId';
 import {number} from "yup";
 import {CommentI} from "../../../../../common/compon/CommentI/CommentI";
 
+export interface CommentMainProperties {
+    id?: number
+    text: string
+    target_id: number
+    target_type: string
+}
+
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
     showAmount?: boolean
@@ -17,7 +24,7 @@ type DishesProps = {
 
 export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_categoriesItem, showAmount, keyVal}) => {
     const comments = product_categoriesItem.comments?.map((commentI, index) =>
-        <CommentI commentI={commentI} key={index}/>)
+        <CommentI commentI={commentI} key={index} parentId={product_categoriesItem.id} index = {index}/>)
     const d = useDispatch()
     const textInput = React.createRef<HTMLInputElement>()
     useEffect(() => {
@@ -29,6 +36,15 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
     const deleteItem = () => {
         d(newBanknoteActions.deleteFullItem(product_categoriesItem))
     }
+
+    const createCommentI = () => {
+        d(newBanknoteActions.addComment({
+            target_id: product_categoriesItem.id,
+            target_type: product_categoriesItem.type?product_categoriesItem.type:"unknown",
+            text: ""
+        }))
+    }
+
     const changeCurA = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.match(/^(\d)*$/))
             d(newBanknoteActions.addMenuItem(product_categoriesItem, e.target.value as any))
@@ -56,6 +72,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                 </div>
                 <div>
                     Comments:
+                    <button onClick={createCommentI}>Add comment</button>
                     {comments}
                 </div>
                 {/*{*/}

@@ -7,6 +7,7 @@ import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
 import {useDispatch} from "react-redux";
 import {CommentItem} from "../../../redux/history/newHistoryReducer";
+import {newBanknoteActions} from "../../../redux/newBanknote/newBanknoteActions";
 
 interface TicketItemProps {
     ticketItem: TicketItem
@@ -16,7 +17,7 @@ interface TicketItemProps {
 export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, showAmount}) => {
 
     const comments = ticketItem.comments?.map((commentItem, index) =>
-        <CommentI commentI={commentItem} key={index}/>)
+        <CommentI commentI={commentItem} key={index} parentId={ticketItem.id} index={index}/>)
 
     const textInput = React.createRef<HTMLInputElement>()
     const d = useDispatch()
@@ -32,7 +33,13 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, 
         if (e.target.value.match(/^(\d)*$/))
             d(ticketsActions.addTicketItem(ticketItem, e.target.value as any))
     }
-
+    const createCommentI = () => {
+        d(ticketsActions.addTicketEmptyComment({
+            target_id: ticketItem.id,
+            target_type: ticketItem.type?ticketItem.type:"unknown",
+            text: ""
+        }))
+    }
 
     return <div>{ticketItem.showAmount &&
     <div className={styles.ticket}>
@@ -56,6 +63,7 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, 
             </div>
             <div>
                 Comments:
+                <button onClick={createCommentI}>Add comment</button>
                 {comments}
             </div>
             <button onClick={deleteItem} className={styles.btn}>Delete</button>
