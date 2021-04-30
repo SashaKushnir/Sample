@@ -128,6 +128,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                     if (serviceI.id === action.entertainmentI.id) {
                         delete serviceI.amount
                         delete serviceI.duration
+                        serviceI.comments = []
                         serviceI.showAmount = false
                     }
                     return serviceI
@@ -138,6 +139,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                 ...services,
                 services: services.services ? [...services.services.map((serviceI) => {
                     delete serviceI.amount
+                    serviceI.comments = []
                     delete serviceI.duration
                     serviceI.showAmount = false
                     return serviceI

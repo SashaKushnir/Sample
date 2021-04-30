@@ -131,6 +131,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                 tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
                     if (ticketI.id === action.ticketI.id) {
                         delete ticketI.amount
+                        ticketI.comments = []
                         ticketI.showAmount = false
                     }
                     return ticketI
@@ -143,6 +144,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                 ...tickets,
                 tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
                     delete ticketI.amount
+                    ticketI.comments = []
                     ticketI.showAmount = false
                     return ticketI
                 })] : undefined
