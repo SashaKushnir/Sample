@@ -10,6 +10,7 @@ import {number} from "yup";
 import {CommentI} from "../../../../../common/compon/CommentI/CommentI";
 
 export interface CommentMainProperties {
+    id?: number
     text: string
     target_id: number
     target_type: string

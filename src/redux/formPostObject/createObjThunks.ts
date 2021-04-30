@@ -14,10 +14,10 @@ const _ = require("lodash");
 
 export const createPost = () => (d: any, getState: () => RootState) => {
 
-    let mainPost: BanquetType, ready = true, menuComments: Array<CommentItem> | undefined,
-        ticketComments: Array<CommentItem> | undefined,
-        servicesComments: Array<CommentItem> | undefined,
-        resultComments: Array<CommentItem> | undefined
+    let mainPost: BanquetType, ready = true, menuComments: Array<any> | undefined,
+        ticketComments: Array<any> | undefined,
+        servicesComments: Array<any> | undefined,
+        resultComments: Array<any> | undefined
 
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
@@ -73,29 +73,34 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
         menuComments = getState().createNew.menus?.reduce((acum: Array<CommentItem>, categoryI) => {
             categoryI.products.map((productI) => {
-                acum = acum.concat(productI.comments)
+                if (productI.comments?.length > 0)
+                    acum = acum.concat(productI.comments)
                 return productI
             })
             return acum
         }, [])
         ticketComments = getState().tickets.tickets?.reduce((acum: Array<CommentItem>, ticketI) => {
+            if(ticketI.comments?.length>0)
             acum = acum.concat(ticketI.comments)
             return acum
         }, [])
         servicesComments = getState().services.services?.reduce((acum: Array<CommentItem>, serviceI) => {
+            if(serviceI.comments?.length>0)
             acum = acum.concat(serviceI.comments)
             return acum
         }, [])
-        console.log("MenuComments",menuComments)
-        if(menuComments)
-            resultComments = resultComments?resultComments.concat(menuComments):menuComments
-        if(ticketComments)
-            resultComments = resultComments?resultComments.concat(ticketComments):ticketComments
-        if(servicesComments)
-            resultComments = resultComments?resultComments.concat(servicesComments):servicesComments
-
-
-        console.log("MyCOMMENTS",resultComments)
+        console.log("MenuComments", menuComments)
+        if (menuComments ? (menuComments.length > 0) : false) { // @ts-ignore
+            resultComments = resultComments ? resultComments.concat(menuComments) : menuComments
+        }
+        if (ticketComments ? (ticketComments.length > 0) : false) { // @ts-ignore
+            resultComments = resultComments ? resultComments.concat(ticketComments) : ticketComments
+        }
+        if (servicesComments ? (servicesComments.length > 0) : false) { // @ts-ignore
+            resultComments = resultComments ? resultComments.concat(servicesComments) : servicesComments
+        }
+        resultComments?.filter((obj) => obj !== undefined)
+        console.log("MyCOMMENTS", resultComments)
         // concat.concat(
         mainPost = {
             id: getState().banquet.id ? getState().banquet.id : undefined,
@@ -129,7 +134,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
                     return subset
                 })
             },
-            comments: resultComments?resultComments:[]
+              comments:resultComments?resultComments:[]
         }
         d(createObjActions.setPostBanquetObj(mainPost))
         console.log("Post obj ")

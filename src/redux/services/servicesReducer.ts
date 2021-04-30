@@ -44,6 +44,7 @@ export interface ServiceCategoriesItem {
     duration?: number | string
     ready?: boolean
     comments: Array<CommentItem>
+    type: string
 }
 
 export type ServicesArray = Array<ServiceCategoriesItem>
@@ -73,6 +74,47 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                     }
                     return serviceI
                 })] : undefined
+            }
+        case "SAVE_COMMENT_TO_SERVICES":
+            if (action.commentI.text)
+                return {
+                    ...services,
+                    services: services.services ? [...services.services.map((ticketI) => {
+                        if ((ticketI.id === action.commentI.target_id)) {
+                            ticketI.comments.map((commentI, index, array) => {
+                                    if (index === action.index) {
+                                        commentI.text = action.commentI.text
+                                    }
+                                    return commentI
+                                }
+                            )
+                        }
+                        return ticketI
+                    })] : []
+                }
+            else {
+                return {
+                    ...services,
+                    services: services.services ? [...services.services.map((servicesI) => {
+                        servicesI.comments = servicesI.comments?.filter((commentI, index) => {
+                            return index !== action.index
+                        })
+                        return servicesI
+                    })
+                    ] : []
+                }
+            }
+        case "ADD_COMMENT_TO_SERVICES":
+            return {
+                ...services,
+                services: services.services ? [...services.services.map((serviceI) => {
+                        if (serviceI.id === action.commentI.target_id) {
+                            serviceI.comments = serviceI.comments?[...serviceI.comments,{...action.commentI}]
+                                :[{...action.commentI}]
+                        }
+                        return serviceI
+                    })
+                ] : []
             }
         case "SET_ENTERTAINMENT_INFO":
             return {

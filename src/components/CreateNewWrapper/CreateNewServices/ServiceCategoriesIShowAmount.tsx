@@ -6,6 +6,7 @@ import {IntertaimentImg} from "../../../common/compon/Intartaiment/Entertainment
 import {useDispatch} from "react-redux";
 import {servicesActions} from "../../../redux/services/servicesActions";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
+import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem
@@ -37,6 +38,13 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
         if (e.target.value.match(/^(\d)*$/))
             d(servicesActions.setDuration(e.target.value, serviceItem.id))
     }
+    const createCommentI = () => {
+        d(servicesActions.addServiceEmptyComment({
+            target_id: serviceItem.id,
+            target_type: serviceItem.type?serviceItem.type:"unknown",
+            text: ""
+        }))
+    }
 
     return <div>
         <div className={styles.intertaiment}>
@@ -66,6 +74,7 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                 </div>
                 <div>
                     Comments:
+                    <button onClick={createCommentI}>Add comment</button>
                     {comments}
                 </div>
 

@@ -4,8 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {newBanknoteActions} from "../../../redux/newBanknote/newBanknoteActions";
 import useOnClickOutside from "../../customHook/onMouseClickOutOfComponent";
+import {useRouteMatch} from "react-router-dom";
+import {ticketsActions} from "../../../redux/tickets/ticketsActions";
+import {servicesActions} from "../../../redux/services/servicesActions";
 
-interface CommentIProps {
+export interface CommentIProps {
     commentI: CommentItem
     parentId: number
     index: number
@@ -15,19 +18,13 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
     const textInp = React.createRef<HTMLInputElement>()
     const d = useDispatch()
     const ref = useRef();
-    // State for our modal
-    // Call hook passing in the ref and a function to call on outside click
     useOnClickOutside(ref, () => setEditModeFalse());
     const [editMode, setEditMode] = useState(false)
     const [commentVal, setCommentVal] = useState(commentI.text)
+    const {url} = useRouteMatch()
 
-    let commentsLength: number = 0
-    useSelector((state:RootState) => state.createNew.menus?.map((catI) => {
-        catI.products.some((proI, index) => {
-            return((proI.id === parentId) && (index === proI.comments.length - 1))
-        })
-    }))
     useEffect(() => {
+        if(!commentVal)
         setEditMode(true)
     },[])
 
@@ -37,10 +34,6 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
         }
     },[editMode])
 
-    useEffect(() => {
-        if(commentsLength)
-        setEditMode(true)
-    },[commentsLength])
 
     const setEditModeTrue = () => {
         setEditMode(true)
@@ -48,11 +41,22 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
 
     const setEditModeFalse = () => {
         setCommentVal(commentVal.trim())
-        d(newBanknoteActions.saveComment({
+        const commentForActions = {
             target_id: commentI.target_id,
             text: commentVal,
             target_type: commentI.type?commentI.type:""
-        }, index))
+        }
+        switch (url) {
+            case "/content/new/menus":
+                d(newBanknoteActions.saveComment(commentForActions, index))
+                break
+            case "/content/new/tickets":
+                d(ticketsActions.addTicketComment(commentForActions, index))
+                break
+            case "/content/new/entertainments":
+                d(servicesActions.addServiceComment(commentForActions, index))
+        }
+
         setEditMode(false)
 
     }
