@@ -1,0 +1,25 @@
+.deleteEdit{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+
+.uploadedUsers{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+    /*grid-gap: 1px;*/
+    border-top:4px inset black;
+    border-left:4px inset black;
+}
+
+.rightSide .center {
+    border-right: 4px inset black;
+    border-left: 4px inset black;
+    border-top: 4px inset black;
+}
+
+.center {
+    text-align: center;
+    font-size: 200%;
+}

@@ -1,6 +1,19 @@
-import { MenuArray, Product } from "./newBanknoteReducer";
+import {MenuArray, ProductCategoriesItem} from "./newBanknoteReducer";
+import {CommentMainProperties} from "../../components/CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
 
 export const newBanknoteActions = {
-    addMenuItem: (product: Product) => ({type: "ADD_MENU_ITEM", product}) as const,
-    setMenuInfo: (menus: MenuArray) => ({type: "SET_MENU_INFO", menus}) as const
+    addMenuItem: (productI: ProductCategoriesItem, value: number | null
+    ) => ({type: "ADD_MENU_ITEM", productI, value}) as const,
+    deleteFullItem: (productI: ProductCategoriesItem, flagAllM = false) => ({
+        type: "TOTALLY_DELETE_MENU_ITEM",
+        productI
+    }) as const,
+    deleteAllAmount: () => ({type: "TOTALLY_DELETE_ALL_MENU_ITEMS"}) as const,
+    setMenuInfo: (menus: MenuArray) => ({type: "SET_MENU_INFO", menus}) as const,
+    addComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_MENUS", commentI}) as const,
+    saveComment: (commentI: CommentMainProperties, index: number) => ({
+        type: "SAVE_COMMENT_TO_MENUS",
+        commentI,
+        index
+    }) as const
 }

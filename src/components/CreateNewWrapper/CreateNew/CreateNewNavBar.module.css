@@ -5,6 +5,11 @@
     margin: 0.5% 20% 0% 20%;
 }
 
+.navFor50{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 0.5% 20% 0% 20%;
+}
 
 .navlink {
     text-decoration: none;
@@ -19,4 +24,33 @@
     border-style: groove;
     border-color: black;
     font-weight: bold;
+}
+.buttonGreen {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.buttonBlack {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.toRightSide{
+    text-align: right;
+}
+.toRightSide button{
+    margin: 0.5%;
+}
+.amountMessage {
+    color:red;
 }

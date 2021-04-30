@@ -1,0 +1,90 @@
+.item{
+    margin: 0 5px;
+    display: inline-block;
+    width: 90%;
+}
+.intertaiment{
+    display: flex;
+
+
+}
+.img{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    margin:auto 0px;
+    text-align: center;
+}
+.name{
+    margin: 0 auto;
+    display: inline-block;
+    font-weight: bold;
+    width: 70%;
+}
+.price{
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+}
+.text{
+    display: inline-block;
+}
+.desc{
+    margin: 0 auto;
+}
+.desc_basket{
+    text-align: right;
+    width: 30%;
+    margin: 0 auto;
+    display: inline-block;
+    font-weight: bold;
+}
+.btn{
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    padding: 1px;
+}
+.amount{
+    font-weight: bold;
+    margin-right: 5px;
+}
+.input_block{
+    display: flex;
+    font-weight: bold;
+    float: right;
+    margin-bottom: 3px;
+}
+.input{
+    border-radius: 5px;
+    border: 2px solid darkgray;
+    float: right;
+    width: 100%;
+    float: right;
+}
+input:focus {
+    outline: none;
+}
+.input_wrong{
+    border-radius: 5px;
+    border: 3px solid red;
+    float: right;
+    width: 100%;
+    float: right;
+}
+input_wrong:focus {
+    outline: none;
+}
+.input_label{
+    margin-right: 5px;
+}
+@media only screen and (max-width: 768px) {
+    .img{
+        width: 15%;
+    }
+    .item{
+        margin: 0 5px;
+        display: inline-block;
+        width: 85%;
+    }
+}

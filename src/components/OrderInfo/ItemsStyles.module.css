@@ -1,0 +1,23 @@
+.name{
+    display: inline-block;
+    margin: 0 10px;
+
+}
+.dish{
+    font-family: Montserrat;
+    margin: 5px 5px;
+    color: grey;
+    font-size: 16px;
+}
+.amount_price{
+    float: right;
+    display: inline-block;
+}
+.amount{
+    display: inline-block;
+    margin: 0 5px;
+}
+.price{
+    display: inline-block;
+    margin: 0 5px;
+}

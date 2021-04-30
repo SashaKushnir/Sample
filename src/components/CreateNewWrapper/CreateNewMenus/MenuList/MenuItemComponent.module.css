@@ -1,9 +1,52 @@
 .name{
     text-align: center;
     font-weight: bold;
-}
-.item{
-    width: 48%;
+    font-size: 19px;
+    margin: 0 auto;
     display: inline-block;
-    margin: 5px;
+
+}
+.name_basket{
+    text-align: left;
+    font-weight: bold;
+    font-size: 19px;
+    margin: 0 auto;
+    display: inline-block;
+
+}
+.title{
+    text-align: center;
+}
+/*.item_show{*/
+/*    margin: 0 auto;*/
+
+/*}*/
+/*.item_not_show{*/
+
+/*}*/
+.item{
+
+
+}
+.hide{
+    display: inline-block;
+    float: right;
+    position: absolute;
+    margin-left: 5px;
+}
+label{
+    float: bottom;
+}
+.all_menu{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+@media only screen and (max-width: 768px) {
+    .all_menu{
+        display: block;
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1;
+    }
 }

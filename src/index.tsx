@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "antd/dist/antd.css";
-import { App } from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { BeforeApp } from "./BeforeApp";
 
 
 ReactDOM.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <App/>
-        </React.StrictMode>
+        <BrowserRouter>
+            <React.StrictMode>
+                    <BeforeApp/>
+            </React.StrictMode>
+        </BrowserRouter>
     </Provider>,
-document.getElementById('root')
+    document.getElementById('root')
 )
 ;
 

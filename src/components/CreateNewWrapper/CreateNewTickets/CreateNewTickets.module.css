@@ -1,3 +1,27 @@
+.main{
+    display: grid;
+    grid-template-columns: 33% 66%;
+}
+.basket{
+
+
+}
 .tickets{
-    margin: 0 30%;
+
+}
+
+@media only screen and (max-width: 768px) {
+    .main{
+        display:flex;
+        flex-direction: column-reverse;
+    }
+    .basket{
+        margin-bottom: 10px;
+
+    }
+    .tickets{
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid grey;
+    }
 }

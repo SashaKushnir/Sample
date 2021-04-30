@@ -1,13 +1,17 @@
-import { ActionsTypes } from "../store";
-import { newBanknoteActions } from "./newBanknoteActions";
-import initialMenu from '../../responses/get_menu2.json'
-import { Dispatch } from "redux";
-import { TicketCategoriesItem } from "../tickets/ticketsReducer";
-import { ServiceCategoriesItem } from "../services/servicesReducer";
+import {ActionsTypes} from "../store";
+import {newBanknoteActions} from "./newBanknoteActions";
+import {CommentItem} from "../history/newHistoryReducer";
 
 
-const initialState: MenusInitial = initialMenu
+const initialState: MenusInitial = {}
 
+export const setInitialComment = (productI: ProductCategoriesItem) => {
+    return {
+        text: "",
+        target_id: productI.id,
+        target_type: productI.type
+    }
+}
 
 export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, action: ActionsTypes<typeof newBanknoteActions>): MenusInitial => {
 
@@ -18,16 +22,103 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                 menus: [...action.menus]
             }
         case "ADD_MENU_ITEM":
-
             return {
                 ...newBanknote,
-                selectedOrders: {...newBanknote.selectedOrders,
+                menus: newBanknote.menus ?
+                    [...newBanknote.menus.map((menuI) => {
+                        const curM = menuI.products.map((productI) => {
+                            if (productI.id === action.productI.id) {
+                                productI.showAmount = true
+                                productI.amount = action.value === null ? 0 : action.value
+                                productI.amount > 0 ? productI.ready = true : productI.ready = false
+                                productI.comments = action.productI.comments ? [...action.productI.comments] : []
+                            }
+                            return productI
+                        })
+                        menuI.products = curM
+                        return menuI
+                    })] : undefined
+            }
+        case "TOTALLY_DELETE_MENU_ITEM":
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus ?
+                    [...newBanknote.menus.map((menuI) => {
+                        menuI.products.map((productI) => {
+                            if (productI.id === action.productI.id) {
+                                productI.comments = []
+                                productI.showAmount = false
+                                delete productI.amount
 
-                    selectedMenu: newBanknote.selectedOrders?.selectedMenu ?
-                        [...newBanknote.selectedOrders?.selectedMenu,
-                        action.product
-                    ]:undefined
+                            }
+                            return productI
+                        })
+                        return menuI
+                    })] : undefined
+            }
+        case "ADD_COMMENT_TO_MENUS":
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus ? [...newBanknote.menus.map((categoryI) => {
+                    categoryI.products.map((productI) => {
+                        if (productI.id === action.commentI.target_id) {
+                            productI.comments.push({...action.commentI})
+                        }
+                        return productI
+                    })
+                    return categoryI
+                })
+                ] : []
+            }
+        case "SAVE_COMMENT_TO_MENUS":
+            if (action.commentI.text)
+                return {
+                    ...newBanknote,
+                    menus: newBanknote.menus ? [...newBanknote.menus.map((categoryI) => {
+                        categoryI.products.map((productI) => {
+                            if ((productI.id === action.commentI.target_id)) {
+                                productI.comments.map((commentI, index, array) => {
+                                    if (index === action.index) {
+                                        commentI.text = action.commentI.text
+                                    }
+                                    return commentI
+
+                                })
+                            }
+                            return productI
+                        })
+                        return categoryI
+                    })
+                    ] : []
                 }
+        else{
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus?[...newBanknote.menus.map((categoryI) => {
+                    categoryI.products.map((productI) => {
+                            productI.comments = productI.comments.filter((commentI, index) =>{
+                                return index !== action.index
+                            })
+                        return productI
+                    })
+                    return categoryI
+                })
+                ]: []
+            }
+        }
+        case "TOTALLY_DELETE_ALL_MENU_ITEMS":
+            return {
+                ...newBanknote,
+                menus: newBanknote.menus ?
+                    [...newBanknote.menus.map((menuI) => {
+                        menuI.products.map((productI) => {
+                            productI.showAmount = false
+                            delete productI.amount
+                            return productI
+                        })
+                        return menuI
+                    })] : undefined
+
             }
         default:
             return newBanknote
@@ -35,72 +126,45 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
 }
 
 // Thunk
-export const setMenuT = () => async (dispatch: Dispatch<ActionsTypes<typeof newBanknoteActions>>) => {
-    // To Fetch firstly
-    try {
-        // Get request: API await with try
-        const response = initialMenu
-        // Set response to Bll
-        if (response.response_status) {
-            dispatch(newBanknoteActions.setMenuInfo(response.menus))
-            // Stop Fetching
-        }else {
-            console.warn(response.response_error)
-        }
-    } catch (error) {
-        alert("Something went wrong")
-        console.warn(error)
-    }
-    // Catch don't forget
-}
-
-
-export type Product = {
-    id: number
-    name: string
-    description: string
-    price: number
-    weight: number
-    menu_id: number
-    category_id: number
-    amount?: number
-}
 export type MenuCategory = {
     id: number
     name: string
-    description: string
+    description: string | null
 }
 export type ProductCategoriesItem = {
     id: number
     name: string
-    description: string
-    products: Array<Product>
+    description: string | null
+    price: number
+    weight: number
+    menu_id: number
+    category_id: number
+    amount?: number | string
+    showAmount?: boolean
+    category: MenuCategory
+    created_at: string
+    updated_at: string
+    ready?: boolean
+    type?: string
+    comments: Array<CommentItem>
 }
+
 export type Product_categories = Array<ProductCategoriesItem>
+
 export type MenuItem = {
     id: number
-    menu_category: MenuCategory
-    product_categories: Product_categories
+    products: Product_categories
+    name: string
+    description: string | null
+    category_id: number | null
+    category: MenuCategory
+    created_at: string
+    updated_at: string
+    period_id: string | null
+    type: string
 }
 export type MenuArray = Array<MenuItem>
-type SelectedOrders = {
-    selectedMenu?: Array<Product>
-    selectedTickets?: Array<TicketCategoriesItem>
-    selectedServices?: Array<ServiceCategoriesItem>
-}
+
 type MenusInitial = {
-    menus: MenuArray
-    response_status: boolean
-    selectedOrders?: SelectedOrders
-    response_error: string | null
+    menus?: MenuArray
 }
-
-
-//
-// type InitialMenu = NewBanknote & {
-//     cart: [
-//         tickets:
-//         services:
-//         menus: Product_categories
-//     ]
-// }

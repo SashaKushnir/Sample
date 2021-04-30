@@ -1,32 +1,35 @@
 import React from 'react'
-import {Determine, PeriodArray, PeriodItem, TicketCategoriesItem} from "../../../redux/tickets/ticketsReducer";
-import {DataItem} from "./DataItem";
+
 import styles from './TicketItemMap.module.css'
-import {TicketImg} from "../../../common/compon/Ticket/TicketImg";
+import { TicketImg } from "../../../common/compon/Ticket/TicketImg";
+import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 interface TicketItemProps {
-    periodArray: PeriodArray
+    ticketItem: TicketItem
+    showAmount?: boolean
 }
 
-export const TicketItemMap: React.FC<TicketItemProps> = ({periodArray}) => {
-    const periodItem = Object.keys(periodArray.period.beg_datetime).map((val) =>
-        <DataItem key={val} keyVal={val} value={periodArray.period.beg_datetime[val as keyof Determine]}/>)
+export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
     return <div>
-        <TicketImg/>
-        <div className={styles.item}>
-            <div className={styles.title}>
-                <div className={styles.name}>
-                    {periodArray.name}
-                </div>
-                <div className={styles.price}>
-                    {periodArray.price} грн.
-                </div>
-
+        <div className={styles.ticket}>
+            <div className={styles.img}>
+                <TicketImg ticketI={ticketItem}/>
             </div>
-            <div className={styles.desc}>
-                {periodArray.description}
+            <div className={styles.item}>
+                <div className={styles.title}>
+                    <div className={styles.name}>
+                        {ticketItem.name}
+                    </div>
+                    <div className={styles.price}>
+                        {ticketItem.price}$
+                    </div>
+                </div>
+                <div className={styles.desc}>
+                    {ticketItem.description}
+                </div>
             </div>
         </div>
-        {/*{periodItem}*/}
+
     </div>
 }
