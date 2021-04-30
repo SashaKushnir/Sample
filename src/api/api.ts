@@ -5,6 +5,7 @@ import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
 import {CustomersArray} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
+import {BanquetStateArray} from "../redux/BanquetStates/BanquetStatesR";
 
 export const BaseURL = "http://194.213.104.146:222"
 //http://imperia-api.com
@@ -53,4 +54,7 @@ export interface ApiGetUsersResultType extends ApiResultType {
 
 export interface ApiPatchUserResponseType extends ApiResultType {
     data: UserInter
+}
+export interface ApiBanquetStatesResponseType extends ApiResultType {
+    states: BanquetStateArray
 }

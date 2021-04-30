@@ -11,8 +11,7 @@ interface TicketItemProps {
 }
 
 export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}) => {
-    return <div>
-        <div className={styles.ticket}>
+    return <div className={styles.ticket}>
             <div className={styles.img}>
                 <TicketImg ticketI={ticketItem}/>
             </div>
@@ -31,5 +30,5 @@ export const TicketItemMap: React.FC<TicketItemProps> = ({ticketItem,showAmount}
             </div>
         </div>
 
-    </div>
+
 }

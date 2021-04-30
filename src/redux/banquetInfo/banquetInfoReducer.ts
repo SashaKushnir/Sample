@@ -4,8 +4,8 @@ import {State} from "../history/newHistoryReducer";
 import {CustomerType} from "../customers/customersReducer";
 
 let initialState: BanquetInitial = {
-    name: "None",
-    description: "None",
+    name: "",
+    description: "",
     beginning: "",
     end: "",
     advance_amount: 0,

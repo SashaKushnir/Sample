@@ -119,8 +119,6 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
     return <div className={s.main}>
         <div className={s.first}>
             <div className={s.buttons}>
-                <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
-
                 <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>
@@ -131,43 +129,42 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
             </div>
             <div className={s.info}>
                 {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
-                <div className={s.line}>
-                    <div className={s.name}>
+                <div className={s.column_left}>
+                    <div className={s.text}>
                         {data.name}
                     </div>
-                    <div className={s.total}>
-                        {data.total}$
-
-                    </div>
-                </div>
-                <div className={s.line}>
-                    <div className={s.name}>
+                    <div className={s.text}>
                         {data.description}
                     </div>
-                    <div className={s.total}>
-                        {data.end_datetime}
-                    </div>
-                </div>
-                <div className={s.line}>
-                    <div className={s.name}>
+                    <div className={s.text}>
                         {data.customer.name}
                     </div>
-                    <div className={s.total}>
+                    <div className={s.text}>
+                        Banquet state: {data.state.name}
+                    </div>
+                </div>
+                <div className={s.column_right}>
+                    <div className={s.price}>
+                        {data.total}$
+                    </div>
+                    <div className={s.numbers}>
+                        {data.end_datetime}
+                    </div>
+                    <div className={s.numbers}>
                         {data.beg_datetime}
                     </div>
                 </div>
-                {/*<div>*/}
-                {/*    <div className={s.name}>*/}
-                {/*        {data.state.id}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+
+            </div>
+            <div>
+                <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
             </div>
         </div>
         {hideProducts &&
         <div className={s.second}>
             <div className={s.products}>
                 <div className={s.title}>
-                   Products
+                    Products
                 </div>
                 <div className={s.items}>
                     {products}
@@ -194,3 +191,38 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         }
     </div>
 }
+
+
+// <div className={s.info}>
+//     {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
+//     <div className={s.line_price}>
+//         <div className={s.name}>
+//             {data.name}
+//         </div>
+//         <div className={s.price}>
+//             {data.total}$
+//
+//         </div>
+//     </div>
+//     <div className={s.line}>
+//         <div className={s.name}>
+//             {data.description}
+//         </div>
+//         <div className={s.total}>
+//             {data.end_datetime}
+//         </div>
+//     </div>
+//     <div className={s.line}>
+//         <div className={s.name}>
+//             {data.customer.name}
+//         </div>
+//         <div className={s.total}>
+//             {data.beg_datetime}
+//         </div>
+//     </div>
+//     <div>
+//         <div className={s.name}>
+//             Banquet state: {data.state.name}
+//         </div>
+//     </div>
+// </div>

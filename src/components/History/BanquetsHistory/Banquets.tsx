@@ -7,6 +7,7 @@ import {setHistoryT} from "../../../redux/history/newHistoryThunk";
 import {setMenuT} from "../../../redux/newBanknote/newBanknoteThunks";
 import {setServicesT} from "../../../redux/services/servicesThunks";
 import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
+import s from "./Banquets.module.css"
 
 export const Banquets: React.FC = () => {
     const d = useDispatch()
@@ -24,9 +25,9 @@ export const Banquets: React.FC = () => {
         if(!tickets)
             d(setTicketsT())
     }, [])
-    return <>
+    return <div className={s.banquet}>
         {history}
-    </>
+    </div>
 
 
 }

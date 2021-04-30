@@ -72,4 +72,5 @@ export type BanquetType = {
     product_order?: Product_order
     ticket_order?: Ticket_order
     service_order?: Service_order
+    comments:Comment | [] | null
 }

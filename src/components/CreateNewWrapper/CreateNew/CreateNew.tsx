@@ -12,6 +12,7 @@ import {FetchingComponent} from "../../../common/compon/FetchingComponent/Fetchi
 import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
 import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
+import {setBanqueStateT} from "../../../redux/BanquetStates/BanquetStatesT";
 
 
 type PropsType = {
@@ -32,6 +33,9 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     }, [fullEmptyAmount])
     useEffect(() => {
         setEditMode(true)
+    }, [])
+    useEffect(() => {
+        d(setBanqueStateT())
     }, [])
     const saveB = () => {
         d(createPost())

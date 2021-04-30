@@ -1,11 +1,13 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
+import {BanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
 import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
+import {setBanqueStateT} from "../../../redux/BanquetStates/BanquetStatesT";
+import {BanquetState} from "../../../redux/BanquetStates/BanquetStatesR";
 
 type PropsType = {
     isEdit: boolean
@@ -19,6 +21,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const isEditMode = useSelector((state:RootState) => state.common.banquetEditMode)
 
+
+
+    const all_states = useSelector(BanquetsStates)
+    const states = all_states?.map((obj:BanquetState) => <option>{obj.name}</option>)
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value as any))
     }
@@ -29,14 +35,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.setAdvance(e.target.value as any))
     }
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
-        if(e.target.value === "Planning")
-            d(banquetActions.setState(1))
-        if(e.target.value === "Booked")
-            d(banquetActions.setState(2))
-        if(e.target.value === "Finished")
-            d(banquetActions.setState(3))
-
+        all_states?.map(obj => {
+            if(e.target.value === obj.name)
+                d(banquetActions.setState(obj.id))
+        })
     }
     const data = useSelector(selectBanquet)
 
@@ -78,6 +80,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")
     }
+
 
 
     return <div>
@@ -152,11 +155,9 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
                            readOnly/>
                 </div>}
-                <div className={s.advance}>
+                <div className={s.advance} >
                     State <select onChange={setState}>
-                    <option>Planning</option>
-                    <option>Booked</option>
-                    <option>Finished</option>
+                    {states}
                 </select>
                 </div>
             </div>

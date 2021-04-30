@@ -40,7 +40,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                 {product_categoriesItems}
             </div>}
         </div>}
-        {showAmount && showMenuItem && <div>
+        {showAmount && showMenuItem && <div className={styles.item}>
             <div className={styles.name_basket}>
                 {Menuitem.name}
             </div>

@@ -54,8 +54,8 @@ export const OneBanquetPDF: React.FC = (props) => {
             <tr className={s.first_line}>
                 <td>Дата: {banquet?.beg_datetime}</td>
                 <td>Час: {banquet?.beg_datetime}</td>
-                <td>Кількість дітей з іменинником: {banquet?.child_guests_amount}</td>
-                <td>Кількість дорослих: {banquet?.adult_guests_amount}</td>
+                <td>Кількість дітей з іменинником: </td>
+                <td>Кількість дорослих: </td>
             </tr>
         </table>
         <table className={s.cover}>
@@ -105,7 +105,7 @@ export const OneBanquetPDF: React.FC = (props) => {
                 <td className={s.bold}>{total_tickets}</td>
             </tr>
             <tr className={s.tickets}>
-                <td colSpan={6}></td>
+                <td colSpan={6}>{banquet?.description}</td>
             </tr>
             <tr className={s.tickets}>
                 <td colSpan={5}><h3 className={s.title_right}>Загальна сума</h3></td>
@@ -117,7 +117,7 @@ export const OneBanquetPDF: React.FC = (props) => {
                 <td colSpan={2}><h3 className={s.title}>Аванс</h3></td>
                 <td>{banquet?.advance_amount}</td>
                 <td colSpan={2}><h3 className={s.title}>Залишок</h3></td>
-                <td></td>
+                <td>{(total_tickets + total_menus) - (banquet?.advance_amount as number)}</td>
             </tr>
         </table>
     </>

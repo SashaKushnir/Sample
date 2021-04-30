@@ -7,7 +7,6 @@ import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
 import { ticketsActions } from "../tickets/ticketsActions";
 import { servicesActions } from "../services/servicesActions";
 
-
 export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<ActionsTypes<typeof commonActions>>, getState: () => RootState) => {
     d(commonActions.fetchingToggle(true))
     try {

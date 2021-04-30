@@ -9,6 +9,7 @@ import { createObjReducer } from "./formPostObject/createObjReducer";
 import {customersReducer} from "./customers/customersReducer";
 import {banquetReducer} from "./banquetInfo/banquetInfoReducer";
 import {CreateNewEmployeeR} from "./CreateNewEmployee/CreateNewEmployeeR";
+import {BanquetStates} from "./BanquetStates/BanquetStatesR";
 
 let reducersList = combineReducers({
     createNew : newBanknoteReducer,
@@ -19,7 +20,8 @@ let reducersList = combineReducers({
     common: commonReducer,
     customers: customersReducer,
     banquet: banquetReducer,
-    accounts: CreateNewEmployeeR
+    accounts: CreateNewEmployeeR,
+    banquetStates: BanquetStates
 })
 export type RootState = ReturnType<typeof reducersList>
 

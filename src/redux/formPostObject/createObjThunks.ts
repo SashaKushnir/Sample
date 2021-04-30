@@ -66,8 +66,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (ready) {
         d(commonActions.needAmountToggle(false))
         mainPost = {
-            id: getState().banquet.id?getState().banquet.id:undefined,
             name: getState().banquet.name,
+            //id: getState().banquet.id?getState().banquet.id:undefined,
             description: getState().banquet.description,
             customer_id: getState().banquet.customer?.id as number,
             creator_id: getState().common.userInfo?.id,
@@ -96,7 +96,9 @@ export const createPost = () => (d: any, getState: () => RootState) => {
                     }
                     return subset
                 })
-            }
+            },
+
+            comments:[]
         }
         d(createObjActions.setPostBanquetObj(mainPost))
         console.log("Post obj ")
