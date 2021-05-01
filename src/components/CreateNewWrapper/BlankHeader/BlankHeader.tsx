@@ -6,6 +6,8 @@ import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
+import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
+import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
 
 type PropsType = {
     isEdit: boolean
@@ -17,7 +19,9 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
 
-    const isEditMode = useSelector((state:RootState) => state.common.banquetEditMode)
+    const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
+    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
+        <SpaceI key={index} spaceI={spaceI}/>)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value as any))
@@ -30,11 +34,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value)
-        if(e.target.value === "Planning")
+        if (e.target.value === "Planning")
             d(banquetActions.setState(1))
-        if(e.target.value === "Booked")
+        if (e.target.value === "Booked")
             d(banquetActions.setState(2))
-        if(e.target.value === "Finished")
+        if (e.target.value === "Finished")
             d(banquetActions.setState(3))
 
     }
@@ -52,6 +56,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         console.log(time)
         time += ":00"
         d(banquetActions.setBegining(time))
+        d(getListOfSpaces(localStorage.getItem("api_token") || ""))
     }
     const setEnd = (e: ChangeEvent<HTMLInputElement>) => {
         let time = e.target.value.replace("T", " ")
@@ -101,7 +106,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 {!isEditMode && <div>
                     Creating Mode
                 </div>
-
                 }
                 <div>
                     <button onClick={clearBasket}>Clear Basket</button>
@@ -161,6 +165,12 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 </div>
             </div>
             <hr className={s.solid}/>
+        </div>
+        <div>
+            Spaces
+            <div className={s.spacesWrapper}>
+                {spaces}
+            </div>
         </div>
 
     </div>

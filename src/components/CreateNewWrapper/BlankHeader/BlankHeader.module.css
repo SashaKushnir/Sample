@@ -44,3 +44,8 @@ hr.solid {
     margin-bottom: 10px;
 }
 
+.spacesWrapper {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20% 20%;
+}
+

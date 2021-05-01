@@ -1,6 +1,5 @@
 import {ActionsTypes} from "../store";
 import {banquetActions} from "./banquetInfoActions";
-import {State} from "../history/newHistoryReducer";
 import {CustomerType} from "../customers/customersReducer";
 
 let initialState: BanquetInitial = {
@@ -14,6 +13,30 @@ let initialState: BanquetInitial = {
     state: 1
 }
 
+export interface SpaceItem {
+    "id": number
+    "name": string
+    "description": null | string
+    "number": number
+    "floor": number
+    "price": number
+    "category_id": number | null
+    "period_id": unknown
+    "period": unknown
+    "category": SpaceCategory
+    "created_at": string
+    "updated_at": string
+    "type": string
+}
+
+export interface SpaceCategory {
+    "id": number
+    "name": string
+    "description": string | null
+    "type": string
+}
+
+
 export type BanquetInitial = {
     id?: number
     name: string
@@ -24,6 +47,7 @@ export type BanquetInitial = {
     total: number
     customer: CustomerType | null
     state: number
+    basicSpaces?: Array<SpaceItem>
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -34,10 +58,16 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 name:action.name
             }
+
         case "SET_BEGINING":
             return{
                 ...banquet,
                 beginning: action.time
+            }
+        case "SET_BASIC_SPACES_INFO":
+            return {
+                ...banquet,
+                basicSpaces: [...action.spaces]
             }
         case "SET_END":
             return{
