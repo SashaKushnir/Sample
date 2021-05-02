@@ -12,6 +12,7 @@ import {FetchingComponent} from "../../../common/compon/FetchingComponent/Fetchi
 import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
 import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
+import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 
 
 type PropsType = {
@@ -32,6 +33,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     }, [fullEmptyAmount])
     useEffect(() => {
         setEditMode(true)
+        d(getListOfSpaces(localStorage.getItem("api_token") || ""))
     }, [])
     const saveB = () => {
         d(createPost())

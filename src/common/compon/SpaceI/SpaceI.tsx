@@ -1,14 +1,25 @@
 import React from 'react'
 import {SpaceItem} from "../../../redux/banquetInfo/banquetInfoReducer";
+import s from './SpaceI.module.css'
+import {useDispatch} from "react-redux";
+import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 
 interface SpaceIProps {
     spaceI: SpaceItem
 }
 
 export const SpaceI: React.FC<SpaceIProps> = ({spaceI}) => {
-    return <div>
+
+    const d = useDispatch()
+
+    const selectSpaceI = () => {
+        d(banquetActions.setSpaceSelectedOrUnSelected(spaceI.id))
+    }
+
+    return <div className={`${spaceI.selected?s.selected:''}  ${s.spaceI}`}
+    onClick={selectSpaceI}>
         <div>
-            <b>Name: </b>Name:{spaceI.name}
+            <b>Name: </b>{spaceI.name}
         </div>
         <div>
             <b>Floor: </b>{spaceI.floor}

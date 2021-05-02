@@ -27,6 +27,7 @@ export interface SpaceItem {
     "created_at": string
     "updated_at": string
     "type": string
+    selected?: boolean
 }
 
 export interface SpaceCategory {
@@ -58,7 +59,16 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 name:action.name
             }
-
+        case "SELECT_UNSELECT_SPACE_BY_ID":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    if(spaceI.id === action.spaceId) {
+                        spaceI.selected = !!!spaceI.selected
+                    }
+                    return spaceI
+                })]:[]
+            }
         case "SET_BEGINING":
             return{
                 ...banquet,

@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
@@ -18,7 +18,6 @@ type PropsType = {
 export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
-
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI}/>)
@@ -56,7 +55,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         console.log(time)
         time += ":00"
         d(banquetActions.setBegining(time))
-        d(getListOfSpaces(localStorage.getItem("api_token") || ""))
     }
     const setEnd = (e: ChangeEvent<HTMLInputElement>) => {
         let time = e.target.value.replace("T", " ")

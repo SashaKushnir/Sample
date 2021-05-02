@@ -12,5 +12,7 @@ export const banquetActions = {
     setCustomer: (cus: CustomerType) => ({type: "SET_CUSTOMER", cus}) as const,
     setBanquetId: (banquetId: number) => ({type: "SET_ID_FOR_BANQUET", banquetId}) as const,
     removeBanquetId: () => ({type: "REMOVE_ID_FOR_BANQUET"}) as const,
-    setSpacesBasicInfo: (spaces: Array<SpaceItem>) => ({type: "SET_BASIC_SPACES_INFO", spaces}) as const
+    setSpacesBasicInfo: (spaces: Array<SpaceItem>) => ({type: "SET_BASIC_SPACES_INFO", spaces}) as const,
+    setSpaceSelectedOrUnSelected: (spaceId: number, status: boolean | undefined = undefined) =>
+         ({type: "SELECT_UNSELECT_SPACE_BY_ID", spaceId}) as const
 }

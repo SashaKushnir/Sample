@@ -1,0 +1,9 @@
+.selected {
+    background: #4CAF50;
+}
+
+.spaceI {
+    border-bottom: 4px inset black;
+    border-right: 4px inset black;
+    padding: 10px;
+}
