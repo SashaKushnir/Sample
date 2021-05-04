@@ -24,6 +24,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const token = localStorage.getItem("api_token")
     const postBObj = useSelector((state: RootState) => state.postBanquet.postBanquetObj)
     const fullEmptyAmount = useSelector((state: RootState) => state.common.fullEmptyAmount)
+
     let {url} = useRouteMatch()
     const d = useDispatch()
     const [editMode, setEditMode] = useState(true)
