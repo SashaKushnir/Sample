@@ -6,6 +6,7 @@ import { History } from "../redux/history/newHistoryReducer";
 import {CustomersArray} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
+import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
 
 export const BaseURL = "http://194.213.104.146:222"
 //http://imperia-api.com
@@ -58,4 +59,8 @@ export interface ApiPatchUserResponseType extends ApiResultType {
 
 export interface ApiGetBasicSpacesResponseType extends ApiResultType {
     spaces: Array<SpaceItem>
+}
+
+export interface ApiBanquetStatesResponseType extends ApiResultType {
+    states: BanquetStateArray
 }

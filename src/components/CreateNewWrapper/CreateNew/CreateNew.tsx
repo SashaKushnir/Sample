@@ -13,6 +13,7 @@ import {RootState} from "../../../redux/store";
 import {OrderItems} from "../../OrderInfo/OrderItems";
 import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
+import {setBanqueStateT} from "../../../redux/BanquetState/BanquetStatesT";
 
 
 type PropsType = {
@@ -34,6 +35,9 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     useEffect(() => {
         setEditMode(true)
         d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+    }, [])
+    useEffect(() => {
+        d(setBanqueStateT())
     }, [])
     const saveB = () => {
         d(createPost())

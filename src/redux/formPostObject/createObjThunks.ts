@@ -108,7 +108,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             description: getState().banquet.description,
             customer_id: getState().banquet.customer?.id as number,
             creator_id: getState().common.userInfo?.id,
-            state_id: getState().banquet.state,
+            state_id: getState().banquet.state?.id as number,
             advance_amount: getState().banquet.advance_amount,
             beg_datetime: getState().banquet.beginning,
             end_datetime: getState().banquet.end,

@@ -1,16 +1,17 @@
 import {ActionsTypes} from "../store";
 import {banquetActions} from "./banquetInfoActions";
 import {CustomerType} from "../customers/customersReducer";
+import {BanquetState} from "../BanquetState/BanquetStatesR";
 
 let initialState: BanquetInitial = {
-    name: "None",
-    description: "None",
+    name: "",
+    description: "",
     beginning: "",
     end: "",
     advance_amount: 0,
     total: 0,
     customer: null,
-    state: 1
+    state: null
 }
 
 export interface SpaceItem {
@@ -47,7 +48,7 @@ export type BanquetInitial = {
     advance_amount: number
     total: number
     customer: CustomerType | null
-    state: number
+    state: BanquetState | null
     basicSpaces?: Array<SpaceItem>
 }
 

@@ -1,13 +1,14 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
+import {BanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
 import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
+import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
 
 type PropsType = {
     isEdit: boolean
@@ -18,6 +19,9 @@ type PropsType = {
 export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
+    const all_states = useSelector(BanquetsStates)
+    const states = all_states?.map((obj: BanquetState) => <option>{obj.name}</option>)
+
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI}/>)
@@ -32,14 +36,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.setAdvance(e.target.value as any))
     }
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
-        if (e.target.value === "Planning")
-            d(banquetActions.setState(1))
-        if (e.target.value === "Booked")
-            d(banquetActions.setState(2))
-        if (e.target.value === "Finished")
-            d(banquetActions.setState(3))
-
+        all_states?.map(obj => {
+            if (e.target.value === obj.name)
+                d(banquetActions.setState(obj))
+        })
     }
     const data = useSelector(selectBanquet)
 
@@ -147,20 +147,23 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     Advance <input type="text" onChange={setAdvance} defaultValue={data.advance_amount}/>
                     <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
                            defaultValue={setDefaultTime(data.end)}/>
+                    <div className={s.advance}>
+                        State <select onChange={setState} defaultValue={data.state?.name}>
+                        {states}
+                    </select>
+                    </div>
                 </div>}
                 {!isEdit &&
                 <div className={s.advance}>
                     Advance <input type="text" value={data.advance_amount} readOnly/>
                     <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
                            readOnly/>
+                    <div className={s.advance}>
+                        State <select defaultValue={data.state?.name} aria-readonly>
+                        <option>{data.state?.name}</option>
+                    </select>
+                    </div>
                 </div>}
-                <div className={s.advance}>
-                    State <select onChange={setState}>
-                    <option>Planning</option>
-                    <option>Booked</option>
-                    <option>Finished</option>
-                </select>
-                </div>
             </div>
             <hr className={s.solid}/>
         </div>
