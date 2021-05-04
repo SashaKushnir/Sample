@@ -14,7 +14,7 @@ export const CreateNewMenus: React.FC = () => {
 
     useEffect(() => {
         let localMenus = JSON.parse(localStorage.getItem("menus") || "[]");
-        if (localMenus.length > 0) {
+        if (localMenus.length > 0 && (menuData?.length)) {
             d(newBanknoteActions.setMenuInfo(localMenus));
         } else
             d(setMenuT())
