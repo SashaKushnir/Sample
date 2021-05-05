@@ -16,10 +16,11 @@ export const ticketsActions = {
         type: "SET_TICKET_INFO",
         ticketI
     }) as const,
-    addTicketComment: (commentI: CommentMainProperties, index: number) => ({
+    addTicketComment: (commentI: CommentMainProperties, index: number, parentId: number) => ({
         type: "SAVE_COMMENT_TO_TICKETS",
         commentI,
-        index
+        index,
+        parentId
     }) as const,
     addTicketEmptyComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_TICKETS", commentI}) as const,
 }

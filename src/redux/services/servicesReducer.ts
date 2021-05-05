@@ -96,6 +96,7 @@ export const servicesReducer = (services = initialState, action: ActionsTypes<ty
                 return {
                     ...services,
                     services: services.services ? [...services.services.map((servicesI) => {
+                        if(servicesI.id === action.parentId)
                         servicesI.comments = servicesI.comments?.filter((commentI, index) => {
                             return index !== action.index
                         })
