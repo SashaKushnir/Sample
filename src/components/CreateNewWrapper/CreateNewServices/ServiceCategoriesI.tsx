@@ -22,8 +22,7 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
         d(servicesActions.addEntertainmentItem(serviceItem, value))
     }
 
-    return <div>
-        <div className={styles.intertaiment}>
+    return <div className={styles.intertaiment}>
             <div className={styles.img}>
              <IntertaimentImg entertainmentI={serviceItem}/>
             </div>
@@ -44,5 +43,5 @@ export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({servic
                 </div>
             </div>
         </div>
-    </div>
+
 }
