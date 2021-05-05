@@ -26,6 +26,7 @@
     text-align: center;
 }
 .ticket{
+    margin: 10px 0;
     display: flex;
     width: 100%;
 }
