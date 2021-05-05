@@ -104,6 +104,10 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")
+
+        localStorage.setItem("menus", JSON.stringify(menus))
+        localStorage.setItem("tickets", JSON.stringify(tickets1))
+        localStorage.setItem("services", JSON.stringify(services1))
     }
 
 
