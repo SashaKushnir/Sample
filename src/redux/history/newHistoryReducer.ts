@@ -5,6 +5,7 @@ import { historyActions } from "./newHistoryAction";
 import {MenuArray, Product_categories, ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import data from "./../../responses/banquets.json"
 import {CustomerType} from "../customers/customersReducer";
+import {SpaceItem} from "../banquetInfo/banquetInfoReducer";
 
 const initialState: HistoryInitial = {}
 
@@ -85,6 +86,7 @@ export interface History{
     ticket_order: Ticket_order | null
     product_order: Product_order | null
     service_order: Service_order | null
+    space_order: SpaceOrderGet | null
     state: State
     customer: CustomerType
     comments: Array<CommentItem>
@@ -109,4 +111,43 @@ type HistoryInitial = {
 }
 
 
-
+export interface SpaceOrderGet {
+    "id": number
+    "banquet_id": number
+    "discount_id": number | null
+    "created_at": string
+    "updated_at": string
+    "discount": null | unknown
+    "items"?:Array<SpaceItem>
+}
+//
+//
+// export interface SpaceOrderGetItem {
+//     "id": number
+//     "name": string
+//     "description": unknown | null
+//     "number": number
+//     "floor": number
+//     "price": 0,
+//     "category_id": 1,
+//     "period_id": null,
+//     "period": null,
+//     "category": {
+//         "id": 1,
+//         "name": "table",
+//         "description": null,
+//         "type": "space_categories"
+//     },
+//     "created_at": "2021-04-23 16:52:12",
+//     "updated_at": "2021-04-23 16:52:12",
+//     "type": "spaces",
+//     "beg_datetime": "2021-04-16 17:00:00",
+//     "end_datetime": "2022-04-16 21:00:00",
+//     "comments": []
+// }
+//
+//
+//         "items": [
+//         {
+//
+//         },

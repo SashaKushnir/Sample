@@ -20,6 +20,8 @@ import {DeleteIcon} from "../../../../common/compon/HistoryIcons/DeleteIcon";
 import {HideIcon} from "../../../../common/compon/HistoryIcons/HideIcon";
 import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
 import {commonActions} from "../../../../redux/forCommon/forCommonActions";
+import {RootState} from "../../../../redux/store";
+import {getListOfSpaces} from "../../../../redux/banquetInfo/banquetInfoT";
 
 interface BanquetProps {
     data: History
@@ -28,6 +30,7 @@ interface BanquetProps {
 
 export const OneBanquet: React.FC<BanquetProps> = (props) => {
     const d = useDispatch()
+    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
     const [hideProducts, setHideProducts] = useState(false)
     //const [hideAll, setHideAll] = useState(false)
     const data = props.data
@@ -99,7 +102,10 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         d(banquetActions.setEnd(data.end_datetime))
         d(banquetActions.setAdvance(data.advance_amount))
         d(banquetActions.setBanquetId(data.id))
-        //d(banquetActions.setState(data.state))
+        if (!spaces)
+            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+        if (data.space_order?.items)
+            d(banquetActions.setArrayOfSpacesSelected(data.space_order?.items))
 
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
@@ -168,7 +174,7 @@ export const OneBanquet: React.FC<BanquetProps> = (props) => {
         <div className={s.second}>
             <div className={s.products}>
                 <div className={s.title}>
-                   Products
+                    Products
                 </div>
                 <div className={s.items}>
                     {products}

@@ -24,25 +24,31 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const token = localStorage.getItem("api_token")
     const postBObj = useSelector((state: RootState) => state.postBanquet.postBanquetObj)
     const fullEmptyAmount = useSelector((state: RootState) => state.common.fullEmptyAmount)
+    const state = useSelector((state: RootState) => state.banquet.state)
+    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
 
     let {url} = useRouteMatch()
     const d = useDispatch()
     const [editMode, setEditMode] = useState(true)
     useEffect(() => {
-        if (fullEmptyAmount === false){
-            setEditMode(false)}
-        else {setEditMode(true)}
+        if (fullEmptyAmount === false) {
+            setEditMode(false)
+        } else {
+            setEditMode(true)
+        }
     }, [fullEmptyAmount])
     useEffect(() => {
         setEditMode(true)
-        d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+        if (!spaces)
+            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
     }, [])
     useEffect(() => {
-        d(setBanqueStateT())
+        if (!state)
+            d(setBanqueStateT())
     }, [])
     const saveB = () => {
         d(createPost())
-        if(!fullEmptyAmount)
+        if (!fullEmptyAmount)
             setEditMode(false)
 
     }
@@ -51,10 +57,9 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     }
     const submitB = () => {
         if (postBObj && token) {
-            if(postBObj.id){
+            if (postBObj.id) {
                 d(updateHistoryT(postBObj, token))
-            }
-            else{
+            } else {
                 d(postNewBanknote(postBObj, token))
             }
 

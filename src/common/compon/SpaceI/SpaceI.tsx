@@ -6,13 +6,15 @@ import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 
 interface SpaceIProps {
     spaceI: SpaceItem
+    editMode: boolean
 }
 
-export const SpaceI: React.FC<SpaceIProps> = ({spaceI}) => {
+export const SpaceI: React.FC<SpaceIProps> = ({spaceI, editMode}) => {
 
     const d = useDispatch()
 
     const selectSpaceI = () => {
+        if(editMode)
         d(banquetActions.setSpaceSelectedOrUnSelected(spaceI.id))
     }
 

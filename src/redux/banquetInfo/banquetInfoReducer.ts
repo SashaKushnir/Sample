@@ -80,6 +80,17 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 basicSpaces: [...action.spaces]
             }
+        case "SET_ARRAY_OF_SPACES_SELECTED":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    action.spaces.forEach((actionI) => {
+                        if(spaceI.id === actionI.id)
+                            spaceI.selected = true
+                    })
+                    return spaceI
+                })]:[]
+            }
         case "SET_END":
             return{
                 ...banquet,

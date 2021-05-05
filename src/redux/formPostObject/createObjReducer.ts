@@ -70,5 +70,16 @@ export type BanquetType = {
     product_order?: Product_order
     ticket_order?: Ticket_order
     service_order?: Service_order
+    space_order?: {
+        discount_id: number | null
+        items?: Array<SpaceOrderItem>
+    }
     comments?: Array<CommentItem>
+}
+
+
+export interface SpaceOrderItem {
+    "id": number
+    "beg_datetime": string
+    "end_datetime": string
 }

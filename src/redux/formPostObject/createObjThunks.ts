@@ -80,13 +80,13 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             return acum
         }, [])
         ticketComments = getState().tickets.tickets?.reduce((acum: Array<CommentItem>, ticketI) => {
-            if(ticketI.comments?.length>0)
-            acum = acum.concat(ticketI.comments)
+            if (ticketI.comments?.length > 0)
+                acum = acum.concat(ticketI.comments)
             return acum
         }, [])
         servicesComments = getState().services.services?.reduce((acum: Array<CommentItem>, serviceI) => {
-            if(serviceI.comments?.length>0)
-            acum = acum.concat(serviceI.comments)
+            if (serviceI.comments?.length > 0)
+                acum = acum.concat(serviceI.comments)
             return acum
         }, [])
         console.log("MenuComments", menuComments)
@@ -134,7 +134,19 @@ export const createPost = () => (d: any, getState: () => RootState) => {
                     return subset
                 })
             },
-              comments:resultComments?resultComments:[]
+            space_order: {
+                discount_id: null,
+                items:  getState().banquet.basicSpaces?.filter((spaceI)=>{
+                    return spaceI.selected
+                }).map((spaceI) => {
+                        const item = _.pick(spaceI, "id")
+                        item["beg_datetime"] = getState().banquet.beginning
+                        item["end_datetime"] = getState().banquet.end
+                        return item
+                    })
+
+            },
+            comments: resultComments ? resultComments : []
         }
         d(createObjActions.setPostBanquetObj(mainPost))
         console.log("Post obj ")
