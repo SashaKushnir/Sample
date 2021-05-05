@@ -61,7 +61,7 @@
     float: right;
     font-size: 16px;
 }
-.second{
+.order{
     margin-top: 10px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -100,4 +100,6 @@
     box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
 }
 
-
+.tables{
+    display: block;
+}

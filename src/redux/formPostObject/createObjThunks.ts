@@ -22,7 +22,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
             if (item.ready === false) {
-                console.log("select menus")
+                alert("select menus - " + item.name)
                 ready = false
             }
         })
@@ -30,7 +30,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
     getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
-            console.log("select tickets")
+            alert("select tickets - " + item.name)
             ready = false
         }
     })
@@ -40,29 +40,36 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             item.duration = 0
         }
         if (item.ready === false) {
-            console.log("select services")
+            alert("select services - " + item.name)
             ready = false
         }
     })
 
-    if (getState().banquet.customer === undefined) {
-        console.log("select customer")
+    if (getState().banquet.customer === undefined || getState().banquet.customer === null) {
+        alert("select customer")
         ready = false
     }
 
-
     if (getState().banquet.beginning === "") {
-        console.log("select start time")
+        alert("select start time")
         ready = false
     }
 
     if (getState().banquet.end === "") {
-        console.log("select end time")
+        alert("select end time")
         ready = false
     }
 
     if (getState().banquet.advance_amount === null) {
-        console.log("select advance_amount")
+        alert("select advance_amount")
+        ready = false
+    }
+    if (getState().banquet.name === null || getState().banquet.name === "" || getState().banquet.name === undefined) {
+        alert("select name")
+        ready = false
+    }
+    if (getState().banquet.state === null || getState().banquet.state === undefined) {
+        alert("select state")
         ready = false
     }
     if (getState().banquet.description === null) {
