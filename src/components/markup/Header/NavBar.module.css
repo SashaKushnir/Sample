@@ -5,7 +5,7 @@
     color: black;
     font-size: 120%;
     margin: 0% 2% 0% 0%;
-
+    vertical-align: middle;
     padding: 1%;
 }
 
@@ -30,8 +30,6 @@
     background-color: white;
     height: 50px;
     border-radius: 10px;
-    box-shadow:
-            0 25px 0 0px #FFFFFF;
 }
 .title{
 

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import {Field, Form, Formik} from "formik";
 import s from "../Authorisation/LoginForm.module.css";
 import {createAccount} from "../../redux/CreateNewEmployee/CreateNewEmployeeT";
+import {SignupSchema} from "./EditUserForm/EditUserForm";
 
 export interface CreateNewEmployeeType {
     name: string
@@ -16,17 +17,11 @@ export const CreateNewEmployeeForm = () => {
     const d = useDispatch()
     const unSuccessMessage = useSelector((state: RootState) => state.common.message)
 
-    const SignupSchema = Yup.object().shape({
-        name: Yup.string().required('Required'),
-        password: Yup.string().required('Required')
-            .min(8, 'Too Short!')
-            .max(50, 'Too Long!'),
-        role_id: Yup.string().required('Required')
-    });
+
 
     return <Formik onSubmit={(values: CreateNewEmployeeType) => {
         d(createAccount(values, localStorage.getItem("api_token") as string))
-        console.log(values)
+
         alert(JSON.stringify(values))
     }}
                    validationSchema={SignupSchema}

@@ -8,6 +8,7 @@ import { RootState } from "./redux/store";
 import { commonActions } from "./redux/forCommon/forCommonActions";
 import { logInWithToken } from "./redux/forCommon/forCommonThunks";
 import {OneBanquetPDF} from "./components/PDF/OneBanquetPDF/OneBanquetPDF";
+import {OneDayPDF} from "./components/PDF/OneDayPDF/OneDayPDF";
 
 export const App = () => {
     const api_token = localStorage.getItem("api_token")
@@ -51,9 +52,11 @@ export const App = () => {
                 <Redirect exact from="/" to="/content"/>
                 <Route path='/login' render={() => <Authorisation/>}/>
                 <Route path='/content' render={() => <MyPage/>}/>
-                <Route path='/pdf' render={() => <OneBanquetPDF/>}/>
+                <Route path='/OneBanquetPdf' render={() => <OneBanquetPDF/>}/>
+                <Route path='/OneDayPdf' render={() => <OneDayPDF/>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>
+
         </div>
     );
 }

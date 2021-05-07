@@ -130,14 +130,17 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const createpdf = () => {
         d(commonActions.setBanquetPdf(data))
     }
+    const employee = useSelector((state:RootState) => state.common.userInfo?.role)
 
     return <div className={s.main}>
         <div className={s.first}>
             <div className={s.buttons}>
-                <NavLink to="/content/new/menus" className={s.navLink}>
+
+                {employee?.can_modify &&  <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
-                </NavLink>
-                <NavLink to="/pdf" className={s.navLink}>
+                </NavLink>}
+
+                <NavLink to="/OneBanquetPdf" className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
                 <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
@@ -171,9 +174,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
 
             </div>
+            {employee?.can_modify &&
             <div>
                 <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
             </div>
+            }
         </div>
         {hideProducts && <div>
             <div className={s.order}>

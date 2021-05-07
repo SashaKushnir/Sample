@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {BanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
+import {selectBanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
 import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
@@ -19,7 +19,7 @@ type PropsType = {
 export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
-    const all_states = useSelector(BanquetsStates)
+    const all_states = useSelector(selectBanquetsStates)
     const states = all_states?.map((obj: BanquetState) => <option>{obj.name}</option>)
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
@@ -27,13 +27,13 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
-        d(banquetActions.setName(e.target.value as any))
+        d(banquetActions.setName(e.target.value.trim() as any))
     }
     const setDesc = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        d(banquetActions.setDescription(e.target.value as any))
+        d(banquetActions.setDescription(e.target.value.trim() as any))
     }
     const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
-        d(banquetActions.setAdvance(e.target.value as any))
+        d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
         all_states?.map(obj => {
@@ -144,7 +144,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             }
             <div className={s.margin}>
                 {isEdit && <div className={s.advance}>
-                    Advance <input type="text" onChange={setAdvance} defaultValue={data.advance_amount}/>
+                    Advance <input type="number" onChange={setAdvance} defaultValue={data.advance_amount} />
                     <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
                            defaultValue={setDefaultTime(data.end)}/>
                     <div className={s.advance}>

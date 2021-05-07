@@ -14,19 +14,21 @@ export interface LoginFormType {
 export const LoginForm = () => {
     const d = useDispatch()
     const unSuccessMessage = useSelector((state: RootState) => state.common.message)
-    useEffect(() => {
-
-    },[])
 
     const SignupSchema = Yup.object().shape({
-        name: Yup.string().required('Required'),
+        name: Yup.string().required('Required')
+            .min(2, 'Too Short')
+            .matches(
+                /^\S.{0,48}\S$/, "S or E"
+            )
+            .max(50, "Too long")
+        ,
         password: Yup.string().required('Required')
             .min(8, 'Too Short!')
-            .max(50, 'Too Long!'),
+            .max(50, 'Too Long!')
     });
 
     return <Formik onSubmit={(values: LoginFormType) => {
-        console.log(values)
         d(tryLoginT(values))
     }}
                    validationSchema={SignupSchema}
