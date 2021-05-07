@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {ProductCategoriesMyItem} from "./DishItem/ProductCategoriesMyItem";
-import {MenuItem} from "../../../../redux/newBanknote/newBanknoteReducer";
+import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './MenuItemComponent.module.css'
 import {FullscreenExitOutlined, FullscreenOutlined} from "@ant-design/icons";
 import {ProductCategoriesMyItemBasket} from "./DishItem/ProductCategoriesMyItemBasket";
@@ -10,16 +10,45 @@ interface MenuItemComponentProps {
     showAmount?: boolean
 }
 
+export interface ItemType {
+    category: string,
+    items: Array<ProductCategoriesItem>
+}
+
+export type ResArrayType = Array<ItemType>
+
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
     let [hide, setHide] = useState(false)
-    let product_categoriesItems = Menuitem.products.map((obj, index) =>
-        <ProductCategoriesMyItem key={index} keyVal={index}
-                                 showAmount={showAmount} product_categoriesItem={obj}/>)
+
     let product_categoriesItemsBasket = Menuitem.products.map((obj, index) =>
         <ProductCategoriesMyItemBasket key={index} keyVal={index}
                                  showAmount={showAmount} product_categoriesItem={obj}/>)
     const showMenuItem = Menuitem.products.some((obj) => obj.showAmount)
+
+    let categoryIds: Array<string> = Menuitem.products.reduce((acum: Array<string>, cur) => {
+        acum.push(cur.category.name as never)
+        return acum
+    },[])
+    categoryIds = Array.from(new Set(categoryIds))
+
+
+    const resArray = categoryIds.reduce((acum: ResArrayType, resItem) => {
+        const items = Menuitem.products.filter((arrItem) => {
+            return arrItem.category.name === resItem
+        })
+        acum.push({
+            category: resItem,
+            items: items
+        })
+        return acum
+    }, [])
+
+    console.log("resArray", resArray)
+
+
+
     return <div>
+
         {!showAmount && <div className={styles.item}>
             <div className={styles.title}>
                 <div className={styles.name}>
@@ -35,7 +64,18 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                 </div>
             </div>
             {!hide && <div className={styles.all_menu}>
-                {product_categoriesItems}
+                {
+                    resArray.map((resArrayItem) => {
+                        const items = resArrayItem.items.map((obj, index) => {
+                            return <ProductCategoriesMyItem key={index} keyVal={index}
+                                                     showAmount={showAmount} product_categoriesItem={obj}/>
+                        })
+                        return  <div>
+                            {resArrayItem.category}
+                            <div>{items}</div>
+                        </div>
+                    })
+                }
             </div>}
         </div>}
         {showAmount && showMenuItem && <div>
@@ -47,9 +87,6 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                     <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
                     : <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
             </div>
-            {/*<div>*/}
-            {/*    {Menuitem.menu_category.description}*/}
-            {/*</div>*/}
             {!hide && <div>
                 {product_categoriesItemsBasket}
             </div>}

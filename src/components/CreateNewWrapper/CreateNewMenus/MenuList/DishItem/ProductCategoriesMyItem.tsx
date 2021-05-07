@@ -1,11 +1,9 @@
-import React, { ChangeEvent, createRef, useEffect, useRef, useState } from 'react'
-import { ProductCategoriesItem } from "../../../../../redux/newBanknote/newBanknoteReducer";
+import React from 'react'
+import {ProductCategoriesItem} from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductCategoriesMyItem.module.css'
-import { DishImg } from "../../../../../common/compon/Dish/DishImg";
-import { useDispatch } from "react-redux";
-import { newBanknoteActions } from "../../../../../redux/newBanknote/newBanknoteActions";
-import { NumericInput } from "../../../../../common/compon/InputNumber/InputNumber";
-import _uniqueId from 'lodash/uniqueId';
+import {DishImg} from "../../../../../common/compon/Dish/DishImg";
+import {useDispatch} from "react-redux";
+import {newBanknoteActions} from "../../../../../redux/newBanknote/newBanknoteActions";
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
@@ -13,7 +11,13 @@ type DishesProps = {
     keyVal: number
 }
 
+
+
+
 export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categoriesItem, showAmount,keyVal}) => {
+
+
+
     const d = useDispatch()
     const deleteItem = () => {
         d(newBanknoteActions.deleteFullItem(product_categoriesItem))
@@ -21,7 +25,6 @@ export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categori
     const changeCurA = (value: number) => {
             d(newBanknoteActions.addMenuItem(product_categoriesItem, value))
     }
-    const [id] = useState(_uniqueId('prefix-'))
 
     return <div className={styles.dish}>
         <div className={styles.item}>
