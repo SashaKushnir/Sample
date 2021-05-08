@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { servicesActions } from "../../../redux/services/servicesActions";
 import { ServiceCategoriesIShowAmount } from "./ServiceCategoriesIShowAmount";
 import { setServicesT } from "../../../redux/services/servicesThunks";
+import {ItemType} from "../CreateNewMenus/MenuList/MenuItemComponent";
+import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 
 
 export const CreateNewServices = () => {
@@ -34,9 +36,27 @@ export const CreateNewServices = () => {
         obj.showAmount).map((obj,index)=>
         <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>)
 
+    let categoryIds: Array<string> | undefined = ser?.reduce((acum: Array<string>, cur) => {
+        acum.push(cur.category.name as never)
+        return acum
+    },[])
+    categoryIds = Array.from(new Set(categoryIds))
 
-    const services = useSelector(selectServices)?.map((obj, index) =>
-        <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>)
+
+    const resArray = categoryIds.reduce((acum: Array<ItemType<ServiceCategoriesItem>>, resItem) => {
+        const items = ser?.filter((arrItem) => {
+            return arrItem.category.name === resItem
+        })
+        if(items)
+            acum.push({
+                category: resItem,
+                items: items
+            })
+        return acum
+    }, [])
+
+    console.log("resArray", resArray)
+
 
 
     return <div className={styles.main}>
@@ -44,7 +64,17 @@ export const CreateNewServices = () => {
             {selectedServices}
         </div>
         <div className={styles.services}>
-            {services}
+            {
+                resArray.map((resArrayItem) => {
+                    const items = resArrayItem.items.map((obj, index) => {
+                        return <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>
+                    })
+                    return  <div>
+                        {resArrayItem.category}
+                        <div>{items}</div>
+                    </div>
+                })
+            }
         </div>
     </div>
 }

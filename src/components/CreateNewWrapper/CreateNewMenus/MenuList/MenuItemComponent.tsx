@@ -10,12 +10,12 @@ interface MenuItemComponentProps {
     showAmount?: boolean
 }
 
-export interface ItemType {
+export interface ItemType<itemType> {
     category: string,
-    items: Array<ProductCategoriesItem>
+    items: Array<itemType>
 }
 
-export type ResArrayType = Array<ItemType>
+export type ResArrayType = Array<ItemType<ProductCategoriesItem>>
 
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
     let [hide, setHide] = useState(false)
