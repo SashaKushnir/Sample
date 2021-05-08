@@ -10,7 +10,6 @@ export const getListOfSpaces = (token: string) => async (d: Dispatch<ActionsType
     try {
         d(commonActions.fetchingToggle(true))
         const res = await spaces.getListOfSpaces(token)
-        console.log("Spaces Info", res)
         if (res.data.response_status) {
             d(banquetActions.setSpacesBasicInfo(res.data.spaces))
         } else {

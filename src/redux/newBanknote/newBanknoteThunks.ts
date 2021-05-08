@@ -8,10 +8,6 @@ export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknote
     try {
         d(commonActions.fetchingToggle(true))
         const response = await menus.getAllMenus()
-        console.log("res", response)
-        // Set response to Bll
-
-
          if (response.data.response_status && !response.data.response_error) {
             d(newBanknoteActions.setMenuInfo(response.data.menus))
             d(commonActions.fetchingToggle(false))

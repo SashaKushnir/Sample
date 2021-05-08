@@ -10,7 +10,6 @@ export const setTicketsT = () => async (d: Dispatch<ActionsTypes<typeof ticketsA
     try {
         d(commonActions.fetchingToggle(true))
         const response = await tickets.getAllTickets()
-        console.log(response)
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
             d(ticketsActions.setTicketInfo(response.data.tickets))

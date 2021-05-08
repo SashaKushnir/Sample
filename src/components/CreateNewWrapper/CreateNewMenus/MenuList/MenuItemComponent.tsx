@@ -43,10 +43,6 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
         return acum
     }, [])
 
-    console.log("resArray", resArray)
-
-
-
     return <div>
 
         {!showAmount && <div className={styles.item}>

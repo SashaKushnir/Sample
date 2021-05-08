@@ -53,11 +53,6 @@ export const CreateNewTickets = () => {
         return acum
     }, [])
 
-    console.log("resArray", resArray)
-
-
-
-
     return <div className={styles.main}>
         <div className={styles.basket}>
             {selectedTickets}

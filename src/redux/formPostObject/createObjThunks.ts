@@ -96,7 +96,6 @@ export const createPost = () => (d: any, getState: () => RootState) => {
                 acum = acum.concat(serviceI.comments)
             return acum
         }, [])
-        console.log("MenuComments", menuComments)
         if (menuComments ? (menuComments.length > 0) : false) { // @ts-ignore
             resultComments = resultComments ? resultComments.concat(menuComments) : menuComments
         }
@@ -107,8 +106,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             resultComments = resultComments ? resultComments.concat(servicesComments) : servicesComments
         }
         resultComments?.filter((obj) => obj !== undefined)
-        console.log("MyCOMMENTS", resultComments)
-        // concat.concat(
+
         mainPost = {
             id: getState().banquet.id ? getState().banquet.id : undefined,
             name: getState().banquet.name,
@@ -156,12 +154,9 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             comments: resultComments ? resultComments : []
         }
         d(createObjActions.setPostBanquetObj(mainPost))
-        console.log("Post obj ")
-        console.log(mainPost)
     } else {
         d(commonActions.needAmountToggle(true))
     }
-    console.log("is ready? " + ready)
 
 }
 
@@ -169,7 +164,6 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
-        console.log(":POSRRESPA", res)
         if (true) {
 
         } else {

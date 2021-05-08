@@ -11,7 +11,6 @@ export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof Banq
         const response = await BanquetStates.getBanquetStates()
         // Set response to Bll
         if (response.data.response_status && !response.data.response_error) {
-            console.log(response.data.states)
             d(BanquetStateActions.setStates(response.data.states))
         } else {
             console.warn(response.data.response_error)

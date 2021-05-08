@@ -55,10 +55,6 @@ export const CreateNewServices = () => {
         return acum
     }, [])
 
-    console.log("resArray", resArray)
-
-
-
     return <div className={styles.main}>
         <div className={styles.basket}>
             {selectedServices}

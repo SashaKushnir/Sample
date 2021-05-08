@@ -52,7 +52,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const setBegining = (e: ChangeEvent<HTMLInputElement>) => {
         let time = e.target.value.replace("T", " ")
-        console.log(time)
         time += ":00"
         d(banquetActions.setBegining(time))
     }
