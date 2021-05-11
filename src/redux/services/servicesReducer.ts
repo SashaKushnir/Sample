@@ -33,7 +33,7 @@ export interface ServiceCategoriesItem {
     description: string | null
     amount?: number | string
     showAmount?: boolean
-    once_paid_price: number | null
+    once_paid_price: number
     hourly_paid_price: number | null
     category_id: number | null
     period_id: number | null

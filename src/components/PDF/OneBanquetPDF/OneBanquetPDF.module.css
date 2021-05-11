@@ -47,3 +47,44 @@ td{
 .per16{
     width: 16.6%;
 }
+.pidpys{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin: 20px 5px;
+    display: inline-block;
+}
+.pidpys_down{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin-top: 50px;
+    display: inline-block;
+}
+.date{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin-top: 50px;
+    display: inline-block;
+}
+.pid{
+    border-bottom: 1px solid black;
+    width: 150px;
+    margin-top: 50px;
+    display: block;
+}
+.right{
+    float: right;
+    display: block;
+    margin-right: 15px;
+}
+.center{
+    display: block;
+    text-align: center;
+}
+.left{
+    float: left;
+    display: block;
+    margin-left: 15px;
+}
