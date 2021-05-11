@@ -10,8 +10,8 @@ export const getListOfSpaces = (token: string) => async (d: Dispatch<ActionsType
     try {
         d(commonActions.fetchingToggle(true))
         const res = await spaces.getListOfSpaces(token)
-        if (res.data.response_status) {
-            d(banquetActions.setSpacesBasicInfo(res.data.spaces))
+        if (res.data.success) {
+            d(banquetActions.setSpacesBasicInfo(res.data.data))
         } else {
 
         }

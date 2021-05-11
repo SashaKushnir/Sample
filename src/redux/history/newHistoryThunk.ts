@@ -11,10 +11,10 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         d(commonActions.fetchingToggle(true))
         const response = await history.getAllHistory()
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
-            d(historyActions.setHistoryInfo(response.data.banquets))
+        if (response.data.success ) {
+            d(historyActions.setHistoryInfo(response.data.data))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
@@ -46,11 +46,11 @@ export const deleteHistoryT = (id:number, api_token:string) => async (d: Dispatc
         const response = await history.deleteHistory(id, api_token)
 
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
+        if (response.data.success) {
             d(historyActions.deleteOneHistoty(id))
             d(commonActions.fetchingToggle(false))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {

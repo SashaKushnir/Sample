@@ -14,6 +14,7 @@ export interface EditUserType {
     password: string
     role_id: 1 | 2 | 3
     api_token: string
+    id?: number
 }
 
 export const UserItem: React.FC<UserItemProps> = ({userI}) => {
@@ -23,10 +24,12 @@ export const UserItem: React.FC<UserItemProps> = ({userI}) => {
             name: userI.name,
             password:userI.password,
             role_id: userI.role_id as 1 | 2 | 3,
-            api_token: userI.api_token}))
+            api_token: userI.api_token,
+            id: userI.id
+        }))
     }
     const deleteU = (e: SyntheticEvent) => {
-        d(deleteUser(userI.api_token))
+        d(deleteUser(userI.api_token, userI.id))
         e.stopPropagation()
     }
     return <div onClick={editUser} className={s.userItemWrap}>

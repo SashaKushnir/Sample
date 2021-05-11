@@ -8,7 +8,7 @@ import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
 import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
 
-export const BaseURL = "http://194.213.104.146:222"
+export const BaseURL = "http://194.213.104.146:88/api"
 //http://imperia-api.com
 
 export const myGetInstance = axios.create({
@@ -19,38 +19,37 @@ export const myPostInstance = axios.create({
 })
 
 export type ApiResultType = {
-    response_error: string | null
-    response_status: boolean
-    response_status_code: number | null
+    errors?: any            //HashMap
+    success: boolean
     message?: string
 }
 
 export interface ApiMenusResultType extends ApiResultType {
-    menus: MenuArray
+    data: MenuArray
 }
 
 export interface ApiLoginResultType extends ApiResultType {
-    user: UserType
+    data: UserType
 }
 
 export interface ApiCustomersResultType extends ApiResultType {
-    customers: CustomersArray
+    data: CustomersArray
 }
 
 export interface ApiServicesResultType extends ApiResultType {
-    services: Array<ServiceCategoriesItem>
+    data: Array<ServiceCategoriesItem>
 }
 
 export interface ApiTicketsResultType extends ApiResultType {
-    tickets: Array<TicketItem>
+    data: Array<TicketItem>
 }
 
 export interface ApiHistoryResultType extends ApiResultType {
-    banquets: Array<History>
+    data: Array<History>
 }
 
 export interface ApiGetUsersResultType extends ApiResultType {
-    users: Array<UserInter>
+    data: Array<UserInter>
 }
 
 export interface ApiPatchUserResponseType extends ApiResultType {
@@ -58,9 +57,9 @@ export interface ApiPatchUserResponseType extends ApiResultType {
 }
 
 export interface ApiGetBasicSpacesResponseType extends ApiResultType {
-    spaces: Array<SpaceItem>
+    data: Array<SpaceItem>
 }
 
 export interface ApiBanquetStatesResponseType extends ApiResultType {
-    states: BanquetStateArray
+    data: BanquetStateArray
 }

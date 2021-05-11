@@ -10,6 +10,7 @@ import styles from './EditUserForm.module.css'
 
 export interface EditUserObjectType extends CreateNewEmployeeType {
     api_token?: string
+    id?: number
 }
 export const SignupSchema = Yup.object().shape({
     name: Yup.string().required('Required')
@@ -30,7 +31,10 @@ export const EditUserForm = () => {
     const initialInfo = useSelector((state: RootState) => state.accounts.editUserInfo)
 
     return <Formik onSubmit={(values: CreateNewEmployeeType) => {
-        Object.assign(values, {api_token: initialInfo?.api_token});
+        Object.assign(values, {
+            api_token: initialInfo?.api_token,
+            id: initialInfo?.id
+        });
         d(editUser(values))
     }}
                    enableReinitialize

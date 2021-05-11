@@ -10,10 +10,10 @@ export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof Banq
         d(commonActions.fetchingToggle(true))
         const response = await BanquetStates.getBanquetStates()
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
-            d(BanquetStateActions.setStates(response.data.states))
+        if (response.data.success) {
+            d(BanquetStateActions.setStates(response.data.data))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {

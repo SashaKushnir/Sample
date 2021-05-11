@@ -9,11 +9,11 @@ export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof service
         d(commonActions.fetchingToggle(true))
         const response = await services.getAllServices()
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
-            d(servicesActions.setEntertainmentInfo(response.data.services))
+        if (response.data.success) {
+            d(servicesActions.setEntertainmentInfo(response.data.data))
             d(commonActions.fetchingToggle(false))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
         }
     } catch (error) {
         alert("Something went wrong")

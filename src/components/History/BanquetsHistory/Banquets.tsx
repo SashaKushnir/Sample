@@ -28,10 +28,18 @@ export const Banquets: React.FC = () => {
         if(!tickets)
             d(setTicketsT())
     }, [])
+
+    const searchForBegDateTime = () => {
+
+    }
+
     return <div>
         <NavLink to="/OneDayPdf" className={s.navLink}>
             <div className={s.btn}>Звіт на день</div>
         </NavLink>
+        <div>
+            <input type="datetime-local" id="meeting-time" className={s.time} onChange={searchForBegDateTime}/>
+        </div>
         {history}
     </div>
 

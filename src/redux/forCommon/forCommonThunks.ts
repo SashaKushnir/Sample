@@ -12,8 +12,8 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
     d(commonActions.fetchingToggle(true))
     try {
         const res = await login.tryLogin(loginObject)
-        if (res.data.user) {
-            d(commonActions.setAuthorisedData(res.data.user))
+        if (res.data.data) {
+            d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))
         } else {
@@ -41,9 +41,9 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
     try {
         d(commonActions.fetchingToggle(true))
         const res = await login.loginByToken(token)
-        if(res.data.user){
+        if(res.data.data){
             d(commonActions.successTokenToggle(true))
-            d(commonActions.setAuthorisedData(res.data.user))
+            d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))
         } else {
@@ -57,6 +57,9 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
         console.warn(error)
         alert("Error")
         d(commonActions.fetchingToggle(false))
+        d(commonActions.successTokenToggle(false))
+        d(commonActions.authToggle(false))
+        d(commonActions.setAuthorisedData(undefined))
     }
 }
 

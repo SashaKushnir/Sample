@@ -4,7 +4,7 @@ import {EditUserObjectType} from "../../components/CreateEmployeeAccount/EditUse
 
 export const accounts = {
     tryCreateAccount: (signUpObject: CreateNewEmployeeType, api_token: string) => {
-        return myGetInstance.post('/users', {user: signUpObject},{
+        return myGetInstance.post('/users', {data: signUpObject},{
             headers: {
                 api_token: api_token
             }
@@ -18,18 +18,18 @@ export const accounts = {
         })
     },
     editAccountByToken: (newUserData: EditUserObjectType, token: string) => {
-        return myGetInstance.patch<ApiPatchUserResponseType>('/users', {user: newUserData}, {
+        return myGetInstance.patch<ApiPatchUserResponseType>('/users', {data: newUserData}, {
             headers: {
                 api_token: token
             }
         })
     },
-    deleteAccountByToken: (tokenForDelete: string, headerToken: string) => {
+    deleteAccountById: (id: number, headerToken: string) => {
         return myGetInstance.delete<ApiResultType>('/users',  {
             headers: {
                 api_token: headerToken
             },
-            data: {user: {api_token: tokenForDelete}}
+            data: {id: id}
         })
     },
 }
