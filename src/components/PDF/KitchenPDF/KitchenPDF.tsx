@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {History} from "./../../../redux/history/newHistoryReducer"
-import s from "./OneBanquetPDF.module.css"
+import s from "./KitchenPDF.module.css"
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
@@ -35,7 +35,7 @@ const Item: React.FC<ItemProps> = (props) => {
 
 }
 
-export const OneBanquetPDF: React.FC = (props) => {
+export const KitchenPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
     let total_menus = 0
