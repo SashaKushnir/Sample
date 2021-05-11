@@ -5,6 +5,7 @@ import {selectUsers} from "../../selectors/selectCreateNew";
 import {CustomerProfile} from "./CustomerProfile";
 import {setHistoryT} from "../../redux/history/newHistoryThunk";
 import {setCustomersT} from "../../redux/customers/customersThunk";
+import {CreateCustomerWrapper} from "../CreateNewWrapper/CreateNewWrapper/crCustomer/CreateCustomerWrapper";
 
 type ProptsType = {
     CusMenuSwitch:  any
@@ -25,6 +26,9 @@ export const Customers: React.FC<ProptsType> = (props) => {
     return(
         <div>
             Users
+            <div>
+                <CreateCustomerWrapper/>
+            </div>
             <div>
                 {customerProfiles}
             </div>
