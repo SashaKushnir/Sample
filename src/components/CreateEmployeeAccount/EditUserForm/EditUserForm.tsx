@@ -10,27 +10,31 @@ import styles from './EditUserForm.module.css'
 
 export interface EditUserObjectType extends CreateNewEmployeeType {
     api_token?: string
+    id?: number
 }
+export const SignupSchema = Yup.object().shape({
+    name: Yup.string().required('Required')
+        .min(2, 'Too Short')
+        .matches(
+            /^\S.{0,48}\S$/, "S or E"
+        )
+        .max(50, "Too long")
+    ,
+    password: Yup.string().required('Required')
+        .min(8, 'Too Short!')
+        .max(50, 'Too Long!'),
+    role_id: Yup.string().required('Required')
+});
 
 export const EditUserForm = () => {
     const d = useDispatch()
     const initialInfo = useSelector((state: RootState) => state.accounts.editUserInfo)
-    const SignupSchema = Yup.object().shape({
-        name: Yup.string().required('Required')
-            .min(2, 'Too Short')
-            .matches(
-                /^\S.{0,48}\S$/, "S or E"
-            )
-            .max(50, "Too long")
-        ,
-        password: Yup.string().required('Required')
-            .min(8, 'Too Short!')
-            .max(50, 'Too Long!'),
-        role_id: Yup.string().required('Required')
-    });
+
     return <Formik onSubmit={(values: CreateNewEmployeeType) => {
-        Object.assign(values, {api_token: initialInfo?.api_token});
-        console.log("VALUES", values)
+        Object.assign(values, {
+            api_token: initialInfo?.api_token,
+            id: initialInfo?.id
+        });
         d(editUser(values))
     }}
                    enableReinitialize

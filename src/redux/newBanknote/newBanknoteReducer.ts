@@ -82,7 +82,6 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                                         commentI.text = action.commentI.text
                                     }
                                     return commentI
-
                                 })
                             }
                             return productI
@@ -96,7 +95,8 @@ export const newBanknoteReducer = (newBanknote: MenusInitial = initialState, act
                 ...newBanknote,
                 menus: newBanknote.menus?[...newBanknote.menus.map((categoryI) => {
                     categoryI.products.map((productI) => {
-                            productI.comments = productI.comments.filter((commentI, index) =>{
+                        if(productI.id === action.parentId)
+                            productI.comments = productI.comments?.filter((commentI, index) => {
                                 return index !== action.index
                             })
                         return productI

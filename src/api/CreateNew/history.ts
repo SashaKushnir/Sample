@@ -7,7 +7,7 @@ export const history = {
         return myGetInstance.get<ApiHistoryResultType>('/banquets')
     },
     postHistory: (obj: BanquetType, api_token: string) => {
-        return myPostInstance.post('/banquets', {banquet: obj}, {
+        return myPostInstance.post('/banquets', {data: obj}, {
             headers: {
                 "api_token": api_token
             }
@@ -15,7 +15,7 @@ export const history = {
     },
     patchHistory: (patchBanquet: BanquetType, token: string) => {
         return myPostInstance.patch('/banquets', {
-                "banquet": patchBanquet
+                "data": patchBanquet
             }, {
                 headers: {
                     api_token: token
@@ -25,11 +25,9 @@ export const history = {
     },
     deleteHistory: (id: number, api_token: string) => {
         const obj = {
-            "banquet": {
-                "id": id
-            }
+            "id": id
         }
-
+        
         return myPostInstance.delete<ApiResultType>('/banquets', {
             headers: {
                 "api_token": api_token

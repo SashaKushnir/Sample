@@ -1,18 +1,43 @@
 import {ActionsTypes} from "../store";
 import {banquetActions} from "./banquetInfoActions";
-import {State} from "../history/newHistoryReducer";
 import {CustomerType} from "../customers/customersReducer";
+import {BanquetState} from "../BanquetState/BanquetStatesR";
 
 let initialState: BanquetInitial = {
-    name: "None",
-    description: "None",
+    name: "",
+    description: "",
     beginning: "",
     end: "",
     advance_amount: 0,
     total: 0,
     customer: null,
-    state: 1
+    state: null
 }
+
+export interface SpaceItem {
+    "id": number
+    "name": string
+    "description": null | string
+    "number": number
+    "floor": number
+    "price": number
+    "category_id": number | null
+    "period_id": unknown
+    "period": unknown
+    "category": SpaceCategory
+    "created_at": string
+    "updated_at": string
+    "type": string
+    selected?: boolean
+}
+
+export interface SpaceCategory {
+    "id": number
+    "name": string
+    "description": string | null
+    "type": string
+}
+
 
 export type BanquetInitial = {
     id?: number
@@ -23,7 +48,8 @@ export type BanquetInitial = {
     advance_amount: number
     total: number
     customer: CustomerType | null
-    state: number
+    state: BanquetState | null
+    basicSpaces?: Array<SpaceItem>
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -34,10 +60,36 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 name:action.name
             }
+        case "SELECT_UNSELECT_SPACE_BY_ID":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    if(spaceI.id === action.spaceId) {
+                        spaceI.selected = !!!spaceI.selected
+                    }
+                    return spaceI
+                })]:[]
+            }
         case "SET_BEGINING":
             return{
                 ...banquet,
                 beginning: action.time
+            }
+        case "SET_BASIC_SPACES_INFO":
+            return {
+                ...banquet,
+                basicSpaces: [...action.spaces]
+            }
+        case "SET_ARRAY_OF_SPACES_SELECTED":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    action.spaces.forEach((actionI) => {
+                        if(spaceI.id === actionI.id)
+                            spaceI.selected = true
+                    })
+                    return spaceI
+                })]:[]
             }
         case "SET_END":
             return{

@@ -22,7 +22,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
             if (item.ready === false) {
-                console.log("select menus")
+                alert("select menus - " + item.name)
                 ready = false
             }
         })
@@ -30,7 +30,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
     getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
-            console.log("select tickets")
+            alert("select tickets - " + item.name)
             ready = false
         }
     })
@@ -40,29 +40,36 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             item.duration = 0
         }
         if (item.ready === false) {
-            console.log("select services")
+            alert("select services - " + item.name)
             ready = false
         }
     })
 
-    if (getState().banquet.customer === undefined) {
-        console.log("select customer")
+    if (getState().banquet.customer === undefined || getState().banquet.customer === null) {
+        alert("select customer")
         ready = false
     }
 
-
     if (getState().banquet.beginning === "") {
-        console.log("select start time")
+        alert("select start time")
         ready = false
     }
 
     if (getState().banquet.end === "") {
-        console.log("select end time")
+        alert("select end time")
         ready = false
     }
 
     if (getState().banquet.advance_amount === null) {
-        console.log("select advance_amount")
+        alert("select advance_amount")
+        ready = false
+    }
+    if (getState().banquet.name === null || getState().banquet.name === "" || getState().banquet.name === undefined) {
+        alert("select name")
+        ready = false
+    }
+    if (getState().banquet.state === null || getState().banquet.state === undefined) {
+        alert("select state")
         ready = false
     }
     if (getState().banquet.description === null) {
@@ -80,16 +87,15 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             return acum
         }, [])
         ticketComments = getState().tickets.tickets?.reduce((acum: Array<CommentItem>, ticketI) => {
-            if(ticketI.comments?.length>0)
-            acum = acum.concat(ticketI.comments)
+            if (ticketI.comments?.length > 0)
+                acum = acum.concat(ticketI.comments)
             return acum
         }, [])
         servicesComments = getState().services.services?.reduce((acum: Array<CommentItem>, serviceI) => {
-            if(serviceI.comments?.length>0)
-            acum = acum.concat(serviceI.comments)
+            if (serviceI.comments?.length > 0)
+                acum = acum.concat(serviceI.comments)
             return acum
         }, [])
-        console.log("MenuComments", menuComments)
         if (menuComments ? (menuComments.length > 0) : false) { // @ts-ignore
             resultComments = resultComments ? resultComments.concat(menuComments) : menuComments
         }
@@ -100,15 +106,14 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             resultComments = resultComments ? resultComments.concat(servicesComments) : servicesComments
         }
         resultComments?.filter((obj) => obj !== undefined)
-        console.log("MyCOMMENTS", resultComments)
-        // concat.concat(
+
         mainPost = {
             id: getState().banquet.id ? getState().banquet.id : undefined,
             name: getState().banquet.name,
             description: getState().banquet.description,
             customer_id: getState().banquet.customer?.id as number,
             creator_id: getState().common.userInfo?.id,
-            state_id: getState().banquet.state,
+            state_id: getState().banquet.state?.id as number,
             advance_amount: getState().banquet.advance_amount,
             beg_datetime: getState().banquet.beginning,
             end_datetime: getState().banquet.end,
@@ -134,15 +139,24 @@ export const createPost = () => (d: any, getState: () => RootState) => {
                     return subset
                 })
             },
-              comments:resultComments?resultComments:[]
+            space_order: {
+                discount_id: null,
+                items:  getState().banquet.basicSpaces?.filter((spaceI)=>{
+                    return spaceI.selected
+                }).map((spaceI) => {
+                        const item = _.pick(spaceI, "id")
+                        item["beg_datetime"] = getState().banquet.beginning
+                        item["end_datetime"] = getState().banquet.end
+                        return item
+                    })
+
+            },
+            comments: resultComments ? resultComments : []
         }
         d(createObjActions.setPostBanquetObj(mainPost))
-        console.log("Post obj ")
-        console.log(mainPost)
     } else {
         d(commonActions.needAmountToggle(true))
     }
-    console.log("is ready? " + ready)
 
 }
 
@@ -150,7 +164,6 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
-        console.log(":POSRRESPA", res)
         if (true) {
 
         } else {

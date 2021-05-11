@@ -52,7 +52,6 @@ export const OrderItems: React.FC = (props) => {
     )
     const total = menu_price + tickets_price + services_price
     d(banquetActions.setTotalPrice(total))
-    console.log(menu_price + tickets_price + services_price)
     return <div>
         <div className={s.order}>
             <div className={s.block}>

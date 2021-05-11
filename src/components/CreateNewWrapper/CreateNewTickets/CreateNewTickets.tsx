@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { selectTickets } from "../../../selectors/selectCreateNew";
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from "react-redux";
+import {selectTickets} from "../../../selectors/selectCreateNew";
 import styles from './CreateNewTickets.module.css'
-import { TicketItemMap } from "./TicketItemMap";
-import { ticketsActions } from "../../../redux/tickets/ticketsActions";
+import {TicketItemMap} from "./TicketItemMap";
+import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {TicketItemMapShowAmount} from "./TicketItemMapShowAmount";
-import { setTicketsT } from "../../../redux/tickets/ticketsThunks";
+import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
+import {ItemType} from "../CreateNewMenus/MenuList/MenuItemComponent";
+import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 export const CreateNewTickets = () => {
 
@@ -26,19 +28,47 @@ export const CreateNewTickets = () => {
         localStorage.setItem("tickets", JSON.stringify(ticketData))
     })
 
-    let tickets, selectedTickets
+    let  selectedTickets
     if(ticketData) {
-        tickets = ticketData.map((obj, index) =>
-        <TicketItemMap key={index} showAmount={false} ticketItem={obj}/>)
         selectedTickets = ticketData.map((obj, index) =>
             <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>)
     }
+
+    let categoryIds: Array<string> | undefined = ticketData?.reduce((acum: Array<string>, cur) => {
+        acum.push(cur.category.name as never)
+        return acum
+    },[])
+    categoryIds = Array.from(new Set(categoryIds))
+
+
+    const resArray = categoryIds.reduce((acum: Array<ItemType<TicketItem>>, resItem) => {
+        const items = ticketData?.filter((arrItem) => {
+            return arrItem.category.name === resItem
+        })
+        if(items)
+        acum.push({
+            category: resItem,
+            items: items
+        })
+        return acum
+    }, [])
+
     return <div className={styles.main}>
         <div className={styles.basket}>
             {selectedTickets}
         </div>
         <div className={styles.tickets}>
-            {tickets}
+            {
+                resArray.map((resArrayItem) => {
+                    const items = resArrayItem.items.map((obj, index) => {
+                        return <TicketItemMap key={index} ticketItem={obj} showAmount={false}/>
+                    })
+                    return  <div>
+                        {resArrayItem.category}
+                        <div>{items}</div>
+                    </div>
+                })
+            }
         </div>
     </div>
 }

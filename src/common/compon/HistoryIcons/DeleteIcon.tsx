@@ -4,5 +4,5 @@ import s from './IconsStyle.module.css'
 
 export const DeleteIcon:React.FC = () => {
 
-    return <img className={s.Icon} src={deleteIcon} alt="Delete img"/>
+    return <img className={s.Icon_delete} src={deleteIcon} alt="Delete img"/>
 }

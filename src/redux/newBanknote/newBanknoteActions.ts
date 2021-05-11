@@ -11,9 +11,10 @@ export const newBanknoteActions = {
     deleteAllAmount: () => ({type: "TOTALLY_DELETE_ALL_MENU_ITEMS"}) as const,
     setMenuInfo: (menus: MenuArray) => ({type: "SET_MENU_INFO", menus}) as const,
     addComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_MENUS", commentI}) as const,
-    saveComment: (commentI: CommentMainProperties, index: number) => ({
+    saveComment: (commentI: CommentMainProperties, index: number, parentId:number) => ({
         type: "SAVE_COMMENT_TO_MENUS",
         commentI,
-        index
+        index,
+        parentId
     }) as const
 }

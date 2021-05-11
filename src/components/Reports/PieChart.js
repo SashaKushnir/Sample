@@ -40,6 +40,8 @@ class Chart extends Component{
         location:'City'
     }
 
+
+
     render(){
         return (
             <div className="chart">

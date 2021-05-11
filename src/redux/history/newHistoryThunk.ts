@@ -11,16 +11,14 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         d(commonActions.fetchingToggle(true))
         const response = await history.getAllHistory()
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
-            console.log(response.data.banquets)
-            d(historyActions.setHistoryInfo(response.data.banquets))
-            console.log(response.data.banquets[1].comments)
+        if (response.data.success ) {
+            d(historyActions.setHistoryInfo(response.data.data))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrong")
+        alert("Something went wrongПП")
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -30,8 +28,6 @@ export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: 
     try {
         d(commonActions.fetchingToggle(true))
         const response = await history.patchHistory(updObj, token)
-        console.log("UPdateResponse", response)
-        // Set response to Bll
         if (true) {
 
         } else {
@@ -50,11 +46,11 @@ export const deleteHistoryT = (id:number, api_token:string) => async (d: Dispatc
         const response = await history.deleteHistory(id, api_token)
 
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
+        if (response.data.success) {
             d(historyActions.deleteOneHistoty(id))
             d(commonActions.fetchingToggle(false))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {

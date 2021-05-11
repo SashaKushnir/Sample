@@ -9,11 +9,11 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
         d(commonActions.fetchingToggle(true))
         const response = await customers.getAllUsers()
         // Set response to Bll
-        if (response.data.response_status && !response.data.response_error) {
-            d(customersActions.setCustomersInfo(response.data.customers))
+        if (response.data.success) {
+            d(customersActions.setCustomersInfo(response.data.data))
             d(commonActions.fetchingToggle(false))
         } else {
-            console.warn(response.data.response_error)
+            console.warn(response.data.message)
         }
     } catch (error) {
         alert("Something went wrong")

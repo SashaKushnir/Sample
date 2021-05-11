@@ -117,6 +117,7 @@ export const ticketsReducer = (tickets = initialState, action: ActionsTypes<type
                 return {
                     ...tickets,
                     tickets: tickets.tickets ? [...tickets.tickets.map((ticketI) => {
+                        if(ticketI.id === action.parentId)
                         ticketI.comments = ticketI.comments?.filter((commentI, index) => {
                             return index !== action.index
                         })

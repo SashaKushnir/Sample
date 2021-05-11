@@ -10,6 +10,7 @@ export interface InitialEmployee {
         password: string
         role_id: number
         api_token: string
+        id?: number
     }
 }
 

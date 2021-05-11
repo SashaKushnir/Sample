@@ -44,3 +44,12 @@ hr.solid {
     margin-bottom: 10px;
 }
 
+.spacesWrapper {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    text-align: center;
+    /*grid-gap: 1px;*/
+    border-top:4px inset black;
+    border-left:4px inset black;
+}
+

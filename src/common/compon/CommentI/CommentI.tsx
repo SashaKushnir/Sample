@@ -48,13 +48,13 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
         }
         switch (url) {
             case "/content/new/menus":
-                d(newBanknoteActions.saveComment(commentForActions, index))
+                d(newBanknoteActions.saveComment(commentForActions, index, parentId))
                 break
             case "/content/new/tickets":
-                d(ticketsActions.addTicketComment(commentForActions, index))
+                d(ticketsActions.addTicketComment(commentForActions, index, parentId))
                 break
             case "/content/new/entertainments":
-                d(servicesActions.addServiceComment(commentForActions, index))
+                d(servicesActions.addServiceComment(commentForActions, index, parentId))
         }
 
         setEditMode(false)

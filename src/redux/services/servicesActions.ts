@@ -20,10 +20,11 @@ export const servicesActions = {
         duration,
         id
     }) as const,
-    addServiceComment: (commentI: CommentMainProperties, index: number) => ({
+    addServiceComment: (commentI: CommentMainProperties, index: number, parentId: number) => ({
         type: "SAVE_COMMENT_TO_SERVICES",
         commentI,
-        index
+        index,
+        parentId
     }) as const,
     addServiceEmptyComment: (commentI: CommentMainProperties) => ({type: "ADD_COMMENT_TO_SERVICES", commentI}) as const,
 }

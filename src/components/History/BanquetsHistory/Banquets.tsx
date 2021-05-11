@@ -7,6 +7,10 @@ import {setHistoryT} from "../../../redux/history/newHistoryThunk";
 import {setMenuT} from "../../../redux/newBanknote/newBanknoteThunks";
 import {setServicesT} from "../../../redux/services/servicesThunks";
 import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
+import {OneDayPDF} from "../../PDF/OneDayPDF/OneDayPDF";
+import {NavLink} from "react-router-dom";
+import s from "./OneBanquet/OneBanquet.module.css";
+import {PrintIcon} from "../../../common/compon/HistoryIcons/PrintIcon";
 
 export const Banquets: React.FC = () => {
     const d = useDispatch()
@@ -24,9 +28,20 @@ export const Banquets: React.FC = () => {
         if(!tickets)
             d(setTicketsT())
     }, [])
-    return <>
+
+    const searchForBegDateTime = () => {
+
+    }
+
+    return <div>
+        <NavLink to="/OneDayPdf" className={s.navLink}>
+            <div className={s.btn}>Звіт на день</div>
+        </NavLink>
+        <div>
+            <input type="datetime-local" id="meeting-time" className={s.time} onChange={searchForBegDateTime}/>
+        </div>
         {history}
-    </>
+    </div>
 
 
 }
