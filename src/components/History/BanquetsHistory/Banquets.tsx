@@ -11,6 +11,7 @@ import {OneDayPDF} from "../../PDF/OneDayPDF/OneDayPDF";
 import {NavLink} from "react-router-dom";
 import s from "./OneBanquet/OneBanquet.module.css";
 import {PrintIcon} from "../../../common/compon/HistoryIcons/PrintIcon";
+import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
 export const Banquets: React.FC = () => {
     const d = useDispatch()
@@ -32,10 +33,13 @@ export const Banquets: React.FC = () => {
     const searchForBegDateTime = () => {
 
     }
-
+    const createpdf = () => {
+        if (historyData)
+            d(commonActions.setOneBanquetPdf(historyData))
+    }
     return <div>
         <NavLink to="/OneDayPdf" className={s.navLink}>
-            <div className={s.btn}>Звіт на день</div>
+            <div className={s.btn} onClick={createpdf}>Звіт на день</div>
         </NavLink>
         <div>
             <input type="datetime-local" id="meeting-time" className={s.time} onChange={searchForBegDateTime}/>

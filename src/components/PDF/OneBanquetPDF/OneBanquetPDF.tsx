@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react'
 import {History} from "./../../../redux/history/newHistoryReducer"
-import s from "./OneBanquetPDF.module.css"
+import s from "../pdfStyles.module.css"
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 import {date} from "yup";
+import {Pidpus} from "../PDF";
 
 type ItemProps = {
     data?: ProductCategoriesItem | TicketItem
@@ -137,20 +138,6 @@ export const OneBanquetPDF: React.FC = (props) => {
                 <td>{(total_tickets + total_menus + total_services) - (banquet?.advance_amount as number)}</td>
             </tr>
         </table>
-        <div>
-            <div className={s.left}>
-                <div className={s.pid}></div>
-                <div className={s.center}>ПІД</div>
-            </div>
-            <div className={s.right}>
-                <div className={s.date}></div>
-                <div className={s.center}>Дата</div>
-            </div>
-            <div className={s.right}>
-                <div className={s.pidpys_down}></div>
-                <div className={s.center}>Підпис</div>
-            </div>
-
-        </div>
+       <Pidpus/>
     </>
 }

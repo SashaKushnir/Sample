@@ -10,6 +10,7 @@ import { logInWithToken } from "./redux/forCommon/forCommonThunks";
 import {OneBanquetPDF} from "./components/PDF/OneBanquetPDF/OneBanquetPDF";
 import {OneDayPDF} from "./components/PDF/OneDayPDF/OneDayPDF";
 import {KitchenPDF} from "./components/PDF/KitchenPDF/KitchenPDF";
+import {PizzaPDF} from "./components/PDF/PizzaPDF/PizzaPDF";
 
 export const App = () => {
     const api_token = localStorage.getItem("api_token")
@@ -56,7 +57,7 @@ export const App = () => {
                 <Route path='/OneBanquetPdf' render={() => <OneBanquetPDF/>}/>
                 <Route path='/OneDayPdf' render={() => <OneDayPDF/>}/>
                 <Route path='/KitchenPdf' render={() => <KitchenPDF/>}/>
-                <Route path='/PizzaPdf' render={() => <OneDayPDF/>}/>
+                <Route path='/PizzaPdf' render={() => <PizzaPDF/>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>
 
