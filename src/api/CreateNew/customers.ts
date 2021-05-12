@@ -12,5 +12,8 @@ export const customers = {
             },
             data:  newCustomerInfo
         })
+    },
+    filterCustomersByName: (searchUnderName: string) => {
+        return myGetInstance.get<ApiCustomersResultType>(`/customers?name=${searchUnderName}`)
     }
 }

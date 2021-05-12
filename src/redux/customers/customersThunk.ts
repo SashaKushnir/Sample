@@ -22,6 +22,23 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
         d(commonActions.fetchingToggle(false))
     }
 }
+export const filterCustomersByName = (filteringName: string) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
+    try {
+        d(commonActions.fetchingToggle(true))
+        const response = await customers.filterCustomersByName(filteringName)
+        // Set response to Bll
+        if (response.data.success) {
+            d(customersActions.setCustomersInfo(response.data.data))
+            d(commonActions.fetchingToggle(false))
+        } else {
+            console.warn(response.data.message)
+        }
+    } catch (error) {
+        alert("Something went wrong")
+        console.warn(error)
+        d(commonActions.fetchingToggle(false))
+    }
+}
 
 export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
                                                                                 getState: () => RootState) => {
@@ -32,6 +49,7 @@ export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (
         console.log(response)
         if (response.data.success) {
             d(customersActions.pushCreatedCustomer(response.data.data))
+            alert("Success")
         } else {
             console.warn(response.data.message)
         }
