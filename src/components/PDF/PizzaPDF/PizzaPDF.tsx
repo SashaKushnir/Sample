@@ -34,7 +34,7 @@ const Item: React.FC<ItemProps> = (props) => {
 
 }
 
-export const KitchenPDF: React.FC = (props) => {
+export const PizzaPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
     let total_menus = 0
@@ -42,15 +42,14 @@ export const KitchenPDF: React.FC = (props) => {
     let total_services = 0
     const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem) => {
         total_menus += obj.amount as number * obj.price
-        if(obj.category.name != "Pizza")
+        if(obj.category.name === "Pizza")
             return <Item data={obj}/>
     })
 
 
 
     return <>
-        <h1 className={s.title}>Анкета страв</h1>
-        <h2 className={s.title}>Банкет: {banquet?.id}</h2>
+        <h1 className={s.title}>Анкета піци</h1>
         <div className={s.pidpys}></div>
         <table className={s.table1}>
             <tr className={s.first_line}>
@@ -91,45 +90,3 @@ export const KitchenPDF: React.FC = (props) => {
         <Pidpus/>
     </>
 }
-
-// <table className={s.cover}>
-//     <tr>
-//         <td >ПІД замовника</td>
-//         <td >{banquet?.customer.name}</td>
-//     </tr>
-//     <tr>
-//         <td >Номер телефону</td>
-//         <td >{banquet?.customer.phone}</td>
-//     </tr>
-//     <tr>
-//         <td >
-//             <h3 className={s.title}>Вхідні квитки</h3>
-//         </td>
-//     </tr>
-//
-//     <tr>
-//         <td ><h3 className={s.title}>Кухня</h3></td>
-//         <td><h3 className={s.title}>Кількість</h3></td>
-//         <td><h3 className={s.title}>Сума</h3></td>
-//     </tr>
-//     {menus}
-//
-//     <tr>
-//         <td ><h3 className={s.title_right}>Всього</h3></td>
-//         <td className={s.bold}>{total_menus}</td>
-//     </tr>
-//
-//
-//
-//
-//
-//
-//
-//     <tr>
-//         <td ></td>
-//     </tr>
-//     <tr>
-//         <td ><h3 className={s.title_right}>Загальна сума</h3></td>
-//         <td>{total_menus}</td>
-//     </tr>
-// </table>

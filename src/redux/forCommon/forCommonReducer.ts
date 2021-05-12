@@ -13,6 +13,7 @@ interface InitialCommonType {
     isSaved: boolean
     banquetEditMode: boolean
     banquet_pdf: History | null
+    oneDay_pdf: Array<History> | null
 }
 
 const initialState: InitialCommonType = {
@@ -23,7 +24,8 @@ const initialState: InitialCommonType = {
     fullEmptyAmount: true,
     isSaved: false,
     banquetEditMode: false,
-    banquet_pdf: null
+    banquet_pdf: null,
+    oneDay_pdf: null
 }
 
 export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {
@@ -85,6 +87,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return{
                 ...common,
                 banquet_pdf: action.banquet
+            }
+        case "ONE_BANQUET_PDF":
+            return{
+                ...common,
+                oneDay_pdf: action.banquet
             }
         default:
             return common

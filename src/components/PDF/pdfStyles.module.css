@@ -1,5 +1,6 @@
 .title{
     text-align: center;
+    margin: 0;
 }
 .title_right{
     text-align: right;
@@ -46,6 +47,9 @@ td{
 }
 .per16{
     width: 16.6%;
+}
+.per33{
+    width: 33.3%;
 }
 .pidpys{
     border-bottom: 1px solid black;
