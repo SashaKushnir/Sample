@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import s from '../../../Authorisation/LoginForm.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import {RootState} from "../../../../redux/store";
+import {postCustomer} from "../../../../redux/customers/customersThunk";
 
 export interface CreateCustomerFormType {
     name: string
@@ -34,13 +35,15 @@ export const CreateCustomerForm = () => {
         ,
         phone: Yup.string().required('Required')
             .min(8, 'Too Short!')
-            .matches(/^(\+)?\d{8,25}$/, "Invalid Phone number"),
+            .matches(/^[+][0-9]+([ -][0-9]+)*$/, "Invalid Phone number")
+            .max(25, "Too long"),
         birthdate: Yup.string(),
         email: Yup.string().email().min(2, "Too Short!!!")
     });
 
     return <Formik onSubmit={(values: CreateCustomerFormType) => {
-        alert("s")
+        console.log(values )
+        d(postCustomer(values))
     }}
                    validationSchema={SignupSchema}
                    initialValues={{

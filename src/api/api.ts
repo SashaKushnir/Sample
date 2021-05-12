@@ -3,7 +3,7 @@ import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBankno
 import {UserInter, UserType} from "./login/login";
 import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
-import {CustomersArray} from "../redux/customers/customersReducer";
+import {CustomersArray, CustomerType} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
 import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
@@ -63,3 +63,7 @@ export interface ApiGetBasicSpacesResponseType extends ApiResultType {
 export interface ApiBanquetStatesResponseType extends ApiResultType {
     data: BanquetStateArray
 }
+export interface ApiPostCustomerResponseType extends ApiResultType {
+    data: CustomerType
+}
+

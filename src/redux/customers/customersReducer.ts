@@ -34,7 +34,12 @@ export const customersReducer = (customers = initialState, action: ActionsTypes<
                 ...customers,
                 customers: customers.customers?.filter((obj: CustomerType) => obj.id !== action.customer.id)
             }
-
+        case "PUSH_CUSTOMER":
+            return {
+                ...customers,
+                customers: customers.customers?[action.customer, ...customers.customers
+                ]:[action.customer]
+            }
 
         // case "SELECT_CUSTOMER":
         //     return {
