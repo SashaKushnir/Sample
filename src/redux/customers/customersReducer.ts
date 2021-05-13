@@ -12,7 +12,18 @@ export interface CustomerType {
     birthdate: string | null
     created_at: string | null
     updated_at: string | null
+    family_members: Array<FamilyMemberGetter>
     type: string
+}
+
+export interface FamilyMemberGetter {
+    birthdate: string
+    created_at: string
+    customer_id: number
+    id: number
+    name: string
+    type: string
+    updated_at: string
 }
 
 export type CustomersArray = Array<CustomerType>
@@ -33,6 +44,16 @@ export const customersReducer = (customers = initialState, action: ActionsTypes<
             return {
                 ...customers,
                 customers: customers.customers?.filter((obj: CustomerType) => obj.id !== action.customer.id)
+            }
+        case "PUSH_FAMILY_MEMBER":
+            return {
+                ...customers,
+                customers: customers.customers?.map((customerI) => {
+                    if(customerI.id === action.customerId) {
+                        customerI.family_members.push(action.familyMember)
+                    }
+                    return customerI
+                })
             }
         case "PUSH_CUSTOMER":
             return {
@@ -64,4 +85,7 @@ export const customersReducer = (customers = initialState, action: ActionsTypes<
             return customers
     }
 }
+
+
+
 

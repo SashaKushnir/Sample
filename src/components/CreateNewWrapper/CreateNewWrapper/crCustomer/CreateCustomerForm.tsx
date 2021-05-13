@@ -42,7 +42,6 @@ export const CreateCustomerForm = () => {
     });
 
     return <Formik onSubmit={(values: CreateCustomerFormType) => {
-        console.log(values )
         d(postCustomer(values))
     }}
                    validationSchema={SignupSchema}

@@ -3,7 +3,7 @@ import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBankno
 import {UserInter, UserType} from "./login/login";
 import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
 import { History } from "../redux/history/newHistoryReducer";
-import {CustomersArray, CustomerType} from "../redux/customers/customersReducer";
+import {CustomersArray, CustomerType, FamilyMemberGetter} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
 import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
@@ -65,5 +65,9 @@ export interface ApiBanquetStatesResponseType extends ApiResultType {
 }
 export interface ApiPostCustomerResponseType extends ApiResultType {
     data: CustomerType
+}
+
+export interface ApiPostFamilyMemberResponseType extends ApiResultType {
+    data: FamilyMemberGetter
 }
 

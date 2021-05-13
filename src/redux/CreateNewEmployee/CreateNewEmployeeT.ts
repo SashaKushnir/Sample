@@ -34,7 +34,6 @@ export const getAllEmployees = (token: string) => async (d: Dispatch<ActionsType
 
 export const editUser = (newUser: EditUserObjectType) => async (d: Dispatch<ActionsTypes<typeof createNewEmployeeA |
     typeof commonActions>>, getState: () => RootState) => {
-    console.log("NewUserInfo", newUser)
     try {
         d(commonActions.fetchingToggle(true))
         const res = await accounts.editAccountByToken(newUser, getState().common.userInfo?.api_token as string)

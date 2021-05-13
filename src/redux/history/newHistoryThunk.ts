@@ -23,6 +23,27 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         d(commonActions.fetchingToggle(false))
     }
 }
+
+export const getFilteredHistory = (beg_datetime: string, end_datetime:string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
+
+    try {
+        d(commonActions.fetchingToggle(true))
+        end_datetime+=' 23:59:59'
+        const response = await history.getFilteredHistory(beg_datetime, end_datetime)
+        // Set response to Bll
+        if (response.data.success ) {
+            d(historyActions.setHistoryInfo(response.data.data))
+        } else {
+            console.warn(response.data.message)
+        }
+        d(commonActions.fetchingToggle(false))
+    } catch (error) {
+        alert("No results")
+        console.warn(error)
+        d(commonActions.fetchingToggle(false))
+    }
+}
+
 export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
 
     try {
