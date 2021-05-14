@@ -12,6 +12,12 @@ export const CreateCustomerWrapper = () => {
         setInputVal(e.target.value)
     }
 
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            search()
+        }
+    }
+
     const search = () => {
         d(filterCustomersByName(input))
     }
@@ -23,7 +29,7 @@ export const CreateCustomerWrapper = () => {
 
     return <div>
         <CreateCustomerForm/>
-        <input value={input} onChange={onChangeInput}/>
+        <input value={input} onKeyDown={handleKeyDown}  onChange={onChangeInput}/>
         <button onClick={search}>
             Search
         </button>
