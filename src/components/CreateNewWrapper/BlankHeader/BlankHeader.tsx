@@ -38,6 +38,14 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
+
+    // useEffect(() => {
+    //     if (all_states){
+    //          d(banquetActions.setState(all_states[0]))
+    //     }
+    // },[)
+
+
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
         all_states?.map(obj => {
             if (e.target.value === obj.name)
@@ -176,7 +184,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
                     <div className={s.state + ' ' + s.blocks}>
                         Стан <select className={s.input_state} onChange={setState}
-                                     defaultValue={data.state?.name || "Planning"}>
+                                     defaultValue={data.state?.name || 'none'}>
                         {states}
                     </select>
                     </div>
