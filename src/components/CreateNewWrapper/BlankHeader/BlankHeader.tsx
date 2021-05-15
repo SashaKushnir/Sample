@@ -9,6 +9,9 @@ import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
 import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
+import moment from 'moment';
+import "react-datepicker/dist/react-datepicker.css";
+import {DatePicker, TimePicker} from "antd";
 
 type PropsType = {
     isEdit: boolean
@@ -41,8 +44,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 d(banquetActions.setState(obj))
         })
     }
-    const data = useSelector(selectBanquet)
 
+    const data = useSelector(selectBanquet)
     const customers = useSelector(selectBanquet)
     const customerInfo = customers.customer
 
@@ -50,16 +53,53 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         CusMenuSwitch(true)
     }
 
-    const setBegining = (e: ChangeEvent<HTMLInputElement>) => {
-        let time = e.target.value.replace("T", " ")
-        time += ":00"
-        d(banquetActions.setBegining(time))
+    const [show_time, Show_time] = useState(false);
+
+    useEffect(() => {
+        if (data.beginning) {
+            Show_time(true)
+        }
+    }, [])
+
+    const setDate = (e: any, text: string) => {
+        Show_time(false);
+        if (text !== "") {
+            Show_time(true);
+            setBegining(text)
+            setEnd(text)
+
+        } else {
+            Show_time(false);
+        }
     }
-    const setEnd = (e: ChangeEvent<HTMLInputElement>) => {
-        let time = e.target.value.replace("T", " ")
-        time += ":00"
-        d(banquetActions.setEnd(time))
+
+    const setBegining = (date: string) => {
+        date += " 00:00:00"
+        d(banquetActions.setBegining(date))
+        console.log(date)
     }
+    const setEnd = (date: string) => {
+        date += " 23:59:00"
+        console.log(date)
+        d(banquetActions.setEnd(date))
+    }
+
+    const SetBegTime = (e: any, time: string) => {
+        let beg: string = data.beginning
+        beg = beg.slice(0, -8)
+        beg += time + ':00'
+        console.log('beg', beg)
+        d(banquetActions.setBegining(beg))
+
+    }
+    const SetEndTime = (e: any, time: string) => {
+        let end: string = data.end
+        end = end.slice(0, -8)
+        end += time + ':00'
+        console.log('end', end)
+        d(banquetActions.setEnd(end))
+    }
+
 
     const setDefaultTime = (my_time: string) => {
         if (my_time) {
@@ -81,97 +121,228 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         localStorage.removeItem("services")
     }
 
+    const CompareDate = (date1: string, date2: string) => {
+        if (date1.slice(2) > date2.slice(2)) {
+            console.log(date1.slice(2), date2.slice(2))
+            return true
+        } else if (date1.slice(-2) > date2.slice(-2)) {
 
-    return <div>
-        <div className={s.info_bock}>
-            {isEdit && <div className={s.margin}>
-                <div className={s.banquetWithName}>
-                    <input className={s.input} placeholder={"Banquet name"}
-                           onChange={setName} defaultValue={data.name ? data.name : ""}/>
-                </div>
-                <div>
-                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
-                              defaultValue={data.description ? data.description : ""}/>
-                </div>
-                {isEditMode && <div>
-                    Edit Mode
-                    <button onClick={stopEditMode}>
-                        Stop Edit Mode
-                    </button>
-                </div>
-                }
-                {!isEditMode && <div>
-                    Creating Mode
-                </div>
-                }
-                <div>
-                    <button onClick={clearBasket}>Clear Basket</button>
-                </div>
-            </div>
-            }
-            {!isEdit && <div className={s.margin}>
-                <div className={s.banquetWithName}>
-                    <input className={s.input} placeholder={"Banquet name"}
-                           onChange={setName} value={data.name} readOnly/>
-                </div>
-                <div>
-                    <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
-                              value={data.description ? data.description : ""} readOnly/>
-                </div>
-            </div>
-            }
+        } else {
 
-            <hr className={s.solid}/>
-        </div>
-        <div className={s.info_bock}>
+        }
+    }
 
-            {isEdit && <div className={s.margin}>
-                <div onClick={ChooseCustomer} className={s.customer}>
-                    Customer: {customerInfo ? customerInfo?.name : ""}
+    const format = 'HH:mm';
+    const formate_date = 'YYYY/MM/DD';
+    return <div className={s.all}>
+        {isEdit && <>
+            <div className={s.main_block}>
+                <div className={s.empty}>
+
                 </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}
-                       defaultValue={setDefaultTime(data.beginning)}/>
-            </div>
-            }
-            {!isEdit && <div className={s.margin}>
-                <div className={s.customer}>
-                    Customer: {customerInfo?.name}
-                </div>
-                <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)}
-                       readOnly/>
-            </div>
-            }
-            <div className={s.margin}>
-                {isEdit && <div className={s.advance}>
-                    Advance <input type="number" onChange={setAdvance} defaultValue={data.advance_amount} />
-                    <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
-                           defaultValue={setDefaultTime(data.end)}/>
-                    <div className={s.advance}>
-                        State <select onChange={setState} defaultValue={data.state?.name}>
+                <div className={s.main}>
+                    <div className={s.name_desc + ' ' + s.blocks}>
+                        <input className={s.input + " " + s.input_name} placeholder={"Імя банкета"}
+                               onChange={setName} defaultValue={data.name ? data.name : ""}/>
+                        <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
+                                  defaultValue={data.description ? data.description : ""}/>
+                        <div onClick={ChooseCustomer} className={s.customer}>
+                            Замовник: {customerInfo ? customerInfo?.name : ""}
+                        </div>
+
+
+                    </div>
+                    <div className={s.advance + ' ' + s.blocks}>
+                        Аванс <input className={s.input_advance + ' ' + s.input} type="number" onChange={setAdvance}
+                                     defaultValue={data.advance_amount}/>
+                    </div>
+                    <div className={s.time + ' ' + s.blocks}>
+                        {data.beginning &&
+                        <DatePicker onChange={setDate}
+                                    defaultValue={moment(data.beginning.slice(0, -9), formate_date)}/>
+                        }
+                        {!data.beginning &&
+                        <DatePicker onChange={setDate}/>
+                        }
+                        {show_time && <>
+                            <TimePicker format={format} onChange={SetBegTime} inputReadOnly={false}
+                                        defaultValue={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
+                            <TimePicker format={format} onChange={SetEndTime} inputReadOnly={true}
+                                        defaultValue={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                        </>
+                        }
+
+                    </div>
+
+                    <div className={s.state + ' ' + s.blocks}>
+                        Стан <select className={s.input_state} onChange={setState}
+                                     defaultValue={data.state?.name || "Planning"}>
                         {states}
                     </select>
                     </div>
-                </div>}
-                {!isEdit &&
-                <div className={s.advance}>
-                    Advance <input type="text" value={data.advance_amount} readOnly/>
-                    <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
-                           readOnly/>
+                    <div className={s.edit + ' ' + s.blocks}>
+                        {isEditMode && <div>
+                            Edit Mode
+                            <button onClick={stopEditMode}>
+                                Stop Edit Mode
+                            </button>
+                        </div>
+                        }
+                        {!isEditMode && <div>
+                            Creating Mode
+                        </div>
+                        }
+                        <div>
+                            <button onClick={clearBasket}>Clear Basket</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div className={s.spaces}>
+                Spaces
+                <div className={s.spacesWrapper}>
+                    {spaces}
+                </div>
+            </div>
+        </>
+        }
+        {!isEdit && <>
+            <div className={s.main_block}>
+                <div className={s.empty}>
+
+                </div>
+                <div className={s.main}>
+                    <div>
+                        <input className={s.input + " " + s.input_name} value={data.name} readOnly/>
+                        <textarea className={s.input} value={data.description ? data.description : ""} readOnly/>
+                        <div onClick={ChooseCustomer} className={s.customer}>
+                            Замовник: {customerInfo?.name}
+                        </div>
+                    </div>
                     <div className={s.advance}>
-                        State <select defaultValue={data.state?.name} aria-readonly>
+                        Аванс <input type="text" className={s.input_advance + ' ' + s.input} value={data.advance_amount}
+                                     readOnly/>
+                    </div>
+                    <div className={s.time + ' ' + s.blocks}>
+                        <DatePicker
+                            value={moment(data.beginning ? data.beginning.slice(0, -9) : "2001-01-01", formate_date)}/>
+                        <TimePicker format={format}
+                                    value={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
+                        <TimePicker format={format}
+                                    value={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                    </div>
+
+                    <div className={s.state}>
+                        Стан <select defaultValue={data.state?.name} aria-readonly>
                         <option>{data.state?.name}</option>
                     </select>
                     </div>
-                </div>}
-            </div>
-            <hr className={s.solid}/>
-        </div>
-        <div>
-            Spaces
-            <div className={s.spacesWrapper}>
-                {spaces}
-            </div>
-        </div>
+                    <div>
+                        None
+                    </div>
 
+                </div>
+            </div>
+            <div>
+                Spaces
+                <div className={s.spacesWrapper}>
+                    {spaces}
+                </div>
+            </div>
+        </>
+        }
     </div>
 }
+// <div>
+// <div className={s.info_bock}>
+// {isEdit && <div className={s.margin}>
+// <div className={s.banquetWithName}>
+// <input className={s.input} placeholder={"Banquet name"}
+//                        onChange={setName} defaultValue={data.name ? data.name : ""}/>
+//             </div>
+//             <div>
+//                     <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
+//                               defaultValue={data.description ? data.description : ""}/>
+//             </div>
+//             {isEditMode && <div>
+//                 Edit Mode
+//                 <button onClick={stopEditMode}>
+//                     Stop Edit Mode
+//                 </button>
+//             </div>
+//             }
+//             {!isEditMode && <div>
+//                 Creating Mode
+//             </div>
+//             }
+//             <div>
+//                 <button onClick={clearBasket}>Clear Basket</button>
+//             </div>
+//         </div>
+//         }
+//         {!isEdit && <div className={s.margin}>
+//             <div className={s.banquetWithName}>
+//                 <input className={s.input} placeholder={"Banquet name"}
+//                        onChange={setName} value={data.name} readOnly/>
+//             </div>
+//             <div>
+//                     <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
+//                               value={data.description ? data.description : ""} readOnly/>
+//             </div>
+//         </div>
+//         }
+//
+//         <hr className={s.solid}/>
+//     </div>
+//     <div className={s.info_bock}>
+//
+//         {isEdit && <div className={s.margin}>
+//             <div onClick={ChooseCustomer} className={s.customer}>
+//                 Customer: {customerInfo ? customerInfo?.name : ""}
+//             </div>
+//             <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}
+//                    defaultValue={setDefaultTime(data.beginning)}/>
+//         </div>
+//         }
+//         {!isEdit && <div className={s.margin}>
+//             <div className={s.customer}>
+//                 Customer: {customerInfo?.name}
+//             </div>
+//             <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)}
+//                    readOnly/>
+//         </div>
+//         }
+//         <div className={s.margin}>
+//             {isEdit && <div className={s.advance}>
+//                 Advance <input type="number" onChange={setAdvance} defaultValue={data.advance_amount} />
+//                 <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
+//                        defaultValue={setDefaultTime(data.end)}/>
+//                 <div className={s.advance}>
+//                     State <select onChange={setState} defaultValue={data.state?.name}>
+//                     {states}
+//                 </select>
+//                 </div>
+//             </div>}
+//             {!isEdit &&
+//             <div className={s.advance}>
+//                 Advance <input type="text" value={data.advance_amount} readOnly/>
+//                 <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
+//                        readOnly/>
+//                 <div className={s.advance}>
+//                     State <select defaultValue={data.state?.name} aria-readonly>
+//                     <option>{data.state?.name}</option>
+//                 </select>
+//                 </div>
+//             </div>}
+//         </div>
+//         <hr className={s.solid}/>
+//     </div>
+//     <div>
+//         Spaces
+//         <div className={s.spacesWrapper}>
+//             {spaces}
+//         </div>
+//     </div>
+//
+// </div>

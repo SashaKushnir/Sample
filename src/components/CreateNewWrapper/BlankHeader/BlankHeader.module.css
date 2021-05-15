@@ -1,19 +1,39 @@
-.dashed {
-    border-top: 3px dashed #bbb;
+.all{
+
 }
-.info_bock {
-    margin: 10px;
+.main_block{
+    width: 100%;
+    font-size: 16px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 3% 97%;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    -moz-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
 }
-hr.solid {
-    border-top: 3px solid black;
+.empty{
+    background-color: #F6C5BD;
+    border-radius: 20px 0 0 20px ;
 }
-.banquetWithName{
-    font-size: 150%;
+.main{
+    display: grid;
+    grid-template-columns: 42.8% 14.2% 14.2% 14.2% 14.2%;
+}
+.blocks{
+    margin: 10px 0;
+}
+.name_desc{
+    margin-left: 10px;
+}
+.input_name{
+    font-size: 20px;
 }
 .input{
     outline: none;
     border: 0px;
     width: 100%;
+
 }
 .input:focus{
     outline: none;
@@ -29,27 +49,77 @@ hr.solid {
     text-decoration: underline;
 }
 .advance{
-
+    margin: auto;
+    text-align: center;
+}
+.input_advance{
+    text-align: center;
 }
 .time{
     display: inline-block;
-    float: right;
+    outline: none;
+    text-align: center;
 }
-.date{
-    display: inline-block;
-    float: right;
+.state{
+    margin: auto;
+    text-align: center;
 }
-.margin{
-    margin-top: 10px;
-    margin-bottom: 10px;
+.input_state{
+    display: block;
+    text-align: center;
+}
+.spaces{
+    margin: 50px 0;
+    border-top: 4px white;
+    border-top-style: dashed;
+    border-bottom: 4px white;
+    border-bottom-style: dashed;
+}
+.edit{
+    margin: auto 0;
+    text-align: center;
 }
 
-.spacesWrapper {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    text-align: center;
-    /*grid-gap: 1px;*/
-    border-top:4px inset black;
-    border-left:4px inset black;
-}
+
+
+
+
+
+
+
+/*.dashed {*/
+/*    border-top: 3px dashed #bbb;*/
+/*}*/
+/*.info_bock {*/
+/*    margin: 10px;*/
+/*}*/
+/*hr.solid {*/
+/*    border-top: 3px solid black;*/
+/*}*/
+/*.banquetWithName{*/
+/*    font-size: 150%;*/
+/*}*/
+
+
+/*.advance{*/
+
+/*}*/
+
+/*.date{*/
+/*    display: inline-block;*/
+/*    float: right;*/
+/*}*/
+/*.margin{*/
+/*    margin-top: 10px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.spacesWrapper {*/
+/*    display: grid;*/
+/*    grid-template-columns: 20% 20% 20% 20% 20%;*/
+/*    text-align: center;*/
+/*    !*grid-gap: 1px;*!*/
+/*    border-top:4px inset black;*/
+/*    border-left:4px inset black;*/
+/*}*/
 
