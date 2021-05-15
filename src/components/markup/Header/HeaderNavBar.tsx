@@ -9,21 +9,21 @@ export const HeaderNavBar = () => {
     return <nav className={s.navigation}>
 
         <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/history`}>
-            History
+            <div className={s.title}>Історія</div>
         </NavLink>
 
 
 
         <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/new`}>
-            <div className={s.title}> Create new</div>
+            <div className={s.title}>Створити новий</div>
         </NavLink>
 
-        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/editors`}>
-            <div className={s.title}> Editors</div>
-        </NavLink>
+        {/*<NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/editors`}>*/}
+        {/*    <div className={s.title}> Editors</div>*/}
+        {/*</NavLink>*/}
 
         <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/reports`}>
-            <div className={s.title}>Reports</div>
+            <div className={s.title}>Звіти</div>
         </NavLink>
     </nav>
 }

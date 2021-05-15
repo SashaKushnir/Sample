@@ -150,7 +150,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 </div>
                 <div className={s.main}>
                     <div className={s.name_desc + ' ' + s.blocks}>
-                        <input className={s.input + " " + s.input_name} placeholder={"Імя банкета"}
+                        <input className={s.input + " " + s.input_name} placeholder={"Назва банкета"}
                                onChange={setName} defaultValue={data.name ? data.name : ""}/>
                         <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
                                   defaultValue={data.description ? data.description : ""}/>
@@ -190,25 +190,25 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.edit + ' ' + s.blocks}>
                         {isEditMode && <div>
-                            Edit Mode
+                            Режим редагування
                             <button onClick={stopEditMode}>
-                                Stop Edit Mode
+                                Зупинити режим редагування
                             </button>
                         </div>
                         }
                         {!isEditMode && <div>
-                            Creating Mode
+
                         </div>
                         }
                         <div>
-                            <button onClick={clearBasket}>Clear Basket</button>
+                            <button onClick={clearBasket}>Очистити корзину</button>
                         </div>
                     </div>
 
                 </div>
             </div>
             <div className={s.spaces}>
-                Spaces
+                Столи
                 <div className={s.spacesWrapper}>
                     {spaces}
                 </div>

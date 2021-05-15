@@ -158,7 +158,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         {data.customer.name}
                     </div>
                     <div className={s.text}>
-                        Banquet state: {data.state.name}
+                        Стан банкета: {data.state.name}
                     </div>
                     <div>
                         <NavLink to="/KitchenPdf" className={s.navLink}>
@@ -171,6 +171,9 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 <div className={s.column_right}>
                     <div className={s.price}>
                         {data.total}$
+                    </div>
+                    <div className={s.advance}>
+                        {data.advance_amount}$
                     </div>
                     <div className={s.numbers}>
                         {data.end_datetime}
@@ -191,7 +194,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             <div className={s.order}>
                 <div className={s.products}>
                     <div className={s.title}>
-                        Products
+                        Продукти
                     </div>
                     <div className={s.items}>
                         {products}
@@ -199,7 +202,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
                 <div className={s.tickets}>
                     <div className={s.title}>
-                        Tickets
+                        Білети
                     </div>
                     <div className={s.items}>
                         {tickets}
@@ -207,7 +210,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
                 <div className={s.enter}>
                     <div className={s.title}>
-                        Enrtainments
+                        Розваги
                     </div>
 
                     <div className={s.items}>
@@ -216,7 +219,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
             </div>
             <div>
-                <h4>Tables</h4>
+                <h4>Столи</h4>
                 {tables}
             </div>
         </div>

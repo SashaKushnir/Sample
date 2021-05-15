@@ -47,10 +47,11 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
                 {cus.birthdate}
             </div>
             <div>
+                Діти:
                 {familyMembers}
             </div>
             {!addFMmode && <button onClick={addFamilyMember}>
-                Add family member
+                Додати дитину
             </button>}
             {addFMmode &&
             <div>

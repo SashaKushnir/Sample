@@ -71,8 +71,8 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                            ref={textInput}/>
                 </div>
                 <div>
-                    Comments:
-                    <button onClick={createCommentI}>Add comment</button>
+                    Коментарі:
+                    <button onClick={createCommentI}>Додати коментар</button>
                     {comments}
                 </div>
                 {/*{*/}
