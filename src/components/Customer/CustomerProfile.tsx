@@ -15,7 +15,7 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
 
 
     const [addFMmode, setAddFMmode] = useState(false)
-    const familyMembers = props.customer.family_members.map((memberI, index) =>
+    const familyMembers = props.customer.family_members?.map((memberI, index) =>
     <FMItem member={memberI} key={index}/>)
     const d = useDispatch()
     const cus = props.customer
