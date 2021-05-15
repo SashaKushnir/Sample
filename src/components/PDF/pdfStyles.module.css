@@ -1,0 +1,94 @@
+.title{
+    text-align: center;
+    margin: 0;
+}
+.title_right{
+    text-align: right;
+}
+.table1{
+    border-bottom: none;
+}
+.table1 td{
+    border-bottom: none;
+}
+.table2{
+    border-top: none;
+}
+.table2 td{
+    border-top: none;
+}
+.first_line td{
+    width: 25%;
+}
+table{
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+    height: 30px;
+    padding: 5px;
+    vertical-align: middle;
+}
+.info td{
+    width: 16.6%;
+    max-width: 16.6%;
+}
+.bar td{
+
+}
+.bold{
+    border: 2px solid black;
+}
+.per50{
+    width: 50%;
+}
+.per16{
+    width: 16.6%;
+}
+.per33{
+    width: 33.3%;
+}
+.pidpys{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin: 20px 5px;
+    display: inline-block;
+}
+.pidpys_down{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin-top: 50px;
+    display: inline-block;
+}
+.date{
+    border-bottom: 1px solid black;
+    width: 150px;
+    float: right;
+    margin-top: 50px;
+    display: inline-block;
+}
+.pid{
+    border-bottom: 1px solid black;
+    width: 150px;
+    margin-top: 50px;
+    display: block;
+}
+.right{
+    float: right;
+    display: block;
+    margin-right: 15px;
+}
+.center{
+    display: block;
+    text-align: center;
+}
+.left{
+    float: left;
+    display: block;
+    margin-left: 15px;
+}

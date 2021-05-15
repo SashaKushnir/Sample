@@ -160,6 +160,13 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     <div className={s.text}>
                         Banquet state: {data.state.name}
                     </div>
+                    <div>
+                        <NavLink to="/KitchenPdf" className={s.navLink}>
+                            <div className={s.btn} onClick={createpdf}>Звіт на кухню, страви</div>
+                        </NavLink><NavLink to="/PizzaPdf" className={s.navLink}>
+                            <div className={s.btn} onClick={createpdf}>Звіт на кухню, піцца</div>
+                        </NavLink>
+                    </div>
                 </div>
                 <div className={s.column_right}>
                     <div className={s.price}>

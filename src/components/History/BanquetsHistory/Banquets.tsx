@@ -1,16 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {selectHistory, selectMenuKitchen, selectServices, selectTickets} from "../../../selectors/selectCreateNew";
 import {OneBanquet} from "./OneBanquet/OneBanquet";
 import {History} from "../../../redux/history/newHistoryReducer";
-import {setHistoryT} from "../../../redux/history/newHistoryThunk";
+import {getFilteredHistory, setHistoryT} from "../../../redux/history/newHistoryThunk";
 import {setMenuT} from "../../../redux/newBanknote/newBanknoteThunks";
 import {setServicesT} from "../../../redux/services/servicesThunks";
 import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
-import {OneDayPDF} from "../../PDF/OneDayPDF/OneDayPDF";
 import {NavLink} from "react-router-dom";
 import s from "./OneBanquet/OneBanquet.module.css";
-import {PrintIcon} from "../../../common/compon/HistoryIcons/PrintIcon";
+import {commonActions} from "../../../redux/forCommon/forCommonActions";
+import {DatePicker} from "antd";
+import moment from 'moment';
+const { RangePicker } = DatePicker
+const dateFormat = 'YYYY-MM-DD';
+const monthFormat = 'YYYY-MM'
+
 
 export const Banquets: React.FC = () => {
     const d = useDispatch()
@@ -29,16 +34,25 @@ export const Banquets: React.FC = () => {
             d(setTicketsT())
     }, [])
 
-    const searchForBegDateTime = () => {
+    const createpdf = () => {
+        if (historyData)
+            d(commonActions.setOneBanquetPdf(historyData))
+    }
 
+    const rangePicker = (val: any, str: any) => {
+        if(str[0] && str[1])
+        d(getFilteredHistory(str[0], str[1]))
     }
 
     return <div>
         <NavLink to="/OneDayPdf" className={s.navLink}>
-            <div className={s.btn}>Звіт на день</div>
+            <div className={s.btn} onClick={createpdf}>Звіт на день</div>
         </NavLink>
         <div>
-            <input type="datetime-local" id="meeting-time" className={s.time} onChange={searchForBegDateTime}/>
+            <RangePicker
+                format={dateFormat}
+                onChange={rangePicker}
+            />
         </div>
         {history}
     </div>
