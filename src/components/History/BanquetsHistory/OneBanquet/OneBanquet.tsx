@@ -98,6 +98,8 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 })
             return obj
         })
+
+        d(banquetActions.clearAllInfoAboutSpaces())
         if (!spaces)
             d(getListOfSpaces(localStorage.getItem("api_token") || ""))
         d(banquetActions.setCustomer(data.customer))

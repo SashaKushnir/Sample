@@ -125,6 +125,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.removeBanquetId())
         d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
         d(banquetActions.clearAllInfoAboutSpaces())
+        d(gettingSpacesByDate(false))
     }
     const clearBasket = () => {
         d(clearAllBasket())
