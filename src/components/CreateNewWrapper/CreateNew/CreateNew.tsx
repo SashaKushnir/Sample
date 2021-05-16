@@ -83,15 +83,15 @@ export const CreateNew: React.FC<PropsType> = (props) => {
                 {fullEmptyAmount && <div className={s.amountMessage}>
                     Some fields are empty!
                 </div>}
-                <button className={s.buttonGreen} onClick={saveB}>Save</button>
+                <button className={s.buttonGreen} onClick={saveB}>Зберегти</button>
             </div>
         </div>}
         {!editMode && <div>
             <BlankHeader isEdit={editMode}/>
             <OrderItems/>
             <div className={s.toRightSide}>
-                <button className={s.buttonBlack} onClick={editB}>Edit</button>
-                <button className={s.buttonGreen} onClick={submitB}>Submit</button>
+                <button className={s.buttonBlack} onClick={editB}>Редагувати</button>
+                <button className={s.buttonGreen} onClick={submitB}>Відправити</button>
             </div>
         </div>}
     </>

@@ -68,12 +68,12 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
             <Form>
                 <div>
                     <div>
-                        <span>Name: </span>
+                        <span>Імя: </span>
                         <Field name="name" type="text" placeholder={"Name"}/>
                         {errors.name && touched.name ? <div>{errors.name}</div> : null}
                     </div>
                     <div>
-                        <span>Birth date : </span>
+                        <span>Дата народження : </span>
                         <Field name="birthdate" placeholder={"birthdate"} type={"date"}/>
                         {errors.birthdate && touched.birthdate ? (
                             <div>{errors.birthdate}</div>
@@ -81,7 +81,7 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
                     </div>
                 </div>
                 <div>{unSuccessMessage}</div>
-                <button type="submit">Submit</button>
+                <button type="submit">Зберегти</button>
             </Form>
         )}
     </Formik>

@@ -22,7 +22,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     getState().createNew.menus?.map((obj: MenuItem) => {
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
             if (item.ready === false) {
-                alert("select menus - " + item.name)
+                alert("Заповніть поля у стравах - " + item.name)
                 ready = false
             }
         })
@@ -30,7 +30,7 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
     getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
         if (item.ready === false) {
-            alert("select tickets - " + item.name)
+            alert("Заповніть поля у квитках - " + item.name)
             ready = false
         }
     })
@@ -40,36 +40,36 @@ export const createPost = () => (d: any, getState: () => RootState) => {
             item.duration = 0
         }
         if (item.ready === false) {
-            alert("select services - " + item.name)
+            alert("Заповніть поля у розвагах - " + item.name)
             ready = false
         }
     })
 
     if (getState().banquet.customer === undefined || getState().banquet.customer === null) {
-        alert("select customer")
+        alert("Виберіть замовника")
         ready = false
     }
 
     if (getState().banquet.beginning === "") {
-        alert("select start time")
+        alert("Виберіть дата початку")
         ready = false
     }
 
     if (getState().banquet.end === "") {
-        alert("select end time")
+        alert("Виберіть дату кінця")
         ready = false
     }
 
     if (getState().banquet.advance_amount === null) {
-        alert("select advance_amount")
+        alert("Введіть предоплату")
         ready = false
     }
     if (getState().banquet.name === null || getState().banquet.name === "" || getState().banquet.name === undefined) {
-        alert("select name")
+        alert("Введіть імя")
         ready = false
     }
     if (getState().banquet.state === null || getState().banquet.state === undefined) {
-        alert("select state")
+        alert("Виберіть стан банкета")
         ready = false
     }
     if (getState().banquet.description === null) {

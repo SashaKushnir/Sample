@@ -14,7 +14,9 @@ export const MenuList:React.FC<MenuListProps> = (props) => {
     const menus = props.menus?.map((curMenuItem:MenuItem, index)=>
         <MenuItemComponent key={index} showAmount={props.showAmount} Menuitem={curMenuItem}/>)
     return <div>
-        <div className={styles.name}>Menu List</div>
+        {!props.showAmount && <div className={styles.name}>Меню</div>}
+        {props.showAmount && <div className={styles.name}>Кошик</div>}
+
         {props.showAmount && <div>
             {menus}
         </div>}

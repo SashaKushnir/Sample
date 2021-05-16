@@ -7,6 +7,8 @@
     margin: 0% 2% 0% 0%;
     vertical-align: middle;
     padding: 1%;
+    margin: auto 0;
+    display: flex;
 }
 
 .navlinkRight{
@@ -21,18 +23,24 @@
 
 .navigation {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 33% 33% 33%;
     margin: 0% 0% 0% 0%;
     background-color: rgb(251, 241, 254);
 }
 
 .activeClassName {
     background-color: white;
-    height: 50px;
     border-radius: 10px;
+    text-align: center;
+    margin: auto 0;
+    height: 50px;
+    display: flex;
+    font-weight: bold;
+    font-size: 20px;
 }
 .title{
-
+    text-align: center;
+    margin: auto auto;
     border-radius: 10px;
 }
 
