@@ -11,8 +11,7 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
     try {
         d(commonActions.fetchingToggle(true))
         const response = await customers.getAllUsers()
-        console.log("Customers", response)
-        // Set response to Bll
+
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
             d(commonActions.fetchingToggle(false))
@@ -67,7 +66,6 @@ export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => 
     try {
         d(commonActions.fetchingToggle(true))
         const response = await familyMembers.createFamilyMember(newFMInfo ,getState().common.userInfo?.api_token as string)
-        console.log(response)
         // Set response to Bll
         if (response.data.success) {
             d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))

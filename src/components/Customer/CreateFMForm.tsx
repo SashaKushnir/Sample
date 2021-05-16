@@ -57,7 +57,6 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
 
     return <Formik onSubmit={(values: CreateFMFormType) => {
         const readyForm: CreateFamilyMember = {...Object.assign(values,{customer_id : customer.id})}
-        console.log(readyForm)
         d(postFamilyMember(readyForm, hideForm))
     }}
                    validationSchema={SignupSchema}

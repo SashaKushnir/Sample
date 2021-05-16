@@ -11,7 +11,8 @@ let initialState: BanquetInitial = {
     advance_amount: 0,
     total: 0,
     customer: null,
-    state: null
+    state: null,
+    notDisabledSpaces: []
 }
 
 export interface SpaceItem {
@@ -24,11 +25,13 @@ export interface SpaceItem {
     "category_id": number | null
     "period_id": unknown
     "period": unknown
+    intervals?:Array<any>
     "category": SpaceCategory
     "created_at": string
     "updated_at": string
     "type": string
     selected?: boolean
+    disabled?: boolean
 }
 
 export interface SpaceCategory {
@@ -50,6 +53,7 @@ export type BanquetInitial = {
     customer: CustomerType | null
     state: BanquetState | null
     basicSpaces?: Array<SpaceItem>
+    notDisabledSpaces: Array<SpaceItem>
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -65,8 +69,32 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
                     if(spaceI.id === action.spaceId) {
-                        spaceI.selected = !!!spaceI.selected
+                        spaceI.selected = !spaceI.selected
                     }
+                    return spaceI
+                })]:[]
+            }
+        case "SET_DISABLED_SPACES":
+            return {
+                ...banquet,
+                basicSpaces:banquet.basicSpaces?.map((spaceI) => {
+                    if(!action.dontDisable?.some((dontI) => dontI.id === spaceI.id))
+                    if(action.disablingArr.some((actionSpaceI) => {
+                        return (actionSpaceI.id === spaceI.id) && (actionSpaceI.intervals ?
+                            (actionSpaceI.intervals.length > 0) : false);
+                    })){
+                        spaceI.disabled = true
+                    }
+                    return spaceI
+                }),
+                notDisabledSpaces: [...action.dontDisable]
+            }
+        case "CLEAR_ALL_INFO_ABOUT_SPACES":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    spaceI.disabled=false
+                    spaceI.selected=false
                     return spaceI
                 })]:[]
             }

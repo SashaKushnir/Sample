@@ -21,7 +21,7 @@ import {HideIcon} from "../../../../common/compon/HistoryIcons/HideIcon";
 import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
 import {commonActions} from "../../../../redux/forCommon/forCommonActions";
 import {RootState} from "../../../../redux/store";
-import {getListOfSpaces} from "../../../../redux/banquetInfo/banquetInfoT";
+import {getListOfSpaces, gettingSpacesByDate} from "../../../../redux/banquetInfo/banquetInfoT";
 
 interface BanquetProps {
     data: History
@@ -98,16 +98,17 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 })
             return obj
         })
-
+        if (!spaces)
+            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
         d(banquetActions.setCustomer(data.customer))
         d(banquetActions.setName(data.name))
         d(banquetActions.setDescription(data.description ? data.description : ""))
         d(banquetActions.setBegining(data.beg_datetime))
         d(banquetActions.setEnd(data.end_datetime))
+        d(gettingSpacesByDate())
         d(banquetActions.setAdvance(data.advance_amount))
         d(banquetActions.setBanquetId(data.id))
-        if (!spaces)
-            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+
         if (data.space_order?.items)
             d(banquetActions.setArrayOfSpacesSelected(data.space_order?.items))
         d(banquetActions.setState(data.state))

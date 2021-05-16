@@ -63,6 +63,7 @@ export interface ApiGetBasicSpacesResponseType extends ApiResultType {
 export interface ApiBanquetStatesResponseType extends ApiResultType {
     data: BanquetStateArray
 }
+
 export interface ApiPostCustomerResponseType extends ApiResultType {
     data: CustomerType
 }

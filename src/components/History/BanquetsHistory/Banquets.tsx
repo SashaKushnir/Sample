@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {selectHistory, selectMenuKitchen, selectServices, selectTickets} from "../../../selectors/selectCreateNew";
 import {OneBanquet} from "./OneBanquet/OneBanquet";
@@ -11,10 +11,9 @@ import {NavLink} from "react-router-dom";
 import s from "./OneBanquet/OneBanquet.module.css";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {DatePicker} from "antd";
-import moment from 'moment';
+
 const { RangePicker } = DatePicker
 const dateFormat = 'YYYY-MM-DD';
-const monthFormat = 'YYYY-MM'
 
 
 export const Banquets: React.FC = () => {

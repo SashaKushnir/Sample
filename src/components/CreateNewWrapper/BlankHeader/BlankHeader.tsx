@@ -6,7 +6,7 @@ import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
-import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
+import {getListOfSpaces, gettingSpacesByDate} from "../../../redux/banquetInfo/banquetInfoT";
 import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
 import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
 import moment from 'moment';
@@ -27,6 +27,9 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
+        <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
+    const nonEditableSpaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.filter((spaceI) => spaceI.selected)
+        ?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +73,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }, [])
 
     const setDate = (e: any, text: string) => {
+        d(banquetActions.clearAllInfoAboutSpaces())
         Show_time(false);
         if (text !== "") {
             Show_time(true);
@@ -79,16 +83,16 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         } else {
             Show_time(false);
         }
+        if(text)
+        d(gettingSpacesByDate())
     }
 
     const setBegining = (date: string) => {
         date += " 00:00:00"
         d(banquetActions.setBegining(date))
-        console.log(date)
     }
     const setEnd = (date: string) => {
         date += " 23:59:00"
-        console.log(date)
         d(banquetActions.setEnd(date))
     }
 
@@ -96,7 +100,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         let beg: string = data.beginning
         beg = beg.slice(0, -8)
         beg += time + ':00'
-        console.log('beg', beg)
         d(banquetActions.setBegining(beg))
 
     }
@@ -104,7 +107,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         let end: string = data.end
         end = end.slice(0, -8)
         end += time + ':00'
-        console.log('end', end)
         d(banquetActions.setEnd(end))
     }
 
@@ -131,7 +133,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const CompareDate = (date1: string, date2: string) => {
         if (date1.slice(2) > date2.slice(2)) {
-            console.log(date1.slice(2), date2.slice(2))
             return true
         } else if (date1.slice(-2) > date2.slice(-2)) {
 
@@ -255,7 +256,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             <div>
                 Spaces
                 <div className={s.spacesWrapper}>
-                    {spaces}
+                    {nonEditableSpaces}
                 </div>
             </div>
         </>
