@@ -12,7 +12,8 @@ let initialState: BanquetInitial = {
     total: 0,
     customer: null,
     state: null,
-    notDisabledSpaces: []
+    notDisabledSpaces: [],
+    notDisabledDate: ""
 }
 
 export interface SpaceItem {
@@ -54,6 +55,7 @@ export type BanquetInitial = {
     state: BanquetState | null
     basicSpaces?: Array<SpaceItem>
     notDisabledSpaces: Array<SpaceItem>
+    notDisabledDate: string
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -63,6 +65,18 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
             return {
                 ...banquet,
                 name:action.name
+            }
+        case "SAVE_APPROPRIATE_DATA":
+            return {
+                ...banquet,
+                notDisabledDate: action.date,
+                notDisabledSpaces: [...action.dontDisable]
+            }
+        case "CLEAR_APPROPRIATE_DATA":
+            return {
+                ...banquet,
+                notDisabledDate: "",
+                notDisabledSpaces: []
             }
         case "SELECT_UNSELECT_SPACE_BY_ID":
             return {
@@ -78,16 +92,23 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
             return {
                 ...banquet,
                 basicSpaces:banquet.basicSpaces?.map((spaceI) => {
-                    if(!action.dontDisable?.some((dontI) => dontI.id === spaceI.id))
-                    if(action.disablingArr.some((actionSpaceI) => {
-                        return (actionSpaceI.id === spaceI.id) && (actionSpaceI.intervals ?
-                            (actionSpaceI.intervals.length > 0) : false);
-                    })){
-                        spaceI.disabled = true
+                    console.log("Here we are1",!banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id),
+                        banquet.beginning.includes(banquet.notDisabledDate), "res",
+                        !banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id) &&
+                        banquet.beginning.includes(banquet.notDisabledDate))
+                    if(!((banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id)) && (
+                        banquet.beginning.includes(banquet.notDisabledDate))
+                    )) {
+
+                        if (action.disablingArr.some((actionSpaceI) => {
+
+                            return (actionSpaceI.id === spaceI.id) && (actionSpaceI.intervals ?
+                                (actionSpaceI.intervals.length > 0) : false);})) {
+                            spaceI.disabled = true
+                        }
                     }
                     return spaceI
-                }),
-                notDisabledSpaces: [...action.dontDisable]
+                })
             }
         case "CLEAR_ALL_INFO_ABOUT_SPACES":
             return {

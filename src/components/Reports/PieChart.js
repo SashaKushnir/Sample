@@ -10,7 +10,7 @@ class Chart extends Component{
                 datasets:[
                     {
                         label:'Population',
-                        data:[
+                        date:[
                             617594,
                             181045,
                             153060,

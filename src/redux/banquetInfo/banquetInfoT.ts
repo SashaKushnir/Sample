@@ -22,18 +22,18 @@ export const getListOfSpaces = (token: string) => async (d: Dispatch<ActionsType
 }
 
 
-export const gettingSpacesByDate = () => async (d: Dispatch<ActionsTypes<typeof banquetActions | typeof commonActions>>,
-                                                getState: () => RootState) => {
+export const gettingSpacesByDate = (fromHistory: boolean) => async (d: Dispatch<ActionsTypes<typeof banquetActions | typeof commonActions>>,
+                                                                    getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        console.log(getState().banquet.beginning, getState().banquet.end,
-            getState().common.userInfo?.api_token as string)
         const res = await spaces.getOrderedSpaces(getState().banquet.beginning, getState().banquet.end,
             getState().common.userInfo?.api_token as string)
-        console.log("OrderedSpaces", res.data)
         if (res.data.success) {
-            d(banquetActions.setDisabledSpaces(res.data.data, getState().banquet.basicSpaces?.filter((spaceI) =>
-                spaceI.selected) || []))
+            if (fromHistory) {
+                d(banquetActions.setFlagsToPreventSpacesBeingDisabled(getState().banquet.basicSpaces?.filter((spaceI) =>
+                    spaceI.selected) || [], getState().banquet.beginning.split(' ')[0]))
+            }
+            d(banquetActions.setDisabledSpaces(res.data.data))
         } else {
 
         }

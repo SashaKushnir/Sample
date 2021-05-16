@@ -14,6 +14,7 @@ import {OrderItems} from "../../OrderInfo/OrderItems";
 import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {setBanqueStateT} from "../../../redux/BanquetState/BanquetStatesT";
+import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 
 
 type PropsType = {
@@ -62,7 +63,8 @@ export const CreateNew: React.FC<PropsType> = (props) => {
             } else {
                 d(postNewBanknote(postBObj, token))
             }
-
+            d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
+            d(banquetActions.clearAllInfoAboutSpaces())
         }
     }
     if (useSelector((state: RootState) => state.common.isFetching))

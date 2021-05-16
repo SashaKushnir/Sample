@@ -84,7 +84,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             Show_time(false);
         }
         if(text)
-        d(gettingSpacesByDate())
+        d(gettingSpacesByDate(false))
     }
 
     const setBegining = (date: string) => {
@@ -123,6 +123,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(commonActions.banquetModeToggle(false))
         clearBasket()
         d(banquetActions.removeBanquetId())
+        d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
+        d(banquetActions.clearAllInfoAboutSpaces())
     }
     const clearBasket = () => {
         d(clearAllBasket())
