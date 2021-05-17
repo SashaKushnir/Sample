@@ -92,10 +92,6 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
             return {
                 ...banquet,
                 basicSpaces:banquet.basicSpaces?.map((spaceI) => {
-                    console.log("Here we are1",!banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id),
-                        banquet.beginning.includes(banquet.notDisabledDate), "res",
-                        !banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id) &&
-                        banquet.beginning.includes(banquet.notDisabledDate))
                     if(!((banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id)) && (
                         banquet.beginning.includes(banquet.notDisabledDate))
                     )) {

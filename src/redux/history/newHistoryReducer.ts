@@ -1,9 +1,8 @@
-import { ActionsTypes } from "../store";
-import { TicketArray } from "../tickets/ticketsReducer";
-import {ServiceCategoriesItem, ServicesArray} from "../services/servicesReducer";
-import { historyActions } from "./newHistoryAction";
-import {MenuArray, Product_categories, ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
-import data from "./../../responses/banquets.json"
+import {ActionsTypes} from "../store";
+import {TicketArray} from "../tickets/ticketsReducer";
+import {ServicesArray} from "../services/servicesReducer";
+import {historyActions} from "./newHistoryAction";
+import {Product_categories} from "../newBanknote/newBanknoteReducer";
 import {CustomerType} from "../customers/customersReducer";
 import {SpaceItem} from "../banquetInfo/banquetInfoReducer";
 

@@ -19,8 +19,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         servicesComments: Array<any> | undefined,
         resultComments: Array<any> | undefined
 
-    getState().createNew.menus?.map((obj: MenuItem) => {
-        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
+    getState().createNew.menus?.forEach((obj: MenuItem) => {
+        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).forEach(item => {
             if (item.ready === false) {
                 alert("Заповніть поля у стравах - " + item.name)
                 ready = false
@@ -28,14 +28,14 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         })
     })
 
-    getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
+    getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).forEach(item => {
         if (item.ready === false) {
             alert("Заповніть поля у квитках - " + item.name)
             ready = false
         }
     })
 
-    getState().services.services?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem) => {
+    getState().services.services?.filter((obj: ServiceCategoriesItem) => obj.showAmount).forEach((item: ServiceCategoriesItem) => {
         if (item.duration === undefined || item.duration === null) {
             item.duration = 0
         }

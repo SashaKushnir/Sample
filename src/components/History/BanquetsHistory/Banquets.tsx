@@ -22,7 +22,8 @@ export const Banquets: React.FC = () => {
     const menus = useSelector(selectMenuKitchen)
     const tickets = useSelector(selectTickets)
     const services = useSelector(selectServices)
-    const history = historyData?.map((obj: History) => <OneBanquet data={obj}/>).reverse()
+    const history = historyData?.map((obj: History, index) =>
+        <OneBanquet key={index} data={obj}/>).reverse()
     useEffect(() => {
         d(setHistoryT())
         if(!menus)

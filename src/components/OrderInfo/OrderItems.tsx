@@ -24,12 +24,12 @@ export const OrderItems: React.FC = (props) => {
             <ProductsOrder item={item} key={index}/>
         )
     )
-    const tickets = ticketsData?.filter((obj: TicketItem) => obj.showAmount).map((item: TicketItem) =>
-        <TicketsOrder item={item}/>
+    const tickets = ticketsData?.filter((obj: TicketItem) => obj.showAmount).map((item: TicketItem, index) =>
+        <TicketsOrder key={index} item={item}/>
     )
 
-    const services = servicesData?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem) =>
-        <ServicesOrder item={item}/>
+    const services = servicesData?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem, index) =>
+        <ServicesOrder key={index} item={item}/>
     )
     let menu_price = 0
     let tickets_price = 0

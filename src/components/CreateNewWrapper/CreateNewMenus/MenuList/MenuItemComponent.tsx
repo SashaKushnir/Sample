@@ -61,12 +61,12 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
             </div>
             {!hide && <div className={styles.all_menu}>
                 {
-                    resArray.map((resArrayItem) => {
+                    resArray.map((resArrayItem,indexH) => {
                         const items = resArrayItem.items.map((obj, index) => {
                             return <ProductCategoriesMyItem key={index} keyVal={index}
                                                      showAmount={showAmount} product_categoriesItem={obj}/>
                         })
-                        return  <div>
+                        return  <div key={indexH}>
                             {resArrayItem.category}
                             <div>{items}</div>
                         </div>

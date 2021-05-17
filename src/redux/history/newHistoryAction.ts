@@ -1,4 +1,3 @@
-import {MenuArray, ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import {History} from "./newHistoryReducer";
 
 

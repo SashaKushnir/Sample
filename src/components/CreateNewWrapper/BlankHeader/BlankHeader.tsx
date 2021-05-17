@@ -23,7 +23,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
     const all_states = useSelector(selectBanquetsStates)
-    const states = all_states?.map((obj: BanquetState) => <option>{obj.name}</option>)
+    const states = all_states?.map((obj: BanquetState, index) =>
+        <option key={index}>{obj.name}</option>)
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>

@@ -21,8 +21,8 @@ export const Customers: React.FC<ProptsType> = (props) => {
         d(setCustomersT())
     }, [])
 
-    const customerProfiles = customers.customers?.map((obj:CustomerType) =>
-        <CustomerProfile customer={obj} CusMenuSwitch={props.CusMenuSwitch}/>)
+    const customerProfiles = customers.customers?.map((obj:CustomerType, index) =>
+        <CustomerProfile customer={obj} key={index} CusMenuSwitch={props.CusMenuSwitch}/>)
 
     return(
         <div>

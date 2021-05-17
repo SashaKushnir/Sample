@@ -37,21 +37,22 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     //const [hideAll, setHideAll] = useState(false)
 
     if (data.space_order?.items)
-        tables = data.space_order?.items.map(obj => <div className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number}, price: {obj.price}</div>)
+        tables = data.space_order?.items.map((obj, index) =>
+            <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number}, price: {obj.price}</div>)
     let products = null
     if (data.product_order !== null)
         products = data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
-            <ProductsOrder item={obj}/>)
+            <ProductsOrder key={index} item={obj}/>)
 
     let tickets = null
     if (data.ticket_order !== null)
-        tickets = data.ticket_order.items.map((obj: TicketItem) =>
-            <TicketsOrder item={obj}/>)
+        tickets = data.ticket_order.items.map((obj: TicketItem, index) =>
+            <TicketsOrder key={index} item={obj}/>)
 
     let services = null
     if (data.service_order !== null)
-        services = data.service_order.items.map((obj: ServiceCategoriesItem) =>
-            <ServicesOrder item={obj}/>)
+        services = data.service_order.items.map((obj: ServiceCategoriesItem, index) =>
+            <ServicesOrder key={index} item={obj}/>)
 
     const Delete = () => {
         if (window.confirm("Delete this banquet? It can not be restored!!!")) {

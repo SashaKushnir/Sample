@@ -42,19 +42,19 @@ export const OneBanquetPDF: React.FC = (props) => {
     let total_menus = 0
     let total_tickets = 0
     let total_services = 0
-    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem) => {
+    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         total_menus += obj.amount as number * obj.price
-        return <Item data={obj}/>
+        return <Item key={index} data={obj}/>
     })
 
-    const tickets = banquet?.ticket_order?.items.map((obj: TicketItem) => {
+    const tickets = banquet?.ticket_order?.items.map((obj: TicketItem, index) => {
         total_tickets += obj.amount as number * obj.price
-        return <Item data={obj}/>
+        return <Item key={index} data={obj}/>
     })
 
-    const services = banquet?.service_order?.items.map((obj: ServiceCategoriesItem) => {
+    const services = banquet?.service_order?.items.map((obj: ServiceCategoriesItem, index) => {
         total_services += obj.amount as number * obj.once_paid_price
-        return <Item services={obj}/>
+        return <Item key={index} services={obj}/>
 
     })
 

@@ -22,7 +22,8 @@ const Item: React.FC<ItemProps> = (props) => {
         {props.data && <>
             <td className={s.per33}>{props.data?.name}</td>
             <td >{props.data?.amount}</td>
-            <td><ul className={s.left}>{props.data.comments.map((obj:CommentItem) => <li>{obj.text}</li>)}</ul></td>
+            <td><ul className={s.left}>{props.data.comments.map((obj:CommentItem, index) =>
+                <li key={index}>{obj.text}</li>)}</ul></td>
         </>}
         {props.services && <>
             <td >{props.services?.name}</td>
@@ -40,10 +41,10 @@ export const KitchenPDF: React.FC = (props) => {
     let total_menus = 0
     let total_tickets = 0
     let total_services = 0
-    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem) => {
+    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         total_menus += obj.amount as number * obj.price
         if(obj.category.name != "Pizza")
-            return <Item data={obj}/>
+            return <Item key={index} data={obj}/>
     })
 
 
