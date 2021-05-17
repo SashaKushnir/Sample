@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react'
-import {History} from "./../../../redux/history/newHistoryReducer"
+import React from 'react'
 import s from "../pdfStyles.module.css"
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
-import {date} from "yup";
 import {Pidpus} from "../PDF";
 
 type ItemProps = {

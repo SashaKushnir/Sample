@@ -4,17 +4,17 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import store from "./redux/store";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import "antd/dist/antd.css";
-import { BrowserRouter } from "react-router-dom";
-import { BeforeApp } from "./BeforeApp";
+import {BrowserRouter} from "react-router-dom";
+import {App} from "./App";
 
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <React.StrictMode>
-                    <BeforeApp/>
+                    <App/>
             </React.StrictMode>
         </BrowserRouter>
     </Provider>,

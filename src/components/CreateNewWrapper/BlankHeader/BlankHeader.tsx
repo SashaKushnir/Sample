@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {selectBanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
-import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
+import {selectBanquet, selectBanquetsStates} from "../../../selectors/selectCreateNew";
+import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
-import {getListOfSpaces, gettingSpacesByDate} from "../../../redux/banquetInfo/banquetInfoT";
+import {gettingSpacesByDate} from "../../../redux/banquetInfo/banquetInfoT";
 import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
 import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
 import moment from 'moment';
@@ -43,15 +43,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
 
-    // useEffect(() => {
-    //     if (all_states){
-    //          d(banquetActions.setState(all_states[0]))
-    //     }
-    // },[)
 
 
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
-        all_states?.map(obj => {
+        all_states?.forEach(obj => {
             if (e.target.value === obj.name)
                 d(banquetActions.setState(obj))
         })
@@ -112,14 +107,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
 
 
-    const setDefaultTime = (my_time: string) => {
-        if (my_time) {
-            let time = my_time.replace(" ", "T")
-            time = time.slice(0, -3)
-            return time
-        }
-    }
-
     const stopEditMode = () => {
         d(commonActions.banquetModeToggle(false))
         clearBasket()
@@ -133,16 +120,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")
-    }
-
-    const CompareDate = (date1: string, date2: string) => {
-        if (date1.slice(2) > date2.slice(2)) {
-            return true
-        } else if (date1.slice(-2) > date2.slice(-2)) {
-
-        } else {
-
-        }
     }
 
     const format = 'HH:mm';

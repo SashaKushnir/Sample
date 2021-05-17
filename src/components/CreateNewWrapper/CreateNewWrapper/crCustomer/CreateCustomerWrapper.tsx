@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useState} from 'react'
+import React, {useState} from 'react'
 import {CreateCustomerForm} from "./CreateCustomerForm";
 import {useDispatch} from "react-redux";
 import {filterCustomersByName, setCustomersT} from "../../../../redux/customers/customersThunk";

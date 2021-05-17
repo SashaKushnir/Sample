@@ -1,4 +1,4 @@
-import {ApiBanquetStatesResponseType, ApiGetBasicSpacesResponseType, myGetInstance} from "../api";
+import {ApiGetBasicSpacesResponseType, myGetInstance} from "../api";
 
 export const spaces = {
     getListOfSpaces: (token: string) => {

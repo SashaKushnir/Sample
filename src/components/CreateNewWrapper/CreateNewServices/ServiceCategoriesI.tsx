@@ -1,11 +1,8 @@
 import React from "react";
 
-import { ServiceCategoriesItem } from "../../../redux/services/servicesReducer";
+import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 import styles from "./ServiceCategoriesI.module.css";
-import { IntertaimentImg } from "../../../common/compon/Intartaiment/EntertainmentImg";
-import { useDispatch } from "react-redux";
-import { servicesActions } from "../../../redux/services/servicesActions";
-import { NumericInput } from "../../../common/compon/InputNumber/InputNumber";
+import {IntertaimentImg} from "../../../common/compon/Intartaiment/EntertainmentImg";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem
@@ -13,14 +10,6 @@ interface ServiceCategoriesItemProps {
 }
 
 export const ServiceCategoriesI: React.FC<ServiceCategoriesItemProps> = ({serviceItem, showAmount}) => {
-    const d = useDispatch()
-    const deleteItem = () => {
-        d(servicesActions.deleteFullEntertainmentItem(serviceItem))
-
-    }
-    const changeCurS = (value: number) => {
-        d(servicesActions.addEntertainmentItem(serviceItem, value))
-    }
 
     return <div className={styles.intertaiment}>
             <div className={styles.img}>

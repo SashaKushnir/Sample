@@ -1,14 +1,12 @@
 import React from 'react'
-import { HeaderNavBar } from "./HeaderNavBar";
+import {HeaderNavBar} from "./HeaderNavBar";
 import s from './Header.module.css'
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { logOutT } from "../../../redux/forCommon/forCommonThunks";
-import { commonActions } from "../../../redux/forCommon/forCommonActions";
+import {useDispatch} from "react-redux";
+import {logOutT} from "../../../redux/forCommon/forCommonThunks";
+import {commonActions} from "../../../redux/forCommon/forCommonActions";
 
 export const Header = () => {
 
-    const history = useHistory()
     const d = useDispatch();
     const log_out =  ( ) => {
         d(logOutT())

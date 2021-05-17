@@ -59,16 +59,17 @@ export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
+// }Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>
 }
-
-export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
+export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d: any,
                                                                                 getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
         const response = await familyMembers.createFamilyMember(newFMInfo ,getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success) {
-            d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))
+            d(setCustomersT())
+            // d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))
             hideForm()
             alert("Success")
         } else {

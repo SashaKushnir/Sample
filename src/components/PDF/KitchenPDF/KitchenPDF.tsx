@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react'
-import {CommentItem, History} from "./../../../redux/history/newHistoryReducer"
+import React from 'react'
+import {CommentItem} from "./../../../redux/history/newHistoryReducer"
 import s from "../pdfStyles.module.css"
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
-import {date} from "yup";
 import {Pidpus} from "../PDF";
 
 type ItemProps = {
@@ -38,12 +37,12 @@ const Item: React.FC<ItemProps> = (props) => {
 export const KitchenPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
-    let total_menus = 0
-    let total_tickets = 0
-    let total_services = 0
-    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
-        total_menus += obj.amount as number * obj.price
-        if(obj.category.name != "Pizza")
+    // let total_menus = 0
+    // let total_tickets = 0                never used!!!
+    // let total_services = 0
+    const menus = banquet?.product_order?.items.forEach((obj: ProductCategoriesItem, index) => {
+        // total_menus += obj.amount as number * obj.price
+        if(obj.category.name !== "Pizza")
             return <Item key={index} data={obj}/>
     })
 

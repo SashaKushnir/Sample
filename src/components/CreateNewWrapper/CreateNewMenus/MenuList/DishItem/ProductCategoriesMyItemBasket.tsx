@@ -1,12 +1,9 @@
-import React, {ChangeEvent, createRef, useEffect, useRef, useState} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 import {ProductCategoriesItem} from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductCategoriesMyItem.module.css'
 import {DishImg} from "../../../../../common/compon/Dish/DishImg";
 import {useDispatch} from "react-redux";
 import {newBanknoteActions} from "../../../../../redux/newBanknote/newBanknoteActions";
-import {NumericInput} from "../../../../../common/compon/InputNumber/InputNumber";
-import _uniqueId from 'lodash/uniqueId';
-import {number} from "yup";
 import {CommentI} from "../../../../../common/compon/CommentI/CommentI";
 
 export interface CommentMainProperties {
@@ -49,7 +46,6 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
         if (e.target.value.match(/^(\d)*$/))
             d(newBanknoteActions.addMenuItem(product_categoriesItem, e.target.value as any))
     }
-    const [id] = useState(_uniqueId('prefix-'))
 
     return <div> {product_categoriesItem.showAmount && <div className={styles.dish_basket}>
         <div className={styles.item}>
@@ -75,9 +71,6 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                     <button onClick={createCommentI}>Додати коментар</button>
                     {comments}
                 </div>
-                {/*{*/}
-                {/*    <div className={styles.weight_basket}>{product_categoriesItem.weight}</div>*/}
-                {/*}*/}
                 <button onClick={deleteItem} className={styles.btn}>Delete</button>
             </div>
         </div>

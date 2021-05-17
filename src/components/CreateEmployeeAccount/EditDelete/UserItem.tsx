@@ -1,4 +1,4 @@
-import React, {MouseEvent, SyntheticEvent} from 'react'
+import React, {SyntheticEvent} from 'react'
 import {useDispatch} from "react-redux";
 import {UserInter} from "../../../api/login/login";
 import {createNewEmployeeA} from "../../../redux/CreateNewEmployee/CreateNewEmployeeA";

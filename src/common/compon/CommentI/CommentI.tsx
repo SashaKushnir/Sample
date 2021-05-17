@@ -1,7 +1,6 @@
 import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {CommentItem} from "../../../redux/history/newHistoryReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../redux/store";
+import {useDispatch} from "react-redux";
 import {newBanknoteActions} from "../../../redux/newBanknote/newBanknoteActions";
 import useOnClickOutside from "../../customHook/onMouseClickOutOfComponent";
 import {useRouteMatch} from "react-router-dom";

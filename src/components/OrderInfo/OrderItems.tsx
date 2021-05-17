@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import s from './OrderItems.module.css'
-import {MenuItem, Product_categories, ProductCategoriesItem} from "../../redux/newBanknote/newBanknoteReducer";
-import {ServiceCategoriesItem, ServicesArray} from "../../redux/services/servicesReducer";
+import {MenuItem, ProductCategoriesItem} from "../../redux/newBanknote/newBanknoteReducer";
+import {ServiceCategoriesItem} from "../../redux/services/servicesReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {BanquetType} from "../../redux/formPostObject/createObjReducer";
 import {ProductsOrder} from "./Products/ProductsOrder";
 import {TicketsOrder} from "./Tickets/TicketsOrder";
 import {ServicesOrder} from "./Services/ServicesOrder";
@@ -15,9 +14,7 @@ import {TicketItem} from "../../redux/tickets/ticketsReducer";
 export const OrderItems: React.FC = (props) => {
     const d = useDispatch()
     const menuData = useSelector(selectMenuKitchen)
-    // const ticketsData = JSON.parse(localStorage.getItem("tickets") || "[]");
     const ticketsData = useSelector(selectTickets)
-    // const servicesData = JSON.parse(localStorage.getItem("services") || "[]");
     const servicesData = useSelector(selectServices)
     const menus = menuData?.map((obj: MenuItem) =>
         obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) =>
@@ -35,17 +32,17 @@ export const OrderItems: React.FC = (props) => {
     let tickets_price = 0
     let services_price = 0
     menuData?.map((obj: MenuItem) =>
-        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map((item, index) => {
+        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).forEach((item, index) => {
                 menu_price = menu_price + (item.amount as number * item.price)
             }
         )
     )
-    ticketsData?.filter((obj: TicketItem) => obj.amount && obj.showAmount).map((item: TicketItem) => {
+    ticketsData?.filter((obj: TicketItem) => obj.amount && obj.showAmount).forEach((item: TicketItem) => {
             tickets_price = tickets_price + (item.amount as number * item.price)
         }
     )
 
-    servicesData?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem) => {
+    servicesData?.filter((obj: ServiceCategoriesItem) => obj.showAmount).forEach((item: ServiceCategoriesItem) => {
             if (item.amount && item.once_paid_price)
                 services_price = services_price + (item.amount as number * item.once_paid_price as number)
         }

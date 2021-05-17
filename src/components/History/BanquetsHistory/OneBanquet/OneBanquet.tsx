@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import s from "./OneBanquet.module.css"
-import {History} from "./../../../../redux/history/newHistoryReducer"
+import {History} from "../../../../redux/history/newHistoryReducer"
 import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import {ServiceCategoriesItem} from "../../../../redux/services/servicesReducer";
 import {ProductsOrder} from "../../../OrderInfo/Products/ProductsOrder";
@@ -65,11 +65,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
     const ClearAllShowAmount = () => {
         d(commonActions.banquetModeToggle(true))
-        menus?.map((obj: MenuItem, index: number) => {
-            obj.products.map((item: ProductCategoriesItem, index: number) => {
+        menus?.forEach((obj: MenuItem) => {
+            obj.products.forEach((item: ProductCategoriesItem) => {
                 d(newBanknoteActions.deleteFullItem(item))
                 if (data.product_order)
-                    data.product_order.items.map((history_item: ProductCategoriesItem, index: number) => {
+                    data.product_order.items.forEach((history_item: ProductCategoriesItem) => {
                         if (history_item.id === item.id) {
                             d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
                         }
@@ -80,7 +80,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         tickets1?.map((obj: TicketItem) => {
             d(ticketsActions.deleteFullTicketItem(obj))
             if (data.ticket_order !== null)
-                data.ticket_order.items.map((item: TicketItem) => {
+                data.ticket_order.items.forEach((item: TicketItem) => {
                     if (obj.id === item.id) {
                         d(ticketsActions.addTicketItem(item, item.amount ? item.amount as number : 0))
                     }
@@ -88,10 +88,10 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             return obj
         })
 
-        services1?.map((obj: ServiceCategoriesItem) => {
+        services1?.forEach((obj: ServiceCategoriesItem) => {
             d(servicesActions.deleteFullEntertainmentItem(obj))
             if (data.service_order !== null)
-                services = data.service_order.items.map((item: ServiceCategoriesItem) => {
+                    data.service_order.items.forEach((item: ServiceCategoriesItem) => {
                     if (obj.id === item.id) {
                         d(servicesActions.addEntertainmentItem(item, item.amount ? item.amount as number : 0))
                         d(servicesActions.setDuration(item.duration as number, item.id))

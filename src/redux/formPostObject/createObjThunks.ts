@@ -164,7 +164,7 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
-        if (true) {
+        if (res.data.success) {
 
         } else {
 

@@ -1,8 +1,8 @@
-import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import {Field, Form, Formik} from "formik";
+import React from "react";
 import * as Yup from 'yup';
 import s from '../../../Authorisation/LoginForm.module.css'
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/store";
 import {postCustomer} from "../../../../redux/customers/customersThunk";
 

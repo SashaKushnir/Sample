@@ -24,7 +24,7 @@ export const Banquets: React.FC = () => {
     const services = useSelector(selectServices)
     const history = historyData?.map((obj: History, index) =>
         <OneBanquet key={index} data={obj}/>).reverse()
-    useEffect(() => {
+    const once = () => {
         d(setHistoryT())
         if(!menus)
             d(setMenuT())
@@ -32,6 +32,9 @@ export const Banquets: React.FC = () => {
             d(setServicesT())
         if(!tickets)
             d(setTicketsT())
+    }
+    useEffect(() => {
+        once()
     }, [])
 
     const createpdf = () => {

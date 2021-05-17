@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import { Redirect, Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import { MyPage } from "./components/markup/MyPage/MyPage";
-import { Authorisation } from "./components/Authorisation/Authorisation";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./redux/store";
-import { commonActions } from "./redux/forCommon/forCommonActions";
-import { logInWithToken } from "./redux/forCommon/forCommonThunks";
+import {Redirect, Route, Switch, useHistory} from "react-router-dom";
+import {MyPage} from "./components/markup/MyPage/MyPage";
+import {Authorisation} from "./components/Authorisation/Authorisation";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "./redux/store";
+import {commonActions} from "./redux/forCommon/forCommonActions";
 import {OneBanquetPDF} from "./components/PDF/OneBanquetPDF/OneBanquetPDF";
 import {OneDayPDF} from "./components/PDF/OneDayPDF/OneDayPDF";
 import {KitchenPDF} from "./components/PDF/KitchenPDF/KitchenPDF";
 import {PizzaPDF} from "./components/PDF/PizzaPDF/PizzaPDF";
 
 export const App = () => {
-    const api_token = localStorage.getItem("api_token")
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
     const needRedirect = useSelector((state: RootState) => state.common.needRedirect)
     const d = useDispatch()

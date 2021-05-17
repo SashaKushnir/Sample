@@ -1,8 +1,8 @@
 import axios from "axios";
-import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBanknoteReducer";
+import {MenuArray} from "../redux/newBanknote/newBanknoteReducer";
 import {UserInter, UserType} from "./login/login";
-import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
-import { History } from "../redux/history/newHistoryReducer";
+import {ServiceCategoriesItem} from "../redux/services/servicesReducer";
+import {History} from "../redux/history/newHistoryReducer";
 import {CustomersArray, CustomerType, FamilyMemberGetter} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";

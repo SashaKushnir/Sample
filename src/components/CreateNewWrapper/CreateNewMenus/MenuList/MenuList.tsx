@@ -1,9 +1,7 @@
 import React from 'react'
 import styles from './MenuList.module.css'
-import { useSelector } from "react-redux";
-import { MenuItemComponent } from "./MenuItemComponent";
-import { selectMenuKitchen } from "../../../../selectors/selectCreateNew";
-import { MenuArray, MenuItem } from "../../../../redux/newBanknote/newBanknoteReducer";
+import {MenuItemComponent} from "./MenuItemComponent";
+import {MenuArray, MenuItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 
 interface MenuListProps {
     menus?: MenuArray

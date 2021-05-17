@@ -3,7 +3,6 @@ import {CustomerType} from "../../redux/customers/customersReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUsers} from "../../selectors/selectCreateNew";
 import {CustomerProfile} from "./CustomerProfile";
-import {setHistoryT} from "../../redux/history/newHistoryThunk";
 import {setCustomersT} from "../../redux/customers/customersThunk";
 import {CreateCustomerWrapper} from "../CreateNewWrapper/CreateNewWrapper/crCustomer/CreateCustomerWrapper";
 

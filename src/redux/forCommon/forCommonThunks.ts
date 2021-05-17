@@ -65,13 +65,13 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
 
 export const clearAllBasket = () => (d: Dispatch<ActionsTypes<typeof newBanknoteActions |
     typeof ticketsActions | typeof servicesActions>>, getState: () => RootState) => {
-    getState().tickets.tickets?.map((ticketI) => {
+    getState().tickets.tickets?.forEach((ticketI) => {
         d(ticketsActions.deleteFullTicketItem(ticketI))
     })
-    getState().services.services?.map((serviceI) => {
+    getState().services.services?.forEach((serviceI) => {
         d(servicesActions.deleteFullEntertainmentItem(serviceI))
     })
-    getState().createNew.menus?.map((categoryI) => categoryI.products?.map((productI) => {
+    getState().createNew.menus?.forEach((categoryI) => categoryI.products?.forEach((productI) => {
         d(newBanknoteActions.deleteFullItem(productI))
     }))
 }

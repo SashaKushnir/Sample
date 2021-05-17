@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {History} from "./../../../redux/history/newHistoryReducer"
 import s from "../pdfStyles.module.css"
 import {useSelector} from "react-redux";
@@ -9,7 +9,7 @@ export const OneDayPDF: React.FC = () => {
     const banquets = useSelector((state: RootState) => state.common.oneDay_pdf)
 
     let advance = 0
-    banquets?.map((obj:History) => {
+    banquets?.forEach((obj:History) => {
        advance += obj.advance_amount
     })
 
