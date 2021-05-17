@@ -9,9 +9,6 @@ type DishesProps = {
     keyVal: number
 }
 
-
-
-
 export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categoriesItem, showAmount,keyVal}) => {
 
     return <div className={styles.dish}>

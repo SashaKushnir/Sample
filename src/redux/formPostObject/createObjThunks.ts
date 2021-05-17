@@ -64,8 +64,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         alert("Введіть предоплату")
         ready = false
     }
-    if (getState().banquet.name === null || getState().banquet.name === "" || getState().banquet.name === undefined) {
-        alert("Введіть імя")
+    if (!getState().banquet.name || getState().banquet.name.length < 2) {
+        alert("Введіть імя (хоча б 2 символи)")
         ready = false
     }
     if (getState().banquet.state === null || getState().banquet.state === undefined) {
@@ -165,12 +165,13 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
         if (res.data.success) {
-
+            alert("Створено!!!")
         } else {
-
+            alert("Невдало...")
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
+        alert("Помилка...")
         d(commonActions.fetchingToggle(false))
     }
 }

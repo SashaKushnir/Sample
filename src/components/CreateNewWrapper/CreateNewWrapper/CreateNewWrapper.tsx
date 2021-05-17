@@ -7,6 +7,6 @@ export const CreateNewWrapper: React.FC = () => {
     const [showMenu, setShowMenuToggle] = useState(false)
     return <div>
         {showMenu && <Customers  CusMenuSwitch={setShowMenuToggle}/>}
-        {!showMenu && <CreateNew CusMenuSwitch={setShowMenuToggle}/>}
+        {!showMenu &&  <div><CreateNew CusMenuSwitch={setShowMenuToggle}/></div>}
     </div>
 }
