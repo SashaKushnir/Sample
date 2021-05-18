@@ -18,7 +18,7 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrongПП")
+        alert("Помилка...")
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
