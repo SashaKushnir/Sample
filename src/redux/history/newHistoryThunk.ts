@@ -50,12 +50,12 @@ export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: 
         d(commonActions.fetchingToggle(true))
         const response = await history.patchHistory(updObj, token)
         if (response.data.success) {
-            alert("Something went wrong")
+            alert("Успішно редаговано")
         } else {
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrong")
+        alert("Помилка...")
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
