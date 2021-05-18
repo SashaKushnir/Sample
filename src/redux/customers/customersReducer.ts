@@ -50,7 +50,8 @@ export const customersReducer = (customers = initialState, action: ActionsTypes<
                 ...customers,
                 customers: customers.customers?.map((customerI) => {
                     if(customerI.id === action.customerId) {
-                        customerI.family_members.push(action.familyMember)
+                        customerI.family_members = customerI.family_members?[...customerI.family_members,
+                        action.familyMember]:[action.familyMember]
                     }
                     return customerI
                 })

@@ -1,6 +1,6 @@
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
 import {ActionsTypes, RootState} from "../store";
-import { commonActions } from "../forCommon/forCommonActions";
+import {commonActions} from "../forCommon/forCommonActions";
 import {customersActions} from "./customersActions";
 import {CreateCustomerFormType} from "../../components/CreateNewWrapper/CreateNewWrapper/crCustomer/CreateCustomerForm";
 import {CreateFamilyMember} from "../../components/Customer/CreateFMForm";
@@ -61,22 +61,25 @@ export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (
     }
 // }Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>
 }
-export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d: any,
-                                                                                getState: () => RootState) => {
+export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d:
+Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
+getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await familyMembers.createFamilyMember(newFMInfo ,getState().common.userInfo?.api_token as string)
+        const response = await familyMembers.createFamilyMember(newFMInfo, getState().common.userInfo?.api_token as string)
         // Set response to Bll
+        console.log(newFMInfo)
+        console.log(response)
         if (response.data.success) {
-            d(setCustomersT())
-            // d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))
             hideForm()
+            d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))
             alert("Success")
         } else {
             console.warn(response.data.message)
         }
+        d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrong")
+        alert("Помилка")
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
