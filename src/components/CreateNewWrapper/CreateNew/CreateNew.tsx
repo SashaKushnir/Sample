@@ -27,6 +27,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const fullEmptyAmount = useSelector((state: RootState) => state.common.fullEmptyAmount)
     const state = useSelector((state: RootState) => state.banquet.state)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
+    const isFetching = useSelector((state:RootState) => state.common.isMenusFetching)
 
     let {url} = useRouteMatch()
     const d = useDispatch()
@@ -90,7 +91,9 @@ export const CreateNew: React.FC<PropsType> = (props) => {
         </div>}
         {!editMode && <div>
             <BlankHeader isEdit={editMode}/>
-            <OrderItems/>
+            { isFetching ? <FetchingComponent/>
+            :<OrderItems/>
+            }
             <div className={s.toRightSide}>
                 <button className={s.buttonBlack} onClick={editB}>Редагувати</button>
                 <button className={s.buttonGreen} onClick={submitB}>Відправити</button>

@@ -6,18 +6,18 @@ import { commonActions } from "../forCommon/forCommonActions";
 
 export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknoteActions | typeof commonActions>>) => {
     try {
-        d(commonActions.fetchingToggle(true))
+        d(commonActions.fetchingMenusToggle(true))
         const response = await menus.getAllMenus()
          if (response.data.success) {
             d(newBanknoteActions.setMenuInfo(response.data.data))
-            d(commonActions.fetchingToggle(false))
+            d(commonActions.fetchingMenusToggle(false))
          } else {
             console.warn(response.statusText)
         }
     } catch (error) {
         alert("Something went wrong")
         console.warn(error)
-        d(commonActions.fetchingToggle(false))
+        d(commonActions.fetchingMenusToggle(false))
     }
     // Catch don't forget
 }
