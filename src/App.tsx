@@ -10,6 +10,7 @@ import {OneBanquetPDF} from "./components/PDF/OneBanquetPDF/OneBanquetPDF";
 import {OneDayPDF} from "./components/PDF/OneDayPDF/OneDayPDF";
 import {KitchenPDF} from "./components/PDF/KitchenPDF/KitchenPDF";
 import {PizzaPDF} from "./components/PDF/PizzaPDF/PizzaPDF";
+import {ServicesPDF} from "./components/PDF/ServicesPDF/ServicesPDF";
 
 export const App = () => {
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
@@ -55,6 +56,7 @@ export const App = () => {
                 <Route path='/OneBanquetPdf' render={() => <OneBanquetPDF/>}/>
                 <Route path='/OneDayPdf' render={() => <OneDayPDF/>}/>
                 <Route path='/KitchenPdf' render={() => <KitchenPDF/>}/>
+                <Route path='/ServicesPdf' render={() => <ServicesPDF/>}/>
                 <Route path='/PizzaPdf' render={() => <PizzaPDF/>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>

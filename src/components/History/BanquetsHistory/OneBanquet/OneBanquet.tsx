@@ -38,7 +38,8 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
     if (data.space_order?.items)
         tables = data.space_order?.items.map((obj, index) =>
-            <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number}, price: {obj.price}</div>)
+            <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number},
+                price: {obj.price}</div>)
     let products = null
     if (data.product_order !== null)
         products = data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
@@ -91,7 +92,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         services1?.forEach((obj: ServiceCategoriesItem) => {
             d(servicesActions.deleteFullEntertainmentItem(obj))
             if (data.service_order !== null)
-                    data.service_order.items.forEach((item: ServiceCategoriesItem) => {
+                data.service_order.items.forEach((item: ServiceCategoriesItem) => {
                     if (obj.id === item.id) {
                         d(servicesActions.addEntertainmentItem(item, item.amount ? item.amount as number : 0))
                         d(servicesActions.setDuration(item.duration as number, item.id))
@@ -134,13 +135,13 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const createpdf = () => {
         d(commonActions.setBanquetPdf(data))
     }
-    const employee = useSelector((state:RootState) => state.common.userInfo?.role)
+    const employee = useSelector((state: RootState) => state.common.userInfo?.role)
 
     return <div className={s.main}>
         <div className={s.first}>
             <div className={s.buttons}>
 
-                {employee?.can_modify &&  <NavLink to="/content/new/menus" className={s.navLink}>
+                {employee?.can_modify && <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
 
@@ -167,8 +168,12 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     <div>
                         <NavLink to="/KitchenPdf" className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, страви</div>
-                        </NavLink><NavLink to="/PizzaPdf" className={s.navLink}>
+                        </NavLink>
+                        <NavLink to="/PizzaPdf" className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, піцца</div>
+                        </NavLink>
+                        <NavLink to="/ServicesPdf" className={s.navLink}>
+                            <div className={s.btn} onClick={createpdf}>Звіт на розваги</div>
                         </NavLink>
                     </div>
                 </div>

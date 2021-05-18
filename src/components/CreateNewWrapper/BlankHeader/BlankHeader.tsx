@@ -71,41 +71,130 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setDate = (e: any, text: string) => {
         d(banquetActions.clearAllInfoAboutSpaces())
         Show_time(false);
-        if (text !== "") {
-            Show_time(true);
-            setBegining(text)
-            setEnd(text)
+        if (text !== "" && data.beginning !== '' && data.end !== '') {
+            let date = data.beginning
+            date = date.slice(-9)
+            console.log(text,date)
+            setBegining(text,date)
 
-        } else {
+            let date1 = data.end
+            date1 = date1.slice(-9)
+            console.log(text,date1)
+            setBegining(text,date1)
+            Show_time(true);
+        } else if(text !== ""){
+            Show_time(true);
+            setBegining(text," 00:00:00")
+            setEnd(text," 23:59:00")
+        }
+        else{
             Show_time(false);
         }
-        if(text)
-        d(gettingSpacesByDate(false))
+
+        // if(text)
+        // d(gettingSpacesByDate(false))
     }
 
-    const setBegining = (date: string) => {
-        date += " 00:00:00"
+    const setBegining = (date: string, time: string) => {
+        date += time
         d(banquetActions.setBegining(date))
     }
-    const setEnd = (date: string) => {
-        date += " 23:59:00"
+    const setEnd = (date: string, time: string) => {
+        date += time
         d(banquetActions.setEnd(date))
     }
 
     const SetBegTime = (e: any, time: string) => {
+        if(time===''){
+            return
+        }
         let beg: string = data.beginning
         beg = beg.slice(0, -8)
         beg += time + ':00'
+        console.log(beg)
         d(banquetActions.setBegining(beg))
-
     }
     const SetEndTime = (e: any, time: string) => {
+        if(time===''){
+            return
+        }
         let end: string = data.end
         end = end.slice(0, -8)
         end += time + ':00'
+        console.log(end)
         d(banquetActions.setEnd(end))
     }
 
+
+    // const [changed, Change] = useState(false)
+    // const ChangeDate = (inc:boolean) => {
+    //     inc_dec_Date(true)
+    //     // if(inc){
+    //     //     if(changed){
+    //     //
+    //     //     }else{
+    //     //         inc_dec_Date(true)
+    //     //     }
+    //     // }else{
+    //     //     if(changed){
+    //     //         inc_dec_Date(false)
+    //     //     }else{
+    //     //
+    //     //     }
+    //     // }
+    // }
+    //
+    // const inc_dec_Date = (inc:boolean) => {
+    //     if(inc){
+    //         let end: string = data.end
+    //         end.replace(' ','T')
+    //         let date = new Date(end);
+    //         date.setDate(date.getDate() + 1);
+    //         end = convert(date)
+    //         end += ' ' + data.end.slice(-8)
+    //         console.log('setting to store',date,end);
+    //         d(banquetActions.setEnd(end))
+    //     }else{
+    //         let end: string = data.end
+    //         end.replace(' ','T')
+    //         let date = new Date(end);
+    //         date.setDate(date.getDate() - 1);
+    //         end = convert(date)
+    //         end += ' ' + data.end.slice(-8)
+    //         console.log('result ',end);
+    //         d(banquetActions.setEnd(end))
+    //     }
+    //
+    // }
+    //
+    //
+    // const CompareTime = (time1:string, time2:string) => {
+    //     let h1 = time1.slice(10,13)
+    //     let h2 = time2.slice(10,13)
+    //     let m1 = time1.slice(13,15)
+    //     let m2 = time2.slice(13,15)
+    //     // console.log('hours ',h1, h2)
+    //     // if(h1 > h2){
+    //     //     console.log("need to switch")
+    //     //     ChangeDate(true)
+    //     //
+    //     // }else if(time1.slice(2) === time2.slice(2)){
+    //     //     ChangeDate(false)
+    //     //     console.log("false")
+    //     // }
+    //
+    //     console.log("final result",data.beginning, data.end)
+    //
+    // }
+    //
+    // const convert = (current_datetime:any) => {
+    //     let month = current_datetime.getMonth() + 1
+    //     if(month < 10){
+    //         month = "0"+month
+    //     }
+    //     let formatted_date = current_datetime.getFullYear() + "-" + month + "-" + current_datetime.getDate();
+    //     return formatted_date;
+    // }
 
     const stopEditMode = () => {
         d(commonActions.banquetModeToggle(false))
@@ -148,17 +237,17 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.time + ' ' + s.blocks}>
                         {data.beginning &&
-                        <DatePicker onChange={setDate}
+                        <DatePicker onChange={(e: any, time: string) => {setDate(e, time)}}
                                     defaultValue={moment(data.beginning.slice(0, -9), formate_date)}/>
                         }
                         {!data.beginning &&
-                        <DatePicker onChange={setDate}/>
+                        <DatePicker onChange={(e: any, time: string) => {setDate(e, time)}}/>
                         }
                         {show_time && <>
-                            <TimePicker format={format} onChange={SetBegTime} inputReadOnly={false}
+                            <TimePicker format={format} onChange={(e: any, time: string) => {SetBegTime(e, time)}} inputReadOnly={false}
                                         defaultValue={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
-                            <TimePicker format={format} onChange={SetEndTime} inputReadOnly={true}
-                                        defaultValue={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                            <TimePicker format={format} onChange={(e: any, time: string) => {SetEndTime(e, time)}} inputReadOnly={true}
+                                        defaultValue={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
                         </>
                         }
 
@@ -203,7 +292,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
                 </div>
                 <div className={s.main}>
-                    <div>
+                    <div className={s.name_desc + ' ' + s.blocks}>
                         <input className={s.input + " " + s.input_name} value={data.name} readOnly/>
                         <textarea className={s.input} value={data.description ? data.description : ""} readOnly/>
                         <div onClick={ChooseCustomer} className={s.customer}>

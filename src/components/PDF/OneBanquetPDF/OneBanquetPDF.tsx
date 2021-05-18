@@ -27,7 +27,8 @@ const Item: React.FC<ItemProps> = (props) => {
             <td colSpan={3} className={s.per50}>{props.services?.name}</td>
             <td className={s.per16}>{props.services?.amount}</td>
             <td className={s.per16}>{props.services.once_paid_price}</td>
-            <td>{props.services?.amount as number * props.services.once_paid_price}</td>
+            {/*<td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount ?  props.services?.amount:0) }</td>*/}
+            <td>{props.services?.amount as number * props.services?.once_paid_price}</td>
         </>}
 
     </tr>

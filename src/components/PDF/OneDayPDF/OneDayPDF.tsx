@@ -9,14 +9,18 @@ export const OneDayPDF: React.FC = () => {
     const banquets = useSelector((state: RootState) => state.common.oneDay_pdf)
 
     let advance = 0
+    let total = 0
     banquets?.forEach((obj:History) => {
        advance += obj.advance_amount
     })
-
+    banquets?.forEach((obj:History) => {
+        total += obj.total
+    })
     return <>
         <h1 className={s.title}>Звіт на день</h1>
         <div className={s.pid}></div>
-        <p>Кількість банкетів: {banquets?.length}</p>
+        <p>Створено банкетів: {banquets?.length}</p>
+        <p>Загальна сума: {total}</p>
         <p>Загальна сума авансів: {advance}</p>
     </>
 }
