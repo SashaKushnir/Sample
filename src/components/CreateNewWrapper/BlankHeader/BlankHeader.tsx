@@ -91,8 +91,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             Show_time(false);
         }
 
-        // if(text)
-        // d(gettingSpacesByDate(false))
+        if(text)
+        d(gettingSpacesByDate(false))
     }
 
     const setBegining = (date: string, time: string) => {
