@@ -41,8 +41,9 @@ export const Banquets: React.FC = () => {
         if (historyData)
             d(commonActions.setOneBanquetPdf(historyData))
     }
-
+    let date = ''
     const rangePicker = (val: any, str: any) => {
+        d(commonActions.setPDF_date(str[0]))
         if(str[0] && str[1])
         d(getFilteredHistory(str[0], str[1]))
     }
