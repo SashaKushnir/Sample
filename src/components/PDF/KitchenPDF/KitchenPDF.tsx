@@ -40,7 +40,7 @@ export const KitchenPDF: React.FC = (props) => {
     // let total_menus = 0
     // let total_tickets = 0                never used!!!
     // let total_services = 0
-    const menus = banquet?.product_order?.items.forEach((obj: ProductCategoriesItem, index) => {
+    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         // total_menus += obj.amount as number * obj.price
         if(obj.category.name !== "Pizza")
             return <Item key={index} data={obj}/>
@@ -53,14 +53,17 @@ export const KitchenPDF: React.FC = (props) => {
         <h2 className={s.title}>Банкет: {banquet?.id}</h2>
         <div className={s.pidpys}></div>
         <table className={s.table1}>
+            <tbody>
             <tr className={s.first_line}>
                 <td>Дата: {banquet?.beg_datetime}</td>
-                <td>Час: {banquet?.beg_datetime}</td>
+                <td>Час: {banquet?.beg_datetime.slice(-8)} - {banquet?.end_datetime.slice(-8)}</td>
                 <td>Кількість дітей з іменинником: {banquet?.child_guests_amount}</td>
                 <td>Кількість дорослих: {banquet?.adult_guests_amount}</td>
             </tr>
+            </tbody>
         </table>
         <table>
+            <tbody>
             <tr>
                 <td>ПІД</td>
                 <td colSpan={2}>{banquet?.customer.name}</td>
@@ -79,6 +82,7 @@ export const KitchenPDF: React.FC = (props) => {
                 <td><h3 className={s.title}>Коментар</h3></td>
             </tr>
             {menus}
+            </tbody>
         </table>
         {/*<table className={s.table2}>*/}
         {/*    <tr className={s.first_line}>*/}

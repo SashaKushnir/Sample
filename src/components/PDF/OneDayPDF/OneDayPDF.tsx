@@ -16,9 +16,10 @@ export const OneDayPDF: React.FC = () => {
     banquets?.forEach((obj:History) => {
         total += obj.total
     })
+
     return <>
         <h1 className={s.title}>Звіт на день</h1>
-        <h2 className={s.title}>{date}</h2>
+        <h2 className={s.title}>{banquets ? banquets[0].beg_datetime.slice(0,10):"none"}</h2>
         <div className={s.pid}></div>
         <p>Створено банкетів: {banquets?.length}</p>
         <p>Загальна сума: {total}</p>

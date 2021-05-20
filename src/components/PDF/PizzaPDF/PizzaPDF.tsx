@@ -52,7 +52,7 @@ export const PizzaPDF: React.FC = (props) => {
         <table className={s.table1}>
             <tr className={s.first_line}>
                 <td>Дата: {banquet?.beg_datetime}</td>
-                <td>Час: {banquet?.beg_datetime}</td>
+                <td>Час: {banquet?.beg_datetime.slice(-8)} - {banquet?.end_datetime.slice(-8)}</td>
                 <td>Кількість дітей з іменинником: {banquet?.child_guests_amount}</td>
                 <td>Кількість дорослих: {banquet?.adult_guests_amount}</td>
             </tr>
