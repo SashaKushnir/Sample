@@ -23,7 +23,7 @@ export const Authorisation = () => {
     if (useSelector((state: RootState) => state.common.isFetching))
         return <FetchingComponent/>
     return <div className={s.wrap}>
-        <h1 className={s.headerText}>Log in</h1>
+        <h1 className={s.headerText}>Вхід</h1>
         <LoginForm/>
     </div>
 }

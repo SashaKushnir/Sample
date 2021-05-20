@@ -12,7 +12,7 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
     d(commonActions.fetchingToggle(true))
     try {
         const res = await login.tryLogin(loginObject)
-        if (res.data.data) {
+        if (res.data.success) {
             d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))
@@ -23,7 +23,7 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {
-        console.warn(error)
+        d(commonActions.setErrorMessage("Failed"))
         d(commonActions.fetchingToggle(false))
     }
 }
