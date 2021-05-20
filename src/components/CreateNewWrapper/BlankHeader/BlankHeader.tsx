@@ -71,7 +71,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         if(all_states)
         d(banquetActions.setState(all_states[0]))
     }, [])
-    
+
     const setDate = (e: any, text: string) => {
         d(banquetActions.clearAllInfoAboutSpaces())
         Show_time(false);

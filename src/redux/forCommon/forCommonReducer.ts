@@ -15,7 +15,7 @@ interface InitialCommonType {
     banquetEditMode: boolean
     banquet_pdf: History | null
     oneDay_pdf: Array<History> | null
-    pdf_date:null | string
+    pdf_date: null | string
 }
 
 const initialState: InitialCommonType = {
