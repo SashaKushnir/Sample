@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import {CreateCustomerForm} from "./CreateCustomerForm";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {filterCustomersByName, setCustomersT} from "../../../../redux/customers/customersThunk";
+import {RootState} from "../../../../redux/store";
+import {FetchingComponent} from "../../../../common/compon/FetchingComponent/FetchingComponent";
 
 export const CreateCustomerWrapper = () => {
 
     const d = useDispatch()
+    const customerIsPosting = useSelector((state: RootState) => state.common.isCustomerPosting)
     const [input, setInputVal] = useState("")
 
     const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +31,9 @@ export const CreateCustomerWrapper = () => {
     }
 
     return <div>
-        <CreateCustomerForm/>
+        {customerIsPosting ? <FetchingComponent/> :
+            <CreateCustomerForm/>
+        }
         <input value={input} onKeyDown={handleKeyDown}  onChange={onChangeInput}/>
         <button onClick={search}>
             Search
