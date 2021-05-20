@@ -18,6 +18,7 @@ export const getListOfSpaces = (token: string) => async (d: Dispatch<ActionsType
         d(commonActions.fetchingToggle(false))
     } catch (e) {
         console.warn(e.message)
+        d(commonActions.fetchingToggle(false))
     }
 }
 
@@ -40,5 +41,6 @@ export const gettingSpacesByDate = (fromHistory: boolean) => async (d: Dispatch<
         d(commonActions.fetchingToggle(false))
     } catch (e) {
         console.warn(e.message)
+        d(commonActions.fetchingToggle(false))
     }
 }

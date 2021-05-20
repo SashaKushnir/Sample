@@ -5,6 +5,7 @@ import {History} from "../history/newHistoryReducer"
 interface InitialCommonType {
     isFetching: boolean
     isMenusFetching: boolean
+    isCustomerPosting: boolean
     isAuthorised: boolean | null
     userInfo?: UserType
     message?: string
@@ -20,6 +21,7 @@ interface InitialCommonType {
 
 const initialState: InitialCommonType = {
     isFetching: false,
+    isCustomerPosting: false,
     isMenusFetching: false,
     needRedirect: false,
     isAuthorised: null,
@@ -39,6 +41,11 @@ export const commonReducer = (common = initialState, action: ActionsTypes<typeof
             return {
                 ...common,
                 isFetching: action.status
+            }
+        case "FETCHING_CUSTOMER_POSTING_TOGGLE":
+            return {
+                ...common,
+                isCustomerPosting: action.status
             }
         case "FETCHING_MENUS_TOGGLE":
             return {

@@ -6,7 +6,10 @@ import {Product_categories} from "../newBanknote/newBanknoteReducer";
 import {CustomerType} from "../customers/customersReducer";
 import {SpaceItem} from "../banquetInfo/banquetInfoReducer";
 
-const initialState: HistoryInitial = {}
+const initialState: HistoryInitial = {
+    beg_datetime: "",
+    end_datetime: ""
+}
 
 
 
@@ -17,6 +20,16 @@ export const historyReducer = (history = initialState, action: ActionsTypes<type
             return {
                 ...history,
                 banquets: [...action.history]
+            }
+        case "SET_BEG_DATETIME":
+            return {
+                ...history,
+                beg_datetime: action.beg_datetime
+            }
+        case "SET_END_DATETIME":
+            return {
+                ...history,
+                end_datetime: action.end_datetime
             }
         case "DELETE_ONE_HISTORY":
             return{
@@ -107,6 +120,8 @@ type HistoryArray = Array<History>
 
 type HistoryInitial = {
     banquets?: HistoryArray
+    beg_datetime: string
+    end_datetime: string
 }
 
 
