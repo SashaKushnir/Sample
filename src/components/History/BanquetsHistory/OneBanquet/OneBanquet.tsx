@@ -63,7 +63,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const menus = useSelector(selectMenuKitchen)
     const tickets1 = useSelector(selectTickets)
     const services1 = useSelector(selectServices)
-
+    const user = useSelector((state:RootState) => state.common.userInfo)
     const ClearAllShowAmount = () => {
         d(commonActions.banquetModeToggle(true))
         menus?.forEach((obj: MenuItem) => {
@@ -144,10 +144,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 {employee?.can_modify && <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
-
+                {user?.role.can_read && user?.role.can_insert && user.role.can_modify === false && user?.id === data.id &&
                 <NavLink to="/OneBanquetPdf" className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
+                }
                 <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
             </div>
             <div className={s.info}>
@@ -160,7 +161,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         {data.description}
                     </div>
                     <div className={s.text}>
-                        {data.customer.name}
+                        {data.customer.name + " " + data.customer.surname}
                     </div>
                     <div className={s.text}>
                         Стан банкета: {data.state.name}

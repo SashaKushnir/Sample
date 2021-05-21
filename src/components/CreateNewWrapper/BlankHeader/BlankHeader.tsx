@@ -24,7 +24,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const d = useDispatch()
     const all_states = useSelector(selectBanquetsStates)
     const states = all_states?.map((obj: BanquetState, index) =>
-        <option key={index}>{obj.name}</option>)
+        <option key={index} >{obj.name}</option>)
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
@@ -67,10 +67,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             Show_time(true)
         }
     }, [])
-    useEffect(() => {
-        if(all_states)
-        d(banquetActions.setState(all_states[0]))
-    }, [])
+    // useEffect(() => {
+    //     if(all_states)
+    //     d(banquetActions.setState(all_states[0]))
+    // }, [])
 
     const setDate = (e: any, text: string) => {
         d(banquetActions.clearAllInfoAboutSpaces())
@@ -84,7 +84,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             let date1 = data.end
             date1 = date1.slice(-9)
             console.log(text,date1)
-            setBegining(text,date1)
+            setEnd(text,date1)
             Show_time(true);
         } else if(text !== ""){
             Show_time(true);
@@ -230,7 +230,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
                                   defaultValue={data.description ? data.description : ""}/>
                         <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo ? customerInfo?.name : ""}
+                            Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                         </div>
 
 
@@ -258,8 +258,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
 
                     <div className={s.state + ' ' + s.blocks}>
-                        Стан <select className={s.input_state} onChange={setState}
-                                     defaultValue={data.state?.name || 'none'}>
+                        Стан <select className={s.input_state} onChange={setState} value={data.state?.name}>
+                        <option style={{display:"none"}}></option>
                         {states}
                     </select>
                     </div>
@@ -299,8 +299,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     <div className={s.name_desc + ' ' + s.blocks}>
                         <input className={s.input + " " + s.input_name} value={data.name} readOnly/>
                         <textarea className={s.input} value={data.description ? data.description : ""} readOnly/>
-                        <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo?.name}
+                        <div className={s.customer}>
+                            Замовник: {customerInfo?.name + " " + customerInfo?.surname}
                         </div>
                     </div>
                     <div className={s.advance}>
@@ -313,11 +313,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         <TimePicker format={format}
                                     value={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
                         <TimePicker format={format}
-                                    value={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                                    value={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
                     </div>
 
                     <div className={s.state}>
-                        Стан <select defaultValue={data.state?.name} aria-readonly>
+                        Стан <select value={data.state?.name} aria-readonly>
                         <option>{data.state?.name}</option>
                     </select>
                     </div>

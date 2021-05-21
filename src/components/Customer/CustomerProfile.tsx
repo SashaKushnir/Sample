@@ -35,26 +35,25 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
 
     return (<div className={s.profile}>
             <div className={s.name} onClick={Select}>
-                {cus.name}
+                {cus.name + " " +cus.surname}
             </div>
             <div className={s.email}>
-                {cus.email}
+                Пошта: {cus.email}
             </div>
             <div className={s.phone}>
-                {cus.phone}
+                Телефон: {cus.phone}
             </div>
             <div className={s.birthdate}>
-                {cus.birthdate}
+                Рік народження: {cus.birthdate}
             </div>
-            <div>
-                Діти:
+            <div className={s.birthdate}> <p className={s.childs_title}>Діти:</p>
                 {familyMembers}
             </div>
-            {!addFMmode && <button onClick={addFamilyMember}>
+            {!addFMmode && <button onClick={addFamilyMember} className={s.birthdate}>
                 Додати дитину
             </button>}
             {addFMmode &&
-            <div>
+            <div >
                 <button onClick={hideForm}>
                     Hide Form
                 </button>

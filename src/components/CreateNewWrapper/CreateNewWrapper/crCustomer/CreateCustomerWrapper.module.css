@@ -1,0 +1,15 @@
+.button{
+    margin: 5px auto;
+}
+.toCenter {
+    text-align: center;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin: 5px;
+}
+.toCenter:hover{
+    color:#4CAF50;
+}
+.save{
+    display: flex;
+}

@@ -1,17 +1,17 @@
 import React from 'react'
 import {FamilyMemberGetter} from "../../redux/customers/customersReducer";
-
+import s from './FMItem.module.css'
 interface FMItemProps {
     member: FamilyMemberGetter
 }
 
 export const FMItem: React.FC<FMItemProps> = ({member}) => {
-    return <div>
+    return <div className={s.main}>
         <div>
-            {member.name}
+            Імя: {member.name}
         </div>
         <div>
-            {member.birthdate}
+            Рік народження: {member.birthdate}
         </div>
     </div>
 }
