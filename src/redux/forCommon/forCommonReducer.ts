@@ -16,7 +16,7 @@ interface InitialCommonType {
     banquetEditMode: boolean
     banquet_pdf: History | null
     oneDay_pdf: Array<History> | null
-    pdf_date: null | string
+    pdf_date: string
 }
 
 const initialState: InitialCommonType = {
@@ -31,7 +31,7 @@ const initialState: InitialCommonType = {
     banquetEditMode: false,
     banquet_pdf: null,
     oneDay_pdf: null,
-    pdf_date: null
+    pdf_date: ""
 }
 
 export const commonReducer = (common = initialState, action: ActionsTypes<typeof commonActions>): InitialCommonType => {

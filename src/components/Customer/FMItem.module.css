@@ -1,0 +1,20 @@
+.main{
+    border-bottom: 1px dotted black;
+}
+.block{
+    display: inline-block;
+}
+.text{
+    display: block;
+    text-align: center;
+
+}
+.input{
+    display: block;
+    margin: 5px;
+}
+.button{
+    margin: 0px 5px;
+    margin-bottom: 5px;
+    background-color: greenyellow;
+}

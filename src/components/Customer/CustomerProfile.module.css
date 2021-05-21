@@ -1,6 +1,6 @@
 .profile{
     border: 2px solid grey;
-    margin: 15px;
+    margin: 5px;
 }
 .name{
     border-bottom: 2px solid grey;
@@ -15,3 +15,8 @@
 .phone{
     margin: 5px;
 }
+.childs_title{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
