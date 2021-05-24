@@ -2,8 +2,6 @@ import React from 'react'
 import {ProductCategoriesItem} from "../../../../../redux/newBanknote/newBanknoteReducer";
 import styles from './ProductCategoriesMyItem.module.css'
 import {DishImg} from "../../../../../common/compon/Dish/DishImg";
-import {useDispatch} from "react-redux";
-import {newBanknoteActions} from "../../../../../redux/newBanknote/newBanknoteActions";
 
 type DishesProps = {
     product_categoriesItem: ProductCategoriesItem
@@ -11,20 +9,7 @@ type DishesProps = {
     keyVal: number
 }
 
-
-
-
 export const ProductCategoriesMyItem: React.FC<DishesProps> = ({product_categoriesItem, showAmount,keyVal}) => {
-
-
-
-    const d = useDispatch()
-    const deleteItem = () => {
-        d(newBanknoteActions.deleteFullItem(product_categoriesItem))
-    }
-    const changeCurA = (value: number) => {
-            d(newBanknoteActions.addMenuItem(product_categoriesItem, value))
-    }
 
     return <div className={styles.dish}>
         <div className={styles.item}>

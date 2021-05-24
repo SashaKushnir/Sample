@@ -16,5 +16,16 @@ export const banquetActions = {
     setSpacesBasicInfo: (spaces: Array<SpaceItem>) => ({type: "SET_BASIC_SPACES_INFO", spaces}) as const,
     setArrayOfSpacesSelected: (spaces: Array<SpaceItem>) => ({type: "SET_ARRAY_OF_SPACES_SELECTED", spaces}) as const,
     setSpaceSelectedOrUnSelected: (spaceId: number, status: boolean | undefined = undefined) =>
-         ({type: "SELECT_UNSELECT_SPACE_BY_ID", spaceId}) as const
+        ({type: "SELECT_UNSELECT_SPACE_BY_ID", spaceId}) as const,
+    setDisabledSpaces: (disablingArr: Array<SpaceItem>) => ({
+        type: "SET_DISABLED_SPACES",
+        disablingArr
+    }) as const,
+    setFlagsToPreventSpacesBeingDisabled: (dontDisable: Array<SpaceItem>, date: string) => ({
+        type: "SAVE_APPROPRIATE_DATA",
+        dontDisable,
+        date
+    }) as const,
+    clearFlagsToPreventSpacesBeingDisabled: () => ({type: "CLEAR_APPROPRIATE_DATA"}) as const,
+    clearAllInfoAboutSpaces: () => ({type: "CLEAR_ALL_INFO_ABOUT_SPACES"}) as const,
 }

@@ -1,8 +1,8 @@
-import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import {Field, Form, Formik} from "formik";
+import React from "react";
 import * as Yup from 'yup';
 import s from '../../../Authorisation/LoginForm.module.css'
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../redux/store";
 import {postCustomer} from "../../../../redux/customers/customersThunk";
 
@@ -55,33 +55,33 @@ export const CreateCustomerForm = () => {
         {({errors, touched}) => (
             <Form>
                 <div className={s.myFrom}>
-                    <div>
+                    <div className={s.input}>
                         <span>Name: </span>
                         <Field name="name" type="text" placeholder={"Name"}/>
                         {errors.name && touched.name ? <div className={s.error}>{errors.name}</div> : null}
                     </div>
-                    <div>
+                    <div className={s.input}>
                         <span>Surname : </span>
                         <Field name="surname" placeholder={"surname"}/>
                         {errors.surname && touched.surname ? (
                             <div className={s.error}>{errors.surname}</div>
                         ) : null}
                     </div>
-                    <div>
+                    <div className={s.input}>
                         <span>Phone : </span>
                         <Field name="phone" placeholder={"phone"}/>
                         {errors.phone && touched.phone ? (
                             <div className={s.error}>{errors.phone}</div>
                         ) : null}
                     </div>
-                    <div>
+                    <div className={s.input}>
                         <span>Birth date : </span>
                         <Field name="birthdate" placeholder={"birthdate"} type={"date"}/>
                         {errors.birthdate && touched.birthdate ? (
                             <div className={s.error}>{errors.birthdate}</div>
                         ) : null}
                     </div>
-                    <div>
+                    <div className={s.input}>
                         <span>Email(optional): </span>
                         <Field name="email" placeholder={"email"} type={"email"}/>
                         {errors.email && touched.email ? (
@@ -89,8 +89,11 @@ export const CreateCustomerForm = () => {
                         ) : null}
                     </div>
                 </div>
+
                 <div className={s.errorMessage}>{unSuccessMessage}</div>
-                <button className={s.button} type="submit">Submit</button>
+                <div className={s.save}>
+                <button className={s.button} type="submit">Зберегти</button>
+                </div>
             </Form>
         )}
     </Formik>

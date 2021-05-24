@@ -1,7 +1,9 @@
 import { UserType } from "../../api/login/login";
-import {History} from "./../history/newHistoryReducer"
+import {History} from "../history/newHistoryReducer"
 export const commonActions = {
     fetchingToggle: (status: boolean) => ({type:"FETCHING_TOGGLE", status}) as const,
+    fetchingMenusToggle: (status: boolean) => ({type:"FETCHING_MENUS_TOGGLE", status}) as const,
+    fetchingPostCustomerToggle: (status: boolean) => ({type:"FETCHING_CUSTOMER_POSTING_TOGGLE", status}) as const,
     authToggle: (status: boolean) => ({type:"AUTH_TOGGLE", status}) as const,
     setAuthorisedData: (payload: UserType | undefined) => ({type: "SET_AUTHORISED_DATA", payload}) as const,
     setErrorMessage: (payload: string) => ({type: "SET_UNAUTHORISED_DATA", payload}) as const,
@@ -12,5 +14,6 @@ export const commonActions = {
     setSaved: (status: boolean) => ({type: "SET_SAVED", status}) as const,
     banquetModeToggle: (banquetModeStatus: boolean) => ({type: "BANQUET_MODE_TOGGLE", banquetModeStatus}) as const,
     setBanquetPdf: (banquet: History) => ({type: "BANQUET_PDF", banquet}) as const,
-    setOneBanquetPdf: (banquet: Array<History>) => ({type: "ONE_BANQUET_PDF", banquet}) as const
+    setOneBanquetPdf: (banquet: Array<History>) => ({type: "ONE_BANQUET_PDF", banquet}) as const,
+    setPDF_date: (date: string) => ({type: "PDF_DATE", date}) as const
 }

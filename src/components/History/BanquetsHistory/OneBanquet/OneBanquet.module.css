@@ -51,6 +51,10 @@
     font-size: 22px;
 
 }
+.advance{
+    display: block;
+    font-size: 18px;
+}
 .start{
     display: inline-block;
     float: right;

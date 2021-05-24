@@ -61,11 +61,11 @@ export const CreateNewServices = () => {
         </div>
         <div className={styles.services}>
             {
-                resArray.map((resArrayItem) => {
+                resArray.map((resArrayItem, indexH) => {
                     const items = resArrayItem.items.map((obj, index) => {
                         return <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>
                     })
-                    return  <div>
+                    return  <div key={indexH}>
                         {resArrayItem.category}
                         <div>{items}</div>
                     </div>

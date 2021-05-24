@@ -11,7 +11,9 @@ let initialState: BanquetInitial = {
     advance_amount: 0,
     total: 0,
     customer: null,
-    state: null
+    state: null,
+    notDisabledSpaces: [],
+    notDisabledDate: ""
 }
 
 export interface SpaceItem {
@@ -24,11 +26,13 @@ export interface SpaceItem {
     "category_id": number | null
     "period_id": unknown
     "period": unknown
+    intervals?:Array<any>
     "category": SpaceCategory
     "created_at": string
     "updated_at": string
     "type": string
     selected?: boolean
+    disabled?: boolean
 }
 
 export interface SpaceCategory {
@@ -50,6 +54,8 @@ export type BanquetInitial = {
     customer: CustomerType | null
     state: BanquetState | null
     basicSpaces?: Array<SpaceItem>
+    notDisabledSpaces: Array<SpaceItem>
+    notDisabledDate: string
 }
 
 export const banquetReducer = (banquet = initialState, action: ActionsTypes<typeof banquetActions>): BanquetInitial => {
@@ -60,13 +66,52 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 ...banquet,
                 name:action.name
             }
+        case "SAVE_APPROPRIATE_DATA":
+            return {
+                ...banquet,
+                notDisabledDate: action.date,
+                notDisabledSpaces: [...action.dontDisable]
+            }
+        case "CLEAR_APPROPRIATE_DATA":
+            return {
+                ...banquet,
+                notDisabledDate: "",
+                notDisabledSpaces: []
+            }
         case "SELECT_UNSELECT_SPACE_BY_ID":
             return {
                 ...banquet,
                 basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
                     if(spaceI.id === action.spaceId) {
-                        spaceI.selected = !!!spaceI.selected
+                        spaceI.selected = !spaceI.selected
                     }
+                    return spaceI
+                })]:[]
+            }
+        case "SET_DISABLED_SPACES":
+            return {
+                ...banquet,
+                basicSpaces:banquet.basicSpaces?.map((spaceI) => {
+                    if(!((banquet.notDisabledSpaces?.some((dontI) => dontI.id === spaceI.id)) && (
+                        banquet.beginning.includes(banquet.notDisabledDate))
+                    )) {
+
+                        if (action.disablingArr.some((actionSpaceI) => {
+
+                            return (actionSpaceI.id === spaceI.id) && (actionSpaceI.intervals ?
+                                (actionSpaceI.intervals.length > 0) : false);})) {
+                            spaceI.disabled = true
+                        }
+                    }
+                    return spaceI
+                })
+            }
+        case "CLEAR_ALL_INFO_ABOUT_SPACES":
+            return {
+                ...banquet,
+                basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                    spaceI.disabled=false
+                    spaceI.selected=false
                     return spaceI
                 })]:[]
             }
@@ -81,6 +126,9 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 basicSpaces: [...action.spaces]
             }
         case "SET_ARRAY_OF_SPACES_SELECTED":
+            if(banquet.basicSpaces?.length === 0) {
+                alert("mistake, no basic spaces before setting...")
+            }
             return {
                 ...banquet,
                 basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {

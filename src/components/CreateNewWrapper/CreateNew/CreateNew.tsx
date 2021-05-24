@@ -14,6 +14,7 @@ import {OrderItems} from "../../OrderInfo/OrderItems";
 import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {setBanqueStateT} from "../../../redux/BanquetState/BanquetStatesT";
+import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 
 
 type PropsType = {
@@ -26,6 +27,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const fullEmptyAmount = useSelector((state: RootState) => state.common.fullEmptyAmount)
     const state = useSelector((state: RootState) => state.banquet.state)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
+    const isFetching = useSelector((state:RootState) => state.common.isMenusFetching)
 
     let {url} = useRouteMatch()
     const d = useDispatch()
@@ -62,7 +64,8 @@ export const CreateNew: React.FC<PropsType> = (props) => {
             } else {
                 d(postNewBanknote(postBObj, token))
             }
-
+            d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
+            d(banquetActions.clearAllInfoAboutSpaces())
         }
     }
     if (useSelector((state: RootState) => state.common.isFetching))
@@ -83,15 +86,17 @@ export const CreateNew: React.FC<PropsType> = (props) => {
                 {fullEmptyAmount && <div className={s.amountMessage}>
                     Some fields are empty!
                 </div>}
-                <button className={s.buttonGreen} onClick={saveB}>Save</button>
+                <button className={s.buttonGreen} onClick={saveB}>Зберегти</button>
             </div>
         </div>}
         {!editMode && <div>
             <BlankHeader isEdit={editMode}/>
-            <OrderItems/>
+            { isFetching ? <FetchingComponent/>
+            :<OrderItems/>
+            }
             <div className={s.toRightSide}>
-                <button className={s.buttonBlack} onClick={editB}>Edit</button>
-                <button className={s.buttonGreen} onClick={submitB}>Submit</button>
+                <button className={s.buttonBlack} onClick={editB}>Редагувати</button>
+                <button className={s.buttonGreen} onClick={submitB}>Відправити</button>
             </div>
         </div>}
     </>

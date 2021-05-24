@@ -6,7 +6,6 @@ import {IntertaimentImg} from "../../../common/compon/Intartaiment/Entertainment
 import {useDispatch} from "react-redux";
 import {servicesActions} from "../../../redux/services/servicesActions";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
-import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem

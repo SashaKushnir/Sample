@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import ticketimg from '../../images/TicketIcon.png'
 import s from './TicketImg.module.css'
-import { useDispatch } from "react-redux";
-import { message } from "antd";
-import { servicesActions } from "../../../redux/services/servicesActions";
-import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
-import { ticketsActions } from "../../../redux/tickets/ticketsActions";
+import {useDispatch} from "react-redux";
+import {message} from "antd";
+import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 
 interface TicketImgProps {

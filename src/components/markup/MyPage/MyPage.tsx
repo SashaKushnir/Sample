@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
 import s from './Content.module.css'
 import {Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
-
-import {CreateNew} from "../../CreateNewWrapper/CreateNew/CreateNew";
 import {Banquets} from "../../History/BanquetsHistory/Banquets";
-import { logInWithToken } from "../../../redux/forCommon/forCommonThunks";
-import { commonActions } from "../../../redux/forCommon/forCommonActions";
+import {logInWithToken} from "../../../redux/forCommon/forCommonThunks";
+import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {useDispatch, useSelector} from "react-redux";
 import {CreateNewWrapper} from "../../CreateNewWrapper/CreateNewWrapper/CreateNewWrapper";
 import {CreateNewEmployeePage} from "../../CreateEmployeeAccount/CreateNewEmployeePage";
@@ -21,12 +19,11 @@ export const MyPage = () => {
     useEffect(() => {
         if (api_token) {
             d(logInWithToken(api_token))
-           // d(commonActions.needRedirectToggle(true))
         }
         else {
             d(commonActions.authToggle(false))
         }
-    },[api_token])
+    },[api_token,d])
     const employee = useSelector((state:RootState) => state.common.userInfo?.role)
     return <div className={s.wrap}>
         <div className={s.content}>

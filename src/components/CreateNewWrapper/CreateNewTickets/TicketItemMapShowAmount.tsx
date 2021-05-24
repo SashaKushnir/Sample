@@ -6,8 +6,6 @@ import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
 import {useDispatch} from "react-redux";
-import {CommentItem} from "../../../redux/history/newHistoryReducer";
-import {newBanknoteActions} from "../../../redux/newBanknote/newBanknoteActions";
 
 interface TicketItemProps {
     ticketItem: TicketItem

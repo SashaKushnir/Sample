@@ -12,7 +12,8 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
     d(commonActions.fetchingToggle(true))
     try {
         const res = await login.tryLogin(loginObject)
-        if (res.data.data) {
+        if (res.data.success) {
+            d(commonActions.successTokenToggle(true))
             d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))
@@ -23,7 +24,7 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
             d(commonActions.fetchingToggle(false))
         }
     } catch (error) {
-        console.warn(error)
+        d(commonActions.setErrorMessage("Failed"))
         d(commonActions.fetchingToggle(false))
     }
 }
@@ -65,13 +66,13 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
 
 export const clearAllBasket = () => (d: Dispatch<ActionsTypes<typeof newBanknoteActions |
     typeof ticketsActions | typeof servicesActions>>, getState: () => RootState) => {
-    getState().tickets.tickets?.map((ticketI) => {
+    getState().tickets.tickets?.forEach((ticketI) => {
         d(ticketsActions.deleteFullTicketItem(ticketI))
     })
-    getState().services.services?.map((serviceI) => {
+    getState().services.services?.forEach((serviceI) => {
         d(servicesActions.deleteFullEntertainmentItem(serviceI))
     })
-    getState().createNew.menus?.map((categoryI) => categoryI.products?.map((productI) => {
+    getState().createNew.menus?.forEach((categoryI) => categoryI.products?.forEach((productI) => {
         d(newBanknoteActions.deleteFullItem(productI))
     }))
 }

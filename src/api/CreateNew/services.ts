@@ -1,5 +1,4 @@
-import { ApiServicesResultType, myGetInstance } from "../api";
-import { ServiceCategoriesItem } from "../../redux/services/servicesReducer";
+import {ApiServicesResultType, myGetInstance} from "../api";
 
 
 export const services = {

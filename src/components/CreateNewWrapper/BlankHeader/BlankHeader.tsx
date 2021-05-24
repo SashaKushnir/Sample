@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {selectBanquetsStates, selectBanquet, selectUsers} from "../../../selectors/selectCreateNew";
-import {banquetActions} from "./../../../redux/banquetInfo/banquetInfoActions";
+import {selectBanquet, selectBanquetsStates} from "../../../selectors/selectCreateNew";
+import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {clearAllBasket} from "../../../redux/forCommon/forCommonThunks";
-import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
+import {gettingSpacesByDate} from "../../../redux/banquetInfo/banquetInfoT";
 import {SpaceI} from "../../../common/compon/SpaceI/SpaceI";
 import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
 import moment from 'moment';
@@ -23,11 +23,17 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
     const all_states = useSelector(selectBanquetsStates)
-    const states = all_states?.map((obj: BanquetState) => <option>{obj.name}</option>)
+    const currentStateInBLL = useSelector((state: RootState) => state.banquet.state?.name)
+    const [currentState, setCurrentState] = useState(currentStateInBLL?currentStateInBLL:(all_states?all_states[0].name:undefined))
+    const states = all_states?.map((obj: BanquetState, index) =>
+        <option key={index}>{obj.name}</option>)
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
+    const nonEditableSpaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.filter((spaceI) => spaceI.selected)
+        ?.map((spaceI, index) =>
+            <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value.trim() as any))
@@ -39,15 +45,10 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
 
-    // useEffect(() => {
-    //     if (all_states){
-    //          d(banquetActions.setState(all_states[0]))
-    //     }
-    // },[)
-
 
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
-        all_states?.map(obj => {
+        setCurrentState(e.target.value)
+        all_states?.forEach(obj => {
             if (e.target.value === obj.name)
                 d(banquetActions.setState(obj))
         })
@@ -68,76 +69,76 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             Show_time(true)
         }
     }, [])
-
     const setDate = (e: any, text: string) => {
+        d(banquetActions.clearAllInfoAboutSpaces())
         Show_time(false);
-        if (text !== "") {
-            Show_time(true);
-            setBegining(text)
-            setEnd(text)
+        if (text !== "" && data.beginning !== '' && data.end !== '') {
+            let date = data.beginning
+            date = date.slice(-9)
+            setBegining(text, date)
 
+            let date1 = data.end
+            date1 = date1.slice(-9)
+            setEnd(text, date1)
+            Show_time(true);
+        } else if (text !== "") {
+            Show_time(true);
+            setBegining(text, " 00:00:00")
+            setEnd(text, " 23:59:00")
         } else {
             Show_time(false);
         }
+
+        if (text) {
+            if (isEdit)
+                d(gettingSpacesByDate(true))
+            else
+                d(gettingSpacesByDate(false))
+        }
+
     }
 
-    const setBegining = (date: string) => {
-        date += " 00:00:00"
+    const setBegining = (date: string, time: string) => {
+        date += time
         d(banquetActions.setBegining(date))
-        console.log(date)
     }
-    const setEnd = (date: string) => {
-        date += " 23:59:00"
-        console.log(date)
+    const setEnd = (date: string, time: string) => {
+        date += time
         d(banquetActions.setEnd(date))
     }
 
     const SetBegTime = (e: any, time: string) => {
+        if (time === '') {
+            return
+        }
         let beg: string = data.beginning
         beg = beg.slice(0, -8)
         beg += time + ':00'
-        console.log('beg', beg)
         d(banquetActions.setBegining(beg))
-
     }
     const SetEndTime = (e: any, time: string) => {
+        if (time === '') {
+            return
+        }
         let end: string = data.end
         end = end.slice(0, -8)
         end += time + ':00'
-        console.log('end', end)
         d(banquetActions.setEnd(end))
-    }
-
-
-    const setDefaultTime = (my_time: string) => {
-        if (my_time) {
-            let time = my_time.replace(" ", "T")
-            time = time.slice(0, -3)
-            return time
-        }
     }
 
     const stopEditMode = () => {
         d(commonActions.banquetModeToggle(false))
         clearBasket()
         d(banquetActions.removeBanquetId())
+        d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
+        d(banquetActions.clearAllInfoAboutSpaces())
+        d(gettingSpacesByDate(false))
     }
     const clearBasket = () => {
         d(clearAllBasket())
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")
-    }
-
-    const CompareDate = (date1: string, date2: string) => {
-        if (date1.slice(2) > date2.slice(2)) {
-            console.log(date1.slice(2), date2.slice(2))
-            return true
-        } else if (date1.slice(-2) > date2.slice(-2)) {
-
-        } else {
-
-        }
     }
 
     const format = 'HH:mm';
@@ -150,12 +151,12 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 </div>
                 <div className={s.main}>
                     <div className={s.name_desc + ' ' + s.blocks}>
-                        <input className={s.input + " " + s.input_name} placeholder={"Імя банкета"}
+                        <input className={s.input + " " + s.input_name} placeholder={"Назва банкета"}
                                onChange={setName} defaultValue={data.name ? data.name : ""}/>
                         <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
                                   defaultValue={data.description ? data.description : ""}/>
                         <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo ? customerInfo?.name : ""}
+                            Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                         </div>
 
 
@@ -166,49 +167,57 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.time + ' ' + s.blocks}>
                         {data.beginning &&
-                        <DatePicker onChange={setDate}
+                        <DatePicker onChange={(e: any, time: string) => {
+                            setDate(e, time)
+                        }}
                                     defaultValue={moment(data.beginning.slice(0, -9), formate_date)}/>
                         }
                         {!data.beginning &&
-                        <DatePicker onChange={setDate}/>
+                        <DatePicker onChange={(e: any, time: string) => {
+                            setDate(e, time)
+                        }}/>
                         }
                         {show_time && <>
-                            <TimePicker format={format} onChange={SetBegTime} inputReadOnly={false}
+                            <TimePicker format={format} onChange={(e: any, time: string) => {
+                                SetBegTime(e, time)
+                            }} inputReadOnly={false}
                                         defaultValue={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
-                            <TimePicker format={format} onChange={SetEndTime} inputReadOnly={true}
-                                        defaultValue={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                            <TimePicker format={format} onChange={(e: any, time: string) => {
+                                SetEndTime(e, time)
+                            }} inputReadOnly={true}
+                                        defaultValue={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
                         </>
                         }
 
                     </div>
 
                     <div className={s.state + ' ' + s.blocks}>
-                        Стан <select className={s.input_state} onChange={setState}
-                                     defaultValue={data.state?.name || 'none'}>
+                        Стан <select className={s.input_state} onChange={setState} value={currentState}>
+                        <option style={{display: "none"}}></option>
                         {states}
                     </select>
                     </div>
                     <div className={s.edit + ' ' + s.blocks}>
                         {isEditMode && <div>
-                            Edit Mode
+                            Режим редагування
                             <button onClick={stopEditMode}>
-                                Stop Edit Mode
+                                Зупинити режим редагування
                             </button>
                         </div>
                         }
                         {!isEditMode && <div>
-                            Creating Mode
+
                         </div>
                         }
                         <div>
-                            <button onClick={clearBasket}>Clear Basket</button>
+                            <button onClick={clearBasket}>Очистити корзину</button>
                         </div>
                     </div>
 
                 </div>
             </div>
             <div className={s.spaces}>
-                Spaces
+                Столи
                 <div className={s.spacesWrapper}>
                     {spaces}
                 </div>
@@ -221,11 +230,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
                 </div>
                 <div className={s.main}>
-                    <div>
+                    <div className={s.name_desc + ' ' + s.blocks}>
                         <input className={s.input + " " + s.input_name} value={data.name} readOnly/>
                         <textarea className={s.input} value={data.description ? data.description : ""} readOnly/>
-                        <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo?.name}
+                        <div className={s.customer}>
+                            Замовник: {customerInfo?.name + " " + customerInfo?.surname}
                         </div>
                     </div>
                     <div className={s.advance}>
@@ -238,11 +247,11 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         <TimePicker format={format}
                                     value={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
                         <TimePicker format={format}
-                                    value={moment(data.beginning ? data.end.slice(11) : '23:59', format)}/>
+                                    value={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
                     </div>
 
                     <div className={s.state}>
-                        Стан <select defaultValue={data.state?.name} aria-readonly>
+                        Стан <select value={data.state?.name} aria-readonly>
                         <option>{data.state?.name}</option>
                     </select>
                     </div>
@@ -255,7 +264,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             <div>
                 Spaces
                 <div className={s.spacesWrapper}>
-                    {spaces}
+                    {nonEditableSpaces}
                 </div>
             </div>
         </>

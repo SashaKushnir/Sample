@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import editIcon from '../../images/edit.png'
 import s from './IconsStyle.module.css'
 

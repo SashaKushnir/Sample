@@ -18,7 +18,7 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrongПП")
+        alert("Помилка...")
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -49,8 +49,8 @@ export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: 
     try {
         d(commonActions.fetchingToggle(true))
         const response = await history.patchHistory(updObj, token)
-        if (true) {
-
+        if (response.data.success) {
+            alert("Успішно змінено")
         } else {
         }
         d(commonActions.fetchingToggle(false))

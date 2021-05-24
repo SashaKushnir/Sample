@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import s from "./OneBanquet.module.css"
-import {History} from "./../../../../redux/history/newHistoryReducer"
+import {History} from "../../../../redux/history/newHistoryReducer"
 import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
 import {ServiceCategoriesItem} from "../../../../redux/services/servicesReducer";
 import {ProductsOrder} from "../../../OrderInfo/Products/ProductsOrder";
@@ -21,7 +21,7 @@ import {HideIcon} from "../../../../common/compon/HistoryIcons/HideIcon";
 import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
 import {commonActions} from "../../../../redux/forCommon/forCommonActions";
 import {RootState} from "../../../../redux/store";
-import {getListOfSpaces} from "../../../../redux/banquetInfo/banquetInfoT";
+import {getListOfSpaces, gettingSpacesByDate} from "../../../../redux/banquetInfo/banquetInfoT";
 
 interface BanquetProps {
     data: History
@@ -37,21 +37,23 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     //const [hideAll, setHideAll] = useState(false)
 
     if (data.space_order?.items)
-        tables = data.space_order?.items.map(obj => <div className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number}, price: {obj.price}</div>)
+        tables = data.space_order?.items.map((obj, index) =>
+            <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number},
+                price: {obj.price}</div>)
     let products = null
     if (data.product_order !== null)
         products = data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
-            <ProductsOrder item={obj}/>)
+            <ProductsOrder key={index} item={obj}/>)
 
     let tickets = null
     if (data.ticket_order !== null)
-        tickets = data.ticket_order.items.map((obj: TicketItem) =>
-            <TicketsOrder item={obj}/>)
+        tickets = data.ticket_order.items.map((obj: TicketItem, index) =>
+            <TicketsOrder key={index} item={obj}/>)
 
     let services = null
     if (data.service_order !== null)
-        services = data.service_order.items.map((obj: ServiceCategoriesItem) =>
-            <ServicesOrder item={obj}/>)
+        services = data.service_order.items.map((obj: ServiceCategoriesItem, index) =>
+            <ServicesOrder key={index} item={obj}/>)
 
     const Delete = () => {
         if (window.confirm("Delete this banquet? It can not be restored!!!")) {
@@ -61,14 +63,13 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const menus = useSelector(selectMenuKitchen)
     const tickets1 = useSelector(selectTickets)
     const services1 = useSelector(selectServices)
-
     const ClearAllShowAmount = () => {
         d(commonActions.banquetModeToggle(true))
-        menus?.map((obj: MenuItem, index: number) => {
-            obj.products.map((item: ProductCategoriesItem, index: number) => {
+        menus?.forEach((obj: MenuItem) => {
+            obj.products.forEach((item: ProductCategoriesItem) => {
                 d(newBanknoteActions.deleteFullItem(item))
                 if (data.product_order)
-                    data.product_order.items.map((history_item: ProductCategoriesItem, index: number) => {
+                    data.product_order.items.forEach((history_item: ProductCategoriesItem) => {
                         if (history_item.id === item.id) {
                             d(newBanknoteActions.addMenuItem(history_item, history_item.amount ? history_item.amount as number : 0))
                         }
@@ -79,7 +80,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         tickets1?.map((obj: TicketItem) => {
             d(ticketsActions.deleteFullTicketItem(obj))
             if (data.ticket_order !== null)
-                data.ticket_order.items.map((item: TicketItem) => {
+                data.ticket_order.items.forEach((item: TicketItem) => {
                     if (obj.id === item.id) {
                         d(ticketsActions.addTicketItem(item, item.amount ? item.amount as number : 0))
                     }
@@ -87,10 +88,10 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             return obj
         })
 
-        services1?.map((obj: ServiceCategoriesItem) => {
+        services1?.forEach((obj: ServiceCategoriesItem) => {
             d(servicesActions.deleteFullEntertainmentItem(obj))
             if (data.service_order !== null)
-                services = data.service_order.items.map((item: ServiceCategoriesItem) => {
+                data.service_order.items.forEach((item: ServiceCategoriesItem) => {
                     if (obj.id === item.id) {
                         d(servicesActions.addEntertainmentItem(item, item.amount ? item.amount as number : 0))
                         d(servicesActions.setDuration(item.duration as number, item.id))
@@ -99,16 +100,21 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             return obj
         })
 
+
+        if (!spaces)
+            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+        d(banquetActions.clearAllInfoAboutSpaces())
         d(banquetActions.setCustomer(data.customer))
         d(banquetActions.setName(data.name))
         d(banquetActions.setDescription(data.description ? data.description : ""))
         d(banquetActions.setBegining(data.beg_datetime))
         d(banquetActions.setEnd(data.end_datetime))
-        d(banquetActions.setAdvance(data.advance_amount))
         d(banquetActions.setBanquetId(data.id))
-        if (!spaces)
-            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
-        if (data.space_order?.items)
+        d(gettingSpacesByDate(true))
+        d(banquetActions.setAdvance(data.advance_amount))
+
+
+        if (((data.space_order?.items)?(data.space_order?.items?.length > 0):false) && (data.space_order?.items))
             d(banquetActions.setArrayOfSpacesSelected(data.space_order?.items))
         d(banquetActions.setState(data.state))
 
@@ -130,19 +136,20 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const createpdf = () => {
         d(commonActions.setBanquetPdf(data))
     }
-    const employee = useSelector((state:RootState) => state.common.userInfo?.role)
+    const employee = useSelector((state: RootState) => state.common.userInfo?.role)
 
     return <div className={s.main}>
         <div className={s.first}>
             <div className={s.buttons}>
 
-                {employee?.can_modify &&  <NavLink to="/content/new/menus" className={s.navLink}>
+                {employee?.can_modify && <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
 
                 <NavLink to="/OneBanquetPdf" className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
+
                 <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
             </div>
             <div className={s.info}>
@@ -155,22 +162,29 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         {data.description}
                     </div>
                     <div className={s.text}>
-                        {data.customer.name}
+                        {data.customer.name + " " + data.customer.surname}
                     </div>
                     <div className={s.text}>
-                        Banquet state: {data.state.name}
+                        Стан банкета: {data.state.name}
                     </div>
                     <div>
                         <NavLink to="/KitchenPdf" className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, страви</div>
-                        </NavLink><NavLink to="/PizzaPdf" className={s.navLink}>
+                        </NavLink>
+                        <NavLink to="/PizzaPdf" className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, піцца</div>
+                        </NavLink>
+                        <NavLink to="/ServicesPdf" className={s.navLink}>
+                            <div className={s.btn} onClick={createpdf}>Звіт на розваги</div>
                         </NavLink>
                     </div>
                 </div>
                 <div className={s.column_right}>
                     <div className={s.price}>
                         {data.total}$
+                    </div>
+                    <div className={s.advance}>
+                        {data.advance_amount}$
                     </div>
                     <div className={s.numbers}>
                         {data.end_datetime}
@@ -191,7 +205,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             <div className={s.order}>
                 <div className={s.products}>
                     <div className={s.title}>
-                        Products
+                        Продукти
                     </div>
                     <div className={s.items}>
                         {products}
@@ -199,7 +213,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
                 <div className={s.tickets}>
                     <div className={s.title}>
-                        Tickets
+                        Білети
                     </div>
                     <div className={s.items}>
                         {tickets}
@@ -207,7 +221,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
                 <div className={s.enter}>
                     <div className={s.title}>
-                        Enrtainments
+                        Розваги
                     </div>
 
                     <div className={s.items}>
@@ -216,7 +230,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 </div>
             </div>
             <div>
-                <h4>Tables</h4>
+                <h4>Столи</h4>
                 {tables}
             </div>
         </div>

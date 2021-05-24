@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import printIcon from '../../images/print.png'
 import s from './IconsStyle.module.css'
 

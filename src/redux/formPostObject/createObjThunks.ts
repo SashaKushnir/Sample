@@ -19,57 +19,59 @@ export const createPost = () => (d: any, getState: () => RootState) => {
         servicesComments: Array<any> | undefined,
         resultComments: Array<any> | undefined
 
-    getState().createNew.menus?.map((obj: MenuItem) => {
-        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).map(item => {
+    getState().createNew.menus?.forEach((obj: MenuItem) => {
+        obj.products.filter((product: ProductCategoriesItem) => product.showAmount).forEach(item => {
             if (item.ready === false) {
-                alert("select menus - " + item.name)
+                alert("Заповніть поля у стравах - " + item.name)
                 ready = false
             }
         })
     })
 
-    getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).map(item => {
+    getState().tickets.tickets?.filter((obj: TicketItem) => obj.showAmount).forEach(item => {
         if (item.ready === false) {
-            alert("select tickets - " + item.name)
+            alert("Заповніть поля у квитках - " + item.name)
             ready = false
         }
     })
 
-    getState().services.services?.filter((obj: ServiceCategoriesItem) => obj.showAmount).map((item: ServiceCategoriesItem) => {
+    getState().services.services?.filter((obj: ServiceCategoriesItem) => obj.showAmount).forEach((item: ServiceCategoriesItem) => {
         if (item.duration === undefined || item.duration === null) {
             item.duration = 0
         }
         if (item.ready === false) {
-            alert("select services - " + item.name)
+            alert("Заповніть поля у розвагах - " + item.name)
             ready = false
         }
     })
 
     if (getState().banquet.customer === undefined || getState().banquet.customer === null) {
-        alert("select customer")
+        alert("Виберіть замовника")
         ready = false
     }
 
     if (getState().banquet.beginning === "") {
-        alert("select start time")
+        alert("Виберіть дата початку")
         ready = false
+    } else {
+
     }
 
     if (getState().banquet.end === "") {
-        alert("select end time")
+        alert("Виберіть дату кінця")
         ready = false
     }
 
     if (getState().banquet.advance_amount === null) {
-        alert("select advance_amount")
+        alert("Введіть предоплату")
         ready = false
     }
-    if (getState().banquet.name === null || getState().banquet.name === "" || getState().banquet.name === undefined) {
-        alert("select name")
+    if (!getState().banquet.name || getState().banquet.name.length < 2) {
+        alert("Введіть імя (хоча б 2 символи)")
         ready = false
     }
     if (getState().banquet.state === null || getState().banquet.state === undefined) {
-        alert("select state")
+        alert("Виберіть стан банкета")
         ready = false
     }
     if (getState().banquet.description === null) {
@@ -164,13 +166,14 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
-        if (true) {
-
+        if (res.data.success) {
+            alert("Створено!!!")
         } else {
-
+            alert("Невдало...")
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
+        alert("Помилка...")
         d(commonActions.fetchingToggle(false))
     }
 }

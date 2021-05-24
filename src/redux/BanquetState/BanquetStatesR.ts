@@ -1,6 +1,5 @@
 import {ActionsTypes} from "../store";
 import {BanquetStateActions} from "./BanquetStatesA";
-import {ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 
 
 export interface BanquetState {

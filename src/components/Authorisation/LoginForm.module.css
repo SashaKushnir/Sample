@@ -6,7 +6,7 @@
 }
 
 .myFrom div {
-    padding: 1%;
+
     margin: 1%;
     display: grid;
     grid-template-columns: 45% 20% 35%;
@@ -18,7 +18,10 @@
 .errorMessage {
     text-align: center;
     color: #f44336;
-    padding: 0 0 1.5% 0;
+
+}
+.save{
+    display: flex;
 }
 .button {
     background-color: darkgray;
@@ -29,6 +32,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 17px;
+    margin: 5px auto;
 }
 .buttonGreen {
     background-color: green;
@@ -50,3 +54,4 @@ button:hover.buttonGreen{
     display: inline-block;
     font-size: 17px;
 }
+

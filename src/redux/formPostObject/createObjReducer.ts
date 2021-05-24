@@ -1,9 +1,6 @@
 import {ActionsTypes} from "../store";
 import {createObjActions} from "./createObjActions";
-import {ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
-import {ServiceCategoriesItem} from "../services/servicesReducer";
-import {CustomerType} from "../customers/customersReducer";
-import {CommentItem, State} from "../history/newHistoryReducer";
+import {CommentItem} from "../history/newHistoryReducer";
 
 export interface PostObject {
     postBanquetObj?: BanquetType

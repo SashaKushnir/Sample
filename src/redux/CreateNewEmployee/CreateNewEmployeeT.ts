@@ -10,8 +10,14 @@ import {EditUserObjectType} from "../../components/CreateEmployeeAccount/EditUse
 export const createAccount = (data: CreateNewEmployeeType, token: string) => async (d: Dispatch<ActionsTypes<typeof createNewEmployeeA>>) => {
     try {
         const res = await accounts.tryCreateAccount(data, token)
+        if(res.data.success){
+            alert("Створено")
+        }
+        else {
+            alert("Відхилено")
+        }
     } catch (e) {
-
+        alert("Неочікувана помилка.")
     }
 }
 

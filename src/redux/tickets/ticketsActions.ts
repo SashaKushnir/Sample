@@ -1,4 +1,3 @@
-import {ProductCategoriesItem} from "../newBanknote/newBanknoteReducer";
 import {TicketItem} from "./ticketsReducer";
 import {CommentMainProperties} from "../../components/CreateNewWrapper/CreateNewMenus/MenuList/DishItem/ProductCategoriesMyItemBasket";
 

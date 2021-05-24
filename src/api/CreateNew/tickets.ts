@@ -1,4 +1,4 @@
-import { ApiServicesResultType, ApiTicketsResultType, myGetInstance } from "../api";
+import {ApiTicketsResultType, myGetInstance} from "../api";
 
 export const tickets = {
     getAllTickets: () => {

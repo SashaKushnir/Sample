@@ -1,14 +1,14 @@
 import axios from "axios";
-import { MenuArray, ProductCategoriesItem } from "../redux/newBanknote/newBanknoteReducer";
+import {MenuArray} from "../redux/newBanknote/newBanknoteReducer";
 import {UserInter, UserType} from "./login/login";
-import { ServiceCategoriesItem } from "../redux/services/servicesReducer";
-import { History } from "../redux/history/newHistoryReducer";
+import {ServiceCategoriesItem} from "../redux/services/servicesReducer";
+import {History} from "../redux/history/newHistoryReducer";
 import {CustomersArray, CustomerType, FamilyMemberGetter} from "../redux/customers/customersReducer";
 import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
 import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
 
-export const BaseURL = "http://194.213.104.146:88/api"
+export const BaseURL = "https://imperia.pp.ua/api"
 //http://imperia-api.com
 
 export const myGetInstance = axios.create({
@@ -63,6 +63,7 @@ export interface ApiGetBasicSpacesResponseType extends ApiResultType {
 export interface ApiBanquetStatesResponseType extends ApiResultType {
     data: BanquetStateArray
 }
+
 export interface ApiPostCustomerResponseType extends ApiResultType {
     data: CustomerType
 }

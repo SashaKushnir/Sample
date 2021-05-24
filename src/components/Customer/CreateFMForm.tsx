@@ -5,14 +5,14 @@ import * as Yup from 'yup'
 import {Field, Form, Formik} from 'formik';
 import {CustomerType} from "../../redux/customers/customersReducer";
 import {postFamilyMember} from "../../redux/customers/customersThunk";
-import {DatePicker} from "antd";
-import moment from 'moment';
+import s from "./FMItem.module.css"
 
 export interface CreateFMFormType {
     name: string
     birthdate: string
 }
-export interface CreateFamilyMember extends CreateFMFormType{
+
+export interface CreateFamilyMember extends CreateFMFormType {
     customer_id: number
 }
 
@@ -25,25 +25,7 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
 
     const d = useDispatch()
     const unSuccessMessage = useSelector((state: RootState) => state.common.message)
-    function range(start: any, end:  any) {
-        const result = [];
-        for (let i = start; i < end; i++) {
-            result.push(i);
-        }
-        return result;
-    }
 
-    function disabledDate(current: any) {
-        // Can not select days before today and today
-        return current && current > moment().endOf('day');
-    }
-    function disabledDateTime() {
-        return {
-            disabledHours: () => range(0, 24).splice(4, 20),
-            disabledMinutes: () => range(30, 60),
-            disabledSeconds: () => [55, 56],
-        };
-    }
     const SignupSchema = Yup.object().shape({
         name: Yup.string().required('Required')
             .min(2, 'Too Short')
@@ -56,8 +38,7 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
     });
 
     return <Formik onSubmit={(values: CreateFMFormType) => {
-        const readyForm: CreateFamilyMember = {...Object.assign(values,{customer_id : customer.id})}
-        console.log(readyForm)
+        const readyForm: CreateFamilyMember = {...Object.assign(values, {customer_id: customer.id})}
         d(postFamilyMember(readyForm, hideForm))
     }}
                    validationSchema={SignupSchema}
@@ -68,21 +49,29 @@ export const CreateFMForm: React.FC<CreateFMFormProps> = ({customer, hideForm}) 
         {({errors, touched}) => (
             <Form>
                 <div>
-                    <div>
-                        <span>Name: </span>
-                        <Field name="name" type="text" placeholder={"Name"}/>
+                    <div className={s.block}>
+                        <span className={s.text}>Імя: </span>
+                        <Field name="name" type="text" placeholder={"Name"} className={s.input}/>
                         {errors.name && touched.name ? <div>{errors.name}</div> : null}
+
+
                     </div>
-                    <div>
-                        <span>Birth date : </span>
-                        <Field name="birthdate" placeholder={"birthdate"} type={"date"}/>
+                    <div className={s.block}>
+
+                        <span className={s.text}>Дата народження : </span>
+
+
+                        <Field name="birthdate" placeholder={"birthdate"} type={"date"} className={s.input}/>
                         {errors.birthdate && touched.birthdate ? (
                             <div>{errors.birthdate}</div>
                         ) : null}
                     </div>
+                    <div>
+                        <div>{unSuccessMessage}</div>
+                        <button type="submit" className={s.button}>Зберегти</button>
+                    </div>
                 </div>
-                <div>{unSuccessMessage}</div>
-                <button type="submit">Submit</button>
+
             </Form>
         )}
     </Formik>

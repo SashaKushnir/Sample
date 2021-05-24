@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react'
-import {History} from "./../../../redux/history/newHistoryReducer"
+import React from 'react'
 import s from "../pdfStyles.module.css"
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/store";
 import {ProductCategoriesItem} from "../../../redux/newBanknote/newBanknoteReducer";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
-import {date} from "yup";
 import {Pidpus} from "../PDF";
 
 type ItemProps = {
@@ -29,7 +27,8 @@ const Item: React.FC<ItemProps> = (props) => {
             <td colSpan={3} className={s.per50}>{props.services?.name}</td>
             <td className={s.per16}>{props.services?.amount}</td>
             <td className={s.per16}>{props.services.once_paid_price}</td>
-            <td>{props.services?.amount as number * props.services.once_paid_price}</td>
+            {/*<td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount ?  props.services?.amount:0) }</td>*/}
+            <td>{props.services?.amount as number * props.services?.once_paid_price}</td>
         </>}
 
     </tr>
@@ -42,19 +41,19 @@ export const OneBanquetPDF: React.FC = (props) => {
     let total_menus = 0
     let total_tickets = 0
     let total_services = 0
-    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem) => {
+    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         total_menus += obj.amount as number * obj.price
-        return <Item data={obj}/>
+        return <Item key={index} data={obj}/>
     })
 
-    const tickets = banquet?.ticket_order?.items.map((obj: TicketItem) => {
+    const tickets = banquet?.ticket_order?.items.map((obj: TicketItem, index) => {
         total_tickets += obj.amount as number * obj.price
-        return <Item data={obj}/>
+        return <Item key={index} data={obj}/>
     })
 
-    const services = banquet?.service_order?.items.map((obj: ServiceCategoriesItem) => {
+    const services = banquet?.service_order?.items.map((obj: ServiceCategoriesItem, index) => {
         total_services += obj.amount as number * obj.once_paid_price
-        return <Item services={obj}/>
+        return <Item key={index} services={obj}/>
 
     })
 
@@ -64,7 +63,7 @@ export const OneBanquetPDF: React.FC = (props) => {
         <table className={s.table1}>
             <tr className={s.first_line}>
                 <td>Дата: {banquet?.beg_datetime}</td>
-                <td>Час: {banquet?.beg_datetime}</td>
+                <td>Час: {banquet?.beg_datetime.slice(-8)} - {banquet?.end_datetime.slice(-8)}</td>
                 <td>Кількість дітей з іменинником: {banquet?.child_guests_amount}</td>
                 <td>Кількість дорослих: {banquet?.adult_guests_amount}</td>
             </tr>
