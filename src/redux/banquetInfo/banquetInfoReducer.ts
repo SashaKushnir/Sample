@@ -126,6 +126,9 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                 basicSpaces: [...action.spaces]
             }
         case "SET_ARRAY_OF_SPACES_SELECTED":
+            if(banquet.basicSpaces?.length === 0) {
+                alert("mistake, no basic spaces before setting...")
+            }
             return {
                 ...banquet,
                 basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {

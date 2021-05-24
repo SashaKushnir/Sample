@@ -13,6 +13,7 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
     try {
         const res = await login.tryLogin(loginObject)
         if (res.data.success) {
+            d(commonActions.successTokenToggle(true))
             d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))

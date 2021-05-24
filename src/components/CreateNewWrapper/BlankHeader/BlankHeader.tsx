@@ -24,14 +24,14 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const d = useDispatch()
     const all_states = useSelector(selectBanquetsStates)
     const states = all_states?.map((obj: BanquetState, index) =>
-        <option key={index} >{obj.name}</option>)
+        <option key={index}>{obj.name}</option>)
 
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
     const nonEditableSpaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.filter((spaceI) => spaceI.selected)
         ?.map((spaceI, index) =>
-        <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
+            <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value.trim() as any))
@@ -42,7 +42,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
-
 
 
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -78,25 +77,27 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         if (text !== "" && data.beginning !== '' && data.end !== '') {
             let date = data.beginning
             date = date.slice(-9)
-            console.log(text,date)
-            setBegining(text,date)
+            setBegining(text, date)
 
             let date1 = data.end
             date1 = date1.slice(-9)
-            console.log(text,date1)
-            setEnd(text,date1)
+            setEnd(text, date1)
             Show_time(true);
-        } else if(text !== ""){
+        } else if (text !== "") {
             Show_time(true);
-            setBegining(text," 00:00:00")
-            setEnd(text," 23:59:00")
-        }
-        else{
+            setBegining(text, " 00:00:00")
+            setEnd(text, " 23:59:00")
+        } else {
             Show_time(false);
         }
 
-        if(text)
-        d(gettingSpacesByDate(false))
+        if (text) {
+            if (isEdit)
+                d(gettingSpacesByDate(true))
+            else
+                d(gettingSpacesByDate(false))
+        }
+
     }
 
     const setBegining = (date: string, time: string) => {
@@ -109,23 +110,21 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     }
 
     const SetBegTime = (e: any, time: string) => {
-        if(time===''){
+        if (time === '') {
             return
         }
         let beg: string = data.beginning
         beg = beg.slice(0, -8)
         beg += time + ':00'
-        console.log(beg)
         d(banquetActions.setBegining(beg))
     }
     const SetEndTime = (e: any, time: string) => {
-        if(time===''){
+        if (time === '') {
             return
         }
         let end: string = data.end
         end = end.slice(0, -8)
         end += time + ':00'
-        console.log(end)
         d(banquetActions.setEnd(end))
     }
 
@@ -241,16 +240,24 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.time + ' ' + s.blocks}>
                         {data.beginning &&
-                        <DatePicker onChange={(e: any, time: string) => {setDate(e, time)}}
+                        <DatePicker onChange={(e: any, time: string) => {
+                            setDate(e, time)
+                        }}
                                     defaultValue={moment(data.beginning.slice(0, -9), formate_date)}/>
                         }
                         {!data.beginning &&
-                        <DatePicker onChange={(e: any, time: string) => {setDate(e, time)}}/>
+                        <DatePicker onChange={(e: any, time: string) => {
+                            setDate(e, time)
+                        }}/>
                         }
                         {show_time && <>
-                            <TimePicker format={format} onChange={(e: any, time: string) => {SetBegTime(e, time)}} inputReadOnly={false}
+                            <TimePicker format={format} onChange={(e: any, time: string) => {
+                                SetBegTime(e, time)
+                            }} inputReadOnly={false}
                                         defaultValue={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
-                            <TimePicker format={format} onChange={(e: any, time: string) => {SetEndTime(e, time)}} inputReadOnly={true}
+                            <TimePicker format={format} onChange={(e: any, time: string) => {
+                                SetEndTime(e, time)
+                            }} inputReadOnly={true}
                                         defaultValue={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
                         </>
                         }
@@ -259,7 +266,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
                     <div className={s.state + ' ' + s.blocks}>
                         Стан <select className={s.input_state} onChange={setState} value={data.state?.name}>
-                        <option style={{display:"none"}}></option>
+                        <option style={{display: "none"}}></option>
                         {states}
                     </select>
                     </div>

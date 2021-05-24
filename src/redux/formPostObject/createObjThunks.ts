@@ -53,6 +53,8 @@ export const createPost = () => (d: any, getState: () => RootState) => {
     if (getState().banquet.beginning === "") {
         alert("Виберіть дата початку")
         ready = false
+    } else {
+
     }
 
     if (getState().banquet.end === "") {

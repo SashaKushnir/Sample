@@ -11,6 +11,8 @@ import {OneDayPDF} from "./components/PDF/OneDayPDF/OneDayPDF";
 import {KitchenPDF} from "./components/PDF/KitchenPDF/KitchenPDF";
 import {PizzaPDF} from "./components/PDF/PizzaPDF/PizzaPDF";
 import {ServicesPDF} from "./components/PDF/ServicesPDF/ServicesPDF";
+import {getListOfSpaces} from "./redux/banquetInfo/banquetInfoT";
+import {setBanqueStateT} from "./redux/BanquetState/BanquetStatesT";
 
 export const App = () => {
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
@@ -19,7 +21,8 @@ export const App = () => {
     const history = useHistory()
     const isAuth = useSelector((state: RootState) => state.common.isAuthorised)
     const userInfo = (useSelector((state: RootState) => state.common.userInfo))
-
+    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
+    const states = useSelector((state: RootState) => state.banquetStates.states)
     useEffect(() => {
         if (tokenSuccess) {
             if(isAuth === false){
@@ -27,6 +30,10 @@ export const App = () => {
             }
             d(commonActions.authToggle(true))
         }
+        if (!spaces)
+            d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+        if(!states)
+            d(setBanqueStateT())
     }, [tokenSuccess])
 
 

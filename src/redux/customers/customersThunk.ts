@@ -71,8 +71,6 @@ getState: () => RootState) => {
         d(commonActions.fetchingToggle(true))
         const response = await familyMembers.createFamilyMember(newFMInfo, getState().common.userInfo?.api_token as string)
         // Set response to Bll
-        console.log(newFMInfo)
-        console.log(response)
         if (response.data.success) {
             hideForm()
             d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))

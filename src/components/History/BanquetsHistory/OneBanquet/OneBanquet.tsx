@@ -63,7 +63,6 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const menus = useSelector(selectMenuKitchen)
     const tickets1 = useSelector(selectTickets)
     const services1 = useSelector(selectServices)
-    const user = useSelector((state:RootState) => state.common.userInfo)
     const ClearAllShowAmount = () => {
         d(commonActions.banquetModeToggle(true))
         menus?.forEach((obj: MenuItem) => {
@@ -101,19 +100,21 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             return obj
         })
 
-        d(banquetActions.clearAllInfoAboutSpaces())
+
         if (!spaces)
             d(getListOfSpaces(localStorage.getItem("api_token") || ""))
+        d(banquetActions.clearAllInfoAboutSpaces())
         d(banquetActions.setCustomer(data.customer))
         d(banquetActions.setName(data.name))
         d(banquetActions.setDescription(data.description ? data.description : ""))
         d(banquetActions.setBegining(data.beg_datetime))
         d(banquetActions.setEnd(data.end_datetime))
+        d(banquetActions.setBanquetId(data.id))
         d(gettingSpacesByDate(true))
         d(banquetActions.setAdvance(data.advance_amount))
-        d(banquetActions.setBanquetId(data.id))
 
-        if (data.space_order?.items)
+
+        if (((data.space_order?.items)?(data.space_order?.items?.length > 0):false) && (data.space_order?.items))
             d(banquetActions.setArrayOfSpacesSelected(data.space_order?.items))
         d(banquetActions.setState(data.state))
 
@@ -144,11 +145,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 {employee?.can_modify && <NavLink to="/content/new/menus" className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
-                {user?.role.can_read && user?.role.can_insert && user.role.can_modify === false && user?.id === data.id &&
+
                 <NavLink to="/OneBanquetPdf" className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
-                }
+
                 <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
             </div>
             <div className={s.info}>

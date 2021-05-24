@@ -27,13 +27,16 @@ export const gettingSpacesByDate = (fromHistory: boolean) => async (d: Dispatch<
                                                                     getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const res = await spaces.getOrderedSpaces(getState().banquet.beginning, getState().banquet.end,
+        const res = await spaces.getOrderedSpaces(getState().banquet.beginning.split(' ')[0] + " 00:00:00",
+            getState().banquet.end.split(' ')[0] + " 23:59:59", fromHistory?getState().banquet.id:0,
             getState().common.userInfo?.api_token as string)
+        console.log("Spaces Filtered",res)
         if (res.data.success) {
-            if (fromHistory) {
-                d(banquetActions.setFlagsToPreventSpacesBeingDisabled(getState().banquet.basicSpaces?.filter((spaceI) =>
-                    spaceI.selected) || [], getState().banquet.beginning.split(' ')[0]))
-            }
+            // if (fromHistory) {
+            //
+            //     d(banquetActions.setFlagsToPreventSpacesBeingDisabled(getState().banquet.basicSpaces?.filter((spaceI) =>
+            //         spaceI.selected) || [], getState().banquet.beginning.split(' ')[0]))
+            // }
             d(banquetActions.setDisabledSpaces(res.data.data))
         } else {
 
