@@ -28,4 +28,5 @@ export const banquetActions = {
     }) as const,
     clearFlagsToPreventSpacesBeingDisabled: () => ({type: "CLEAR_APPROPRIATE_DATA"}) as const,
     clearAllInfoAboutSpaces: () => ({type: "CLEAR_ALL_INFO_ABOUT_SPACES"}) as const,
+    clearAllBlankInfoL: () => ({type: "CLEAR_ALL_BLANK_INFO"}) as const
 }

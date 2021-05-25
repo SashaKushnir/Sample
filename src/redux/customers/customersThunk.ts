@@ -34,7 +34,6 @@ export const filterCustomersByName = (filteringName: string) => async (d: Dispat
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
             d(commonActions.fetchingToggle(false))
-            message.info("Створено", 3)
         } else {
             console.warn(response.data.message)
             message.info("Помилка, невдала спроба", 3)
@@ -67,8 +66,8 @@ export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (
     }
 }
 export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d:
-Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
-getState: () => RootState) => {
+                                                                                                    Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
+                                                                                                getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
         const response = await familyMembers.createFamilyMember(newFMInfo, getState().common.userInfo?.api_token as string)

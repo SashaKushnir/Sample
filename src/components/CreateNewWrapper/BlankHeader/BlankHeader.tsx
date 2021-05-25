@@ -134,7 +134,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         d(banquetActions.removeBanquetId())
         d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
         d(banquetActions.clearAllInfoAboutSpaces())
-        d(gettingSpacesByDate(false))
+        d(banquetActions.clearAllBlankInfoL())
     }
     const clearBasket = () => {
         d(clearAllBasket())
@@ -207,10 +207,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                             </button>
                         </div>
                         }
-                        {!isEditMode && <div>
 
-                        </div>
-                        }
+
                         <div>
                             <button onClick={clearBasket}>Очистити корзину</button>
                         </div>

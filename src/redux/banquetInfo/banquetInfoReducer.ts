@@ -115,6 +115,20 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
                     return spaceI
                 })]:[]
             }
+        case "CLEAR_ALL_BLANK_INFO":
+            return {
+                ...banquet,
+                id: undefined,
+                name: "",
+                end: "",
+                beginning: "",
+                // basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
+                //     spaceI.selected = false
+                //     spaceI.disabled = false
+                //     return spaceI
+                // })]:[],
+                customer: null
+            }
         case "SET_BEGINING":
             return{
                 ...banquet,
