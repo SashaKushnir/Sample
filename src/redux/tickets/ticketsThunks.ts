@@ -3,6 +3,7 @@ import {ActionsTypes} from "../store";
 import {ticketsActions} from "./ticketsActions";
 import {commonActions} from "../forCommon/forCommonActions";
 import {tickets} from "../../api/CreateNew/tickets";
+import {message} from "antd";
 
 export const setTicketsT = () => async (d: Dispatch<ActionsTypes<typeof ticketsActions | typeof commonActions>>) => {
 
@@ -15,9 +16,10 @@ export const setTicketsT = () => async (d: Dispatch<ActionsTypes<typeof ticketsA
             d(commonActions.fetchingMenusToggle(false))
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
         }
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingMenusToggle(false))
     }

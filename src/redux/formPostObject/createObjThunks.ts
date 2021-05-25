@@ -9,6 +9,7 @@ import {BanquetType, Product} from "./createObjReducer";
 import {TicketItem} from "../tickets/ticketsReducer";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 import {CommentItem} from "../history/newHistoryReducer";
+import {message} from "antd";
 
 const _ = require("lodash");
 
@@ -167,13 +168,13 @@ export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
         if (res.data.success) {
-            alert("Створено!!!")
+            message.info("Створено", 3)
         } else {
-            alert("Невдало...")
+            message.info("Помилка, невдала спроба", 3)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Помилка...")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         d(commonActions.fetchingToggle(false))
     }
 }

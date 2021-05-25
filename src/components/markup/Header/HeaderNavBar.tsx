@@ -16,8 +16,13 @@ export const HeaderNavBar = () => {
             <div className={s.title}>Створити новий</div>
         </NavLink>
 
-        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/reports`}>
-            <div className={s.title}>Звіти</div>
+        <NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/support`}>
+            <div className={s.title}>Облікові записи </div>
         </NavLink>
+
+
+        {/*<NavLink activeClassName={s.activeClassName} className={s.navlink} to={`${url}/reports`}>*/}
+        {/*    <div className={s.title}>Звіти</div>*/}
+        {/*</NavLink>*/}
     </nav>
 }

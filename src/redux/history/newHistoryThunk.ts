@@ -4,6 +4,7 @@ import { commonActions } from "../forCommon/forCommonActions";
 import { history } from "../../api/CreateNew/history";
 import {historyActions} from "./newHistoryAction";
 import {BanquetType} from "../formPostObject/createObjReducer";
+import {message} from "antd";
 
 export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
 
@@ -18,7 +19,7 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Помилка...")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -38,7 +39,7 @@ export const getFilteredHistory = (beg_datetime: string, end_datetime:string) =>
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("No results")
+        message.info("Нема банкетів з такою датою", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -50,12 +51,13 @@ export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: 
         d(commonActions.fetchingToggle(true))
         const response = await history.patchHistory(updObj, token)
         if (response.data.success) {
-            alert("Успішно змінено")
+            message.info("Успішно змінено", 3)
         } else {
+            message.info("Помилка, невдала спроба", 3)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -70,12 +72,14 @@ export const deleteHistoryT = (id:number, api_token:string) => async (d: Dispatc
         if (response.data.success) {
             d(historyActions.deleteOneHistoty(id))
             d(commonActions.fetchingToggle(false))
+            message.info("Видалено", 3)
         } else {
             console.warn(response.data.message)
             d(commonActions.fetchingToggle(false))
+            message.info("Помилка, невдала спроба", 3)
         }
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }

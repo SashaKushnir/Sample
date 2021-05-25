@@ -6,6 +6,7 @@ import { login } from "../../api/login/login";
 import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
 import { ticketsActions } from "../tickets/ticketsActions";
 import { servicesActions } from "../services/servicesActions";
+import {message} from "antd";
 
 
 export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<ActionsTypes<typeof commonActions>>, getState: () => RootState) => {
@@ -48,7 +49,7 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
             d(commonActions.authToggle(true))
             d(commonActions.fetchingToggle(false))
         } else {
-            alert("Something wrong with your token, please login with name and password")
+            message.info("Помилка, неправильний ключ, ввійдіть ще раз, щоб уникнути помилки", 3)
             d(commonActions.successTokenToggle(false))
             d(commonActions.authToggle(false))
             d(commonActions.setAuthorisedData(undefined))
@@ -56,7 +57,7 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
         }
     } catch (error) {
         console.warn(error)
-        alert("Error")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         d(commonActions.fetchingToggle(false))
         d(commonActions.successTokenToggle(false))
         d(commonActions.authToggle(false))

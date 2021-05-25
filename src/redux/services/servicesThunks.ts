@@ -3,6 +3,7 @@ import { ActionsTypes } from "../store";
 import { servicesActions } from "./servicesActions";
 import { commonActions } from "../forCommon/forCommonActions";
 import { services } from "../../api/CreateNew/services";
+import {message} from "antd";
 
 export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof servicesActions | typeof commonActions>>) => {
     try {
@@ -14,9 +15,10 @@ export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof service
             d(commonActions.fetchingMenusToggle(false))
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
         }
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingMenusToggle(false))
     }

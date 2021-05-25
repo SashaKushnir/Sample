@@ -4,6 +4,7 @@ import { commonActions } from "../forCommon/forCommonActions";
 import {BanquetStateActions} from "./BanquetStatesA";
 import {BanquetStates} from "../../api/CreateNew/states";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
+import {message} from "antd";
 
 export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof banquetActions
     | typeof  BanquetStateActions | typeof commonActions>>) => {
@@ -17,10 +18,11 @@ export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof banq
             d(banquetActions.setState(response.data.data[0]))
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба загрузки даних", 3)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }

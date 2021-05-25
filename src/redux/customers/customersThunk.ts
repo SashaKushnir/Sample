@@ -6,6 +6,7 @@ import {CreateCustomerFormType} from "../../components/CreateNewWrapper/CreateNe
 import {CreateFamilyMember} from "../../components/Customer/CreateFMForm";
 import {customers} from "../../api/CreateNew/customers";
 import {familyMembers} from "../../api/CreateNew/familyMember";
+import {message} from "antd";
 
 export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
     try {
@@ -17,9 +18,10 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
             d(commonActions.fetchingToggle(false))
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
         }
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -32,11 +34,13 @@ export const filterCustomersByName = (filteringName: string) => async (d: Dispat
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
             d(commonActions.fetchingToggle(false))
+            message.info("Створено", 3)
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
         }
     } catch (error) {
-        alert("Something went wrong")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
@@ -50,19 +54,17 @@ export const postCustomer = (newCustomerInfo: CreateCustomerFormType) => async (
         // Set response to Bll
         if (response.data.success) {
             d(customersActions.pushCreatedCustomer(response.data.data))
-            alert("Success")
+            message.info("Створено", 3)
         } else {
-            alert("Невдало...")
-            alert(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
             console.warn(response.data.message)
         }
         d(commonActions.fetchingPostCustomerToggle(false))
     } catch (error) {
-        alert("Помилка...")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingPostCustomerToggle(false))
     }
-// }Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>
 }
 export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => void) => async (d:
 Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>,
@@ -70,17 +72,18 @@ getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
         const response = await familyMembers.createFamilyMember(newFMInfo, getState().common.userInfo?.api_token as string)
-        // Set response to Bll
+
         if (response.data.success) {
             hideForm()
             d(customersActions.addFamilyMember(response.data.data, newFMInfo.customer_id))
-            alert("Success")
+            message.info("Створено", 3)
         } else {
             console.warn(response.data.message)
+            message.info("Помилка, невдала спроба", 3)
         }
         d(commonActions.fetchingToggle(false))
     } catch (error) {
-        alert("Помилка")
+        message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         console.warn(error)
         d(commonActions.fetchingToggle(false))
     }
