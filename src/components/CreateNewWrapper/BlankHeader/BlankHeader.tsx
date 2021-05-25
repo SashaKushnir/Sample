@@ -87,6 +87,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
             setEnd(text, " 23:59:00")
         } else {
             Show_time(false);
+            d(banquetActions.setEnd(""))
+            d(banquetActions.setBegining(""))
         }
 
         if (text) {
