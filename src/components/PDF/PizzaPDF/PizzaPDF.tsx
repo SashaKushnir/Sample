@@ -38,7 +38,7 @@ export const PizzaPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
     // let total_menus = 0                                      never used please remove or use
-    const menus = banquet?.product_order?.items.forEach((obj: ProductCategoriesItem, index) => {
+    const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         // total_menus += obj.amount as number * obj.price      never used please remove or use
         if(obj.category.name === "Pizza")
             return <Item key={index} data={obj}/>

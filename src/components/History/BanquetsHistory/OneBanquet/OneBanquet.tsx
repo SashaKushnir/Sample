@@ -27,7 +27,6 @@ interface BanquetProps {
     data: History
 }
 
-
 export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const d = useDispatch()
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
