@@ -28,7 +28,6 @@ interface BanquetProps {
     data: History
 }
 
-
 export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const {url} = useRouteMatch()
     const d = useDispatch()

@@ -40,13 +40,10 @@ export const ServicesPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
     // let total_menus = 0                                      never used please remove or use
-    const menus = banquet?.service_order?.items.forEach((obj: ServiceCategoriesItem, index) => {
+    const menus = banquet?.service_order?.items.map((obj: ServiceCategoriesItem, index) => {
         // total_menus += obj.amount as number * obj.price      never used please remove or use
-        if(obj.category.name === "Pizza")
             return <Item key={index} services={obj}/>
     })
-
-
 
     return <>
         <h1 className={s.title}>Анкета розваг</h1>
