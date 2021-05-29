@@ -10,7 +10,7 @@ import {deleteHistoryT} from "../../../../redux/history/newHistoryThunk";
 import {useDispatch, useSelector} from "react-redux";
 import {selectMenuKitchen, selectServices, selectTickets} from "../../../../selectors/selectCreateNew";
 import {TicketItem} from "../../../../redux/tickets/ticketsReducer";
-import {NavLink} from 'react-router-dom';
+import {NavLink, useRouteMatch} from 'react-router-dom';
 import {newBanknoteActions} from "../../../../redux/newBanknote/newBanknoteActions";
 import {ticketsActions} from "../../../../redux/tickets/ticketsActions";
 import {servicesActions} from "../../../../redux/services/servicesActions";
@@ -22,6 +22,7 @@ import {EditIcon} from "../../../../common/compon/HistoryIcons/EditIcon";
 import {commonActions} from "../../../../redux/forCommon/forCommonActions";
 import {RootState} from "../../../../redux/store";
 import {getListOfSpaces, gettingSpacesByDate} from "../../../../redux/banquetInfo/banquetInfoT";
+import {pathPrefix} from "../../../../App";
 
 interface BanquetProps {
     data: History
@@ -29,6 +30,7 @@ interface BanquetProps {
 
 
 export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
+    const {url} = useRouteMatch()
     const d = useDispatch()
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
     const [hideProducts, setHideProducts] = useState(false)
@@ -168,13 +170,13 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         Стан банкета: {data.state.name}
                     </div>
                     <div>
-                        <NavLink to="/KitchenPdf" className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/KitchenPdf`} className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, страви</div>
                         </NavLink>
-                        <NavLink to="/PizzaPdf" className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/PizzaPdf`} className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на кухню, піцца</div>
                         </NavLink>
-                        <NavLink to="/ServicesPdf" className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/ServicesPdf`} className={s.navLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт на розваги</div>
                         </NavLink>
                     </div>

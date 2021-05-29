@@ -14,7 +14,10 @@ import {ServicesPDF} from "./components/PDF/ServicesPDF/ServicesPDF";
 import {getListOfSpaces} from "./redux/banquetInfo/banquetInfoT";
 import {setBanqueStateT} from "./redux/BanquetState/BanquetStatesT";
 
-export const App = () => {
+export const pathPrefix = "/app"
+
+
+ const App = () => {
     const tokenSuccess = useSelector((state:RootState) => state.common.authByToken)
     const needRedirect = useSelector((state: RootState) => state.common.needRedirect)
     const d = useDispatch()
@@ -39,16 +42,16 @@ export const App = () => {
 
     useEffect(() => {
         if (isAuth === false) {
-            history.push('/login')
+            history.push(`${pathPrefix}/login`)
             d(commonActions.needRedirectToggle(true))
         } else {
             if(isAuth ===true)
                 if((needRedirect === true) || (needRedirect === null)) {
-                    history.push('/content')
+                    history.push(`${pathPrefix}/content`)
                     d(commonActions.needRedirectToggle(false))
                 }
             if (userInfo?.api_token)
-              localStorage.setItem("api_token", userInfo.api_token)
+                localStorage.setItem("api_token", userInfo.api_token)
             d(commonActions.needRedirectToggle(false))
         }
     }, [isAuth, needRedirect])
@@ -57,17 +60,19 @@ export const App = () => {
     return (
         <div className="App">
             <Switch>
-                <Redirect exact from="/" to="/content"/>
-                <Route path='/login' render={() => <Authorisation/>}/>
-                <Route path='/content' render={() => <MyPage/>}/>
-                <Route path='/OneBanquetPdf' render={() => <OneBanquetPDF/>}/>
-                <Route path='/OneDayPdf' render={() => <OneDayPDF/>}/>
-                <Route path='/KitchenPdf' render={() => <KitchenPDF/>}/>
-                <Route path='/ServicesPdf' render={() => <ServicesPDF/>}/>
-                <Route path='/PizzaPdf' render={() => <PizzaPDF/>}/>
+                <Redirect exact from={pathPrefix} to={`${pathPrefix}/content`}/>
+                <Redirect exact from='/' to={`${pathPrefix}/content`}/>
+                <Route path={`${pathPrefix}/login`} render={() => <Authorisation/>}/>
+                <Route path={`${pathPrefix}/content`} render={() => <MyPage/>}/>
+                <Route path={`${pathPrefix}/OneBanquetPdf`} render={() => <OneBanquetPDF/>}/>
+                <Route path={`${pathPrefix}/OneDayPdf`} render={() => <OneDayPDF/>}/>
+                <Route path={`${pathPrefix}/KitchenPdf`} render={() => <KitchenPDF/>}/>
+                <Route path={`${pathPrefix}/ServicesPdf`} render={() => <ServicesPDF/>}/>
+                <Route path={`${pathPrefix}/PizzaPdf`} render={() => <PizzaPDF/>}/>
                 <Route path='*' render={() => <div>Error, empty link</div>}/>
             </Switch>
 
         </div>
     );
 }
+export default App

@@ -119,14 +119,11 @@ export const banquetReducer = (banquet = initialState, action: ActionsTypes<type
             return {
                 ...banquet,
                 id: undefined,
+                advance_amount: 0,
+                description: null,
                 name: "",
                 end: "",
                 beginning: "",
-                // basicSpaces: banquet.basicSpaces?[...banquet.basicSpaces.map((spaceI) => {
-                //     spaceI.selected = false
-                //     spaceI.disabled = false
-                //     return spaceI
-                // })]:[],
                 customer: null
             }
         case "SET_BEGINING":
