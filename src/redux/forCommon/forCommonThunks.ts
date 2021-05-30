@@ -1,11 +1,11 @@
-import { Dispatch } from "redux";
-import { ActionsTypes, RootState } from "../store";
-import { LoginFormType } from "../../components/Authorisation/LoginForm";
-import { commonActions } from "./forCommonActions";
-import { login } from "../../api/login/login";
-import { newBanknoteActions } from "../newBanknote/newBanknoteActions";
-import { ticketsActions } from "../tickets/ticketsActions";
-import { servicesActions } from "../services/servicesActions";
+import {Dispatch} from "redux";
+import {ActionsTypes, RootState} from "../store";
+import {LoginFormType} from "../../components/Authorisation/LoginForm";
+import {commonActions} from "./forCommonActions";
+import {login} from "../../api/login/login";
+import {newBanknoteActions} from "../newBanknote/newBanknoteActions";
+import {ticketsActions} from "../tickets/ticketsActions";
+import {servicesActions} from "../services/servicesActions";
 import {message} from "antd";
 
 
@@ -14,9 +14,12 @@ export const tryLoginT = (loginObject: LoginFormType) => async (d: Dispatch<Acti
     try {
         const res = await login.tryLogin(loginObject)
         if (res.data.success) {
+            if (res.data.data)
+                localStorage.setItem("api_token", res.data.data.api_token)
             d(commonActions.successTokenToggle(true))
             d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
+
             d(commonActions.fetchingToggle(false))
         } else {
             console.warn("error")
@@ -43,7 +46,7 @@ export const logInWithToken = (token: string) => async (d: Dispatch<ActionsTypes
     try {
         d(commonActions.fetchingToggle(true))
         const res = await login.loginByToken(token)
-        if(res.data.data){
+        if (res.data.data) {
             d(commonActions.successTokenToggle(true))
             d(commonActions.setAuthorisedData(res.data.data))
             d(commonActions.authToggle(true))
