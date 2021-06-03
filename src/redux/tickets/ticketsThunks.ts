@@ -1,15 +1,15 @@
 import {Dispatch} from "redux";
-import {ActionsTypes} from "../store";
+import {ActionsTypes, RootState} from "../store";
 import {ticketsActions} from "./ticketsActions";
 import {commonActions} from "../forCommon/forCommonActions";
 import {tickets} from "../../api/CreateNew/tickets";
 import {message} from "antd";
 
-export const setTicketsT = () => async (d: Dispatch<ActionsTypes<typeof ticketsActions | typeof commonActions>>) => {
+export const setTicketsT = () => async (d: Dispatch<ActionsTypes<typeof ticketsActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingMenusToggle(true))
-        const response = await tickets.getAllTickets()
+        const response = await tickets.getAllTickets(getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success ) {
             d(ticketsActions.setTicketInfo(response.data.data))

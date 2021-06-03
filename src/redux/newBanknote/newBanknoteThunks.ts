@@ -1,14 +1,14 @@
 import { Dispatch } from "redux";
-import { ActionsTypes } from "../store";
+import {ActionsTypes, RootState} from "../store";
 import { newBanknoteActions } from "./newBanknoteActions";
 import { menus } from "../../api/CreateNew/menus";
 import { commonActions } from "../forCommon/forCommonActions";
 import {message} from "antd";
 
-export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknoteActions | typeof commonActions>>) => {
+export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknoteActions | typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingMenusToggle(true))
-        const response = await menus.getAllMenus()
+        const response = await menus.getAllMenus(getState().common.userInfo?.api_token as string)
          if (response.data.success) {
             d(newBanknoteActions.setMenuInfo(response.data.data))
             d(commonActions.fetchingMenusToggle(false))

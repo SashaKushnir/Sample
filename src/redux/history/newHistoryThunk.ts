@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
-import { ActionsTypes } from "../store";
+import {ActionsTypes, RootState} from "../store";
 import { commonActions } from "../forCommon/forCommonActions";
 import { history } from "../../api/CreateNew/history";
 import {historyActions} from "./newHistoryAction";
 import {BanquetType} from "../formPostObject/createObjReducer";
 import {message} from "antd";
 
-export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
+export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await history.getAllHistory()
+        const response = await history.getAllHistory(getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success ) {
             d(historyActions.setHistoryInfo(response.data.data))
@@ -25,12 +25,12 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
     }
 }
 
-export const getFilteredHistory = (beg_datetime: string, end_datetime:string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
+export const getFilteredHistory = (beg_datetime: string, end_datetime:string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))
         end_datetime+=' 23:59:59'
-        const response = await history.getFilteredHistory(beg_datetime, end_datetime)
+        const response = await history.getFilteredHistory(beg_datetime, end_datetime,getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success ) {
             d(historyActions.setHistoryInfo(response.data.data))

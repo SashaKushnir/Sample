@@ -3,16 +3,24 @@ import {BanquetType} from "../../redux/formPostObject/createObjReducer";
 
 
 export const history = {
-    getAllHistory: (beg_datetime: string = "", end_datetime: string = "") => {
-        return myGetInstance.get<ApiHistoryResultType>(`/banquets`)
+    getAllHistory: (headerToken: string, beg_datetime: string = "", end_datetime: string = "") => {
+        return myGetInstance.get<ApiHistoryResultType>(`/banquets`,{
+            headers : {
+                'api-token': headerToken
+            }
+        })
     },
-    getFilteredHistory: (beg_datetime: string = "", end_datetime: string = "") => {
-        return myGetInstance.get<ApiHistoryResultType>(`/banquets?beg_datetime[min]=${beg_datetime}&end_datetime[max]=${end_datetime}`)
+    getFilteredHistory: (beg_datetime: string = "", end_datetime: string = "", api_token: string) => {
+        return myGetInstance.get<ApiHistoryResultType>(`/banquets?beg_datetime[min]=${beg_datetime}&end_datetime[max]=${end_datetime}`, {
+            headers: {
+                'api-token': api_token
+            }
+        })
     },
     postHistory: (obj: BanquetType, api_token: string) => {
         return myPostInstance.post('/banquets', {data: obj}, {
             headers: {
-                "api_token": api_token
+                'api-token': api_token
             }
         })
     },
@@ -21,7 +29,7 @@ export const history = {
                 "data": patchBanquet
             }, {
                 headers: {
-                    api_token: token
+                    'api-token': token
                 }
             }
         )
@@ -30,10 +38,10 @@ export const history = {
         const obj = {
             "id": id
         }
-        
+
         return myPostInstance.delete<ApiResultType>('/banquets', {
             headers: {
-                "api_token": api_token
+                'api-token': api_token
             },
             data: obj
         })

@@ -5,7 +5,7 @@ export const familyMembers = {
     createFamilyMember: (newFamilyMember: CreateFamilyMember,headerToken: string) => {
         return myGetInstance.post<ApiPostFamilyMemberResponseType>('/customer-family-members', {
             headers : {
-                api_token: headerToken
+                'api-token': headerToken
             },
             data:  newFamilyMember
         })

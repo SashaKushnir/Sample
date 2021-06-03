@@ -26,10 +26,10 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
         d(commonActions.fetchingToggle(false))
     }
 }
-export const filterCustomersByName = (filteringName: string) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
+export const filterCustomersByName = (filteringName: string) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await customers.filterCustomersByName(filteringName)
+        const response = await customers.filterCustomersByName(filteringName, getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
