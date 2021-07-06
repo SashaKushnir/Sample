@@ -17,3 +17,8 @@
     padding: 1px;
     cursor: pointer;
 }
+.name{
+    display: inline-block;
+    float: right;
+    margin: 0 5px;
+}

@@ -23,6 +23,7 @@ import {commonActions} from "../../../../redux/forCommon/forCommonActions";
 import {RootState} from "../../../../redux/store";
 import {getListOfSpaces, gettingSpacesByDate} from "../../../../redux/banquetInfo/banquetInfoT";
 import {pathPrefix} from "../../../../App";
+import {FetchingComponent} from "../../../../common/compon/FetchingComponent/FetchingComponent";
 
 interface BanquetProps {
     data: History
@@ -138,6 +139,9 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         d(commonActions.setBanquetPdf(data))
     }
     const employee = useSelector((state: RootState) => state.common.userInfo?.role)
+
+    if (useSelector((state: RootState) => state.common.isFetching))
+        return <FetchingComponent/>
 
     return <div className={s.main}>
         <div className={s.first}>

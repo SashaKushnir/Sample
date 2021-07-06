@@ -1,7 +1,8 @@
-.all{
+.all {
 
 }
-.main_block{
+
+.main_block {
     width: 100%;
     font-size: 16px;
     border-radius: 20px;
@@ -12,122 +13,151 @@
     -moz-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
     box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
 }
-.empty{
+
+.empty {
     background-color: #F6C5BD;
-    border-radius: 20px 0 0 20px ;
+    border-radius: 20px 0 0 20px;
 }
-.main{
+
+.main {
     display: grid;
     grid-template-columns: 46.1% 11.3% 20% 11.3% 11.3%;
 }
-.main div{
+
+.main div {
 
 }
-.blocks{
+
+.blocks {
     margin: 10px 0;
 }
-.name_desc{
+
+.name_desc {
     margin-left: 10px;
 }
-.input_name{
+
+.input_name {
     font-size: 20px;
 }
-.input{
+
+.input {
     outline: none;
     border: 0px;
     width: 100%;
 
 }
-.input:focus{
+
+.input:focus {
     outline: none;
 }
-.input:focus{
+
+.input:focus {
     outline: none;
 }
-.customer{
+
+.customer {
     display: inline-block;
     cursor: pointer;
 }
-.customer:hover{
+
+.customer:hover {
     text-decoration: underline;
 }
-.advance{
+
+.advance {
     margin: auto;
     text-align: center;
 }
-.input_advance{
+
+.input_advance {
     text-align: center;
 }
-.select_time{
+
+.select_time {
 
     outline: none;
     text-align: center;
 }
+
 .select_time > * {
     margin: 2px;
     border: 0px;
 }
-.time{
-   margin: 0 auto;
+
+.time {
+    margin: 0 auto;
 }
-.ture{
-   align-items: center;
+
+.ture {
+    align-items: center;
+    text-align: center;
 }
-.ture p{
+
+.ture p {
     margin: auto;
     padding: 0;
 
 }
-.time_picker{
+
+.time_picker {
 
     display: grid;
     grid-template-columns: 45% 10% 45%;
 }
-.time_picker div{
+
+.time_picker div {
     border: 0;
     padding: 0;
 
 }
-.time_picker div input{
+
+.time_picker div input {
     text-align: center;
 }
-.start_time{
+
+.start_time {
     text-align: center;
     display: grid;
     grid-template-columns: 40% 30% 30%;
     color: grey;
 }
-.end_time{
+
+.end_time {
     text-align: center;
     display: grid;
     grid-template-columns: 25% 25% 50%;
     color: grey;
 }
-.date_text{
+
+.date_text {
     font-size: 12px;
     margin: 0 10px;
 }
 
-.state{
+.state {
     margin: auto;
     text-align: center;
 }
-.input_state{
+
+.input_state {
     display: block;
     text-align: center;
 }
-.spaces{
+
+.spaces {
     margin: 50px 0;
     border-top: 4px white;
     border-top-style: dashed;
     border-bottom: 4px white;
     border-bottom-style: dashed;
 }
-.edit{
+
+.edit {
     margin: auto 0;
     text-align: center;
 }
-.spacesWrapper{
+
+.spacesWrapper {
     display: flex;
     flex-wrap: wrap;
     align-content: stretch;

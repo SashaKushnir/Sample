@@ -27,7 +27,7 @@ const Item: React.FC<ItemProps> = (props) => {
         {props.services && <>
             <td>{props.services?.name}</td>
             <td>{props.services?.amount}</td>
-            <td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount as number) }</td>
+            <td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price as number) *( props.services?.duration as number  / 60) * (props.services?.amount as number) }</td>
             <td><ul className={s.left}>{props.services.comments.map((obj:CommentItem, index) =>
                 <li key={index}>{obj.text}</li>)}</ul></td>
         </>}

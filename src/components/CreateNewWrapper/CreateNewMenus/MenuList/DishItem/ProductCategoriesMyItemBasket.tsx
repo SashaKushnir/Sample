@@ -63,7 +63,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                         onChange={changeCurA}
                            value={!product_categoriesItem.amount ? "" : String(product_categoriesItem.amount) ?
                                String(product_categoriesItem.amount) : ""}
-                           placeholder={"Amount"}
+                           placeholder={"Кількість"}
                            ref={textInput}/>
                 </div>
                 <div>

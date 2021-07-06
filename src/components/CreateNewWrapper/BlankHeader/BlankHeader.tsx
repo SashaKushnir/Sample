@@ -145,140 +145,158 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     return <div className={s.all}>
         {isEdit && <>
-            <div className={s.main_block}>
-                <div className={s.empty}>
+          <div className={s.main_block}>
+            <div className={s.empty}>
 
-                </div>
-                <div className={s.main}>
-                    <div className={s.name_desc + ' ' + s.blocks}>
-                        <input className={s.input + " " + s.input_name} placeholder={"Назва банкета"}
-                               onChange={setName} defaultValue={banquet.name ? banquet.name : ""}/>
-                        <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
-                                  defaultValue={banquet.description ? banquet.description : ""}/>
-                        <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
-                        </div>
-
-
-                    </div>
-                    <div className={s.advance + ' ' + s.blocks}>
-                        Аванс <input className={s.input_advance + ' ' + s.input} type="number" onChange={setAdvance}
-                                     defaultValue={banquet.advance_amount}/>
-                    </div>
-                    <div className={s.select_time + ' ' + s.blocks}>
-                        {banquet.beginning &&
-                        <DatePicker onChange={(e: any, time: string) => {
-                            setDate(e, time)
-                        }}
-                                    defaultValue={moment(banquet.beginning.slice(0, -9), format_date)}/>
-                        }
-                        {!banquet.beginning &&
-                        <DatePicker onChange={(e: any, time: string) => {
-                            setDate(e, time)
-                        }}/>
-                        }
-                        {show_time && <div className={s.time}>
-                            <div className={s.start_time}>
-
-                                <p className={s.date_text}>{banquet.beginning.slice(0, -9)}</p>
-                                <p></p>
-                                <p></p>
-                            </div>
-                            <div className={s.time_picker}>
-                                <TimePicker format={format} onChange={(e: any, time: string) => {
-                                    SetBegTime(e, time)
-                                }} inputReadOnly={false}
-                                            defaultValue={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
-                                <div className={s.ture}><p>-</p></div>
-                                <TimePicker format={format} onChange={(e: any, time: string) => {
-                                    SetEndTime(e, time)
-                                }} inputReadOnly={true}
-                                            defaultValue={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
-                            </div>
-                            <div className={s.end_time}>
-                                <p></p>
-                                <p></p>
-                                 <p className={s.date_text}>{banquet.end.slice(0, -9)}</p>
-                            </div>
-                        </div>
-                        }
-
-                    </div>
-
-                    <div className={s.state + ' ' + s.blocks}>
-                        Стан <select className={s.input_state} onChange={setState} value={currentState}>
-                        <option style={{display: "none"}}></option>
-                        {states}
-                    </select>
-                    </div>
-                    <div className={s.edit + ' ' + s.blocks}>
-                        {isEditMode && <div>
-                          <h4>Режим редагування</h4>
-                            <div onClick={stopEditMode}>
-                              <DeleteIcon/>
-                            </div>
-                        </div>
-                        }
-                        {/*<div>*/}
-                        {/*    <div onClick={clearBasket} className={s.btn} title=""><DeleteIcon/></div>*/}
-                        {/*</div>*/}
-                        <div>
-                            <div onClick={clearBasket} className={s.btn} title=""><BasketIcon/></div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
-            <div className={s.spaces}>
-                <div className={s.spacesWrapper}>
-                    {spaces}
+            <div className={s.main}>
+              <div className={s.name_desc + ' ' + s.blocks}>
+                <input className={s.input + " " + s.input_name} placeholder={"Назва банкета"}
+                       onChange={setName} defaultValue={banquet.name ? banquet.name : ""}/>
+                <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
+                          defaultValue={banquet.description ? banquet.description : ""}/>
+                <div onClick={ChooseCustomer} className={s.customer}>
+                  Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                 </div>
+
+
+              </div>
+              <div className={s.advance + ' ' + s.blocks}>
+                Аванс <input className={s.input_advance + ' ' + s.input} type="number" onChange={setAdvance}
+                             defaultValue={banquet.advance_amount}/>
+              </div>
+              <div className={s.select_time + ' ' + s.blocks}>
+                  {banquet.beginning &&
+                  <DatePicker onChange={(e: any, time: string) => {
+                      setDate(e, time)
+                  }}
+                              defaultValue={moment(banquet.beginning.slice(0, -9), format_date)}/>
+                  }
+                  {!banquet.beginning &&
+                  <DatePicker onChange={(e: any, time: string) => {
+                      setDate(e, time)
+                  }}/>
+                  }
+                  {show_time && <div className={s.time}>
+                    <div className={s.start_time}>
+
+                      <p className={s.date_text}>{banquet.beginning.slice(0, -9)}</p>
+                      <p></p>
+                      <p></p>
+                    </div>
+                    <div className={s.time_picker}>
+                      <TimePicker format={format} onChange={(e: any, time: string) => {
+                          SetBegTime(e, time)
+                      }} inputReadOnly={false}
+                                  defaultValue={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
+                      <div className={s.ture}><p>-</p></div>
+                      <TimePicker format={format} onChange={(e: any, time: string) => {
+                          SetEndTime(e, time)
+                      }} inputReadOnly={true}
+                                  defaultValue={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
+                    </div>
+                    <div className={s.end_time}>
+                      <p></p>
+                      <p></p>
+                      <p className={s.date_text}>{banquet.end.slice(0, -9)}</p>
+                    </div>
+                  </div>
+                  }
+
+              </div>
+
+              <div className={s.state + ' ' + s.blocks}>
+                Стан <select className={s.input_state} onChange={setState} value={currentState}>
+                <option style={{display: "none"}}></option>
+                  {states}
+              </select>
+              </div>
+              <div className={s.edit + ' ' + s.blocks}>
+                  {isEditMode && <div>
+                    <h4>Режим редагування</h4>
+                    <div onClick={stopEditMode}>
+                      <DeleteIcon/>
+                    </div>
+                  </div>
+                  }
+                  {/*<div>*/}
+                  {/*    <div onClick={clearBasket} className={s.btn} title=""><DeleteIcon/></div>*/}
+                  {/*</div>*/}
+                <div>
+                  <div onClick={clearBasket} className={s.btn} title=""><BasketIcon/></div>
+                </div>
+              </div>
+
             </div>
+          </div>
+          <div className={s.spaces}>
+            <div className={s.spacesWrapper}>
+                {spaces}
+            </div>
+          </div>
         </>
         }
         {!isEdit && <>
-            <div className={s.main_block}>
-                <div className={s.empty}>
+          <div className={s.main_block}>
+            <div className={s.empty}>
 
-                </div>
-                <div className={s.main}>
-                    <div className={s.name_desc + ' ' + s.blocks}>
-                        <input className={s.input + " " + s.input_name} value={banquet.name} readOnly/>
-                        <textarea className={s.input} value={banquet.description ? banquet.description : ""} readOnly/>
-                        <div className={s.customer}>
-                            Замовник: {customerInfo?.name + " " + customerInfo?.surname}
-                        </div>
-                    </div>
-                    <div className={s.advance}>
-                        Аванс <input type="text" className={s.input_advance + ' ' + s.input}
-                                     value={banquet.advance_amount}
-                                     readOnly/>
-                    </div>
-                    <div className={s.time + ' ' + s.blocks}>
-                        <DatePicker
-                            value={moment(banquet.beginning ? banquet.beginning.slice(0, -9) : "2001-01-01", format_date)}/>
-                        <TimePicker format={format}
-                                    value={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
-                        <TimePicker format={format}
-                                    value={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
-                    </div>
-
-                    <div className={s.state}>
-                        Стан <select value={banquet.state?.name} aria-readonly>
-                        <option>{banquet.state?.name}</option>
-                    </select>
-                    </div>
-                    <div>
-                        None
-                    </div>
-
-                </div>
             </div>
-            <div>
-                <div className={s.spacesWrapper}>
-                    {nonEditableSpaces}
+            <div className={s.main}>
+              <div className={s.name_desc + ' ' + s.blocks}>
+                <input className={s.input + " " + s.input_name} value={banquet.name} readOnly/>
+                <textarea className={s.input} value={banquet.description ? banquet.description : ""} readOnly/>
+                <div className={s.customer}>
+                  Замовник: {customerInfo?.name + " " + customerInfo?.surname}
                 </div>
+              </div>
+              <div className={s.advance}>
+                Аванс <input type="text" className={s.input_advance + ' ' + s.input}
+                             value={banquet.advance_amount}
+                             readOnly/>
+              </div>
+              <div className={s.time + ' ' + s.blocks}>
+                <div className={s.select_time + ' ' + s.blocks}>
+                  <DatePicker
+                    value={moment(banquet.beginning ? banquet.beginning.slice(0, -9) : "2001-01-01", format_date)}/>
+                </div>
+                <div className={s.start_time}>
+
+                  <p className={s.date_text}>{banquet.beginning.slice(0, -9)}</p>
+                  <p></p>
+                  <p></p>
+                </div>
+
+                <div className={s.time_picker}>
+                  <TimePicker format={format}
+                              value={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
+                  <div className={s.ture}><p>-</p></div>
+                  <TimePicker format={format}
+                              value={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
+                </div>
+                <div className={s.end_time}>
+                  <p></p>
+                  <p></p>
+                  <p className={s.date_text}>{banquet.end.slice(0, -9)}</p>
+                </div>
+
+              </div>
+
+              <div className={s.state}>
+                Стан <select value={banquet.state?.name} aria-readonly>
+                <option>{banquet.state?.name}</option>
+              </select>
+              </div>
+              <div>
+                None
+              </div>
+
             </div>
+          </div>
+          <div>
+            <div className={s.spacesWrapper}>
+                {nonEditableSpaces}
+            </div>
+          </div>
         </>
         }
     </div>

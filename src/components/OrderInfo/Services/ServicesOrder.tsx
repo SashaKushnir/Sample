@@ -12,6 +12,7 @@ export const ServicesOrder: React.FC<Items> = ({item}) => {
         <div className={styles.name}>{item.name}</div>
         <div className={styles.amount_price}>
             <div className={styles.amount}>x{item.amount}</div>
+            {item.duration ? <div className={styles.amount}>{item?.duration}хв</div> : <></>}
             <div className={styles.price}>${item.once_paid_price}</div>
         </div>
     </div>

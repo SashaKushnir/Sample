@@ -29,15 +29,10 @@ export const MyPage = () => {
         <div className={s.content}>
             <Header/>
             <Switch>
-                <Redirect exact from={`${url}`} to={`${url}/history`}/>
                 <Route path={`${url}/new`} render={() => <CreateNewWrapper/>}/>
-                {employee?.can_modify && <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>}
-                <Route path={`${url}/editors`} render={() => <div>editors</div>}/>
-                <Route path={`${url}/reports`} render={() => <div><Chart/></div>}/>
-                {employee?.can_modify && <Route path={`${url}/support`} render={() => <div><CreateNewEmployeePage/></div>}/>}
-                <Route path={`${url}/block`} render={() => <div>block</div>}/>
-                <Route path={`${url}/block`} render={() => <div>block</div>}/>
-                <Route path={`${url}/authors`} render={() => <div>authors</div>}/>
+                {employee?.can_read && <Route path={`${url}/history`} render={() => <div><Banquets/></div>}/>}
+                {employee?.is_owner && <Route path={`${url}/reports`} render={() => <div><Chart/></div>}/>}
+                {employee?.is_owner && <Route path={`${url}/support`} render={() => <div><CreateNewEmployeePage/></div>}/>}
             </Switch>
         </div>
         <div className={s.footer}>

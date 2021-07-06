@@ -28,6 +28,12 @@
 
 
 }
+.category{
+    /*-webkit-column-count: 2; !* Chrome, Safari, Opera *!*/
+    /*-moz-column-count: 2; !* Firefox *!*/
+    /*column-count: 2;*/
+    width: 100%;
+}
 .hide{
     display: inline-block;
     float: right;
@@ -38,9 +44,9 @@ label{
     float: bottom;
 }
 .all_menu{
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
+    /*-webkit-column-count: 2; !* Chrome, Safari, Opera *!*/
+    /*-moz-column-count: 2; !* Firefox *!*/
+    /*column-count: 2;*/
 }
 @media only screen and (max-width: 768px) {
     .all_menu{

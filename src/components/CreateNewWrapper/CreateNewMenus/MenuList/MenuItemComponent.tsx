@@ -49,7 +49,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
             <div className={styles.title}>
                 <div className={styles.name}>
                     {Menuitem.name}
-                    {Menuitem.type}
+
                 </div>
                 <div className={styles.hide}>
                     <label>{!hide ?
@@ -66,7 +66,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                             return <ProductCategoriesMyItem key={index} keyVal={index}
                                                      showAmount={showAmount} product_categoriesItem={obj}/>
                         })
-                        return  <div key={indexH}>
+                        return  <div key={indexH} className={styles.category}>
                             {resArrayItem.category}
                             <div>{items}</div>
                         </div>
