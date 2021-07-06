@@ -2,8 +2,12 @@ import {ApiCustomersResultType, ApiPostCustomerResponseType, myGetInstance} from
 import {CreateCustomerFormType} from "../../components/CreateNewWrapper/CreateNewWrapper/crCustomer/CreateCustomerForm";
 
 export const customers = {
-    getAllUsers: () => {
-        return myGetInstance.get<ApiCustomersResultType>('/customers')
+    getAllUsers: (headerToken: string) => {
+        return myGetInstance.get<ApiCustomersResultType>('/customers', {
+            headers : {
+                'api-token': headerToken
+            }
+        })
     },
     createCustomer: (newCustomerInfo: CreateCustomerFormType,headerToken: string) => {
         return myGetInstance.post<ApiPostCustomerResponseType>('/customers', {

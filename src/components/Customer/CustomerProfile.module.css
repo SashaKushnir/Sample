@@ -6,6 +6,10 @@
     border-bottom: 2px solid grey;
     margin: 5px;
 }
+.name:hover{
+    cursor: pointer;
+}
+
 .email{
     margin: 5px;
 }

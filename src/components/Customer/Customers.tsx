@@ -23,8 +23,15 @@ export const Customers: React.FC<ProptsType> = (props) => {
     const customerProfiles = customers.customers?.map((obj:CustomerType, index) =>
         <CustomerProfile customer={obj} key={index} CusMenuSwitch={props.CusMenuSwitch}/>)
 
+    const GoBack = () => {
+        props.CusMenuSwitch(false)
+    }
+
     return(
         <div>
+            <div onClick={GoBack}>
+                Повернутись
+            </div>
             <div>
                 <CreateCustomerWrapper/>
             </div>

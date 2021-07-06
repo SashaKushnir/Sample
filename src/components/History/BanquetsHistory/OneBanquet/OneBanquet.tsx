@@ -39,8 +39,8 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
     if (data.space_order?.items)
         tables = data.space_order?.items.map((obj, index) =>
-            <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number},
-                price: {obj.price}</div>)
+            <div key={index} className={s.tables}>Назва: {obj.name}, поверх: {obj.floor}, номер: {obj.number},
+                ціна: {obj.price}</div>)
     let products = null
     if (data.product_order !== null)
         products = data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
@@ -143,11 +143,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         <div className={s.first}>
             <div className={s.buttons}>
 
-                {employee?.can_modify && <NavLink to="/content/new/menus" className={s.navLink}>
+                {employee?.can_modify && <NavLink to={`${pathPrefix}/content/new/menus`} className={s.navLink}>
                     <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
 
-                <NavLink to="/OneBanquetPdf" className={s.navLink}>
+                <NavLink to={`${pathPrefix}/OneBanquetPdf`} className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
 
@@ -168,15 +168,15 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     <div className={s.text}>
                         Стан банкета: {data.state.name}
                     </div>
-                    <div>
+                    <div className={s.pdfs}>
                         <NavLink to={`${pathPrefix}/KitchenPdf`} className={s.navLink}>
-                            <div className={s.btn} onClick={createpdf}>Звіт на кухню, страви</div>
+                            <div className={s.btn} onClick={createpdf}>Звіт для страви</div>
                         </NavLink>
                         <NavLink to={`${pathPrefix}/PizzaPdf`} className={s.navLink}>
-                            <div className={s.btn} onClick={createpdf}>Звіт на кухню, піцца</div>
+                            <div className={s.btn} onClick={createpdf}>Звіт для піцца</div>
                         </NavLink>
                         <NavLink to={`${pathPrefix}/ServicesPdf`} className={s.navLink}>
-                            <div className={s.btn} onClick={createpdf}>Звіт на розваги</div>
+                            <div className={s.btn} onClick={createpdf}>Звіт для розваг</div>
                         </NavLink>
                     </div>
                 </div>

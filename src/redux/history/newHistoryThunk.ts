@@ -13,6 +13,7 @@ export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyA
         const response = await history.getAllHistory(getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success ) {
+            console.log(response.data.data)
             d(historyActions.setHistoryInfo(response.data.data))
         } else {
             console.warn(response.data.message)

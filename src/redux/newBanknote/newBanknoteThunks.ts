@@ -21,5 +21,4 @@ export const setMenuT = () => async (d: Dispatch<ActionsTypes<typeof newBanknote
         console.warn(error)
         d(commonActions.fetchingMenusToggle(false))
     }
-    // Catch don't forget
 }

@@ -33,6 +33,7 @@ export const gettingSpacesByDate = (fromHistory: boolean) => async (d: Dispatch<
             getState().common.userInfo?.api_token as string)
         console.log("Spaces Filtered",res)
         if (res.data.success) {
+
             d(banquetActions.setDisabledSpaces(res.data.data))
         } else {
             message.info("Помилка, невдала спроба", 3)

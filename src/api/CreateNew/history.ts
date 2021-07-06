@@ -4,14 +4,15 @@ import {BanquetType} from "../../redux/formPostObject/createObjReducer";
 
 export const history = {
     getAllHistory: (headerToken: string, beg_datetime: string = "", end_datetime: string = "") => {
-        return myGetInstance.get<ApiHistoryResultType>(`/banquets`,{
+        console.log("here")
+        return myGetInstance.get<ApiHistoryResultType>(`/banquets?trashed=without`,{
             headers : {
                 'api-token': headerToken
             }
         })
     },
     getFilteredHistory: (beg_datetime: string = "", end_datetime: string = "", api_token: string) => {
-        return myGetInstance.get<ApiHistoryResultType>(`/banquets?beg_datetime[min]=${beg_datetime}&end_datetime[max]=${end_datetime}`, {
+        return myGetInstance.get<ApiHistoryResultType>(`/banquets?trashed=without&beg_datetime[min]=${beg_datetime}&end_datetime[max]=${end_datetime}`, {
             headers: {
                 'api-token': api_token
             }

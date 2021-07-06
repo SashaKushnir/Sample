@@ -4,6 +4,7 @@
     -webkit-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
     -moz-box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
     box-shadow: 0px 0px 7px 1px rgba(238, 91, 234, 0.2);
+    font-family: Montserrat;
 }
 .buttons{
     display: inline-block;
@@ -94,6 +95,7 @@
 }
 .navLink{
     background-color: transparent;
+    margin:0 5px;
 }
 .items{
     background-color: white;
@@ -106,4 +108,8 @@
 
 .tables{
     display: block;
+}
+.pdfs div{
+    display: inline-block;
+    margin-right: 5px;
 }

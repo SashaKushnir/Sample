@@ -24,16 +24,20 @@ export const SpaceI: React.FC<SpaceIProps> = ({spaceI, editMode}) => {
     return <div className={`${!spaceI.disabled?(spaceI.selected?s.selected:''):s.disabled}  ${s.spaceI}`}
     onClick={selectSpaceI}>
         <div>
-            <b>Name: </b>{spaceI.name}
+            {(spaceI.name === "Table") && <div>
+                <b>Стол</b>
+            </div>
+            }
+            {(spaceI.name !== "Table") && <div>
+                <b>Кімната: {spaceI.name}</b>
+            </div>
+            }
         </div>
         <div>
-            <b>Floor: </b>{spaceI.floor}
+            <b>Поверх: </b>{spaceI.floor}
         </div>
         <div>
-            <b>Number: </b>{spaceI.number}
-        </div>
-        <div>
-            <b>Type: </b>{spaceI.type}
+            <b>Номер: </b>{spaceI.number}
         </div>
         {(spaceI.type === "room") && <div>
             <b>Price: </b>{spaceI.price}

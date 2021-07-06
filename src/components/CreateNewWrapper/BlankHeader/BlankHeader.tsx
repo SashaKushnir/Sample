@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './BlankHeader.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {selectBanquet, selectBanquetsStates} from "../../../selectors/selectCreateNew";
+import {selectBanquet, selectBanquetsStates, selectHistory} from "../../../selectors/selectCreateNew";
 import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 import {RootState} from "../../../redux/store";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
@@ -12,6 +12,9 @@ import {BanquetState} from "../../../redux/BanquetState/BanquetStatesR";
 import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import {DatePicker, TimePicker} from "antd";
+import {DeleteIcon} from "../../../common/compon/HistoryIcons/DeleteIcon";
+import {BasketIcon} from "../../../common/compon/BlankHeader/Basket";
+import {CheckIcon} from "../../../common/compon/BlankHeader/Check";
 
 type PropsType = {
     isEdit: boolean
@@ -23,11 +26,15 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
 
     const d = useDispatch()
     const all_states = useSelector(selectBanquetsStates)
+    const banquet = useSelector(selectBanquet)
+    //const history_count = useSelector(selectHistory)?.length // add banquet id to name input
+    const customerInfo = banquet.customer
     const currentStateInBLL = useSelector((state: RootState) => state.banquet.state?.name)
-    const [currentState, setCurrentState] = useState(currentStateInBLL?currentStateInBLL:(all_states?all_states[0].name:undefined))
+    const format = 'HH:mm';
+    const format_date = 'YYYY/MM/DD';
+    const [currentState, setCurrentState] = useState(currentStateInBLL ? currentStateInBLL : (all_states ? all_states[0].name : undefined))
     const states = all_states?.map((obj: BanquetState, index) =>
         <option key={index}>{obj.name}</option>)
-
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
         <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
@@ -44,8 +51,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const setAdvance = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setAdvance(e.target.value.trim() as any))
     }
-
-
     const setState = (e: ChangeEvent<HTMLSelectElement>) => {
         setCurrentState(e.target.value)
         all_states?.forEach(obj => {
@@ -53,31 +58,25 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 d(banquetActions.setState(obj))
         })
     }
-
-    const data = useSelector(selectBanquet)
-    const customers = useSelector(selectBanquet)
-    const customerInfo = customers.customer
-
     const ChooseCustomer = () => {
         CusMenuSwitch(true)
     }
-
     const [show_time, Show_time] = useState(false);
 
     useEffect(() => {
-        if (data.beginning) {
+        if (banquet.beginning) {
             Show_time(true)
         }
     }, [])
     const setDate = (e: any, text: string) => {
         d(banquetActions.clearAllInfoAboutSpaces())
         Show_time(false);
-        if (text !== "" && data.beginning !== '' && data.end !== '') {
-            let date = data.beginning
+        if (text !== "" && banquet.beginning !== '' && banquet.end !== '') {
+            let date = banquet.beginning
             date = date.slice(-9)
             setBegining(text, date)
 
-            let date1 = data.end
+            let date1 = banquet.end
             date1 = date1.slice(-9)
             setEnd(text, date1)
             Show_time(true);
@@ -113,7 +112,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         if (time === '') {
             return
         }
-        let beg: string = data.beginning
+        let beg: string = banquet.beginning
         beg = beg.slice(0, -8)
         beg += time + ':00'
         d(banquetActions.setBegining(beg))
@@ -122,7 +121,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         if (time === '') {
             return
         }
-        let end: string = data.end
+        let end: string = banquet.end
         end = end.slice(0, -8)
         end += time + ':00'
         d(banquetActions.setEnd(end))
@@ -144,8 +143,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         localStorage.removeItem("services")
     }
 
-    const format = 'HH:mm';
-    const formate_date = 'YYYY/MM/DD';
     return <div className={s.all}>
         {isEdit && <>
             <div className={s.main_block}>
@@ -155,9 +152,9 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 <div className={s.main}>
                     <div className={s.name_desc + ' ' + s.blocks}>
                         <input className={s.input + " " + s.input_name} placeholder={"Назва банкета"}
-                               onChange={setName} defaultValue={data.name ? data.name : ""}/>
+                               onChange={setName} defaultValue={banquet.name ? banquet.name : ""}/>
                         <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
-                                  defaultValue={data.description ? data.description : ""}/>
+                                  defaultValue={banquet.description ? banquet.description : ""}/>
                         <div onClick={ChooseCustomer} className={s.customer}>
                             Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                         </div>
@@ -166,30 +163,44 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.advance + ' ' + s.blocks}>
                         Аванс <input className={s.input_advance + ' ' + s.input} type="number" onChange={setAdvance}
-                                     defaultValue={data.advance_amount}/>
+                                     defaultValue={banquet.advance_amount}/>
                     </div>
-                    <div className={s.time + ' ' + s.blocks}>
-                        {data.beginning &&
+                    <div className={s.select_time + ' ' + s.blocks}>
+                        {banquet.beginning &&
                         <DatePicker onChange={(e: any, time: string) => {
                             setDate(e, time)
                         }}
-                                    defaultValue={moment(data.beginning.slice(0, -9), formate_date)}/>
+                                    defaultValue={moment(banquet.beginning.slice(0, -9), format_date)}/>
                         }
-                        {!data.beginning &&
+                        {!banquet.beginning &&
                         <DatePicker onChange={(e: any, time: string) => {
                             setDate(e, time)
                         }}/>
                         }
-                        {show_time && <>
-                            <TimePicker format={format} onChange={(e: any, time: string) => {
-                                SetBegTime(e, time)
-                            }} inputReadOnly={false}
-                                        defaultValue={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
-                            <TimePicker format={format} onChange={(e: any, time: string) => {
-                                SetEndTime(e, time)
-                            }} inputReadOnly={true}
-                                        defaultValue={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
-                        </>
+                        {show_time && <div className={s.time}>
+                            <div className={s.start_time}>
+
+                                <p className={s.date_text}>{banquet.beginning.slice(0, -9)}</p>
+                                <p></p>
+                                <p></p>
+                            </div>
+                            <div className={s.time_picker}>
+                                <TimePicker format={format} onChange={(e: any, time: string) => {
+                                    SetBegTime(e, time)
+                                }} inputReadOnly={false}
+                                            defaultValue={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
+                                <div className={s.ture}><p>-</p></div>
+                                <TimePicker format={format} onChange={(e: any, time: string) => {
+                                    SetEndTime(e, time)
+                                }} inputReadOnly={true}
+                                            defaultValue={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
+                            </div>
+                            <div className={s.end_time}>
+                                <p></p>
+                                <p></p>
+                                 <p className={s.date_text}>{banquet.end.slice(0, -9)}</p>
+                            </div>
+                        </div>
                         }
 
                     </div>
@@ -202,23 +213,23 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                     </div>
                     <div className={s.edit + ' ' + s.blocks}>
                         {isEditMode && <div>
-                            Режим редагування
-                            <button onClick={stopEditMode}>
-                                Зупинити режим редагування
-                            </button>
+                          <h4>Режим редагування</h4>
+                            <div onClick={stopEditMode}>
+                              <DeleteIcon/>
+                            </div>
                         </div>
                         }
-
-
+                        {/*<div>*/}
+                        {/*    <div onClick={clearBasket} className={s.btn} title=""><DeleteIcon/></div>*/}
+                        {/*</div>*/}
                         <div>
-                            <button onClick={clearBasket}>Очистити корзину</button>
+                            <div onClick={clearBasket} className={s.btn} title=""><BasketIcon/></div>
                         </div>
                     </div>
 
                 </div>
             </div>
             <div className={s.spaces}>
-                Столи
                 <div className={s.spacesWrapper}>
                     {spaces}
                 </div>
@@ -232,28 +243,29 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 </div>
                 <div className={s.main}>
                     <div className={s.name_desc + ' ' + s.blocks}>
-                        <input className={s.input + " " + s.input_name} value={data.name} readOnly/>
-                        <textarea className={s.input} value={data.description ? data.description : ""} readOnly/>
+                        <input className={s.input + " " + s.input_name} value={banquet.name} readOnly/>
+                        <textarea className={s.input} value={banquet.description ? banquet.description : ""} readOnly/>
                         <div className={s.customer}>
                             Замовник: {customerInfo?.name + " " + customerInfo?.surname}
                         </div>
                     </div>
                     <div className={s.advance}>
-                        Аванс <input type="text" className={s.input_advance + ' ' + s.input} value={data.advance_amount}
+                        Аванс <input type="text" className={s.input_advance + ' ' + s.input}
+                                     value={banquet.advance_amount}
                                      readOnly/>
                     </div>
                     <div className={s.time + ' ' + s.blocks}>
                         <DatePicker
-                            value={moment(data.beginning ? data.beginning.slice(0, -9) : "2001-01-01", formate_date)}/>
+                            value={moment(banquet.beginning ? banquet.beginning.slice(0, -9) : "2001-01-01", format_date)}/>
                         <TimePicker format={format}
-                                    value={moment(data.beginning ? data.beginning.slice(11) : '00:00', format)}/>
+                                    value={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
                         <TimePicker format={format}
-                                    value={moment(data.end ? data.end.slice(11) : '23:59', format)}/>
+                                    value={moment(banquet.end ? banquet.end.slice(11) : '23:59', format)}/>
                     </div>
 
                     <div className={s.state}>
-                        Стан <select value={data.state?.name} aria-readonly>
-                        <option>{data.state?.name}</option>
+                        Стан <select value={banquet.state?.name} aria-readonly>
+                        <option>{banquet.state?.name}</option>
                     </select>
                     </div>
                     <div>
@@ -263,7 +275,6 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                 </div>
             </div>
             <div>
-                Spaces
                 <div className={s.spacesWrapper}>
                     {nonEditableSpaces}
                 </div>
@@ -272,95 +283,3 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         }
     </div>
 }
-// <div>
-// <div className={s.info_bock}>
-// {isEdit && <div className={s.margin}>
-// <div className={s.banquetWithName}>
-// <input className={s.input} placeholder={"Banquet name"}
-//                        onChange={setName} defaultValue={data.name ? data.name : ""}/>
-//             </div>
-//             <div>
-//                     <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
-//                               defaultValue={data.description ? data.description : ""}/>
-//             </div>
-//             {isEditMode && <div>
-//                 Edit Mode
-//                 <button onClick={stopEditMode}>
-//                     Stop Edit Mode
-//                 </button>
-//             </div>
-//             }
-//             {!isEditMode && <div>
-//                 Creating Mode
-//             </div>
-//             }
-//             <div>
-//                 <button onClick={clearBasket}>Clear Basket</button>
-//             </div>
-//         </div>
-//         }
-//         {!isEdit && <div className={s.margin}>
-//             <div className={s.banquetWithName}>
-//                 <input className={s.input} placeholder={"Banquet name"}
-//                        onChange={setName} value={data.name} readOnly/>
-//             </div>
-//             <div>
-//                     <textarea className={s.input} placeholder={"Description"} onChange={setDesc}
-//                               value={data.description ? data.description : ""} readOnly/>
-//             </div>
-//         </div>
-//         }
-//
-//         <hr className={s.solid}/>
-//     </div>
-//     <div className={s.info_bock}>
-//
-//         {isEdit && <div className={s.margin}>
-//             <div onClick={ChooseCustomer} className={s.customer}>
-//                 Customer: {customerInfo ? customerInfo?.name : ""}
-//             </div>
-//             <input type="datetime-local" id="meeting-time" className={s.time} onChange={setBegining}
-//                    defaultValue={setDefaultTime(data.beginning)}/>
-//         </div>
-//         }
-//         {!isEdit && <div className={s.margin}>
-//             <div className={s.customer}>
-//                 Customer: {customerInfo?.name}
-//             </div>
-//             <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.beginning)}
-//                    readOnly/>
-//         </div>
-//         }
-//         <div className={s.margin}>
-//             {isEdit && <div className={s.advance}>
-//                 Advance <input type="number" onChange={setAdvance} defaultValue={data.advance_amount} />
-//                 <input type="datetime-local" id="meeting-time" className={s.time} onChange={setEnd}
-//                        defaultValue={setDefaultTime(data.end)}/>
-//                 <div className={s.advance}>
-//                     State <select onChange={setState} defaultValue={data.state?.name}>
-//                     {states}
-//                 </select>
-//                 </div>
-//             </div>}
-//             {!isEdit &&
-//             <div className={s.advance}>
-//                 Advance <input type="text" value={data.advance_amount} readOnly/>
-//                 <input type="datetime-local" id="meeting-time" className={s.time} value={setDefaultTime(data.end)}
-//                        readOnly/>
-//                 <div className={s.advance}>
-//                     State <select defaultValue={data.state?.name} aria-readonly>
-//                     <option>{data.state?.name}</option>
-//                 </select>
-//                 </div>
-//             </div>}
-//         </div>
-//         <hr className={s.solid}/>
-//     </div>
-//     <div>
-//         Spaces
-//         <div className={s.spacesWrapper}>
-//             {spaces}
-//         </div>
-//     </div>
-//
-// </div>

@@ -1,13 +1,13 @@
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
 import {ActionsTypes, RootState} from "../store";
-import { commonActions } from "../forCommon/forCommonActions";
+import {commonActions} from "../forCommon/forCommonActions";
 import {BanquetStateActions} from "./BanquetStatesA";
 import {BanquetStates} from "../../api/CreateNew/states";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 import {message} from "antd";
 
 export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof banquetActions
-    | typeof  BanquetStateActions | typeof commonActions>>, getState: () => RootState) => {
+    | typeof BanquetStateActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))

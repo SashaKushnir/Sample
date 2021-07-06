@@ -1,4 +1,4 @@
-import {ApiPostFamilyMemberResponseType, myGetInstance} from "../api";
+import {ApiPostFamilyMemberResponseType, ApiResultType, myGetInstance, myPostInstance} from "../api";
 import {CreateFamilyMember} from "../../components/Customer/CreateFMForm";
 
 export const familyMembers = {
@@ -10,4 +10,16 @@ export const familyMembers = {
             data:  newFamilyMember
         })
     },
+    // deleteFamilyMember: (id: number, api_token: string) => {
+    //     const obj = {
+    //         "id": id
+    //     }
+    //
+    //     return myPostInstance.delete<ApiResultType>('/customer-family-members', {
+    //         headers: {
+    //             'api-token': api_token
+    //         },
+    //         data: obj
+    //     })
+    // },
 }

@@ -50,6 +50,7 @@ export interface Ticket_order  {
     discount: number | null
     items: TicketArray
     comments: Array<CommentItem>
+    total: number
 }
 
 export interface Product_order  {
@@ -60,7 +61,8 @@ export interface Product_order  {
     updated_at: string
     discount: number | null
     items: Product_categories
-    comments: Array<CommentItem>
+    comments: Array<CommentItem>,
+    total: number
 }
 
 export interface Service_order  {
@@ -71,6 +73,7 @@ export interface Service_order  {
     updated_at: string
     discount: number | null
     items: ServicesArray
+    total: number
 }
 
 export interface State  {

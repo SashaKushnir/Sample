@@ -18,3 +18,14 @@
     margin-bottom: 5px;
     background-color: greenyellow;
 }
+.birth{
+    display: inline-block;
+}
+.delete{
+    display: inline-block;
+    float: right;
+    color:red;
+}
+.delete:hover{
+    cursor: pointer;
+}

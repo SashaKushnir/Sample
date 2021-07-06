@@ -9,38 +9,28 @@ import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
 import {Pidpus} from "../PDF";
 
 type ItemProps = {
-    data?: ProductCategoriesItem | TicketItem
-    services?: ServiceCategoriesItem
+    data: ProductCategoriesItem
+
 }
 
 
 const Item: React.FC<ItemProps> = (props) => {
-
     return <tr>
-
-        {props.data && <>
             <td className={s.per33}>{props.data?.name}</td>
             <td >{props.data?.amount}</td>
-            <td><ul className={s.left}>{props.data.comments.map((obj:CommentItem, index) =>
-                <li key={index}>{obj.text}</li>)}</ul></td>
-        </>}
-        {props.services && <>
-            <td >{props.services?.name}</td>
-            <td >{props.services?.amount}</td>
-            <td>{props.services?.amount as number * props.services.once_paid_price}</td>
-        </>}
-
+            <td>
+                <ul className={s.left}>{props.data.comments.map((obj:CommentItem, index) =>
+                <li key={index}>{obj.text}</li>)}</ul>
+            </td>
     </tr>
-
 }
 
 export const PizzaPDF: React.FC = (props) => {
 
     const banquet = useSelector((state: RootState) => state.common.banquet_pdf)
-    // let total_menus = 0                                      never used please remove or use
     const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
-        // total_menus += obj.amount as number * obj.price      never used please remove or use
-        if(obj.category.name === "Pizza")
+        //Pizza, Піцца, Піца, піцца, піца
+        if(obj.category.name === "Pizza" || obj.category.name === "Піцца" || obj.category.name === "Піца" || obj.category.name === "піцца" || obj.category.name === "піца")
             return <Item key={index} data={obj}/>
     })
 
@@ -77,14 +67,6 @@ export const PizzaPDF: React.FC = (props) => {
             </tr>
             {menus}
         </table>
-        {/*<table className={s.table2}>*/}
-        {/*    <tr className={s.first_line}>*/}
-        {/*        <td colSpan={2}><h3 className={s.title}>Аванс</h3></td>*/}
-        {/*        <td>{banquet?.advance_amount}</td>*/}
-        {/*        <td colSpan={2}><h3 className={s.title}>Залишок</h3></td>*/}
-        {/*        <td>{(total_tickets + total_menus + total_services) - (banquet?.advance_amount as number)}</td>*/}
-        {/*    </tr>*/}
-        {/*</table>*/}
         <Pidpus/>
     </>
 }
