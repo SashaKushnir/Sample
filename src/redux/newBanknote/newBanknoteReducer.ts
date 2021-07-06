@@ -146,7 +146,8 @@ export type ProductCategoriesItem = {
     updated_at: string
     ready?: boolean
     type?: string
-    comments: Array<CommentItem>
+    comments: Array<CommentItem>,
+    total: number
 }
 
 export type Product_categories = Array<ProductCategoriesItem>

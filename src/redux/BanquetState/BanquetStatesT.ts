@@ -1,17 +1,17 @@
-import { Dispatch } from "redux";
-import { ActionsTypes } from "../store";
-import { commonActions } from "../forCommon/forCommonActions";
+import {Dispatch} from "redux";
+import {ActionsTypes, RootState} from "../store";
+import {commonActions} from "../forCommon/forCommonActions";
 import {BanquetStateActions} from "./BanquetStatesA";
 import {BanquetStates} from "../../api/CreateNew/states";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 import {message} from "antd";
 
 export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof banquetActions
-    | typeof  BanquetStateActions | typeof commonActions>>) => {
+    | typeof BanquetStateActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await BanquetStates.getBanquetStates()
+        const response = await BanquetStates.getBanquetStates(getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success) {
             d(BanquetStateActions.setStates(response.data.data))

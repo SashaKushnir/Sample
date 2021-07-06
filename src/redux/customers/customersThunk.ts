@@ -7,11 +7,13 @@ import {CreateFamilyMember} from "../../components/Customer/CreateFMForm";
 import {customers} from "../../api/CreateNew/customers";
 import {familyMembers} from "../../api/CreateNew/familyMember";
 import {message} from "antd";
+import {historyActions} from "../history/newHistoryAction";
+import {history} from "../../api/CreateNew/history";
 
-export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
+export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await customers.getAllUsers()
+        const response = await customers.getAllUsers(getState().common.userInfo?.api_token as string)
 
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
@@ -26,10 +28,10 @@ export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof custom
         d(commonActions.fetchingToggle(false))
     }
 }
-export const filterCustomersByName = (filteringName: string) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>) => {
+export const filterCustomersByName = (filteringName: string) => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await customers.filterCustomersByName(filteringName)
+        const response = await customers.filterCustomersByName(filteringName, getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success) {
             d(customersActions.setCustomersInfo(response.data.data))
@@ -88,3 +90,25 @@ export const postFamilyMember = (newFMInfo: CreateFamilyMember, hideForm: () => 
     }
 }
 
+// export const deleteFamilyMember = (id:number, api_token:string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
+//
+//     try {
+//         d(commonActions.fetchingToggle(true))
+//         const response = await history.deleteHistory(id, api_token)
+//
+//         // Set response to Bll
+//         if (response.data.success) {
+//             d(historyActions.deleteOneHistoty(id))
+//             d(commonActions.fetchingToggle(false))
+//             message.info("Видалено", 3)
+//         } else {
+//             console.warn(response.data.message)
+//             d(commonActions.fetchingToggle(false))
+//             message.info("Помилка, невдала спроба", 3)
+//         }
+//     } catch (error) {
+//         message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
+//         console.warn(error)
+//         d(commonActions.fetchingToggle(false))
+//     }
+// }

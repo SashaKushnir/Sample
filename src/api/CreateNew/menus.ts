@@ -11,8 +11,12 @@ import axios from "axios";
 
 
 export const menus = {
-    getAllMenus: () => {
-        return myGetInstance.get<ApiMenusResultType>('/menus')
+    getAllMenus: (api_token: string) => {
+        return myGetInstance.get<ApiMenusResultType>('/menus', {
+            headers: {
+                'api-token': api_token
+            }
+        })
     }
 }
 

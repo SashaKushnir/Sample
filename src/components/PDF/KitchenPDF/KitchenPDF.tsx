@@ -42,11 +42,9 @@ export const KitchenPDF: React.FC = (props) => {
     // let total_services = 0
     const menus = banquet?.product_order?.items.map((obj: ProductCategoriesItem, index) => {
         // total_menus += obj.amount as number * obj.price
-        if(obj.category.name !== "Pizza")
+        // if(obj.category.name !== "Pizza")
             return <Item key={index} data={obj}/>
     })
-
-
 
     return <>
         <h1 className={s.title}>Анкета страв</h1>

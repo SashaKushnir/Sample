@@ -1,14 +1,14 @@
 import { Dispatch } from "redux";
-import { ActionsTypes } from "../store";
+import {ActionsTypes, RootState} from "../store";
 import { servicesActions } from "./servicesActions";
 import { commonActions } from "../forCommon/forCommonActions";
 import { services } from "../../api/CreateNew/services";
 import {message} from "antd";
 
-export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof servicesActions | typeof commonActions>>) => {
+export const setServicesT = () => async (d: Dispatch<ActionsTypes<typeof servicesActions | typeof commonActions>>, getState: () => RootState) => {
     try {
         d(commonActions.fetchingMenusToggle(true))
-        const response = await services.getAllServices()
+        const response = await services.getAllServices(getState().common.userInfo?.api_token as string)
         // Set response to Bll
         if (response.data.success) {
             d(servicesActions.setEntertainmentInfo(response.data.data))

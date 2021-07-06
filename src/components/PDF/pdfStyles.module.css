@@ -93,3 +93,15 @@ td{
     display: block;
     margin-left: 15px;
 }
+.tables_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+.banquet_tables{
+    flex-grow: 1;
+}
+.banquet_tables p{
+    margin: 0;
+}
+

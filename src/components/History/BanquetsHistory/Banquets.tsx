@@ -14,6 +14,7 @@ import {DatePicker} from "antd";
 import {RootState} from "../../../redux/store";
 import {historyActions} from "../../../redux/history/newHistoryAction";
 import moment from 'moment';
+import {pathPrefix} from "../../../App";
 
 const { RangePicker } = DatePicker
 const dateFormat = 'YYYY-MM-DD';
@@ -59,19 +60,18 @@ export const Banquets: React.FC = () => {
     }
 
     return <div>
-        <NavLink to="/OneDayPdf" className={s.navLink}>
+        <NavLink to={`${pathPrefix}/OneDayPdf`} className={s.navLink}>
             <div className={s.btn} onClick={createpdf}>Звіт на день</div>
         </NavLink>
         <div>
             {(beg_datetime && end_datetime) ? <RangePicker
                 defaultValue={[moment(beg_datetime, dateFormat), moment(end_datetime, dateFormat)]}
                 format={dateFormat}
-                onChange={rangePicker}
-            />
-                : <RangePicker
+                onChange={rangePicker}/>
+                :
+                <RangePicker
                     format={dateFormat}
-                    onChange={rangePicker}
-                />
+                    onChange={rangePicker}/>
             }
         </div>
         {history}

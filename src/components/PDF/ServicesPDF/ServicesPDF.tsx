@@ -25,9 +25,9 @@ const Item: React.FC<ItemProps> = (props) => {
                 <li key={index}>{obj.text}</li>)}</ul></td>
         </>}
         {props.services && <>
-            <td >{props.services?.name}</td>
-            <td >{props.services?.amount}</td>
-            <td>{props.services?.amount as number * props.services.once_paid_price}</td>
+            <td>{props.services?.name}</td>
+            <td>{props.services?.amount}</td>
+            <td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount as number) }</td>
             <td><ul className={s.left}>{props.services.comments.map((obj:CommentItem, index) =>
                 <li key={index}>{obj.text}</li>)}</ul></td>
         </>}
@@ -77,14 +77,6 @@ export const ServicesPDF: React.FC = (props) => {
             </tr>
             {menus}
         </table>
-        {/*<table className={s.table2}>*/}
-        {/*    <tr className={s.first_line}>*/}
-        {/*        <td colSpan={2}><h3 className={s.title}>Аванс</h3></td>*/}
-        {/*        <td>{banquet?.advance_amount}</td>*/}
-        {/*        <td colSpan={2}><h3 className={s.title}>Залишок</h3></td>*/}
-        {/*        <td>{(total_tickets + total_menus + total_services) - (banquet?.advance_amount as number)}</td>*/}
-        {/*    </tr>*/}
-        {/*</table>*/}
         <Pidpus/>
     </>
 }

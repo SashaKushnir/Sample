@@ -18,7 +18,10 @@
 }
 .main{
     display: grid;
-    grid-template-columns: 42.8% 14.2% 14.2% 14.2% 14.2%;
+    grid-template-columns: 46.1% 11.3% 20% 11.3% 11.3%;
+}
+.main div{
+
 }
 .blocks{
     margin: 10px 0;
@@ -55,11 +58,56 @@
 .input_advance{
     text-align: center;
 }
-.time{
-    display: inline-block;
+.select_time{
+
     outline: none;
     text-align: center;
 }
+.select_time > * {
+    margin: 2px;
+    border: 0px;
+}
+.time{
+   margin: 0 auto;
+}
+.ture{
+   align-items: center;
+}
+.ture p{
+    margin: auto;
+    padding: 0;
+
+}
+.time_picker{
+
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
+}
+.time_picker div{
+    border: 0;
+    padding: 0;
+
+}
+.time_picker div input{
+    text-align: center;
+}
+.start_time{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    color: grey;
+}
+.end_time{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    color: grey;
+}
+.date_text{
+    font-size: 12px;
+    margin: 0 10px;
+}
+
 .state{
     margin: auto;
     text-align: center;
@@ -81,47 +129,7 @@
 }
 .spacesWrapper{
     display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
 }
-
-
-
-
-
-
-
-/*.dashed {*/
-/*    border-top: 3px dashed #bbb;*/
-/*}*/
-/*.info_bock {*/
-/*    margin: 10px;*/
-/*}*/
-/*hr.solid {*/
-/*    border-top: 3px solid black;*/
-/*}*/
-/*.banquetWithName{*/
-/*    font-size: 150%;*/
-/*}*/
-
-
-/*.advance{*/
-
-/*}*/
-
-/*.date{*/
-/*    display: inline-block;*/
-/*    float: right;*/
-/*}*/
-/*.margin{*/
-/*    margin-top: 10px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
-/*.spacesWrapper {*/
-/*    display: grid;*/
-/*    grid-template-columns: 20% 20% 20% 20% 20%;*/
-/*    text-align: center;*/
-/*    !*grid-gap: 1px;*!*/
-/*    border-top:4px inset black;*/
-/*    border-left:4px inset black;*/
-/*}*/
 

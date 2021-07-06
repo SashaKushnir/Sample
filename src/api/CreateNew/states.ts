@@ -1,7 +1,11 @@
 import {ApiBanquetStatesResponseType, myGetInstance} from "../api";
 
 export const BanquetStates = {
-    getBanquetStates: () => {
-        return myGetInstance.get<ApiBanquetStatesResponseType>('/banquet-states')
+    getBanquetStates: (api_token: string) => {
+        return myGetInstance.get<ApiBanquetStatesResponseType>('/banquet-states', {
+            headers: {
+                'api-token': api_token
+            }
+        })
     }
 }

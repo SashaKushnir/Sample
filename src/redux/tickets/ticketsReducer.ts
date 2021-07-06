@@ -50,7 +50,8 @@ export type TicketItem = {
     amount?: number | string
     showAmount?: boolean
     ready?: boolean
-    comments: Array<CommentItem>
+    comments: Array<CommentItem>,
+    total: number
 }
 
 export type TicketArray = Array<TicketItem>

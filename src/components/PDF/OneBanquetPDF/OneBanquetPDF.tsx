@@ -22,13 +22,14 @@ const Item: React.FC<ItemProps> = (props) => {
             <td className={s.per16}>{props.data?.amount}</td>
             <td className={s.per16}>{props.data.price}</td>
             <td>{props.data?.amount as number * props.data.price}</td>
+
         </>}
         {props.services && <>
             <td colSpan={3} className={s.per50}>{props.services?.name}</td>
             <td className={s.per16}>{props.services?.amount}</td>
             <td className={s.per16}>{props.services.once_paid_price}</td>
-            {/*<td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount ?  props.services?.amount:0) }</td>*/}
-            <td>{props.services?.amount as number * props.services?.once_paid_price}</td>
+            <td>{props.services?.amount as number * props.services?.once_paid_price + (props.services.hourly_paid_price ?  props.services.hourly_paid_price : 0) *( props.services?.duration as number  / 60) * (props.services?.amount as number) }</td>
+            {/*<td>{props.services?.amount as number * props.services?.once_paid_price}</td>*/}
         </>}
 
     </tr>
@@ -93,7 +94,7 @@ export const OneBanquetPDF: React.FC = (props) => {
 
             <tr className={s.tickets}>
                 <td colSpan={5}><h3 className={s.title_right}>Всього</h3></td>
-                <td className={s.bold}>{total_menus}</td>
+                <td className={s.bold}>{banquet?.product_order?.total}</td>
             </tr>
             <tr className={s.tickets}>
                 <td colSpan={3}><h3 className={s.title}>Квитки</h3></td>
@@ -104,7 +105,7 @@ export const OneBanquetPDF: React.FC = (props) => {
             {tickets}
             <tr className={s.tickets}>
                 <td colSpan={5}><h3 className={s.title_right}>Всього</h3></td>
-                <td className={s.bold}>{total_tickets}</td>
+                <td className={s.bold}>{banquet?.ticket_order?.total}</td>
             </tr>
 
 
@@ -117,7 +118,7 @@ export const OneBanquetPDF: React.FC = (props) => {
             {services}
             <tr className={s.tickets}>
                 <td colSpan={5}><h3 className={s.title_right}>Всього</h3></td>
-                <td className={s.bold}>{total_services}</td>
+                <td className={s.bold}>{banquet?.service_order?.total}</td>
             </tr>
 
 
@@ -126,7 +127,7 @@ export const OneBanquetPDF: React.FC = (props) => {
             </tr>
             <tr className={s.tickets}>
                 <td colSpan={5}><h3 className={s.title_right}>Загальна сума</h3></td>
-                <td>{total_tickets + total_menus + total_services}</td>
+                <td>{banquet?.total}</td>
             </tr>
         </table>
         <table className={s.table2}>
@@ -134,7 +135,7 @@ export const OneBanquetPDF: React.FC = (props) => {
                 <td colSpan={2}><h3 className={s.title}>Аванс</h3></td>
                 <td>{banquet?.advance_amount}</td>
                 <td colSpan={2}><h3 className={s.title}>Залишок</h3></td>
-                <td>{(total_tickets + total_menus + total_services) - (banquet?.advance_amount as number)}</td>
+                <td>{(banquet?.total as number ) - (banquet?.advance_amount as number)}</td>
             </tr>
         </table>
        <Pidpus/>
