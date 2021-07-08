@@ -92,6 +92,7 @@
 .btn{
     display: flex;
     height: 33%;
+    display: inline-block;
 }
 .navLink{
     background-color: transparent;

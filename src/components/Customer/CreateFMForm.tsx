@@ -16,6 +16,10 @@ export interface CreateFamilyMember extends CreateFMFormType {
     customer_id: number
 }
 
+export interface UpdateFamilyMember extends CreateFMFormType {
+    id: number
+}
+
 interface CreateFMFormProps {
     customer: CustomerType
     hideForm: () => void

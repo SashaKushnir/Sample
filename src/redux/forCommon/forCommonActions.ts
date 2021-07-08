@@ -14,6 +14,6 @@ export const commonActions = {
     setSaved: (status: boolean) => ({type: "SET_SAVED", status}) as const,
     banquetModeToggle: (banquetModeStatus: boolean) => ({type: "BANQUET_MODE_TOGGLE", banquetModeStatus}) as const,
     setBanquetPdf: (banquet: History) => ({type: "BANQUET_PDF", banquet}) as const,
-    setOneBanquetPdf: (banquet: Array<History>) => ({type: "ONE_BANQUET_PDF", banquet}) as const,
+    setOneDayBanquetPdf: (banquet: Array<History>) => ({type: "ONE_BANQUET_PDF", banquet}) as const,
     setPDF_date: (date: string) => ({type: "PDF_DATE", date}) as const
 }

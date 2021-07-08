@@ -8,36 +8,39 @@ import {TicketItemMapShowAmount} from "./TicketItemMapShowAmount";
 import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
 import {ItemType} from "../CreateNewMenus/MenuList/MenuItemComponent";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
+import {CheckForDeleted} from "../../../common/compon/DeletedItems/DeletedItems";
 
 export const CreateNewTickets = () => {
 
-    const ticketData  = useSelector(selectTickets)
+    const ticketData = useSelector(selectTickets)
 
     const d = useDispatch()
 
     useEffect(() => {
         let localTickets = JSON.parse(localStorage.getItem("tickets") || "[]");
-        if(localTickets.length > 0)
+        if (localTickets.length > 0)
             d(ticketsActions.setTicketInfo(localTickets));
         else
             d(setTicketsT())
     }, [])
 
-    useEffect(()=> {
-        if(ticketData)
-        localStorage.setItem("tickets", JSON.stringify(ticketData))
+    useEffect(() => {
+        if (ticketData)
+            localStorage.setItem("tickets", JSON.stringify(ticketData))
     })
 
-    let  selectedTickets
-    if(ticketData) {
-        selectedTickets = ticketData.map((obj, index) =>
-            <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>)
+    let selectedTickets
+    if (ticketData) {
+        selectedTickets = ticketData.map((obj, index) => {
+            if (CheckForDeleted(obj)) return
+            return <TicketItemMapShowAmount key={index} showAmount={true} ticketItem={obj}/>
+        })
     }
 
     let categoryIds: Array<string> | undefined = ticketData?.reduce((acum: Array<string>, cur) => {
         acum.push(cur.category.name as never)
         return acum
-    },[])
+    }, [])
     categoryIds = Array.from(new Set(categoryIds))
 
 
@@ -45,11 +48,11 @@ export const CreateNewTickets = () => {
         const items = ticketData?.filter((arrItem) => {
             return arrItem.category.name === resItem
         })
-        if(items)
-        acum.push({
-            category: resItem,
-            items: items
-        })
+        if (items)
+            acum.push({
+                category: resItem,
+                items: items
+            })
         return acum
     }, [])
 
@@ -61,9 +64,10 @@ export const CreateNewTickets = () => {
             {
                 resArray.map((resArrayItem, indexH) => {
                     const items = resArrayItem.items.map((obj, index) => {
+                        if (CheckForDeleted(obj)) return
                         return <TicketItemMap key={index} ticketItem={obj} showAmount={false}/>
                     })
-                    return  <div key={indexH}>
+                    return <div key={indexH}>
                         {resArrayItem.category}
                         <div>{items}</div>
                     </div>

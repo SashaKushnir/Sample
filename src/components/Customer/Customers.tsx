@@ -6,8 +6,10 @@ import {CustomerProfile} from "./CustomerProfile";
 import {setCustomersT} from "../../redux/customers/customersThunk";
 import {CreateCustomerWrapper} from "../CreateNewWrapper/CreateNewWrapper/crCustomer/CreateCustomerWrapper";
 import s from "./Customers.module.css"
+import {CheckForDeleted} from "../../common/compon/DeletedItems/DeletedItems";
+
 type ProptsType = {
-    CusMenuSwitch:  any
+    CusMenuSwitch: any
 }
 
 
@@ -20,14 +22,16 @@ export const Customers: React.FC<ProptsType> = (props) => {
         d(setCustomersT())
     }, [])
 
-    const customerProfiles = customers.customers?.map((obj:CustomerType, index) =>
-        <CustomerProfile customer={obj} key={index} CusMenuSwitch={props.CusMenuSwitch}/>)
+    const customerProfiles = customers.customers?.map((obj: CustomerType, index) => {
+        if (CheckForDeleted(obj)) return
+        return <CustomerProfile customer={obj} key={index} CusMenuSwitch={props.CusMenuSwitch}/>
+    })
 
     const GoBack = () => {
         props.CusMenuSwitch(false)
     }
 
-    return(
+    return (
         <div>
             <div onClick={GoBack}>
                 Повернутись

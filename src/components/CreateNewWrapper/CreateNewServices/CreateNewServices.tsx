@@ -9,6 +9,7 @@ import { ServiceCategoriesIShowAmount } from "./ServiceCategoriesIShowAmount";
 import { setServicesT } from "../../../redux/services/servicesThunks";
 import {ItemType} from "../CreateNewMenus/MenuList/MenuItemComponent";
 import {ServiceCategoriesItem} from "../../../redux/services/servicesReducer";
+import {CheckForDeleted} from "../../../common/compon/DeletedItems/DeletedItems";
 
 
 export const CreateNewServices = () => {
@@ -33,8 +34,10 @@ export const CreateNewServices = () => {
 
 
     const selectedServices = useSelector(selectServices)?.filter((obj)=>
-        obj.showAmount).map((obj,index)=>
-        <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>)
+        obj.showAmount).map((obj,index)=> {
+        if (CheckForDeleted(obj)) return
+        return <ServiceCategoriesIShowAmount key={index} serviceItem={obj} showAmount={true}/>
+    })
 
     let categoryIds: Array<string> | undefined = ser?.reduce((acum: Array<string>, cur) => {
         acum.push(cur.category.name as never)
@@ -63,6 +66,7 @@ export const CreateNewServices = () => {
             {
                 resArray.map((resArrayItem, indexH) => {
                     const items = resArrayItem.items.map((obj, index) => {
+                        if (CheckForDeleted(obj)) return
                         return <ServiceCategoriesI key={index} serviceItem={obj} showAmount={false}/>
                     })
                     return  <div key={indexH}>

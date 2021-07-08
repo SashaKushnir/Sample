@@ -20,13 +20,17 @@ export const CreateNewMenus: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        if(menuData)
-        localStorage.setItem("menus", JSON.stringify(menuData))
+        if (menuData)
+            localStorage.setItem("menus", JSON.stringify(menuData))
     })
 
 
     return <div className={styles.wrap}>
-        <MenuList menus={menuData} showAmount={true}/>
-        <MenuList menus={menuData}/>
+        {menuData && <>
+          <MenuList menus={menuData} showAmount={true}/>
+          <MenuList menus={menuData}/>
+        </>
+        }
+
     </div>
 }

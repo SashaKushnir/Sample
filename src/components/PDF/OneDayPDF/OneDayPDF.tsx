@@ -28,30 +28,37 @@ export const OneDayPDF: React.FC = () => {
     //         <div key={index} className={s.tables}>Name: {obj.name}, floor: {obj.floor}, number: {obj.number},
     //             price: {obj.price}</div>)
 
-    const tables = banquets?.map(banquet =>
+    const tables = banquets?.map(banquet => {
+            if(banquet.space_order?.items?.length === 0){
+                return <div className={s.banquet_tables}>
+                    <h3>{banquet.name}</h3>
 
-        <div className={s.banquet_tables}> {banquet.space_order?.items?.map((spaceI, num) => {
-            return <div>
-                 <p>
-                    <b>{num+1}) Назва: </b>{spaceI.name}
-                </p>
-                <p>
-                    <b>Поверх: </b>{spaceI.floor}
-                </p>
-                <p>
-                    <b>Номер: </b>{spaceI.number}
-                </p>
-                <p>
-                    <b>Тип: </b>{spaceI.type}
-                </p>
-                {(spaceI.type === "room") && <p>
-                    <b>Price: </b>{spaceI.price}
-                </p>
-                }
+                </div>
+            }
+           return <div className={s.banquet_tables}> {banquet.space_order?.items?.map((spaceI, num) => {
+                return <div>
+                    <h3>{banquet.name}</h3>
+                    <p>
+                        <b>{num + 1}) Назва: </b>{spaceI.name}
+                    </p>
+                    <p>
+                        <b>Поверх: </b>{spaceI.floor}
+                    </p>
+                    <p>
+                        <b>Номер: </b>{spaceI.number}
+                    </p>
+                    <p>
+                        <b>Тип: </b>{spaceI.type}
+                    </p>
+                    {(spaceI.type === "room") && <p>
+                      <b>Price: </b>{spaceI.price}
+                    </p>
+                    }
+                </div>
+            })
+            }
             </div>
-        })
         }
-        </div>
     )
 
     return <>

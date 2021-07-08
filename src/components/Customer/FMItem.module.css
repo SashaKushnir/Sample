@@ -23,8 +23,9 @@
 }
 .delete{
     display: inline-block;
-    float: right;
+
     color:red;
+    margin: 2px;
 }
 .delete:hover{
     cursor: pointer;

@@ -1,26 +1,36 @@
-.profile{
+.profile {
     border: 2px solid grey;
     margin: 5px;
 }
-.name{
+
+.name {
     border-bottom: 2px solid grey;
     margin: 5px;
 }
-.name:hover{
+
+.name:hover {
     cursor: pointer;
 }
 
-.email{
+.email {
     margin: 5px;
 }
-.birthdate{
+
+.birthdate {
     margin: 5px;
 }
-.phone{
+
+.phone {
     margin: 5px;
 }
-.childs_title{
+
+.childs_title {
     font-size: 18px;
     margin-bottom: 5px;
 }
 
+.delete {
+    display: inline-block;
+    float: right;
+    color: red;
+}

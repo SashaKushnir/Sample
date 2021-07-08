@@ -4,6 +4,7 @@ import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/new
 import styles from './MenuItemComponent.module.css'
 import {FullscreenExitOutlined, FullscreenOutlined} from "@ant-design/icons";
 import {ProductCategoriesMyItemBasket} from "./DishItem/ProductCategoriesMyItemBasket";
+import {CheckForDeleted} from "../../../../common/compon/DeletedItems/DeletedItems";
 
 interface MenuItemComponentProps {
     Menuitem: MenuItem
@@ -20,9 +21,11 @@ export type ResArrayType = Array<ItemType<ProductCategoriesItem>>
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
     let [hide, setHide] = useState(false)
 
-    let product_categoriesItemsBasket = Menuitem.products.map((obj, index) =>
-        <ProductCategoriesMyItemBasket key={index} keyVal={index}
-                                 showAmount={showAmount} product_categoriesItem={obj}/>)
+    let product_categoriesItemsBasket = Menuitem.products.map((obj, index) => {
+        if (CheckForDeleted(obj)) return
+        return <ProductCategoriesMyItemBasket key={index} keyVal={index}
+                                       showAmount={showAmount} product_categoriesItem={obj}/>
+    })
     const showMenuItem = Menuitem.products.some((obj) => obj.showAmount)
 
     let categoryIds: Array<string> = Menuitem.products.reduce((acum: Array<string>, cur) => {
@@ -63,6 +66,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                 {
                     resArray.map((resArrayItem,indexH) => {
                         const items = resArrayItem.items.map((obj, index) => {
+                            if (CheckForDeleted(obj)) return
                             return <ProductCategoriesMyItem key={index} keyVal={index}
                                                      showAmount={showAmount} product_categoriesItem={obj}/>
                         })

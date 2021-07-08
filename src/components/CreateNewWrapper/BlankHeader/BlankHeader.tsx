@@ -15,6 +15,7 @@ import {DatePicker, TimePicker} from "antd";
 import {DeleteIcon} from "../../../common/compon/HistoryIcons/DeleteIcon";
 import {BasketIcon} from "../../../common/compon/BlankHeader/Basket";
 import {CheckIcon} from "../../../common/compon/BlankHeader/Check";
+import {CheckForDeleted} from "../../../common/compon/DeletedItems/DeletedItems";
 
 type PropsType = {
     isEdit: boolean
@@ -36,11 +37,15 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
     const states = all_states?.map((obj: BanquetState, index) =>
         <option key={index}>{obj.name}</option>)
     const isEditMode = useSelector((state: RootState) => state.common.banquetEditMode)
-    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) =>
-        <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
+    const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.map((spaceI, index) => {
+        if (CheckForDeleted(spaceI)) return
+        return <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>
+    })
     const nonEditableSpaces = useSelector((state: RootState) => state.banquet.basicSpaces)?.filter((spaceI) => spaceI.selected)
-        ?.map((spaceI, index) =>
-            <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>)
+        ?.map((spaceI, index) => {
+            if (CheckForDeleted(spaceI)) return
+            return <SpaceI key={index} spaceI={spaceI} editMode={isEdit}/>
+        })
 
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         d(banquetActions.setName(e.target.value.trim() as any))
