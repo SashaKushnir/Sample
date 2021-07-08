@@ -8,7 +8,7 @@ import {TicketItem} from "../redux/tickets/ticketsReducer";
 import {SpaceItem} from "../redux/banquetInfo/banquetInfoReducer";
 import {BanquetStateArray} from "../redux/BanquetState/BanquetStatesR";
 
-export const BaseURL = "https://imperia.pp.ua/test/api"
+export const BaseURL = "https://imperia.pp.ua/api"
 //http://imperia-api.com
 
 export const myGetInstance = axios.create({
