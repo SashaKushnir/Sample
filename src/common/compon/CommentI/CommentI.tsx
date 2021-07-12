@@ -6,6 +6,7 @@ import useOnClickOutside from "../../customHook/onMouseClickOutOfComponent";
 import {useRouteMatch} from "react-router-dom";
 import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {servicesActions} from "../../../redux/services/servicesActions";
+import { pathPrefix } from '../../../App';
 
 export interface CommentIProps {
     commentI: CommentItem
@@ -46,13 +47,13 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
             target_type: commentI.type?commentI.type:""
         }
         switch (url) {
-            case "/app/content/new/menus":
+            case `${pathPrefix}/content/new/menus`:
                 d(newBanknoteActions.saveComment(commentForActions, index, parentId))
                 break
-            case "/app/content/new/tickets":
+            case `${pathPrefix}/content/new/tickets`:
                 d(ticketsActions.addTicketComment(commentForActions, index, parentId))
                 break
-            case "/app/content/new/entertainments":
+            case `${pathPrefix}/content/new/entertainments`:
                 d(servicesActions.addServiceComment(commentForActions, index, parentId))
         }
 

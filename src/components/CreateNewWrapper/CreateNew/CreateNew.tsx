@@ -16,6 +16,7 @@ import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {setBanqueStateT} from "../../../redux/BanquetState/BanquetStatesT";
 import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
 import {useHistory} from "react-router-dom";
+import { pathPrefix } from '../../../App';
 
 type PropsType = {
     CusMenuSwitch: any
@@ -60,7 +61,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const history = useHistory()
     const redirect = () => {
 
-        history.push("/app/content/history");
+        history.push(`${pathPrefix}/content/history`);
     }
     const submitB = () => {
         if (postBObj && token) {
