@@ -10,6 +10,7 @@ import {TicketItem} from "../tickets/ticketsReducer";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 import {CommentItem} from "../history/newHistoryReducer";
 import {message} from "antd";
+import {useHistory} from "react-router-dom";
 
 const _ = require("lodash");
 
@@ -163,12 +164,13 @@ export const createPost = () => (d: any, getState: () => RootState) => {
 
 }
 
-export const postNewBanknote = (obj: BanquetType, api_token: string) => async (d: Dispatch<ActionsTypes<typeof createObjActions | typeof commonActions>>) => {
+export const postNewBanknote = (obj: BanquetType, api_token: string, redirect : () => void) => async (d: Dispatch<ActionsTypes<typeof createObjActions | typeof commonActions>>) => {
     try {
         d(commonActions.fetchingToggle(true))
         const res = await history.postHistory(obj, api_token)
         if (res.data.success) {
             message.info("Створено", 3)
+            redirect()
         } else {
             message.info("Помилка, невдала спроба", 3)
         }

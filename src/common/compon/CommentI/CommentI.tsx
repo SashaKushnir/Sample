@@ -46,13 +46,13 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
             target_type: commentI.type?commentI.type:""
         }
         switch (url) {
-            case "/content/new/menus":
+            case "/app/content/new/menus":
                 d(newBanknoteActions.saveComment(commentForActions, index, parentId))
                 break
-            case "/content/new/tickets":
+            case "/app/content/new/tickets":
                 d(ticketsActions.addTicketComment(commentForActions, index, parentId))
                 break
-            case "/content/new/entertainments":
+            case "/app/content/new/entertainments":
                 d(servicesActions.addServiceComment(commentForActions, index, parentId))
         }
 

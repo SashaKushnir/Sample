@@ -44,7 +44,8 @@ export const OrderItems: React.FC = (props) => {
 
     servicesData?.filter((obj: ServiceCategoriesItem) => obj.showAmount).forEach((item: ServiceCategoriesItem) => {
             if (item.amount && item.once_paid_price)
-                services_price = services_price + (item.amount as number * item.once_paid_price as number)
+                services_price = services_price + (item.amount as number * item.once_paid_price + (item.hourly_paid_price ?  item.hourly_paid_price : 0) *( item.duration as number  / 60) * (item.amount as number)
+    )
         }
     )
     const total = menu_price + tickets_price + services_price

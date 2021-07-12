@@ -116,7 +116,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
         d(banquetActions.setAdvance(data.advance_amount))
 
 
-        if (((data.space_order?.items)?(data.space_order?.items?.length > 0):false) && (data.space_order?.items))
+        if (((data.space_order?.items) ? (data.space_order?.items?.length > 0) : false) && (data.space_order?.items))
             d(banquetActions.setArrayOfSpacesSelected(data.space_order?.items))
         d(banquetActions.setState(data.state))
 
@@ -148,14 +148,15 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             <div className={s.buttons}>
 
                 {employee?.can_modify && <NavLink to={`${pathPrefix}/content/new/menus`} className={s.navLink}>
-                    <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
+                  <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
 
                 <NavLink to={`${pathPrefix}/OneBanquetPdf`} className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
-
-                <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
+                <NavLink to={``} className={s.navLink}>
+                    <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
+                </NavLink>
             </div>
             <div className={s.info}>
                 {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
@@ -192,52 +193,52 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         {data.advance_amount}$
                     </div>
                     <div className={s.numbers}>
-                        {data.end_datetime}
+                        {data.beg_datetime}
                     </div>
                     <div className={s.numbers}>
-                        {data.beg_datetime}
+                        {data.end_datetime}
                     </div>
                 </div>
 
             </div>
             {employee?.can_modify &&
             <div>
-                <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
+              <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
             </div>
             }
         </div>
         {hideProducts && <div>
-            <div className={s.order}>
-                <div className={s.products}>
-                    <div className={s.title}>
-                        Продукти
-                    </div>
-                    <div className={s.items}>
-                        {products}
-                    </div>
-                </div>
-                <div className={s.tickets}>
-                    <div className={s.title}>
-                        Білети
-                    </div>
-                    <div className={s.items}>
-                        {tickets}
-                    </div>
-                </div>
-                <div className={s.enter}>
-                    <div className={s.title}>
-                        Розваги
-                    </div>
+          <div className={s.order}>
+            <div className={s.products}>
+              <div className={s.title}>
+                Продукти
+              </div>
+              <div className={s.items}>
+                  {products}
+              </div>
+            </div>
+            <div className={s.tickets}>
+              <div className={s.title}>
+                Білети
+              </div>
+              <div className={s.items}>
+                  {tickets}
+              </div>
+            </div>
+            <div className={s.enter}>
+              <div className={s.title}>
+                Розваги
+              </div>
 
-                    <div className={s.items}>
-                        {services}
-                    </div>
-                </div>
+              <div className={s.items}>
+                  {services}
+              </div>
             </div>
-            <div>
-                <h4>Столи</h4>
-                {tables}
-            </div>
+          </div>
+          <div>
+            <h4>Столи</h4>
+              {tables}
+          </div>
         </div>
         }
     </div>

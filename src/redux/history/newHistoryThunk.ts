@@ -46,13 +46,14 @@ export const getFilteredHistory = (beg_datetime: string, end_datetime:string) =>
     }
 }
 
-export const updateHistoryT = (updObj: BanquetType, token: string) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
+export const updateHistoryT = (updObj: BanquetType, token: string, redirect : () => void) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>) => {
 
     try {
         d(commonActions.fetchingToggle(true))
         const response = await history.patchHistory(updObj, token)
         if (response.data.success) {
             message.info("Успішно змінено", 3)
+            redirect()
         } else {
             message.info("Помилка, невдала спроба", 3)
         }

@@ -96,6 +96,8 @@
 }
 .navLink{
     background-color: transparent;
+    width: 100%;
+    height: 33%;
 }
 .items{
     background-color: white;

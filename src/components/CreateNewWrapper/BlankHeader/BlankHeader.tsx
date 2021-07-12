@@ -146,6 +146,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
         localStorage.removeItem("menus")
         localStorage.removeItem("tickets")
         localStorage.removeItem("services")
+
     }
 
     return <div className={s.all}>

@@ -15,7 +15,7 @@ import {updateHistoryT} from "../../../redux/history/newHistoryThunk";
 import {getListOfSpaces} from "../../../redux/banquetInfo/banquetInfoT";
 import {setBanqueStateT} from "../../../redux/BanquetState/BanquetStatesT";
 import {banquetActions} from "../../../redux/banquetInfo/banquetInfoActions";
-
+import {useHistory} from "react-router-dom";
 
 type PropsType = {
     CusMenuSwitch: any
@@ -57,12 +57,17 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     const editB = () => {
         setEditMode(true)
     }
+    const history = useHistory()
+    const redirect = () => {
+
+        history.push("/app/content/history");
+    }
     const submitB = () => {
         if (postBObj && token) {
             if (postBObj.id) {
-                d(updateHistoryT(postBObj, token))
+                d(updateHistoryT(postBObj, token, redirect))
             } else {
-                d(postNewBanknote(postBObj, token))
+                d(postNewBanknote(postBObj, token, redirect))
             }
             d(banquetActions.clearFlagsToPreventSpacesBeingDisabled())
             d(banquetActions.clearAllInfoAboutSpaces())
