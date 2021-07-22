@@ -1,6 +1,9 @@
 .name{
     display: inline-block;
-    font-weight: bold;
+    color: rgb(120, 120, 120);
+    font-family: Montserrat-Bold, Montserrat;
+    font-size: 18px;
+    font-weight: 500;
 }
 .btn_hide{
     float: right;
@@ -31,12 +34,12 @@
 
     display: inline-block;
     float: left;
-    width: 80%;
+
 }
 .weight{
     display: inline-block;
     float: right;
-    width: 20%;
+    margin-left: 5px;
 }
 .image{
     width: 10%;
@@ -50,6 +53,9 @@
     margin-left: 1%;
     width: 48%;
     display: inline-block;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    padding-bottom: 5px;
+
 }
 .dish_basket{
     margin-bottom: 10px;

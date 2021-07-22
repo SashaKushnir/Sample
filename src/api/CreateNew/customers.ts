@@ -18,12 +18,16 @@ export const customers = {
         })
     },
     createCustomer: (newCustomerInfo: CreateCustomerFormType, headerToken: string) => {
-        return myGetInstance.post<ApiPostCustomerResponseType>('/customers', {
-            headers: {
-                'api-token': headerToken
+        return myGetInstance.post<ApiPostCustomerResponseType>('/customers',
+            {
+                'data': newCustomerInfo
             },
-            data: newCustomerInfo
-        })
+            {
+                headers: {
+                    'api-token': headerToken
+                },
+
+            })
     },
     filterCustomersByName: (searchUnderName: string, headerToken: string) => {
         return myGetInstance.get<ApiCustomersResultType>(`/customers?name=${searchUnderName}`, {
@@ -37,14 +41,15 @@ export const customers = {
             "id": id
         }
         console.log(obj)
-        return myPostInstance.delete<ApiResultType>('/customers', {
+        return myPostInstance.delete<ApiResultType>('/customers',
+            {
             headers: {
                 'api-token': api_token
             },
             data: obj
         })
     },
-    patchCustomer: (obj: CreateCustomerFormType,id:number, token: string) => {
+    patchCustomer: (obj: CreateCustomerFormType, id: number, token: string) => {
         const patchObj = {
             name: obj.name,
             email: obj.email,
@@ -56,8 +61,8 @@ export const customers = {
 
         console.log(patchObj)
         return myPostInstance.patch('/customers', {
-            "data":patchObj
-        },{
+                "data": patchObj
+            }, {
                 headers: {
                     'api-token': token
                 }

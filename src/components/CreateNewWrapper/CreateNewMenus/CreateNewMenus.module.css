@@ -1,6 +1,11 @@
 .wrap{
     display: grid;
     grid-template-columns: 33% 66%;
+    background: white;
+    border-radius: 70px;
+    margin-top: 20px;
+    padding-top: 15px;
+    padding-left: 15px;
 }
 
 @media only screen and (max-width: 768px) {

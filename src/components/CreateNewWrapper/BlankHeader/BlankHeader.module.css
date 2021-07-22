@@ -147,13 +147,13 @@
 }
 
 .spaces {
-    margin: 50px 0;
+
+}
+.dotted_line{
     border-top: 4px white;
     border-top-style: dashed;
-    border-bottom: 4px white;
-    border-bottom-style: dashed;
+    margin: 25px 0;
 }
-
 .edit {
     margin: auto 0;
     text-align: center;

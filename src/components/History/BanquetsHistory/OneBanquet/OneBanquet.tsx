@@ -154,9 +154,9 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                 <NavLink to={`${pathPrefix}/OneBanquetPdf`} className={s.navLink}>
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
-                <NavLink to={``} className={s.navLink}>
+                <div className={s.navLink}>
                     <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
-                </NavLink>
+                </div>
             </div>
             <div className={s.info}>
                 {/*<button onClick={() => setHideAll(!hideAll)}>Hide</button>*/}
@@ -174,13 +174,13 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                         Стан банкета: {data.state.name}
                     </div>
                     <div className={s.pdfs}>
-                        <NavLink to={`${pathPrefix}/KitchenPdf`} className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/KitchenPdf`} className={s.PdfNavLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт для страви</div>
                         </NavLink>
-                        <NavLink to={`${pathPrefix}/PizzaPdf`} className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/PizzaPdf`} className={s.PdfNavLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт для піцца</div>
                         </NavLink>
-                        <NavLink to={`${pathPrefix}/ServicesPdf`} className={s.navLink}>
+                        <NavLink to={`${pathPrefix}/ServicesPdf`} className={s.PdfNavLink}>
                             <div className={s.btn} onClick={createpdf}>Звіт для розваг</div>
                         </NavLink>
                     </div>
@@ -202,8 +202,8 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
             </div>
             {employee?.can_modify &&
-            <div>
-              <div onClick={Delete} className={s.btn}><DeleteIcon/></div>
+            <div  className={s.closeContainer}>
+              <div onClick={Delete} className={s.closeBtn}><DeleteIcon/></div>
             </div>
             }
         </div>

@@ -3,12 +3,15 @@ import {CreateFamilyMember, UpdateFamilyMember} from "../../components/Customer/
 
 export const familyMembers = {
     createFamilyMember: (newFamilyMember: CreateFamilyMember, headerToken: string) => {
-        return myGetInstance.post<ApiPostFamilyMemberResponseType>('/customer-family-members', {
-            headers: {
-                'api-token': headerToken
+        return myGetInstance.post<ApiPostFamilyMemberResponseType>('/customer-family-members',
+            {
+                'data': newFamilyMember
             },
-            data: newFamilyMember
-        })
+            {
+                headers: {
+                    'api-token': headerToken
+                }
+            })
     },
     deleteFamilyMember: (id: number, api_token: string) => {
         const obj = {

@@ -17,31 +17,37 @@ export const SpaceI: React.FC<SpaceIProps> = ({spaceI, editMode}) => {
 
 
     const selectSpaceI = () => {
-        if(editMode && !spaceI.disabled && beg_datetime)
-        d(banquetActions.setSpaceSelectedOrUnSelected(spaceI.id))
+        if (editMode && !spaceI.disabled && beg_datetime)
+            d(banquetActions.setSpaceSelectedOrUnSelected(spaceI.id))
     }
 
-    return <div className={`${!spaceI.disabled?(spaceI.selected?s.selected:''):s.disabled}  ${s.spaceI}`}
-    onClick={selectSpaceI}>
+    return <div className={`${!spaceI.disabled ? (spaceI.selected ? s.selected : '') : s.disabled}  ${s.spaceI}`}
+                onClick={selectSpaceI}>
         <div>
             {(spaceI.name === "Table") && <div>
                 <b>Стол</b>
+                <div>
+                    <b>Поверх: </b>{spaceI.floor}
+                </div>
+                <div>
+                    <b>Номер: </b>{spaceI.number}
+                </div>
+                <div>
+                    <b>{spaceI.price}грн.</b>
+                </div>
+
             </div>
             }
             {(spaceI.name !== "Table") && <div>
-                <b>Кімната: {spaceI.name}</b>
+                <div>
+                    <b>{spaceI.name}</b>
+                </div>
+                <div>
+                    <b>{spaceI.price}грн.</b>
+                </div>
             </div>
             }
         </div>
-        <div>
-            <b>Поверх: </b>{spaceI.floor}
-        </div>
-        <div>
-            <b>Номер: </b>{spaceI.number}
-        </div>
-        {(spaceI.type === "room") && <div>
-            <b>Price: </b>{spaceI.price}
-        </div>
-        }
+
     </div>
 }

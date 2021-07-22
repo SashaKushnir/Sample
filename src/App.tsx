@@ -36,7 +36,7 @@ export const pathPrefix = "/app"
         if (!spaces)
             d(getListOfSpaces(localStorage.getItem("api_token") || ""))
         if(!states)
-            d(setBanqueStateT())
+            d(setBanqueStateT(localStorage.getItem("api_token") || ""))
     }, [tokenSuccess])
 
 

@@ -1,5 +1,6 @@
 .selected {
-    background: #4CAF50;
+    /*background: #4CAF50;*/
+    background: rgb(246, 197, 189);
 }
 
 .spaceI {
@@ -16,5 +17,6 @@
     border-bottom: 4px inset black;
     border-right: 4px inset black;
     padding: 10px;
-    background: #f44336;
+    /*background: #f44336;*/
+    background: rgb(232, 189, 246);
 }

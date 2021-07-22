@@ -9,7 +9,12 @@
 .tickets{
 
 }
-
+.category{
+    color: rgb(120, 120, 120);
+    font-size: 18px;
+    font-family: Montserrat-Bold, Montserrat;
+    font-weight: 700;
+}
 @media only screen and (max-width: 768px) {
     .main{
         display:flex;

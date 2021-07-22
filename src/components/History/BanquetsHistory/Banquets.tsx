@@ -8,7 +8,7 @@ import {setMenuT} from "../../../redux/newBanknote/newBanknoteThunks";
 import {setServicesT} from "../../../redux/services/servicesThunks";
 import {setTicketsT} from "../../../redux/tickets/ticketsThunks";
 import {NavLink} from "react-router-dom";
-import s from "./OneBanquet/OneBanquet.module.css";
+import s from "./Banquets.module.css";
 import {commonActions} from "../../../redux/forCommon/forCommonActions";
 import {DatePicker} from "antd";
 import {RootState} from "../../../redux/store";
@@ -19,7 +19,6 @@ import {CheckForDeleted} from "../../../common/compon/DeletedItems/DeletedItems"
 
 const {RangePicker} = DatePicker
 const dateFormat = 'YYYY-MM-DD';
-
 
 export const Banquets: React.FC = () => {
     const d = useDispatch()
@@ -64,7 +63,7 @@ export const Banquets: React.FC = () => {
     }
 
     return <div>
-        <NavLink to={`${pathPrefix}/OneDayPdf`} className={s.navLink}>
+        <NavLink to={`${pathPrefix}/OneDayPdf`} className={s.ForDayPdfNavLink}>
             <div className={s.btn} onClick={createpdf}>Звіт на день</div>
         </NavLink>
         <div>

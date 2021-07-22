@@ -6,12 +6,12 @@ import {BanquetStates} from "../../api/CreateNew/states";
 import {banquetActions} from "../banquetInfo/banquetInfoActions";
 import {message} from "antd";
 
-export const setBanqueStateT = () => async (d: Dispatch<ActionsTypes<typeof banquetActions
+export const setBanqueStateT = (token:string) => async (d: Dispatch<ActionsTypes<typeof banquetActions
     | typeof BanquetStateActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await BanquetStates.getBanquetStates(getState().common.userInfo?.api_token as string)
+        const response = await BanquetStates.getBanquetStates(token)
         // Set response to Bll
         if (response.data.success) {
             d(BanquetStateActions.setStates(response.data.data))

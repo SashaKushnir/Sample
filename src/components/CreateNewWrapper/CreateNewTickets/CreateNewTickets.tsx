@@ -68,7 +68,7 @@ export const CreateNewTickets = () => {
                         return <TicketItemMap key={index} ticketItem={obj} showAmount={false}/>
                     })
                     return <div key={indexH}>
-                        {resArrayItem.category}
+                        <h3 className={styles.category}>{resArrayItem.category}</h3>
                         <div>{items}</div>
                     </div>
                 })

@@ -47,7 +47,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
     }, [])
     useEffect(() => {
         if (!state)
-            d(setBanqueStateT())
+            d(setBanqueStateT(localStorage.getItem("api_token") || ""))
     }, [])
     const saveB = () => {
         d(createPost())

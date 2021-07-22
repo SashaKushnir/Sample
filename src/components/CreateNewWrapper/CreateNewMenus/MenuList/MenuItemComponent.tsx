@@ -19,7 +19,8 @@ export interface ItemType<itemType> {
 export type ResArrayType = Array<ItemType<ProductCategoriesItem>>
 
 export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, showAmount}) => {
-    let [hide, setHide] = useState(false)
+    let [hide, setHide] = useState(true)
+    let [hideBasket, setHideBasket] = useState(false)
 
     let product_categoriesItemsBasket = Menuitem.products.map((obj, index) => {
         if (CheckForDeleted(obj)) return
@@ -50,17 +51,17 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
 
         {!showAmount && <div className={styles.item}>
             <div className={styles.title}>
-                <div className={styles.name}>
+                <div className={styles.name} onClick={() => setHide(!hide)}>
                     {Menuitem.name}
 
                 </div>
-                <div className={styles.hide}>
-                    <label>{!hide ?
-                        <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
-                        :
-                        <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}
-                    </label>
-                </div>
+                {/*<div className={styles.hide}>*/}
+                {/*    <label>{!hide ?*/}
+                {/*        <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>*/}
+                {/*        :*/}
+                {/*        <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}*/}
+                {/*    </label>*/}
+                {/*</div>*/}
             </div>
             {!hide && <div className={styles.all_menu}>
                 {
@@ -71,7 +72,7 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
                                                      showAmount={showAmount} product_categoriesItem={obj}/>
                         })
                         return  <div key={indexH} className={styles.category}>
-                            {resArrayItem.category}
+                            <h3 className={styles.category_name}>{resArrayItem.category}</h3>
                             <div>{items}</div>
                         </div>
                     })
@@ -79,15 +80,15 @@ export const MenuItemComponent: React.FC<MenuItemComponentProps> = ({Menuitem, s
             </div>}
         </div>}
         {showAmount && showMenuItem && <div>
-            <div className={styles.name_basket}>
+            <div className={styles.name_basket} onClick={() => setHideBasket(!hideBasket)}>
                 {Menuitem.name}
             </div>
-            <div className={styles.hide}>
-                <label>{!hide ?
-                    <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>
-                    : <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>
-            </div>
-            {!hide && <div>
+            {/*<div className={styles.hide}>*/}
+            {/*    <label>{!hide ?*/}
+            {/*        <FullscreenExitOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>*/}
+            {/*        : <FullscreenOutlined twoToneColor="726764" rotate={45} onClick={() => setHide(!hide)}/>}</label>*/}
+            {/*</div>*/}
+            {!hideBasket && <div>
                 {product_categoriesItemsBasket}
             </div>}
         </div>

@@ -2,9 +2,13 @@
     text-align: center;
     font-weight: bold;
     font-size: 19px;
-    margin: 0 auto;
+    margin: 5px auto;
     display: inline-block;
-
+    border-radius: 70px;
+    background: rgb(251, 241, 254);
+    padding: 15px;
+    width: 100%;
+    cursor: pointer;
 }
 .name_basket{
     text-align: left;
@@ -12,7 +16,13 @@
     font-size: 19px;
     margin: 0 auto;
     display: inline-block;
-
+    cursor: pointer;
+}
+.category_name{
+    color: rgb(120, 120, 120);
+    font-family: Montserrat-Bold, Montserrat;
+    font-size: 18px;
+    font-weight: 700;
 }
 .title{
     text-align: center;
@@ -33,6 +43,7 @@
     /*-moz-column-count: 2; !* Firefox *!*/
     /*column-count: 2;*/
     width: 100%;
+    border-radius: 5px;
 }
 .hide{
     display: inline-block;
@@ -47,6 +58,7 @@ label{
     /*-webkit-column-count: 2; !* Chrome, Safari, Opera *!*/
     /*-moz-column-count: 2; !* Firefox *!*/
     /*column-count: 2;*/
+
 }
 @media only screen and (max-width: 768px) {
     .all_menu{
