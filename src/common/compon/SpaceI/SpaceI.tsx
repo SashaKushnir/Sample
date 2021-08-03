@@ -21,7 +21,7 @@ export const SpaceI: React.FC<SpaceIProps> = ({spaceI, editMode}) => {
             d(banquetActions.setSpaceSelectedOrUnSelected(spaceI.id))
     }
 
-    return <div className={`${!spaceI.disabled ? (spaceI.selected ? s.selected : '') : s.disabled}  ${s.spaceI}`}
+    return <div className={`${!spaceI.disabled ? (spaceI.selected ? s.selected : '') : s.disabled} ${s.spaceI}`}
                 onClick={selectSpaceI}>
         <div>
             {(spaceI.name === "Table") && <div>

@@ -11,6 +11,7 @@
     background-color: #ff7674;
     border-radius: 5px;
     padding: 3px;
+    margin: auto;
 }
 .log_out:hover{
     border: 2px solid black;
@@ -20,5 +21,5 @@
 .name{
     display: inline-block;
     float: right;
-    margin: 0 5px;
+    margin: 0 10px;
 }

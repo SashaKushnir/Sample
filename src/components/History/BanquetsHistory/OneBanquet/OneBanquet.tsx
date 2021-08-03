@@ -34,14 +34,11 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const d = useDispatch()
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
     const [hideProducts, setHideProducts] = useState(false)
-    let tables = null
 
-    //const [hideAll, setHideAll] = useState(false)
+    const tables = data.space_order?.items?.map((obj, index) =>
+            <div key={index} className={s.tables}>{index + 1}) {obj.name}, поверх: {obj.floor},
+                номер: {obj.number}, {obj.price}$</div>)
 
-    if (data.space_order?.items)
-        tables = data.space_order?.items.map((obj, index) =>
-            <div key={index} className={s.tables}>Назва: {obj.name}, поверх: {obj.floor}, номер: {obj.number},
-                ціна: {obj.price}</div>)
     let products = null
     if (data.product_order !== null)
         products = data.product_order.items.map((obj: ProductCategoriesItem, index: number) =>
@@ -148,7 +145,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
             <div className={s.buttons}>
 
                 {employee?.can_modify && <NavLink to={`${pathPrefix}/content/new/menus`} className={s.navLink}>
-                  <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
+                    <div onClick={editBanquet} className={s.btn}><EditIcon/></div>
                 </NavLink>}
 
                 <NavLink to={`${pathPrefix}/OneBanquetPdf`} className={s.navLink}>
@@ -202,43 +199,45 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
             </div>
             {employee?.can_modify &&
-            <div  className={s.closeContainer}>
-              <div onClick={Delete} className={s.closeBtn}><DeleteIcon/></div>
+            <div className={s.closeContainer}>
+                <div onClick={Delete} className={s.closeBtn}><DeleteIcon/></div>
             </div>
             }
         </div>
-        {hideProducts && <div>
-          <div className={s.order}>
-            <div className={s.products}>
-              <div className={s.title}>
-                Продукти
-              </div>
-              <div className={s.items}>
-                  {products}
-              </div>
-            </div>
-            <div className={s.tickets}>
-              <div className={s.title}>
-                Білети
-              </div>
-              <div className={s.items}>
-                  {tickets}
-              </div>
-            </div>
-            <div className={s.enter}>
-              <div className={s.title}>
-                Розваги
-              </div>
+        {hideProducts && <div className={s.pop_up}>
+            <div className={s.order}>
+                <div className={s.products}>
+                    <div className={s.title}>
+                        Продукти
+                    </div>
+                    <div className={s.items}>
+                        {products}
+                    </div>
+                </div>
+                <div className={s.tickets}>
+                    <div className={s.title}>
+                        Білети
+                    </div>
+                    <div className={s.items}>
+                        {tickets}
+                    </div>
+                </div>
+                <div className={s.enter}>
+                    <div className={s.title}>
+                        Розваги
+                    </div>
 
-              <div className={s.items}>
-                  {services}
-              </div>
+                    <div className={s.items}>
+                        {services}
+                    </div>
+                </div>
             </div>
-          </div>
-          <div>
-            <h4>Столи</h4>
-              {tables}
-          </div>
+            <div>
+                <h3 className={s.table_title}>Столи</h3>
+                <div className={s.table_container}>
+                    {tables}
+                </div>
+            </div>
         </div>
         }
     </div>

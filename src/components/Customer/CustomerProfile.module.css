@@ -1,10 +1,15 @@
 .profile {
     border: 2px solid grey;
     margin: 5px;
+    border-radius: 8px;
+    background: white;
 }
-
+.update_profile{
+    text-align: right;
+    cursor: pointer;
+}
 .name {
-    border-bottom: 2px solid grey;
+    border-bottom: 1px solid rgb(217, 217, 217);
     margin: 5px;
 }
 
@@ -14,14 +19,17 @@
 
 .email {
     margin: 5px;
+    border-bottom: 1px solid rgb(217, 217, 217);
 }
 
 .birthdate {
     margin: 5px;
+    border-bottom: 1px solid rgb(217, 217, 217);
 }
 
 .phone {
     margin: 5px;
+    border-bottom: 1px solid rgb(217, 217, 217);
 }
 
 .childs_title {
@@ -33,4 +41,12 @@
     display: inline-block;
     float: right;
     color: red;
+}
+
+.add_child_button{
+    margin: 5px;
+    padding: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid rgb(300, 220, 220);
 }

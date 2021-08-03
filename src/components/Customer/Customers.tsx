@@ -33,7 +33,7 @@ export const Customers: React.FC<ProptsType> = (props) => {
 
     return (
         <div>
-            <div onClick={GoBack}>
+            <div onClick={GoBack} className={s.go_back}>
                 Повернутись
             </div>
             <div>

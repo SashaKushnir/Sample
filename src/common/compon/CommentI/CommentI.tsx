@@ -67,7 +67,7 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
 
     return <div>
         {!editMode && <span onClick={setEditModeTrue}>
-            TEXT {index + 1}: {commentI.text}
+            {index + 1}) {commentI.text}
         </span>}
         {editMode && <div ref={ref as any}>
             <input ref={textInp} onBlur={setEditModeFalse} onChange={changeCommentValue} value={commentVal}/>

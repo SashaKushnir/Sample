@@ -2,3 +2,13 @@
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 }
+
+.go_back{
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 1px;
+}
+.go_back:hover{
+    border-bottom: 1px solid black;
+    margin-bottom: 0px;
+}

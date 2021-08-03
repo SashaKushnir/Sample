@@ -68,9 +68,9 @@ export const OneDayPDF: React.FC = () => {
         <p>Створено банкетів: {banquets?.length}</p>
         <p>Загальна сума: {total}</p>
         <p>Загальна сума авансів: {advance}</p>
-        <div className={s.tables_wrapper}>
-            {tables}
-        </div>
+        {/*<div className={s.tables_wrapper}>*/}
+        {/*    {tables}*/}
+        {/*</div>*/}
 
     </>
 }

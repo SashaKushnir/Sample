@@ -88,7 +88,7 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
             </div>
 
           </div>
-          <div onClick={() => SetUpdate(true)}>Оновити</div>
+          <div className={s.update_profile} onClick={() => SetUpdate(true)}>Оновити</div>
           <div className={s.email}>
             Пошта: {cus.email}
           </div>
@@ -101,7 +101,7 @@ export const CustomerProfile: React.FC<PropsType> = (props) => {
           <div className={s.birthdate}><p className={s.childs_title}>Діти:</p>
               {familyMembers}
           </div>
-            {!addFMmode && <button onClick={addFamilyMember} className={s.birthdate}>
+            {!addFMmode && <button onClick={addFamilyMember} className={s.add_child_button}>
               Додати дитину
             </button>}
             {addFMmode &&

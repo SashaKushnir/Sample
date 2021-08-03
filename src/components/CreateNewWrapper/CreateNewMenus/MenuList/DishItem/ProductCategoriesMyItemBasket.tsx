@@ -58,7 +58,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                     <div className={styles.price}>{product_categoriesItem.price}$</div>
                 </div>
                 <div className={styles.input_block}>
-                    <label htmlFor={"def"} className={styles.input_label}>Amount</label>
+                    <label htmlFor={"def"} className={styles.input_label}>Кількість</label>
                     <input className={product_categoriesItem.ready ? styles.input : styles.input_wrong}
                         onChange={changeCurA}
                            value={!product_categoriesItem.amount ? "" : String(product_categoriesItem.amount) ?
@@ -67,8 +67,7 @@ export const ProductCategoriesMyItemBasket: React.FC<DishesProps> = ({product_ca
                            ref={textInput}/>
                 </div>
                 <div>
-                    Коментарі:
-                    <button onClick={createCommentI}>Додати коментар</button>
+                    <button onClick={createCommentI} className={styles.add_comment_button}>Додати коментар</button>
                     {comments}
                 </div>
                 <button onClick={deleteItem} className={styles.btn}>Delete</button>
