@@ -30,3 +30,12 @@
 .delete:hover{
     cursor: pointer;
 }
+.update{
+    display: inline-block;
+
+    color: orange;
+    margin: 2px;
+}
+.update:hover{
+    cursor: pointer;
+}

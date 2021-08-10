@@ -44,64 +44,65 @@ export const FMItem: React.FC<FMItemProps> = ({member}) => {
     const [update, SetUpdate] = useState(false)
     return <div className={s.main}>
         {!update && <>
-          <div>
-            Імя: {member.name}
-          </div>
-          <div className={s.birth}>
-            Рік народження: {member.birthdate}
-          </div>
-          <div>
-            <div className={s.delete} onClick={Delete}>
-              Видалити
+            <div>
+                Імя: {member.name}
             </div>
-            <div className={s.delete} onClick={() => SetUpdate(true)}>
-              Оновити
+            <div className={s.birth}>
+                Рік народження: {member.birthdate}
             </div>
-          </div>
+            <div>
+
+                <div className={s.update} onClick={() => SetUpdate(true)}>
+                    Оновити
+                </div>
+                <div className={s.delete} onClick={Delete}>
+                    Видалити
+                </div>
+            </div>
         </>}
         {update && <>
-          <div className={s.delete} onClick={() => SetUpdate(false)}>
-            Скасувати
-          </div>
-          <Formik onSubmit={(values: CreateFMFormType) => {
+            <div className={s.delete} onClick={() => SetUpdate(false)}>
+                Скасувати
+            </div>
+            <Formik onSubmit={(values: CreateFMFormType) => {
 
-              const readyForm: UpdateFamilyMember = {...Object.assign(values, {id: member.id})}
-              d(updateFamilyMember(readyForm, hideForm))
-          }}
-                  validationSchema={SignupSchema}
-                  initialValues={{
-                      name: '',
-                      birthdate: ''
-                  }}>
-              {({errors, touched}) => (
-                  <Form>
-                      <div>
-                          <div className={s.block}>
-                              <span className={s.text}>Імя: </span>
-                              <Field name="name" type="text" placeholder={"Name"} className={s.input}/>
-                              {errors.name && touched.name ? <div>{errors.name}</div> : null}
-
-
-                          </div>
-                          <div className={s.block}>
-
-                              <span className={s.text}>Дата народження : </span>
+                const readyForm: UpdateFamilyMember = {...Object.assign(values, {id: member.id})}
+                d(updateFamilyMember(readyForm, hideForm))
+            }}
+                    validationSchema={SignupSchema}
+                    initialValues={{
+                        name: '',
+                        birthdate: ''
+                    }}>
+                {({errors, touched}) => (
+                    <Form>
+                        <div>
+                            <div className={s.block}>
+                                <span className={s.text}>Імя: </span>
+                                <Field name="name" type="text" placeholder={"Name"} className={s.input}/>
+                                {errors.name && touched.name ? <div>{errors.name}</div> : null}
 
 
-                              <Field name="birthdate" placeholder={"birthdate"} type={"date"} className={s.input}/>
-                              {errors.birthdate && touched.birthdate ? (
-                                  <div>{errors.birthdate}</div>
-                              ) : null}
-                          </div>
-                          <div>
-                              <div>{unSuccessMessage}</div>
-                              <button type="submit" className={s.button}>Зберегти</button>
-                          </div>
-                      </div>
+                            </div>
+                            <div className={s.block}>
 
-                  </Form>
-              )}
-          </Formik>
+                                <span className={s.text}>Дата народження : </span>
+
+
+                                <Field name="birthdate" placeholder={"birthdate"} type={"date"} className={s.input}/>
+                                {errors.birthdate && touched.birthdate ? (
+                                    <div>{errors.birthdate}</div>
+                                ) : null}
+                            </div>
+                            <div>
+                                <div>{unSuccessMessage}</div>
+                                <button type="submit" className={s.button}>Зберегти</button>
+                            </div>
+                        </div>
+
+                    </Form>
+                )}
+            </Formik>
         </>
         }
     </div>
