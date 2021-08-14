@@ -39,6 +39,25 @@ export const pathPrefix = "/app"
             d(setBanqueStateT(localStorage.getItem("api_token") || ""))
     }, [tokenSuccess])
 
+     useEffect(() => {
+         window.addEventListener('beforeunload', alertUser)
+         window.addEventListener('unload', handleTabClosing)
+         return () => {
+             window.removeEventListener('beforeunload', alertUser)
+             window.removeEventListener('unload', handleTabClosing)
+         }
+     })
+
+     const handleTabClosing = () => {
+         localStorage.removeItem('menus');
+         localStorage.removeItem('tickets');
+         localStorage.removeItem('services');
+     }
+
+     const alertUser = (event:any) => {
+         event.preventDefault()
+         event.returnValue = ''
+     }
 
     useEffect(() => {
         if (isAuth === false) {

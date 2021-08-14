@@ -90,7 +90,7 @@ export const CreateNew: React.FC<PropsType> = (props) => {
 
             <div className={s.toRightSide}>
                 {fullEmptyAmount && <div className={s.amountMessage}>
-                    Some fields are empty!
+                    Не всі поля заповнені!!!
                 </div>}
                 <button className={s.buttonGreen} onClick={saveB}>Зберегти</button>
             </div>

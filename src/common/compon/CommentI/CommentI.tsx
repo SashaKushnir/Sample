@@ -6,7 +6,8 @@ import useOnClickOutside from "../../customHook/onMouseClickOutOfComponent";
 import {useRouteMatch} from "react-router-dom";
 import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {servicesActions} from "../../../redux/services/servicesActions";
-import { pathPrefix } from '../../../App';
+import {pathPrefix} from '../../../App';
+import s from './styles.module.css'
 
 export interface CommentIProps {
     commentI: CommentItem
@@ -24,15 +25,15 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
     const {url} = useRouteMatch()
 
     useEffect(() => {
-        if(!commentVal)
-        setEditMode(true)
-    },[])
+        if (!commentVal)
+            setEditMode(true)
+    }, [])
 
     useEffect(() => {
-        if(editMode) {
+        if (editMode) {
             textInp.current?.focus()
         }
-    },[editMode])
+    }, [editMode])
 
 
     const setEditModeTrue = () => {
@@ -44,7 +45,7 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
         const commentForActions = {
             target_id: commentI.target_id,
             text: commentVal,
-            target_type: commentI.type?commentI.type:""
+            target_type: commentI.type ? commentI.type : ""
         }
         switch (url) {
             case `${pathPrefix}/content/new/menus`:
@@ -66,7 +67,7 @@ export const CommentI: React.FC<CommentIProps> = ({commentI, parentId, index}) =
     }
 
     return <div>
-        {!editMode && <span onClick={setEditModeTrue}>
+        {!editMode && <span onClick={setEditModeTrue} className={s.text}>
             {index + 1}) {commentI.text}
         </span>}
         {editMode && <div ref={ref as any}>

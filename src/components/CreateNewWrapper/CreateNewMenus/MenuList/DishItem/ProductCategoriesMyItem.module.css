@@ -1,12 +1,24 @@
 .name{
     display: inline-block;
     color: rgb(120, 120, 120);
-    font-family: Montserrat-Bold, Montserrat;
     font-size: 18px;
     font-weight: 500;
 }
 .btn_hide{
     float: right;
+}
+.delete_price{
+    display: inline-block;
+    float: right;
+}
+.price_basket{
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    float: left;
+    margin: auto 10px;
+    vertical-align: middle;
+    color: #787878;
 }
 .item{
  display: flex;
@@ -27,14 +39,26 @@
 }
 .price{
     display: inline-block;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 16px;
     float: right;
+    margin: auto 10px;
+    vertical-align: middle;
+    color: #787878;
+}
+.delete_icon{
+    display: inline-block;
+    margin: auto;
 }
 .desc{
 
     display: inline-block;
     float: left;
-
+    font-weight: 400;
+    color: #787878;
+    margin: 0 auto;
+    fill: rgb(120, 120, 120);
+    font-family: Montserrat-Regular, Montserrat;
 }
 .weight{
     display: inline-block;
@@ -45,7 +69,6 @@
     width: 10%;
     display: inline-block;
     height: 100%;
-    margin:auto 0px;
     text-align: center;
 }
 .dish{
@@ -85,13 +108,13 @@
     border-radius: 5px;
     border: 2px solid darkgray;
     float: right;
-    width: 100%;
+    width: 70px;
 }
 .input_wrong{
     border-radius: 5px;
     border: 3px solid red;
     float: right;
-    width: 100%;
+    width: 70px;
 }
 .input_wrong:focus{
     outline: none;
@@ -104,8 +127,7 @@ input:focus {
 }
 .add_comment_button{
     border-radius: 5px;
-    padding: 2px;
-    margin-bottom: 2px;
+
 }
 @media only screen and (max-width: 768px) {
     .info{

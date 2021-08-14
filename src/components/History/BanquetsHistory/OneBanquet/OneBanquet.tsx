@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import s from "./OneBanquet.module.css"
 import {History} from "../../../../redux/history/newHistoryReducer"
 import {MenuItem, ProductCategoriesItem} from "../../../../redux/newBanknote/newBanknoteReducer";
@@ -34,7 +34,9 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
     const d = useDispatch()
     const spaces = useSelector((state: RootState) => state.banquet.basicSpaces)
     const [hideProducts, setHideProducts] = useState(false)
-
+    useEffect(() => {
+        console.log(data)
+    }, [])
     const tables = data.space_order?.items?.map((obj, index) =>
             <div key={index} className={s.tables}>{index + 1}) {obj.name}, поверх: {obj.floor},
                 номер: {obj.number}, {obj.price}$</div>)
@@ -152,7 +154,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     <div onClick={createpdf} className={s.btn}><PrintIcon/></div>
                 </NavLink>
                 <div className={s.navLink}>
-                    <div onClick={() => setHideProducts(!hideProducts)} className={s.btn}><HideIcon/></div>
+                    <div onClick={() => {setHideProducts(!hideProducts);  console.log((data?.service_order?.items && data?.service_order?.items.length === 0),data?.service_order?.items.length );}} className={s.btn}><HideIcon/></div>
                 </div>
             </div>
             <div className={s.info}>
@@ -212,6 +214,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     </div>
                     <div className={s.items}>
                         {products}
+                        {(data?.product_order?.items && data?.product_order?.items.length > 0) &&  <p className={s.sum_price}>${data?.product_order?.total}</p>}
                     </div>
                 </div>
                 <div className={s.tickets}>
@@ -220,6 +223,7 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
                     </div>
                     <div className={s.items}>
                         {tickets}
+                        {(data?.ticket_order?.items && data?.ticket_order?.items.length > 0) &&  <p className={s.sum_price}>${data?.ticket_order?.total}</p>}
                     </div>
                 </div>
                 <div className={s.enter}>
@@ -229,15 +233,16 @@ export const OneBanquet: React.FC<BanquetProps> = ({data}) => {
 
                     <div className={s.items}>
                         {services}
+                        {(data?.service_order?.items && data?.service_order?.items.length > 0) &&  <p className={s.sum_price}>${data?.service_order?.total}</p>}
                     </div>
                 </div>
             </div>
-            <div>
+            {(tables && tables.length > 0) && <div>
                 <h3 className={s.table_title}>Столи</h3>
                 <div className={s.table_container}>
                     {tables}
                 </div>
-            </div>
+            </div>}
         </div>
         }
     </div>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import dishimg from '../../images/dish placeholder.svg'
+import comment from '../../images/addcomment.png'
 import s from './DishImg.module.css'
 import { useDispatch } from "react-redux";
 import { ProductCategoriesItem } from "../../../redux/newBanknote/newBanknoteReducer";
 import { newBanknoteActions } from "../../../redux/newBanknote/newBanknoteActions";
 import { message } from "antd";
+import customerI from "../../images/customer.png";
 
 interface DishImgProps {
     productItem: ProductCategoriesItem
@@ -29,4 +31,9 @@ export const DishImg: React.FC<DishImgProps> = ({productItem}) => {
     return <div onClick={addProduct} className={s.img}>
         <img className={s.dishimg} src={dishimg} alt="Dish img"/>
     </div>
+}
+
+export const AddComment:React.FC = () => {
+
+    return <img className={s.comment} src={comment} alt="add comment"/>
 }

@@ -35,7 +35,7 @@
 }
 
 .name_desc {
-    margin-left: 10px;
+    margin-left: 40px;
 }
 
 .input_name {
@@ -60,10 +60,14 @@
 .customer {
     display: inline-block;
     cursor: pointer;
+    align-content: flex-start;
+    font-weight: bold;
+    color: grey;
 }
 
 .customer:hover {
     text-decoration: underline;
+
 }
 
 .advance {
@@ -73,6 +77,7 @@
 
 .input_advance {
     text-align: center;
+    font-weight: bold;
 }
 
 .select_time {

@@ -1,7 +1,7 @@
 .name{
     text-align: center;
     font-weight: bold;
-    font-size: 19px;
+    font-size: 22px;
 }
 .menus{
     margin-left: 15px;
@@ -10,4 +10,7 @@
     margin: 5px;
     border-radius: 5px  ;
     padding: 10px;
+}
+.category_name{
+    /*text-align: center;*/
 }

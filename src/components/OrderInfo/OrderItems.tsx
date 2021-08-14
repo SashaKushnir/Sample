@@ -54,16 +54,16 @@ export const OrderItems: React.FC = (props) => {
         <div className={s.order}>
             <div className={s.block}>
                 <div className={s.list}>{menus}</div>
-                <div className={s.total}>Ціна меню: {menu_price}$</div>
+                {(menus && menus?.length > 0) && <div className={s.total}>{menu_price}$</div>}
             </div>
             <div className={s.block}>
                 <div className={s.list}>{tickets}</div>
-                <div className={s.total}>Ціна квитків:{tickets_price}$</div>
+                {(tickets && tickets?.length > 0) && <div className={s.total}>{tickets_price}$</div>}
             </div>
             <div className={s.block}>
 
                 <div className={s.list}>{services}</div>
-                <div className={s.total}>Ціна сервісів: {services_price}$</div>
+                {(services && services?.length > 0) && <div className={s.total}>{services_price}$</div>}
             </div>
         </div>
         <div className={s.total}>

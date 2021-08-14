@@ -58,7 +58,7 @@ export const MenuList: React.FC<MenuListProps> = (props) => {
                                                   Menuitem={obj}/>
                     })
                     return <div key={indexH} >
-                        <h2>{resArrayItem.category}</h2>
+                        <h2 className={styles.category_name}>{resArrayItem.category}</h2>
                         <div className={styles.menu_category}>{items}</div>
                     </div>
                 })

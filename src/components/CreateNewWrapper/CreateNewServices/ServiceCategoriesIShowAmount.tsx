@@ -6,6 +6,8 @@ import {IntertaimentImg} from "../../../common/compon/Intartaiment/Entertainment
 import {useDispatch} from "react-redux";
 import {servicesActions} from "../../../redux/services/servicesActions";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
+import {AddComment} from "../../../common/compon/Dish/DishImg";
+import {DeleteIcon} from "../../../common/compon/HistoryIcons/DeleteIcon";
 
 interface ServiceCategoriesItemProps {
     serviceItem: ServiceCategoriesItem
@@ -47,12 +49,17 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
 
     return <div>
         <div className={styles.intertaiment}>
-            <div className={styles.img}>
-                <IntertaimentImg entertainmentI={serviceItem}/>
+            <div className={styles.img_backet}>
+                <div onClick={createCommentI} className={styles.add_comment_button}>
+                    <AddComment/>
+                </div>
             </div>
             <div className={styles.item}>
                 <div className={styles.name}>
                     {serviceItem.name}
+                    <div className={styles.delete_price}>
+                        <div onClick={deleteItem} className={styles.delete_icon}><DeleteIcon/></div>
+                    </div>
                 </div>
                 <div className={styles.price1}>
                     <div className={styles.text}>Одноразова оплата</div>
@@ -63,30 +70,32 @@ export const ServiceCategoriesIShowAmount: React.FC<ServiceCategoriesItemProps> 
                     <div className={styles.price}>{serviceItem.hourly_paid_price}$</div>
                 </div>
 
-                <div className={styles.input_block}>
-                    <label htmlFor={"def"} className={styles.input_label}>Amount</label>
-                    <input className={serviceItem.ready ? styles.input : styles.input_wrong}
-                           onChange={changeCurS}
-                           value={serviceItem.amount ? String(serviceItem.amount) : ""}
-                           placeholder={"Amount"}
-                           ref={textInput}/>
-                </div>
-                <div>
-                    Comments:
-                    <button onClick={createCommentI}>Add comment</button>
-                    {comments}
-                </div>
+
+
 
                 <div className={styles.input_block}>
-                    <label htmlFor={"def"} className={styles.input_label}>Duration</label>
+                    <label htmlFor={"def"} className={styles.input_label}>Час</label>
                     <input className={styles.input}
                            onChange={changeCurD}
                            value={serviceItem.duration ? String(serviceItem.duration) : ""}
-                           placeholder={"Duration"}
+                           placeholder={"Час"}
                            ref={textInput}/>
                 </div>
+                <div className={styles.input_block}>
+                    <label htmlFor={"def"} className={styles.input_label}>Кількість</label>
+                    <input className={serviceItem.ready ? styles.input : styles.input_wrong}
+                           onChange={changeCurS}
+                           value={serviceItem.amount ? String(serviceItem.amount) : ""}
+                           placeholder={"Кількість"}
+                           ref={textInput}/>
+                </div>
+                <div>
+                    {/*Comments:*/}
+                    {/*<button onClick={createCommentI}>Add comment</button>*/}
+                    {comments}
+                </div>
 
-                <button onClick={deleteItem} className={styles.btn}>Delete</button>
+                {/*<button onClick={deleteItem} className={styles.btn}>Delete</button>*/}
             </div>
         </div>
     </div>

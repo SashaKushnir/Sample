@@ -32,7 +32,7 @@ export const SpaceI: React.FC<SpaceIProps> = ({spaceI, editMode}) => {
                 <div>
                     <b>Номер: </b>{spaceI.number}
                 </div>
-                <div>
+                <div className={s.price}>
                     <b>{spaceI.price}грн.</b>
                 </div>
 

@@ -6,6 +6,8 @@ import {ticketsActions} from "../../../redux/tickets/ticketsActions";
 import {TicketItem} from "../../../redux/tickets/ticketsReducer";
 import {CommentI} from "../../../common/compon/CommentI/CommentI";
 import {useDispatch} from "react-redux";
+import {AddComment} from "../../../common/compon/Dish/DishImg";
+import {DeleteIcon} from "../../../common/compon/HistoryIcons/DeleteIcon";
 
 interface TicketItemProps {
     ticketItem: TicketItem
@@ -42,29 +44,33 @@ export const TicketItemMapShowAmount: React.FC<TicketItemProps> = ({ticketItem, 
     return <div>{ticketItem.showAmount &&
     <div className={styles.ticket}>
         <div className={styles.img}>
-            <TicketImg ticketI={ticketItem}/>
+            <div onClick={createCommentI} className={styles.add_comment_button}>
+                <AddComment/>
+            </div>
         </div>
         <div className={styles.item}>
             <div className={styles.title}>
                 <div className={styles.name}>
                     {ticketItem.name}
                 </div>
-                <div className={styles.price}>
-                    {ticketItem.price}$
+                <div className={styles.delete_price}>
+                    <div className={styles.price_basket}><p>{ticketItem.price}$</p></div>
+                    <div onClick={deleteItem} className={styles.delete_icon}><DeleteIcon/></div>
+                </div>
+                <div className={styles.input_block}>
+                    {/*<label htmlFor={"def"} className={styles.input_label}>Amount</label>*/}
+                    <input className={ticketItem.ready ? styles.input : styles.input_wrong} ref={textInput} placeholder={"Amount"}
+                           value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurr}/>
                 </div>
             </div>
 
-            <div className={styles.input_block}>
-                <label htmlFor={"def"} className={styles.input_label}>Amount</label>
-                <input className={styles.input} ref={textInput} placeholder={"Amount"}
-                       value={ticketItem.amount ? String(ticketItem.amount) : ""} onChange={changeCurr}/>
-            </div>
+
             <div>
-                Comments:
-                <button onClick={createCommentI}>Add comment</button>
+                {/*Comments:*/}
+                {/*<button onClick={createCommentI}>Add comment</button>*/}
                 {comments}
             </div>
-            <button onClick={deleteItem} className={styles.btn}>Delete</button>
+            {/*<button onClick={deleteItem} className={styles.btn}>Delete</button>*/}
             {/*<div className={styles.desc}>*/}
             {/*    /!*{ticketItem.description}*!/*/}
             {/*</div>*/}

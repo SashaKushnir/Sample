@@ -23,6 +23,13 @@
     border-radius: 20%;
     /*background-color: darkgray;*/
 }
+.comment{
+    margin: 0 auto;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
 @media only screen and (max-width: 768px) {
     .img{
         width: 100%;

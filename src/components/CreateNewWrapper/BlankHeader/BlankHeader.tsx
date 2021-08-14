@@ -16,6 +16,7 @@ import {DeleteIcon} from "../../../common/compon/HistoryIcons/DeleteIcon";
 import {BasketIcon} from "../../../common/compon/BlankHeader/Basket";
 import {CheckIcon} from "../../../common/compon/BlankHeader/Check";
 import {CheckForDeleted} from "../../../common/compon/DeletedItems/DeletedItems";
+import {CustomerIcon} from "../../../common/compon/customer/customer";
 
 type PropsType = {
     isEdit: boolean
@@ -162,7 +163,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         <textarea className={s.input} placeholder={"Опис"} onChange={setDesc}
                                   defaultValue={banquet.description ? banquet.description : ""}/>
                         <div onClick={ChooseCustomer} className={s.customer}>
-                            Замовник: {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
+                            <CustomerIcon />
+                            {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                         </div>
 
 
@@ -181,7 +183,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         {!banquet.beginning &&
                         <DatePicker onChange={(e: any, time: string) => {
                             setDate(e, time)
-                        }}/>
+                        }} />
                         }
                         {show_time && <div className={s.time}>
                             <div className={s.start_time}>
@@ -194,7 +196,7 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                                 <TimePicker format={format} onChange={(e: any, time: string) => {
                                     SetBegTime(e, time)
                                 }} inputReadOnly={false}
-                                            defaultValue={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)}/>
+                                            defaultValue={moment(banquet.beginning ? banquet.beginning.slice(11) : '00:00', format)} />
                                 <div className={s.ture}><p>-</p></div>
                                 <TimePicker format={format} onChange={(e: any, time: string) => {
                                     SetEndTime(e, time)
@@ -254,7 +256,8 @@ export const BlankHeader: React.FC<PropsType> = ({isEdit, CusMenuSwitch}) => {
                         <input className={s.input + " " + s.input_name} value={banquet.name} readOnly/>
                         <textarea className={s.input} value={banquet.description ? banquet.description : ""} readOnly/>
                         <div className={s.customer}>
-                            Замовник: {customerInfo?.name + " " + customerInfo?.surname}
+                            <CustomerIcon />
+                            {customerInfo ? customerInfo?.name + " " + customerInfo?.surname : ""}
                         </div>
                     </div>
                     <div className={s.advance}>

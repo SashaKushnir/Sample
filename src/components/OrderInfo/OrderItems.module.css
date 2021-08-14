@@ -1,9 +1,12 @@
 .order{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    margin: 10px;
+    /*display: grid;*/
+    /*grid-template-columns: 33% 33% 33%;*/
+    margin: 10px 0px;
     border-radius: 10px;
     column-gap: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .list{
 
@@ -11,9 +14,15 @@
 .block{
     background-color: white;
     border-radius: 10px;
-
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    justify-content: space-between;
 }
 .total{
-    font-weight: bold;
-   text-align: center;
+    text-align: center;
+    color: rgb(120, 120, 120);
+    font-size: 18px;
+    font-weight: 700;
+    justify-self: flex-end;
 }

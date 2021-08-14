@@ -9,6 +9,12 @@
     border-bottom: 1px solid rgb(217, 217, 217);
     padding-bottom: 5px;
 }
+.img_backet{
+    width: 10%;
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+}
 .img{
     width: 10%;
     display: inline-block;
@@ -16,24 +22,37 @@
     margin:auto 0px;
     text-align: center;
 }
+.delete_price{
+    display: inline-block;
+    float: right;
+}
+.delete_icon{
+    display: inline-block;
+    margin: auto;
+}
+
 .name{
     margin: 0 auto;
     display: inline-block;
     color: rgb(120, 120, 120);
-    font-family: Montserrat-Bold, Montserrat;
     font-size: 18px;
     font-weight: 500;
-    width: 70%;
+    width: 100%;
 }
 .price{
-    font-weight: bold;
     display: inline-block;
     float: right;
+    color: #787878;
+    font-weight: 700;
 }
 .text{
     display: inline-block;
+    color: #787878;
+    font-weight: 700;
 }
 .desc{
+    font-weight: 400;
+    color: #787878;
     margin: 0 auto;
     fill: rgb(120, 120, 120);
     font-family: Montserrat-Regular, Montserrat;
@@ -59,13 +78,13 @@
     display: flex;
     font-weight: bold;
     float: right;
-    margin-bottom: 3px;
+    margin: 2px 5px;
 }
 .input{
     border-radius: 5px;
     border: 2px solid darkgray;
     float: right;
-    width: 100%;
+    width: 70px;
     float: right;
 }
 input:focus {
@@ -75,7 +94,7 @@ input:focus {
     border-radius: 5px;
     border: 3px solid red;
     float: right;
-    width: 100%;
+    width: 70px;
     float: right;
 }
 input_wrong:focus {
@@ -83,6 +102,8 @@ input_wrong:focus {
 }
 .input_label{
     margin-right: 5px;
+    font-weight: 400;
+    color: #787878;
 }
 @media only screen and (max-width: 768px) {
     .img{
