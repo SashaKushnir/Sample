@@ -6,11 +6,11 @@ import {historyActions} from "./newHistoryAction";
 import {BanquetType} from "../formPostObject/createObjReducer";
 import {message} from "antd";
 
-export const setHistoryT = () => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>, getState: () => RootState) => {
+export const setHistoryT = (page:number) => async (d: Dispatch<ActionsTypes<typeof historyActions | typeof commonActions>>, getState: () => RootState) => {
 
     try {
         d(commonActions.fetchingToggle(true))
-        const response = await history.getAllHistory(getState().common.userInfo?.api_token as string)
+        const response = await history.getAllHistory(getState().common.userInfo?.api_token as string, page)
         // Set response to Bll
         if (response.data.success ) {
             console.log(response.data.data)

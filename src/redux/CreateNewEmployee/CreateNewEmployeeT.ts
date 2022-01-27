@@ -55,7 +55,7 @@ export const editUser = (newUser: EditUserObjectType) => async (d: Dispatch<Acti
         d(commonActions.fetchingToggle(false))
 
     } catch (e) {
-        d(commonActions.setErrorMessage(e.message))
+        // d(commonActions.setErrorMessage(e.message))
         message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)
         d(commonActions.fetchingToggle(false))
 

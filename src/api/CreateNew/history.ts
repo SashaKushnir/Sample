@@ -3,9 +3,9 @@ import {BanquetType} from "../../redux/formPostObject/createObjReducer";
 
 
 export const history = {
-    getAllHistory: (headerToken: string, beg_datetime: string = "", end_datetime: string = "") => {
+    getAllHistory: (headerToken: string, page: number, beg_datetime: string = "", end_datetime: string = "") => {
         console.log("here")
-        return myGetInstance.get<ApiHistoryResultType>(`/banquets`,{
+        return myGetInstance.get<ApiHistoryResultType>(`/banquets?page[number]=${page}&page[size]=30`,{
             headers : {
                 'api-token': headerToken
             }
