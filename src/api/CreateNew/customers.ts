@@ -11,7 +11,7 @@ import {CustomerType} from "../../redux/customers/customersReducer";
 
 export const customers = {
     getAllUsers: (headerToken: string) => {
-        return myGetInstance.get<ApiCustomersResultType>('/customers?trashed=without', {
+        return myGetInstance.get<ApiCustomersResultType>('/customers', {
             headers: {
                 'api-token': headerToken
             }

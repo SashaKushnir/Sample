@@ -13,15 +13,18 @@ import {CustomerType} from "./customersReducer";
 
 export const setCustomersT = () => async (d: Dispatch<ActionsTypes<typeof customersActions | typeof commonActions>>, getState: () => RootState) => {
     try {
-        d(commonActions.fetchingToggle(true))
-        const response = await customers.getAllUsers(getState().common.userInfo?.api_token as string)
+        if(getState().common.userInfo?.api_token){
+            d(commonActions.fetchingToggle(true))
+            
+            const response = await customers.getAllUsers(getState().common.userInfo?.api_token as string)
 
-        if (response.data.success) {
-            d(customersActions.setCustomersInfo(response.data.data))
-            d(commonActions.fetchingToggle(false))
-        } else {
-            console.warn(response.data.message)
-            message.info("Помилка, невдала спроба", 3)
+            if (response.data.success) {
+                d(customersActions.setCustomersInfo(response.data.data))
+                d(commonActions.fetchingToggle(false))
+            } else {
+                console.warn(response.data.message)
+                message.info("Помилка, невдала спроба", 3)
+            }
         }
     } catch (error) {
         message.info("Помилка, невдала спроба, перевірте інтернет підключення", 3)

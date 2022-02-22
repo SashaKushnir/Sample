@@ -19,26 +19,23 @@ export const CreateCustomerForm = () => {
     const unSuccessMessage = useSelector((state: RootState) => state.common.message)
 
     const SignupSchema = Yup.object().shape({
-        name: Yup.string().required('Required')
-            .min(2, 'Too Short')
-            .matches(
-                /^\S.{0,48}\S$/, "S or E"
-            )
-            .max(50, "Too long")
-        ,
-        surname:Yup.string().required('Required')
-            .min(2, 'Too Short')
-            .matches(
-                /^\S.{0,48}\S$/, "S or E"
-            )
-            .max(50, "Too long")
-        ,
-        phone: Yup.string().required('Required')
-            .min(8, 'Too Short!')
-            .matches(/^[+][0-9]+([ -][0-9]+)*$/, "Invalid Phone number")
-            .max(25, "Too long"),
-        birthdate: Yup.string(),
-        email: Yup.string().email().min(2, "Too Short!!!")
+      name: Yup.string()
+        // .required("Обов'язкове")
+        .min(2, "Too Short")
+        .matches(/^\S.{0,48}\S$/, "S or E")
+        .max(50, "Too long"),
+      surname: Yup.string()
+        // .required("Обов'язкове")
+        .min(2, "Too Short")
+        .matches(/^\S.{0,48}\S$/, "S or E")
+        .max(50, "Too long"),
+      phone: Yup.string()
+        // .required("Обов'язкове")
+        .min(8, "Too Short!")
+        .matches(/^[+][0-9]+([ -][0-9]+)*$/, "Invalid Phone number")
+        .max(25, "Too long"),
+      birthdate: Yup.string(),
+      email: Yup.string().email().min(2, "Too Short!!!"),
     });
 
     return <Formik onSubmit={(values: CreateCustomerFormType) => {
